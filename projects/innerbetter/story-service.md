@@ -1,3 +1,4 @@
+<!-- approved_at: 2026-10-25 (H0, R1-A 승인) -->
 # story-service.md
 
 > 출처: [prd.md](prd.md) + 사용자 확인 사항 (2026-10-05)

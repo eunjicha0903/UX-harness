@@ -1,0 +1,28 @@
+{
+  "slug": "innerbetter",
+  "updated_at": "2026-10-25",
+  "sources": [
+    { "id": "SRC-00", "title": "사용자앱 PRD (사용자 제공 원문)", "platform": ["APP"], "status": "FETCHED", "role": "사용자앱 1차 기준", "url": null, "path": "sources/prd-user-app.md", "checked_at": "2026-10-25", "hash": "864face61e214043" },
+    { "id": "SRC-01", "title": "사용자앱 PRD v1.0 (Notion)", "platform": ["APP"], "status": "FETCHED", "role": "보조 (SRC-00에 없는 항목만)", "url": "https://app.notion.com/p/39dcd783cd418139a482cb0f782f8b91", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-02", "title": "프로젝트 페이지 (Notion)", "platform": ["APP", "WEB"], "status": "FETCHED", "role": "기획 메모 (참고 의견·확정 혼재)", "url": "https://app.notion.com/p/325cd783cd4180308454c8dca3d4d44e", "path": null, "checked_at": "2026-10-25", "hash": null, "note": "외부 블록 2개 미확인" },
+    { "id": "SRC-03", "title": "RV 회고 (Notion)", "platform": ["APP", "WEB"], "status": "FETCHED", "role": "회고 (배달시간 규칙, 플랫폼별 목표)", "url": "https://app.notion.com/p/351cd783cd418009882cd487cbd06ae0", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-04", "title": "사용자앱 기능정의서 .xlsx", "platform": ["APP"], "status": "SEARCH_ONLY", "role": "원본 미열람", "url": "https://app.notion.com/p/325cd783cd4180308454c8dca3d4d44e", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-05", "title": "QA-TC 앱", "platform": ["APP"], "status": "SEARCH_ONLY", "role": "", "url": null, "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-06", "title": "QA-TC 웹 (화면 7개 목록)", "platform": ["WEB"], "status": "FETCHED", "role": "화면 목록 근거로만", "url": "https://app.notion.com/p/39ecd783cd4181a28212c8568b82c28f", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-07", "title": "Figma 원본 이너베러 (개발)", "platform": ["APP", "WEB"], "status": "BLOCKED", "role": "회사 계정 소유", "url": "https://www.figma.com/design/ZwcWEllvBjbgK6ZYO16PKT", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-08", "title": "관리자웹 기능정의서", "platform": ["WEB"], "status": "NOT_FOUND", "role": "", "url": null, "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "SRC-09", "title": "관리자웹 PRD 초안 v0.1", "platform": ["WEB"], "status": "FETCHED", "role": "관리자웹 1차 기준 (SRC-10 기반)", "url": null, "path": "sources/prd-admin-web.md", "checked_at": "2026-10-25", "hash": "fbea8aef26fcb27f" },
+    { "id": "SRC-10", "title": "Figma 복제본 디자인 하네스 실험 / concept", "platform": ["APP", "WEB"], "status": "FETCHED", "role": "검증 대상 화면", "url": "https://www.figma.com/design/wsd2HEsLTV74mUSucqjHVF?node-id=18-2", "path": null, "checked_at": "2026-10-25", "hash": null, "note": "개인 계정 복제본, 원본 SRC-07, 복제일 미확인" },
+    { "id": "EX-01", "title": "work/Today To-do 관리자웹 수정사항 정리 (401cd783…)", "platform": [], "status": "EXCLUDED", "role": "다른 프로젝트(MARU 추정)", "url": "https://app.notion.com/p/401cd783cd41805c9aabec957797e49a", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "EX-02", "title": "work/Today To-do 관리자웹 수정 (402cd783…)", "platform": [], "status": "EXCLUDED", "role": "다른 프로젝트(MARU 추정)", "url": "https://app.notion.com/p/402cd783cd41805092f0f428fc7be91d", "path": null, "checked_at": "2026-10-25", "hash": null },
+    { "id": "EX-03", "title": "Figma 복제본 screens 페이지 (23:29)", "platform": [], "status": "EXCLUDED", "role": "사용자 지시: concept 페이지만 사용", "url": "https://www.figma.com/design/wsd2HEsLTV74mUSucqjHVF?node-id=23-29", "path": null, "checked_at": "2026-10-25", "hash": null }
+  ],
+  "conflicts": [
+    { "id": "CF-01", "summary": "배송 슬롯 예시 '오후 5시 이전 주문→당일 6~9시'(SRC-01) vs 배달 시간 정책(시작+3h, 마감 −1h)", "sources": ["SRC-01", "SRC-03", "SRC-10"], "status": "NEEDS_REVIEW", "resolution": "story-service 배달 시간 정책으로 대체 예정, 확인 필요" },
+    { "id": "CF-02", "summary": "마일리지: 적립형X·200원 자동차감(SRC-02) vs 결제 후 N% 적립(SRC-01) vs 주문 상세 −200원/적립예정 200원(SRC-10)", "sources": ["SRC-01", "SRC-02", "SRC-10"], "status": "NEEDS_REVIEW", "resolution": null },
+    { "id": "CF-03", "summary": "홈 구조: 클라이언트 요청 배민형 vs 채택안 상품 진입 중심형", "sources": ["SRC-02", "SRC-00"], "status": "NEEDS_REVIEW", "resolution": "클라이언트 최종 컨펌 근거 미확인" },
+    { "id": "CF-04", "summary": "배송/취소 마감: 고정 정책 vs 관리자 커스텀", "sources": ["SRC-00", "SRC-01", "SRC-03", "SRC-10"], "status": "RESOLVED", "resolution": "사용자 확인 2026-10-25: 배달시간은 관리자 설정(하루 최대 2회), 주문·취소 마감 = 배달시간 −1h 고정" },
+    { "id": "CF-05", "summary": "배송 상태 3단계 vs 주문취소 포함 4단계", "sources": ["SRC-00", "SRC-01", "SRC-10"], "status": "RESOLVED", "resolution": "Figma 기준 4개 상태 (사용자 지시)" },
+    { "id": "CF-06", "summary": "로그인·회원가입·검색·배달불가지역·품절 범위 포함 여부", "sources": ["SRC-00", "SRC-01", "SRC-10"], "status": "RESOLVED", "resolution": "범위 포함 (사용자 지시)" }
+  ]
+}

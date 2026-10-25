@@ -549,7 +549,9 @@ def compute_status(slug, run):
             "id": r.get("id"), "verdict": v, "rule_ref": r.get("rule_ref"),
             "what": r.get("title"), "why": r.get("reason"),
             "evidence": [f"{e.get('source_id')} {e.get('locator')}" for e in r.get("evidence") or []],
-            "impact_screens": r.get("impact_screens") or r.get("screen_ids") or [],
+            # CHK-S3-GUIDE(디자인 가이드 부재)는 하네스가 요구하는 프로젝트 전체 항목이므로 영향 범위가 전체 화면이다.
+            "impact_screens": r.get("impact_screens") or r.get("screen_ids")
+                              or (["전체 화면"] if r.get("id") == "CHK-S3-GUIDE" else []),
             "follow_up": r.get("follow_up"),
         })
     gr_fail = [r.get("id") for r in final.get("records", []) if r.get("rule_ref") and r.get("verdict") == "FAIL"]

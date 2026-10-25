@@ -71,6 +71,17 @@ run-id 형식: `YYYYMMDD-HHMM` (예: `20261025-1530`)
 | `follow_up` | 후속 조치 |
 | `prev_verdict` | 이전 실행 판정 (없으면 null) |
 
+### 단계별 JSON 형식 (scripts/harness.py가 검사하는 필드)
+
+| 파일 | 최상위 필드 |
+|---|---|
+| `s1-context.json` | `run_id`, `requirements[] {id, title, source_id, locator}`, `screens[] {id(APP-01 등), platform, number, name, frames[] {name, node_id, width, height}, overrides[]}`, `platform_gaps[] {platform, reason}`, `excluded_requests[] {request, reason}`, `excluded_sources[] {source, reason}`, `changes[] {id, target, detail}`, `recheck_targets[]`(항목 ID), `notion_read`(ok/failed), `notion_inputs[] {item_id, page_url, 수정 완료, 컨펌 완료, 결정 메모}`, `feedback[] {id, text, targets[], change, figma_reflected, verdict?}` |
+| `s2-requirements.json` | `records[]` (공통 항목 레코드 + `req_refs[]`) |
+| `s3-components.json` | `components[] {id, name, node_id, used_in[]}`, `records[]` (공통 항목 레코드 + `component_refs[]`). `design.md`가 없으면 `id: CHK-S3-GUIDE` INSUFFICIENT_INFO 레코드 1건 |
+| `s4-impact.json` | `units[] {id, origin {type: change/fail/recheck/feedback, ref}, origin_screens[], change_target, related_screens[] {screen_id, platform, decision, reason}, relation_evidence[] {source_id, locator}, expected_problem, needs_fix, verdict, follow_up, consider_areas[]?, rule_ref?}`, `records[]` |
+| `impact-map(.next).json` | `edges[] {from, to, type, evidence}` (화면 ID 기준) |
+| `judge.json` | `records[] {id, agree, objection_reason, evidence_check}`, `missing_coverage[]` |
+
 ## 4. SSOT와 사본의 관계
 
 | 정보 | SSOT | 사본·창구 | 충돌 시 |

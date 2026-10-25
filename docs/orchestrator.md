@@ -29,7 +29,7 @@
 
 ## 3. 검증 실행 ("<프로젝트> UX 검증 시작" 등)
 
-1. `state.json` 확인: 미완료 run이 있으면 재개할지 새로 시작할지 묻는다.
+1. `state.json` 확인: 미완료 run이 있으면 묻지 않고 artifacts §6 기준으로 결정한다 (자료 해시가 같으면 재개, 다르면 새 run). 사용자 수정 피드백이 함께 들어오면 새 run으로 시작한다.
 2. run-id 생성, `state.json` 기록 → G0.
 3. `ux-context` → G1 → `sources.next/` 반영.
 4. `ux-flow`, `ux-component` (병렬 가능) → G2, G3.
@@ -37,10 +37,14 @@
 6. s1~s4 해시 기록 → `ux-judge` → 반환 JSON을 `s5/judge.json`에 저장 → 해시 재검사 (G5②).
 7. scripts: `final.json`(이의 반영) → DONE-01~10·GR → `s5-judgement.json` → `report.md`·`diff.json`.
 8. G5 → Notion 반영 (실패 시 `notion-pending.json`) → `[<slug>] run <run-id>: <상태>` 커밋 (원격 연결 시 push).
-9. 사용자에게 상태·report 경로·필수 규칙 위반 여부를 보고 → H1 대기.
+9. 사용자에게 결과를 보고 → H1 대기.
+   - 상태 (통과 / 검토 필요 = 미승인)
+   - 미승인이면 이유: 필수 규칙 위반, 미해소 항목별 상세 사유(무엇이·왜·근거·영향 화면·후속 조치)
+   - 피드백이 있었으면 피드백 항목별 고려해야 할 영역
+   - report 경로, Notion 검토 사항 링크
 
-보고: 단계가 끝날 때마다 한 줄 (예: `S2 완료 · G2 PASS · FAIL 3 / NEEDS_REVIEW 5`), 마지막에 상태와 report 경로.
-게이트 FAIL 시 gates.md §1 "실패 시" 열의 단계로 되돌아가고, 같은 게이트가 2회 FAIL이면 멈추고 질문한다.
+실행 중에는 사용자에게 묻지 않는다 (pipeline §8). 단계가 끝날 때마다 한 줄 진행 표시만 한다 (예: `S2 완료 · G2 PASS · FAIL 3 / NEEDS_REVIEW 5`).
+게이트 FAIL 시 gates.md §1 "실패 시" 열의 단계로 되돌아가고, 같은 게이트가 2회 FAIL이면 "실행 실패"로 끝내고 사유를 보고한다 (gates §3).
 
 ## 4. 재개 ("검증 재개")
 
@@ -51,9 +55,9 @@
 | 시점 | 무엇 | 근거 |
 |---|---|---|
 | 초기화 4단계 후 | H0 story-service 승인 | gates §2 |
-| 실행 1단계 | 미완료 run 재개 여부 | artifacts §6 |
-| 게이트 2회 실패 | 부족한 자료·결정 질문 | gates §3 |
 | 실행 9단계 후 | H1 결과 확인 (Notion) | gates §2 |
+
+검증 실행 중(실행 1~8단계)에는 사용자 확인 시점이 없다.
 | 공통 하네스 파일 변경 | 사용자 승인 | artifacts §1 |
 
 ## 6. Orchestrator 금지

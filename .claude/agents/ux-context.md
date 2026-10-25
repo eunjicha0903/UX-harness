@@ -25,7 +25,10 @@ tools: Read, Write, Glob, Grep, Skill, mcp__Notion__notion-fetch, mcp__Notion__n
 3. project.json의 Figma 파일·페이지에서 화면 판별 규칙으로 화면 목록을 만든다 (화면 ID `플랫폼-번호`, 상태 변형 묶음, override 연결). 허용 목록 밖 플랫폼 화면은 목록에 넣지 않고 제외 사유를 남긴다.
 4. 이전 실행 대비 변경점(추가·삭제·수정된 화면/노드/자료)을 표시한다.
 5. Notion 검토 사항 DB(project.json의 data_source)를 읽어 '수정 완료'·'컨펌 완료'·'결정 메모' 값을 스냅샷하고, 재검증 대상 목록을 만든다. 읽기 실패 시 `notion_read: "failed"`로 기록하고 계속한다.
-6. 결과를 `s1/s1-context.json`에 쓴다.
+6. 사용자 수정 피드백이 전달됐으면 `docs/pipeline.md` §7에 따라 `FB-<run_id>-<번호>` 항목으로 나눈다 (대상, 변경 내용, 원문, Figma 반영 여부). 대상을 특정할 수 없으면 `INSUFFICIENT_INFO`로 기록한다.
+7. 결과를 `s1/s1-context.json`에 쓴다.
+
+실행 중 사용자에게 질문하지 않는다. 판단할 수 없는 것은 상태값으로 기록하고 계속한다.
 
 ## 금지
 - 자기 폴더 밖 쓰기, Notion·Figma 쓰기

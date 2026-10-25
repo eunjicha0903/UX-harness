@@ -476,8 +476,8 @@ def gate_g5(a, g):
     g.check(recomputed["status"] == j.get("status"), f"실행 상태 불일치: 기록 {j.get('status')} / 재계산 {recomputed['status']}")
     sync = load(rd / "s5" / "notion-result.json")
     pending = load(proj(a.slug) / "notion-pending.json", []) or []
-    g.check((sync and sync.get("ok")) or any(p.get("run_id") == a.run for p in pending),
-            "Notion 반영 성공 기록도 notion-pending 적재도 없음")
+    g.check((sync and sync.get("ok") and sync.get("report_page_url")) or any(p.get("run_id") == a.run for p in pending),
+            "Notion 반영 성공 기록(검토 사항 DB + 실행 결과 페이지 URL)도 notion-pending 적재도 없음")
 
 
 def gate_gr(a, g):
@@ -702,7 +702,10 @@ def cmd_notion_sync(a):
 def cmd_notion_result(a):
     rd = run_dir(a.slug, a.run)
     if a.ok:
-        save(rd / "s5" / "notion-result.json", {"ok": True, "at": now()})
+        if not a.report_page_url:
+            print("오류: --ok에는 실행 결과 페이지 URL(--report-page-url)이 필요")
+            return 1
+        save(rd / "s5" / "notion-result.json", {"ok": True, "at": now(), "report_page_url": a.report_page_url})
     else:
         pend = load(proj(a.slug) / "notion-pending.json", []) or []
         pend.append({"run_id": a.run, "at": now(), "sync": str(rd / "s5" / "notion-sync.json")})
@@ -737,6 +740,7 @@ def main():
     s.add_argument("--slug", required=True); s.add_argument("--run", default=""); s.set_defaults(fn=cmd_gate)
     s = sub.add_parser("notion-result"); s.add_argument("--slug", required=True); s.add_argument("--run", required=True)
     grp = s.add_mutually_exclusive_group(required=True); grp.add_argument("--ok", action="store_true"); grp.add_argument("--failed", action="store_true")
+    s.add_argument("--report-page-url")
     s.set_defaults(fn=cmd_notion_result)
     s = sub.add_parser("status"); s.add_argument("--slug", required=True); s.set_defaults(fn=cmd_status)
     a = p.parse_args()

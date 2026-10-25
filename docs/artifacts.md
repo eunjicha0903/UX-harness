@@ -89,6 +89,7 @@ run-id 형식: `YYYYMMDD-HHMM` (예: `20261025-1530`)
 | 공통 판정 규칙 | `docs/harness-goal.md` | 다른 문서는 ID로만 참조 | SSOT 기준 |
 | 프로젝트 규칙 | `projects/<slug>/story-service.md` (프로젝트 값) | — | — |
 | 항목 판정 결과 | `results/<run-id>/s*.json` | Notion 검토 사항 DB (미해소 항목 미러) | 로컬 JSON 기준 |
+| **실행 결과 보고서 (사용자 최종 산출물)** | Notion `업무 도우미 / UX검토 / <프로젝트>` 아래 실행 결과 페이지 (`UX 검증 결과 <run-id> · <상태>`) | `s5/report.md` (같은 내용, git 기록용) | 둘 다 같은 report.md에서 생성 |
 | 사용자 결정 (수정 완료·컨펌·메모) | Notion 검토 사항 DB | `s1-context.json`에 실행 시점 스냅샷 | Notion 기준 |
 | 영향 관계 | `projects/<slug>/impact-map.json` | `s4-impact.json` (실행 시점) | impact-map 기준 |
 

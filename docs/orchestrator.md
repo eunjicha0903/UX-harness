@@ -36,12 +36,15 @@
 5. `ux-impact` → G4 → `impact-map.next.json` 반영.
 6. s1~s4 해시 기록 → `ux-judge` → 반환 JSON을 `s5/judge.json`에 저장 → 해시 재검사 (G5②).
 7. scripts: `final.json`(이의 반영) → DONE-01~10·GR → `s5-judgement.json` → `report.md`·`diff.json`.
-8. G5 → Notion 반영 (실패 시 `notion-pending.json`) → `[<slug>] run <run-id>: <상태>` 커밋 (원격 연결 시 push).
+8. Notion 반영 → G5 → `[<slug>] run <run-id>: <상태>` 커밋 (원격 연결 시 push).
+   - 검토 사항 DB: `s5/notion-sync.json`대로 생성·갱신 (하네스 칸만)
+   - **실행 결과 페이지 (최종 산출물)**: `업무 도우미 / UX검토 / <프로젝트>` 아래에 `UX 검증 결과 <run-id> · <상태>` 페이지를 만들고 `s5/report.md` 내용과 검토 사항 DB 링크를 넣는다. 페이지 URL을 `s5/notion-result.json`에 기록한다.
+   - 실패 시 `notion-pending.json`에 적재하고 다음 실행에서 재전송한다.
 9. 사용자에게 결과를 보고 → H1 대기.
    - 상태 (통과 / 검토 필요 = 미승인)
    - 미승인이면 이유: 필수 규칙 위반, 미해소 항목별 상세 사유(무엇이·왜·근거·영향 화면·후속 조치)
    - 피드백이 있었으면 피드백 항목별 고려해야 할 영역
-   - report 경로, Notion 검토 사항 링크
+   - Notion 실행 결과 페이지 링크(최종 산출물), 검토 사항 DB 링크
 
 실행 중에는 사용자에게 묻지 않는다 (pipeline §8). 단계가 끝날 때마다 한 줄 진행 표시만 한다 (예: `S2 완료 · G2 PASS · FAIL 3 / NEEDS_REVIEW 5`).
 게이트 FAIL 시 gates.md §1 "실패 시" 열의 단계로 되돌아가고, 같은 게이트가 2회 FAIL이면 "실행 실패"로 끝내고 사유를 보고한다 (gates §3).

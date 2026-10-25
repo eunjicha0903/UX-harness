@@ -507,8 +507,13 @@ def compute_final(slug, run):
     opinion = {j["id"]: j for j in judge.get("records", [])}
     out = []
     recs = stage_records(slug, run) + [unit_as_record(u) for u in impact_units(slug, run)]
+    # S2에서 S4 결과가 필요해 INSUFFICIENT_INFO로 남긴 규칙 조건은, S4가 같은 rule_ref로 판정하면 대체된다.
+    s4_rules = {r.get("rule_ref"): r.get("id") for r in recs if r.get("stage") == "S4" and r.get("rule_ref")}
     for r in recs:
         f = dict(r)
+        if (r.get("stage") == "S2" and r.get("verdict") == "INSUFFICIENT_INFO"
+                and r.get("rule_ref") in s4_rules):
+            f["superseded_by"] = s4_rules[r["rule_ref"]]
         j = opinion.get(r.get("id"))
         f["judge"] = j
         if j and not j.get("agree") and r.get("verdict") != "FAIL":
@@ -530,7 +535,7 @@ def compute_status(slug, run):
     unresolved, resolved_by_confirm = [], []
     for r in final.get("records", []):
         v = r.get("verdict")
-        if v not in UNRESOLVED:
+        if v not in UNRESOLVED or r.get("superseded_by"):
             continue
         n = inputs.get(r.get("id"), {})
         if (v == "NEEDS_REVIEW" and not r.get("rule_ref") and n.get("컨펌 완료")

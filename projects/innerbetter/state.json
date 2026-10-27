@@ -1,0 +1,32 @@
+{
+  "slug": "innerbetter",
+  "run_id": "20261025-0838",
+  "started_at": "2026-10-25T08:38:08",
+  "current_stage": "S5",
+  "completed_stages": [
+    "S1",
+    "S2",
+    "S3",
+    "S4"
+  ],
+  "stage_outputs": {},
+  "source_hashes": {
+    "SRC-00": "864face61e214043",
+    "SRC-01": null,
+    "SRC-02": null,
+    "SRC-03": null,
+    "SRC-04": null,
+    "SRC-05": null,
+    "SRC-06": null,
+    "SRC-07": null,
+    "SRC-08": null,
+    "SRC-09": "fbea8aef26fcb27f",
+    "SRC-10": null,
+    "EX-01": null,
+    "EX-02": null,
+    "EX-03": null
+  },
+  "gate_failures": {},
+  "last_status": null,
+  "last_error": null
+}

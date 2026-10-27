@@ -1,4 +1,2172 @@
 {
-  "updated_at": "",
-  "edges": []
+  "updated_at": "2026-10-25",
+  "edges": [
+    {
+      "from": "WEB-25",
+      "to": "APP-20",
+      "type": "정책: 배송시간 회차 → 홈 배송 출발·도착 예정 안내(설정−1h 마감, 설정~+3h 도착)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24689 (26_메인/지점관리) 배송시간①② 18:00~21:00, 배송취소 가능시간 17:00까지, 주문 마감 17:00"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23384 'EX)관리자에서 배송 출발 설정 1개만 설정' (APP-20 주석)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-21",
+      "type": "정책: 배송시간 회차 → 홈 배송 출발·도착 예정 안내(설정−1h 마감, 설정~+3h 도착)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24689 (26_메인/지점관리) 배송시간①② 18:00~21:00, 배송취소 가능시간 17:00까지, 주문 마감 17:00"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23386 'EX)관리자에서 배송 출발 설정 2개 설정 시' (APP-21 주석)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-47",
+      "type": "정책: 취소 마감 계산(배달시간 −1h) → 주문 상세 취소 가능 여부·취소 버튼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22132 (47.마이/주문내역/상세) 주문취소 버튼"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-48",
+      "type": "정책: 취소 마감 경과 → 취소 불가 안내 모달 사유·시각",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §D 2-c"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22332 (48.마이/주문내역/상세) 취소 불가 모달"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-35",
+      "type": "정책: 주문 마감·취소 마감 시각, 배송 예정 시간대 → 주문·결제 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20068 (35.주문/결제) 토스트 '주문취소는 배송 시작 1시간 전까지 가능합니다'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-36",
+      "type": "정책: 주문 마감·취소 마감 시각, 배송 예정 시간대 → 주문·결제 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20152 (36.주문/결제) 토스트 '주문취소는 배송 시작 1시간 전까지 가능합니다'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-37",
+      "type": "정책: 주문 마감·취소 마감 시각, 배송 예정 시간대 → 주문·결제 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20328 (37.주문/결제) 토스트 '주문취소는 배송 시작 1시간 전까지 가능합니다'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-39",
+      "type": "정책: 배송 예정 시간대·취소 마감 → 주문 완료 배송 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "6-5 주문 완료 배송 정보·배송 안내"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-24",
+      "type": "설정: 영업 ON/OFF·운영 가능 시간 → 메인 영업 중 아님 상태",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 영업 ON/OFF, 운영 가능 시간 → 24.메인_영업 중X"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-003(추론)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23189 (24.메인_영업 중X)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-33",
+      "type": "데이터: 최소주문 금액 → 장바구니 미달 판정·부족액·버튼 라벨(규칙 1 기준값)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액 → 장바구니 최소금액 미달 시 차단"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-004"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §D 1-e"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19883 장바구니 진행바 20,000원"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-34",
+      "type": "데이터: 최소주문 금액 → 장바구니 미달 판정·부족액·버튼 라벨(규칙 1 기준값)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액 → 장바구니 최소금액 미달 시 차단"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-004"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §D 1-e"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19981 장바구니 진행바 20,000원"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-19",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-20",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22585 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-25",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19556 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-28",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19732 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-11",
+      "type": "데이터: 배송 반경(동) → 회원가입 배달 불가 지역 판정",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 배송 반경(동) → 배달 불가 지역 판정"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-005(추론)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22437 배달 불가 지역 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-12",
+      "type": "데이터: 배송 반경(동) → 회원가입 배달 불가 지역 판정",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 배송 반경(동) → 배달 불가 지역 판정"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-005(추론)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22450 배달 불가 지역 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-42",
+      "type": "데이터(추론, 확인 필요): 배송 반경(동) → 주소 변경 시 배달 가능 판정",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-005(추론)"
+        },
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-006"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21027 (42.마이/주소관리(주소변경))"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "APP-19",
+      "type": "데이터: 지점 사진 여러 장 → 앱 상단 이미지 5초 자동 슬라이드",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점 사진 여러 장"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:29189 수정 반영 case 6 (텍스트 36:29205)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-20",
+      "type": "정책: 배송시간 회차 → 홈 배송 출발·도착 예정 안내(설정−1h 마감, 설정~+3h 도착)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24689 (26_메인/지점관리) 배송시간①② 18:00~21:00, 배송취소 가능시간 17:00까지, 주문 마감 17:00"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23384 'EX)관리자에서 배송 출발 설정 1개만 설정' (APP-20 주석)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-21",
+      "type": "정책: 배송시간 회차 → 홈 배송 출발·도착 예정 안내(설정−1h 마감, 설정~+3h 도착)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24689 (26_메인/지점관리) 배송시간①② 18:00~21:00, 배송취소 가능시간 17:00까지, 주문 마감 17:00"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23386 'EX)관리자에서 배송 출발 설정 2개 설정 시' (APP-21 주석)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-47",
+      "type": "정책: 취소 마감 계산(배달시간 −1h) → 주문 상세 취소 가능 여부·취소 버튼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22132 (47.마이/주문내역/상세) 주문취소 버튼"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-48",
+      "type": "정책: 취소 마감 경과 → 취소 불가 안내 모달 사유·시각",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점관리 > 배송시간 회차 → 메인 배송출발 안내, 주문 취소 가능 여부"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §D 2-c"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22332 (48.마이/주문내역/상세) 취소 불가 모달"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-35",
+      "type": "정책: 주문 마감·취소 마감 시각, 배송 예정 시간대 → 주문·결제 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20068 (35.주문/결제) 토스트 '주문취소는 배송 시작 1시간 전까지 가능합니다'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-36",
+      "type": "정책: 주문 마감·취소 마감 시각, 배송 예정 시간대 → 주문·결제 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20152 (36.주문/결제) 토스트 '주문취소는 배송 시작 1시간 전까지 가능합니다'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-37",
+      "type": "정책: 주문 마감·취소 마감 시각, 배송 예정 시간대 → 주문·결제 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20328 (37.주문/결제) 토스트 '주문취소는 배송 시작 1시간 전까지 가능합니다'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-39",
+      "type": "정책: 배송 예정 시간대·취소 마감 → 주문 완료 배송 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-001 배송시간 종료=시작+3h, 주문마감·취소마감=시작−1h 자동 계산"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md 배달 시간 정책 (주문 마감·취소 가능 시간 = 배달시간 −1h)"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "6-5 주문 완료 배송 정보·배송 안내"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-24",
+      "type": "설정: 영업 ON/OFF·운영 가능 시간 → 메인 영업 중 아님 상태",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 영업 ON/OFF, 운영 가능 시간 → 24.메인_영업 중X"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-003(추론)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23189 (24.메인_영업 중X)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-33",
+      "type": "데이터: 최소주문 금액 → 장바구니 미달 판정·부족액·버튼 라벨(규칙 1 기준값)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액 → 장바구니 최소금액 미달 시 차단"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-004"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §D 1-e"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19883 장바구니 진행바 20,000원"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-34",
+      "type": "데이터: 최소주문 금액 → 장바구니 미달 판정·부족액·버튼 라벨(규칙 1 기준값)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액 → 장바구니 최소금액 미달 시 차단"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-004"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §D 1-e"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19981 장바구니 진행바 20,000원"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-19",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-20",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22585 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-25",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19556 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-28",
+      "type": "데이터: 최소주문 금액 → 하단 장바구니 바 부족액·기준 금액 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 최소주문 금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19732 하단 바 'N원 더 담아야 결제할 수 있어요! / 20,000원'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-11",
+      "type": "데이터: 배송 반경(동) → 회원가입 배달 불가 지역 판정",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 배송 반경(동) → 배달 불가 지역 판정"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-005(추론)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22437 배달 불가 지역 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-12",
+      "type": "데이터: 배송 반경(동) → 회원가입 배달 불가 지역 판정",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 배송 반경(동) → 배달 불가 지역 판정"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-005(추론)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22450 배달 불가 지역 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-42",
+      "type": "데이터(추론, 확인 필요): 배송 반경(동) → 주소 변경 시 배달 가능 판정",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-BR-005(추론)"
+        },
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-006"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21027 (42.마이/주소관리(주소변경))"
+        }
+      ]
+    },
+    {
+      "from": "WEB-26",
+      "to": "APP-19",
+      "type": "데이터: 지점 사진 여러 장 → 앱 상단 이미지 5초 자동 슬라이드",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 지점 사진 여러 장"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:29189 수정 반영 case 6 (텍스트 36:29205)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-25",
+      "to": "WEB-26",
+      "type": "상태: 지점관리 기본/입력 완료(AW-040), 수정 반영 case 6·7 종속",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-040 #25·#26은 수정 반영 case 6·7에 종속"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:29196 수정 반영 case 7 배송 시간 삭제 확인 모달"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-47",
+      "type": "상태: 관리자 처리상태 변경 배송 준비중 → 주문 상세 상태 태그·취소 버튼 노출",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-003 상태 역방향 변경 허용 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22132 (APP-47)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-48",
+      "type": "상태: 관리자 처리상태 변경 상태 변경 시점 → 취소 불가 모달 사유(마감 경과/배송 시작) 분기",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-003 상태 역방향 변경 허용 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22332 (APP-48)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-50",
+      "type": "상태: 관리자 처리상태 변경 배송 중 → 주문 상세 취소 불가(버튼 없음)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-003 상태 역방향 변경 허용 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22034 (APP-50)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-51",
+      "type": "상태: 관리자 처리상태 변경 배송완료 → 주문 상세 완료 상태·마일리지 적립 시점",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-003 상태 역방향 변경 허용 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21936 (APP-51)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-43",
+      "type": "상태: 관리자 처리상태 변경 → 주문·배송 현황 진행 바",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-003 상태 역방향 변경 허용 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21046 (APP-43)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-44",
+      "type": "상태: 관리자 처리상태 변경 → 주문·배송 현황 진행 바(검색O)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-003 상태 역방향 변경 허용 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21422 (APP-44)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-20",
+      "type": "상태(추론, 확인 필요): 배송 중 변경 → 메인 배송출발 카드 노출",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22585 (20.메인_배송출발 1개일 때)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-21",
+      "type": "상태(추론, 확인 필요): 배송 중 변경 → 메인 배송출발 카드 노출",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 주문관리 > 처리상태 변경 → 고객 PUSH, 앱 주문 상세 상태"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23718/36:23727 (07_메인/주문관리/처리상태 변경모달) 배송 준비중·배송 중·배송완료 + PUSH 확인"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22994 (21.메인_배송출발 2개일 때)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-19",
+      "type": "기능: 상태 변경 PUSH 발송 → 앱 알림 진입점(현재 없음)",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-002 상태 변경 시 고객 PUSH"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "6-1 홈 알림 접근"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 (19.메인) 헤더"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-40",
+      "type": "정책: 배송완료 처리 → 마일리지 적립('배송 완료가 되면 적립') 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20846 (APP-40) 마일리지 적립 안내"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "6 확인 필요 1 (CF-02 마일리지)"
+        }
+      ]
+    },
+    {
+      "from": "WEB-07",
+      "to": "APP-41",
+      "type": "정책: 배송완료 처리 → 마일리지 적립('배송 완료가 되면 적립') 안내",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20735 (APP-41) 마일리지 적립 안내"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "6 확인 필요 1 (CF-02 마일리지)"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "WEB-03",
+      "type": "상태: 앱 주문 취소 → 관리자 주문관리 '결제취소' 표시",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §B 배송 상태 정의 (주문 취소 종료 상태)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22132 (APP-47)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23632 (03.메인/주문관리) 처리상태 '결제취소'"
+        }
+      ]
+    },
+    {
+      "from": "APP-49",
+      "to": "WEB-03",
+      "type": "상태: 앱 주문 취소 → 관리자 주문관리 '결제취소' 표시",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-ORD-001 처리상태는 배송 준비중/배송 중/배송완료만, 결제취소는 표시만"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §B 배송 상태 정의 (주문 취소 종료 상태)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21839 (APP-49)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23632 (03.메인/주문관리) 처리상태 '결제취소'"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "WEB-30",
+      "type": "데이터(확인 필요): 주문 취소 → 매출요약 합계 포함 여부",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-SALES-001 합계에 결제취소 포함 여부 확인 필요"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24486 (30_메인/매출요약)"
+        }
+      ]
+    },
+    {
+      "from": "APP-35",
+      "to": "WEB-08",
+      "type": "데이터: 결제 시 배송지·요청사항·결제금액(주문금액·마일리지·최종) → 관리자 상세조회",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-012 상세조회 모달 배송정보·결제금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20068 (APP-35)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23736 (08_메인/주문관리/상세보기 모달)"
+        }
+      ]
+    },
+    {
+      "from": "APP-35",
+      "to": "WEB-03",
+      "type": "데이터: 할인 전 주문금액·마일리지 사용·실 결제금액 → 주문관리 목록 컬럼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-010 컬럼"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20068 (APP-35)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23632 (03.메인/주문관리)"
+        }
+      ]
+    },
+    {
+      "from": "APP-35",
+      "to": "WEB-30",
+      "type": "데이터: 실 결제금액 → 매출요약 판매합계",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-060 주문관리와 같은 컬럼 + 판매합계"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24486 (30_메인/매출요약)"
+        }
+      ]
+    },
+    {
+      "from": "APP-37",
+      "to": "WEB-08",
+      "type": "데이터: 결제 시 배송지·요청사항·결제금액(주문금액·마일리지·최종) → 관리자 상세조회",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-012 상세조회 모달 배송정보·결제금액"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20328 (APP-37)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23736 (08_메인/주문관리/상세보기 모달)"
+        }
+      ]
+    },
+    {
+      "from": "APP-37",
+      "to": "WEB-03",
+      "type": "데이터: 할인 전 주문금액·마일리지 사용·실 결제금액 → 주문관리 목록 컬럼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-010 컬럼"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20328 (APP-37)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23632 (03.메인/주문관리)"
+        }
+      ]
+    },
+    {
+      "from": "APP-37",
+      "to": "WEB-30",
+      "type": "데이터: 실 결제금액 → 매출요약 판매합계",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-060 주문관리와 같은 컬럼 + 판매합계"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24486 (30_메인/매출요약)"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "WEB-08",
+      "type": "데이터: 같은 주문의 결제 정보(최종 결제 금액) 일관 표시",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22132 (47) 결제금액 24,300원"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23736 (WEB-08) 최종 결제금액"
+        },
+        {
+          "source_id": "SRC-00",
+          "locator": "6-3 / 6-4 / 14 정책 일관성"
+        }
+      ]
+    },
+    {
+      "from": "APP-43",
+      "to": "WEB-03",
+      "type": "데이터: 주문·배송 현황 금액·상태와 관리자 목록 일관 표시",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21046 (43)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23632 (WEB-03)"
+        }
+      ]
+    },
+    {
+      "from": "APP-39",
+      "to": "WEB-08",
+      "type": "정책: 마일리지 적립(예정) 금액 일관 표시",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19529 (39.결제완료) '480원이 쌓였어요'"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-012 마일리지 적립예정"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "6 확인 필요 1 (CF-02)"
+        }
+      ]
+    },
+    {
+      "from": "APP-11",
+      "to": "WEB-33",
+      "type": "데이터: '우리 지역도 요청하기' → 오픈 요청 지역 목록",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 오픈 요청 지역 목록 ↔ 앱 '우리 지역도 요청하기'"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-070"
+        },
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-006"
+        }
+      ]
+    },
+    {
+      "from": "APP-12",
+      "to": "WEB-33",
+      "type": "데이터: '우리 지역도 요청하기' → 오픈 요청 지역 목록",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 오픈 요청 지역 목록 ↔ 앱 '우리 지역도 요청하기'"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-070"
+        },
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-006"
+        }
+      ]
+    },
+    {
+      "from": "APP-08",
+      "to": "WEB-28",
+      "type": "데이터(추론): 가입 회원정보(이메일·이름·주소·마케팅 동의) → 회원관리 목록 컬럼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-050 컬럼(이름·주소·이메일·연락처·가입일·마케팅 수신동의·소셜 로그인)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21770 (APP-08)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24471 (WEB-28) '마케팅 수신동의'"
+        }
+      ]
+    },
+    {
+      "from": "APP-14",
+      "to": "WEB-28",
+      "type": "데이터(추론): 가입 회원정보(이메일·이름·주소·마케팅 동의) → 회원관리 목록 컬럼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-050 컬럼(이름·주소·이메일·연락처·가입일·마케팅 수신동의·소셜 로그인)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21678 (APP-14)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24471 (WEB-28) '마케팅 수신동의'"
+        }
+      ]
+    },
+    {
+      "from": "APP-15",
+      "to": "WEB-28",
+      "type": "데이터(추론): 가입 회원정보(이메일·이름·주소·마케팅 동의) → 회원관리 목록 컬럼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-050 컬럼(이름·주소·이메일·연락처·가입일·마케팅 수신동의·소셜 로그인)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21790 (APP-15)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24471 (WEB-28) '마케팅 수신동의'"
+        }
+      ]
+    },
+    {
+      "from": "WEB-24",
+      "to": "APP-22",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24269 (WEB-24)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20640 (APP-22) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-24",
+      "to": "APP-19",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24269 (WEB-24)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 (APP-19) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-24",
+      "to": "APP-20",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24269 (WEB-24)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22585 (APP-20) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-24",
+      "to": "APP-25",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24269 (WEB-24)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19556 (APP-25) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-24",
+      "to": "APP-28",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24269 (WEB-24)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19732 (APP-28) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-17",
+      "to": "APP-22",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23933 (WEB-17)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20640 (APP-22) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-17",
+      "to": "APP-19",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23933 (WEB-17)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 (APP-19) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-17",
+      "to": "APP-20",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23933 (WEB-17)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22585 (APP-20) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-17",
+      "to": "APP-25",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23933 (WEB-17)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19556 (APP-25) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-17",
+      "to": "APP-28",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23933 (WEB-17)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19732 (APP-28) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-16",
+      "to": "APP-22",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24310 (WEB-16)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20640 (APP-22) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-16",
+      "to": "APP-19",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24310 (WEB-16)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 (APP-19) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-16",
+      "to": "APP-20",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24310 (WEB-16)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22585 (APP-20) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-16",
+      "to": "APP-25",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24310 (WEB-16)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19556 (APP-25) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-16",
+      "to": "APP-28",
+      "type": "상태: 품절 토글·품절 전환 → 앱 품절 표기·담기·수량 스테퍼 비활성",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 상품관리 > 품절 토글 → 품절 표기, 담기 비활성화"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-003"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24310 (WEB-16)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19732 (APP-28) 품절 표기"
+        }
+      ]
+    },
+    {
+      "from": "WEB-18",
+      "to": "APP-22",
+      "type": "데이터: 상품 정보·성분(명·내용량·%, 단위 필수) → 상품 상세 영양 프로필",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 성분(합 100%, 단위 필수) → 상품 상세 영양 프로필"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-001/002"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23972 (WEB-18)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20520 (22.메인/해당상품상세) 한눈 영양 프로필"
+        }
+      ]
+    },
+    {
+      "from": "WEB-19",
+      "to": "APP-22",
+      "type": "데이터: 상품 정보·성분(명·내용량·%, 단위 필수) → 상품 상세 영양 프로필",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 성분(합 100%, 단위 필수) → 상품 상세 영양 프로필"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-001/002"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24099 (WEB-19)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20520 (22.메인/해당상품상세) 한눈 영양 프로필"
+        }
+      ]
+    },
+    {
+      "from": "WEB-20",
+      "to": "APP-22",
+      "type": "데이터: 상품 정보·성분(명·내용량·%, 단위 필수) → 상품 상세 영양 프로필",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 성분(합 100%, 단위 필수) → 상품 상세 영양 프로필"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-001/002"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24017 (WEB-20)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20520 (22.메인/해당상품상세) 한눈 영양 프로필"
+        }
+      ]
+    },
+    {
+      "from": "WEB-21",
+      "to": "APP-22",
+      "type": "데이터: 상품 정보·성분(명·내용량·%, 단위 필수) → 상품 상세 영양 프로필",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 성분(합 100%, 단위 필수) → 상품 상세 영양 프로필"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-001/002"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24058 (WEB-21)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20520 (22.메인/해당상품상세) 한눈 영양 프로필"
+        }
+      ]
+    },
+    {
+      "from": "WEB-22",
+      "to": "APP-22",
+      "type": "데이터: 상품 정보·성분(명·내용량·%, 단위 필수) → 상품 상세 영양 프로필",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 성분(합 100%, 단위 필수) → 상품 상세 영양 프로필"
+        },
+        {
+          "source_id": "SRC-09",
+          "locator": "3 FR-AW-PRD-001/002"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24181 (WEB-22)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:20520 (22.메인/해당상품상세) 한눈 영양 프로필"
+        }
+      ]
+    },
+    {
+      "from": "WEB-10",
+      "to": "APP-19",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23836 (WEB-10)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-10",
+      "to": "APP-25",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23836 (WEB-10)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-12",
+      "to": "APP-19",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23886 (WEB-12)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-12",
+      "to": "APP-25",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23886 (WEB-12)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-13",
+      "to": "APP-19",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23895 (WEB-13)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-13",
+      "to": "APP-25",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23895 (WEB-13)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-14",
+      "to": "APP-19",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23843 (WEB-14)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "WEB-14",
+      "to": "APP-25",
+      "type": "데이터: 카테고리 생성·노출 순서·삭제 → 홈 카테고리 그리드와 탭",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "4 앱–웹 연결 관계: 카테고리 관리 → 홈 카테고리 그리드와 탭"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:23843 (WEB-14)"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:24698 TAB 컴포넌트(CMP-06) 사용 화면"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "APP-48",
+      "type": "흐름: 주문취소 시도 → 취소 불가 모달",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22132 → 36:22332"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "APP-49",
+      "type": "상태 변형: 같은 주문 상세(배송 준비 중 → 주문 취소)",
+      "evidence": [
+        {
+          "source_id": "SRC-00",
+          "locator": "story-service.md §B"
+        },
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21839 (49)"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "APP-50",
+      "type": "상태 변형: 같은 주문 상세(배송 중), 공용 안내문",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22034 (50)"
+        }
+      ]
+    },
+    {
+      "from": "APP-47",
+      "to": "APP-51",
+      "type": "상태 변형: 같은 주문 상세(배송완료), 공용 안내문",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:21936 (51)"
+        }
+      ]
+    },
+    {
+      "from": "APP-43",
+      "to": "APP-47",
+      "type": "흐름: 주문·배송 현황 → 주문 상세",
+      "evidence": [
+        {
+          "source_id": "SRC-00",
+          "locator": "6-6 마이 / 주문 내역 → 주문 상세"
+        }
+      ]
+    },
+    {
+      "from": "APP-41",
+      "to": "APP-47",
+      "type": "흐름: 마이 주문 내역 → 주문 상세",
+      "evidence": [
+        {
+          "source_id": "SRC-00",
+          "locator": "6-6 마이 / 주문 내역"
+        }
+      ]
+    },
+    {
+      "from": "APP-39",
+      "to": "APP-43",
+      "type": "흐름: 주문 완료 → 주문 내역(이동 대상 정의 필요)",
+      "evidence": [
+        {
+          "source_id": "SRC-00",
+          "locator": "6-5 주문 내역 이동"
+        }
+      ]
+    },
+    {
+      "from": "APP-33",
+      "to": "APP-34",
+      "type": "상태: 장바구니 미달/도달(같은 금액 데이터)",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19883 / 36:19981"
+        }
+      ]
+    },
+    {
+      "from": "APP-34",
+      "to": "APP-35",
+      "type": "흐름: 결제하기 → 주문·결제",
+      "evidence": [
+        {
+          "source_id": "SRC-00",
+          "locator": "6-3 → 6-4"
+        }
+      ]
+    },
+    {
+      "from": "APP-35",
+      "to": "APP-38",
+      "type": "흐름: 결제 → 토스 PG 결제창",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19526 (38)"
+        }
+      ]
+    },
+    {
+      "from": "APP-38",
+      "to": "APP-39",
+      "type": "흐름: 결제 성공 → 주문 완료",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:19529 (39)"
+        }
+      ]
+    },
+    {
+      "from": "APP-19",
+      "to": "APP-33",
+      "type": "데이터: 하단 장바구니 바 금액·부족액 = 장바구니 금액",
+      "evidence": [
+        {
+          "source_id": "SRC-10",
+          "locator": "36:22779 / 36:19883"
+        }
+      ]
+    },
+    {
+      "from": "APP-08",
+      "to": "APP-13",
+      "type": "흐름: 회원가입 입력 단계",
+      "evidence": [
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-001"
+        }
+      ]
+    },
+    {
+      "from": "APP-13",
+      "to": "APP-14",
+      "type": "흐름: 회원가입 → 회원정보 입력",
+      "evidence": [
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-001"
+        }
+      ]
+    },
+    {
+      "from": "APP-16",
+      "to": "APP-17",
+      "type": "흐름: 문자 본인인증 입력",
+      "evidence": [
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-004"
+        }
+      ]
+    },
+    {
+      "from": "APP-17",
+      "to": "APP-18",
+      "type": "흐름: 본인인증 → 가입 완료",
+      "evidence": [
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-004"
+        }
+      ]
+    },
+    {
+      "from": "APP-11",
+      "to": "APP-12",
+      "type": "상태: 배달 불가 지역 → 요청 완료",
+      "evidence": [
+        {
+          "source_id": "SRC-01",
+          "locator": "10 FR-AUTH-006"
+        }
+      ]
+    },
+    {
+      "from": "WEB-03",
+      "to": "WEB-07",
+      "type": "흐름: 주문관리 → 처리상태 변경 모달",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-011"
+        }
+      ]
+    },
+    {
+      "from": "WEB-03",
+      "to": "WEB-08",
+      "type": "흐름: 주문관리 → 상세조회 모달",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-012"
+        }
+      ]
+    },
+    {
+      "from": "WEB-03",
+      "to": "WEB-30",
+      "type": "데이터: 매출요약 = 주문관리 같은 컬럼",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-060 / 3 FR-AW-SALES-001"
+        }
+      ]
+    },
+    {
+      "from": "WEB-19",
+      "to": "WEB-18",
+      "type": "상태: 상품 저장 → 성분 합 오류 토스트",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-032"
+        }
+      ]
+    },
+    {
+      "from": "WEB-17",
+      "to": "WEB-24",
+      "type": "흐름: 품절 토글 → 품절 전환 확인 모달",
+      "evidence": [
+        {
+          "source_id": "SRC-09",
+          "locator": "2 AW-034"
+        }
+      ]
+    }
+  ]
 }

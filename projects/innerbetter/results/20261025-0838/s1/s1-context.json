@@ -1,0 +1,2250 @@
+{
+ "run_id": "20261025-0838",
+ "slug": "innerbetter",
+ "prev_run_id": null,
+ "figma": {
+  "file_key": "wsd2HEsLTV74mUSucqjHVF",
+  "page_id": "18:2",
+  "page_name": "concept",
+  "metadata_snapshot": "sources.next/figma/concept-metadata.xml",
+  "is_copy": true,
+  "original_file_key": "ZwcWEllvBjbgK6ZYO16PKT",
+  "copied_at": null
+ },
+ "requirements": [
+  {
+   "id": "REQ-HOME-01",
+   "title": "홈에서 카테고리별로 상품을 탐색할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-1 홈",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-HOME-02",
+   "title": "홈 상품 목록에 상품명·가격·상품 정보를 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-1 홈 / 3-1",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-HOME-03",
+   "title": "홈 상품 목록에서 바로 장바구니에 담을 수 있다(빠른 담기)",
+   "source_id": "SRC-00",
+   "locator": "6-1 홈 / MVP 포함",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-HOME-04",
+   "title": "홈에서 장바구니·마이페이지·알림에 접근할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-1 홈",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-PDP-01",
+   "title": "상품 상세에 상품 이미지·상품명·가격을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-2 상품 상세",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-PDP-02",
+   "title": "상품 상세에 상품 설명과 상품 특징을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-2 상품 상세",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-PDP-03",
+   "title": "상품 상세에 칼로리와 영양성분을 구매 전에 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-2 상품 상세 / 13 조건",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-PDP-04",
+   "title": "상품 상세에서 수량을 선택해 장바구니에 담을 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-2 상품 상세",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-01",
+   "title": "장바구니에 담긴 상품 목록과 상품 금액을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-3 장바구니",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-02",
+   "title": "장바구니에서 수량을 변경할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-3 장바구니",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-03",
+   "title": "장바구니에서 상품을 삭제할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-3 장바구니",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-04",
+   "title": "장바구니에 최소 주문 금액을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-3 장바구니",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-05",
+   "title": "장바구니에 할인 금액과 최종 결제 금액을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-3 장바구니",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-06",
+   "title": "장바구니에서 주문하기로 주문·결제에 진입한다",
+   "source_id": "SRC-00",
+   "locator": "6-3 장바구니",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-07",
+   "title": "최소 주문 금액 미달 시 현재 금액과 비교해 부족한 금액을 안내한다",
+   "source_id": "SRC-00",
+   "locator": "6-3 최소 주문 금액 예외",
+   "platform": "APP",
+   "rule_ref": "1-c",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-CART-08",
+   "title": "최소 주문 금액 미달 시 주문 진행을 차단한다",
+   "source_id": "SRC-00",
+   "locator": "6-3 최소 주문 금액 예외 / 4 / 13",
+   "platform": "APP",
+   "rule_ref": "1-b",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-ORD-01",
+   "title": "주문·결제에 배송 정보를 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-4 주문·결제",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-ORD-02",
+   "title": "주문·결제에 주문 상품과 상품 금액을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-4 주문·결제",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-ORD-03",
+   "title": "적립금은 결제 시 자동으로 할인 적용되며 사용자가 사용량을 조정하지 않는다",
+   "source_id": "SRC-00",
+   "locator": "6-4 / 7 핵심 운영 정책 / 4",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-ORD-04",
+   "title": "주문·결제에 할인 금액과 최종 결제 금액을 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-4 주문·결제",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-ORD-05",
+   "title": "주문·결제에 주문 취소 가능 조건을 안내한다",
+   "source_id": "SRC-00",
+   "locator": "6-4 주문·결제 / 5 주문 취소 안내",
+   "platform": "APP",
+   "rule_ref": "2-d",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-ORD-06",
+   "title": "결제를 진행해 주문을 완료할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-4 주문·결제",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DONE-01",
+   "title": "주문 완료 화면에 주문 완료 상태·주문 상품·주문 정보를 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-5 주문 완료",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DONE-02",
+   "title": "주문 완료 화면에 배송 정보와 배송 안내를 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-5 주문 완료",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DONE-03",
+   "title": "주문 완료 화면에 적립금 안내를 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-5 주문 완료",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DONE-04",
+   "title": "주문 완료 화면에서 주문 내역으로 이동할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-5 주문 완료",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-MY-01",
+   "title": "마이 주문 내역에 주문 날짜·주문 상품·주문 금액·주문 상태를 목록으로 보여주고 주문 상세로 이동할 수 있다",
+   "source_id": "SRC-00",
+   "locator": "6-6 마이 / 주문 내역",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DTL-01",
+   "title": "주문 상세에 주문 상품·배송 정보·결제 정보·배송 상태를 통합해 보여준다",
+   "source_id": "SRC-00",
+   "locator": "5 핵심 정보 구조(주문 상세) / 6-7",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DTL-02",
+   "title": "배송 상태(배송 준비중→배송 중→배송 완료)를 태그와 진행 상태로 구분해 보여준다",
+   "source_id": "SRC-00",
+   "locator": "6-7 주문 상세 / 배송 상태",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DTL-03",
+   "title": "주문 취소는 배송 준비중 상태에서만 가능하고 배송 중 이후에는 불가하다",
+   "source_id": "SRC-00",
+   "locator": "6-7 주문 취소 / 7 / 13",
+   "platform": "APP",
+   "rule_ref": "2-a",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-DTL-04",
+   "title": "취소 가능 여부를 현재 주문 상태와 함께 안내한다",
+   "source_id": "SRC-00",
+   "locator": "6-7 주문 취소",
+   "platform": "APP",
+   "rule_ref": "2-a",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-POL-01",
+   "title": "배달 시간은 관리자가 설정하며 하루 최대 2회다",
+   "source_id": "SRC-00",
+   "locator": "story-service.md 배달 시간 정책",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-POL-02",
+   "title": "앱의 배달 가능 시간은 관리자 설정 시각 기준으로 표시한다(예: 18시 설정 → 18:00~21:00)",
+   "source_id": "SRC-00",
+   "locator": "story-service.md 배달 시간 정책",
+   "platform": "APP",
+   "rule_ref": "2-d",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-POL-03",
+   "title": "주문 마감 시간은 배달시간 −1시간이다(예: 17:00)",
+   "source_id": "SRC-00",
+   "locator": "story-service.md 배달 시간 정책",
+   "platform": "APP",
+   "rule_ref": "2-d",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-POL-04",
+   "title": "주문 취소 가능 시간은 배달시간 −1시간까지이며, 마감 이후 취소 시도에는 실패 안내가 있다",
+   "source_id": "SRC-00",
+   "locator": "story-service.md 배달 시간 정책",
+   "platform": "APP",
+   "rule_ref": "2-b",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AUTH-01",
+   "title": "이메일·비밀번호 또는 카카오·구글·애플 계정으로 로그인할 수 있다",
+   "source_id": "SRC-01",
+   "locator": "7 US-AUTH-001 / 10 FR-AUTH-002",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AUTH-02",
+   "title": "로그인 실패 시 에러 모달을 보여준다",
+   "source_id": "SRC-01",
+   "locator": "8 주요 분기 / 14",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AUTH-03",
+   "title": "이메일 회원가입은 이메일·비밀번호 입력 → 문자 본인인증 → 회원정보(이름·주소) → 약관 동의 → 가입 완료로 진행한다",
+   "source_id": "SRC-01",
+   "locator": "10 FR-AUTH-001, FR-AUTH-004 / 8",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AUTH-04",
+   "title": "SNS 로그인 시 회원정보가 없으면 회원정보 입력 단계로 이동한다",
+   "source_id": "SRC-01",
+   "locator": "10 FR-AUTH-002 / 8 주요 분기",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AUTH-05",
+   "title": "약관 동의는 이용약관·위치기반서비스 필수, 마케팅 활용 선택으로 받는다",
+   "source_id": "SRC-01",
+   "locator": "12 비즈니스 규칙 / 9 SC-009",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AUTH-06",
+   "title": "가입 이메일로 비밀번호 재설정 링크를 발송하고 발송 완료를 안내한다",
+   "source_id": "SRC-01",
+   "locator": "10 FR-AUTH-005",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-SRCH-01",
+   "title": "지점 내 상품명으로 검색할 수 있다",
+   "source_id": "SRC-01",
+   "locator": "10 FR-MAIN-001",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-SRCH-02",
+   "title": "검색은 검색 전·결과 없음·결과 있음 상태를 제공한다",
+   "source_id": "SRC-01",
+   "locator": "9 SC-017 / 14",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AREA-01",
+   "title": "배달 불가 지역이면 준비 중 안내와 \"우리 지역도 요청하기\"를 제공하고 요청 완료를 토스트로 알린다",
+   "source_id": "SRC-01",
+   "locator": "10 FR-AUTH-006 / 8 주요 분기",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-SOLD-01",
+   "title": "품절 상품은 품절로 표기하고 장바구니 담기를 비활성화한다",
+   "source_id": "SRC-01",
+   "locator": "10 FR-MAIN-004 / 8 주요 분기",
+   "platform": "APP",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-AUTH-01",
+   "title": "관리자는 이메일·비밀번호로 로그인하며, 실패 시 \"이메일 또는 비밀번호를 확인해주세요\" 모달과 다시 입력하기를 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-001",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-ORD-01",
+   "title": "주문관리 목록은 검색, 일간·월간 날짜 이동, 지정 컬럼(주문번호~상세조회), 페이지네이션, 빈 상태 \"아직 주문이 없어요\"를 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-010 / 5",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-ORD-03",
+   "title": "처리상태는 배송 준비중·배송 중·배송완료 중에서만 변경하고, 결제취소는 목록에 표시만 한다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-ORD-001",
+   "platform": "WEB",
+   "rule_ref": "2-e",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-ORD-04",
+   "title": "처리상태 변경 전 \"고객에게 PUSH알림이 발송됩니다\" 확인 모달을 거친다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-ORD-002 / 2 AW-011",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-ORD-05",
+   "title": "상세조회 모달에 주문상품·배송정보(주소·요청사항·공동현관 출입번호)·결제금액(주문금액·마일리지 차감·최종 결제금액·적립예정)을 보여준다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-012",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-CAT-01",
+   "title": "카테고리 관리 목록은 선택삭제·노출 순서변경·추가하기와 항목(이미지·이름·생성날짜), 빈 상태를 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-020",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-CAT-02",
+   "title": "카테고리 추가/수정 모달은 이미지(1:1)와 카테고리 이름을 입력받는다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-021",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-CAT-03",
+   "title": "카테고리 삭제 전 확인 모달을 거치고, 상품이 1개 이상 연결된 카테고리는 삭제를 차단한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-022 / 3 FR-AW-CAT-001",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-PRD-01",
+   "title": "상품관리 목록은 검색, 탭(전체/판매 중/품절+개수), 추가·삭제, 지정 컬럼과 품절 토글을 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-030",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-PRD-02",
+   "title": "상품 추가/수정 모달은 카테고리 다중 선택, 상품 이미지 1:1, 메인컨셉 16:9, 상세 이미지 최대 5장, 가격, 영양성분 행 추가/삭제, 영양성분표 이미지를 입력받는다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-031 / 3 FR-AW-PRD-004",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-PRD-03",
+   "title": "성분 % 합이 100이 아니면 저장할 수 없고 저장 오류 토스트를 보여준다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-PRD-001 / 2 AW-032",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-PRD-04",
+   "title": "성분 내용량은 단위(g, mg)까지 입력해야 앱에 노출된다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-PRD-002",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-PRD-05",
+   "title": "품절 전환 전 확인 모달을 거치며, 품절이면 앱에서 구매할 수 없다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-PRD-003 / 2 AW-034",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-PRD-06",
+   "title": "식품 법령 이미지 팝업에서 이미지를 업로드·삭제할 수 있다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-033",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-BR-01",
+   "title": "지점관리는 운영 가능 시간, 영업 ON/OFF, 주소(검색+상세), 지점 사진, 최소주문 금액, 배송 반경(동), 배송시간 회차, 저장을 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-040",
+   "platform": "WEB",
+   "rule_ref": "1-e",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-BR-02",
+   "title": "배송시간은 시작 시각만 입력하고 종료=시작+3h, 주문마감·취소마감=시작−1h를 자동 계산(수정 불가)한다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-BR-001",
+   "platform": "WEB",
+   "rule_ref": "2-d",
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-BR-03",
+   "title": "배송시간 회차는 여러 개 둘 수 있고, 삭제 전 확인 모달을 거친다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-BR-002 / 2 AW-042(수정 반영 case 7)",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-BR-04",
+   "title": "지점 사진은 여러 장 등록·삭제할 수 있고(16:9, 비율 안내), 앱 상단에서 5초 자동 슬라이드한다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-BR-006 / 2 AW-040(수정 반영 case 6)",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-BR-05",
+   "title": "지점관리 최소주문 금액이 앱 장바구니 결제 차단 기준이다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-BR-004 / 4 앱–웹 연결",
+   "platform": "WEB",
+   "rule_ref": "1-e",
+   "status": "추론"
+  },
+  {
+   "id": "REQ-AW-BR-06",
+   "title": "영업 OFF이거나 운영 시간 외이면 앱에 영업 중 아님 상태를 노출한다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-BR-003 / 4 앱–웹 연결",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "추론"
+  },
+  {
+   "id": "REQ-AW-BR-07",
+   "title": "배송 반경(동)이 앱 배달 불가 지역 판정 기준이다",
+   "source_id": "SRC-09",
+   "locator": "3 FR-AW-BR-005 / 4 앱–웹 연결",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "추론"
+  },
+  {
+   "id": "REQ-AW-BR-08",
+   "title": "주소 검색은 카카오 우편번호 서비스를 사용한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-041",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-MEM-01",
+   "title": "회원관리 목록은 검색, 컬럼(이름·주소·이메일·연락처·가입일·마케팅 수신동의·소셜 로그인), 빈 상태 \"회원 정보가 없어요\"를 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-050",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-SALES-01",
+   "title": "매출요약은 주문관리와 같은 컬럼과 기간(일/월) 판매합계, 빈 상태를 제공한다",
+   "source_id": "SRC-09",
+   "locator": "2 AW-060 / 3 FR-AW-SALES-001",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  },
+  {
+   "id": "REQ-AW-AREA-01",
+   "title": "오픈 요청 지역 목록은 요청시간·이름·연락처·마케팅 수신동의·주소를 보여준다(앱 \"우리 지역도 요청하기\"와 연결)",
+   "source_id": "SRC-09",
+   "locator": "2 AW-070 / 4 앱–웹 연결",
+   "platform": "WEB",
+   "rule_ref": null,
+   "status": "확정"
+  }
+ ],
+ "screens": [
+  {
+   "id": "APP-01",
+   "platform": "APP",
+   "number": 1,
+   "name": "01.회인가입/로그인",
+   "frames": [
+    {
+     "name": "01.회인가입/로그인",
+     "node_id": "36:22482",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-01__36-22482.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": true
+  },
+  {
+   "id": "APP-02",
+   "platform": "APP",
+   "number": 2,
+   "name": "02.회인가입/로그인",
+   "frames": [
+    {
+     "name": "02.회인가입/로그인",
+     "node_id": "36:22533",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-02__36-22533.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-03",
+   "platform": "APP",
+   "number": 3,
+   "name": "03.로그인/로그인 실패",
+   "frames": [
+    {
+     "name": "03.로그인/로그인 실패",
+     "node_id": "36:19370",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-03__36-19370.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-04",
+   "platform": "APP",
+   "number": 4,
+   "name": "04.로그인 완료",
+   "frames": [
+    {
+     "name": "04.로그인 완료",
+     "node_id": "36:19544",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-04__36-19544.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-06",
+   "platform": "APP",
+   "number": 6,
+   "name": "06.로그인_비밀번호 재설정",
+   "frames": [
+    {
+     "name": "06.로그인_비밀번호 재설정",
+     "node_id": "36:19425",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-06__36-19425.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-07",
+   "platform": "APP",
+   "number": 7,
+   "name": "07.로그인_비밀번호 재설정",
+   "frames": [
+    {
+     "name": "07.로그인_비밀번호 재설정",
+     "node_id": "36:19436",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-07__36-19436.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-08",
+   "platform": "APP",
+   "number": 8,
+   "name": "08.회원가입",
+   "frames": [
+    {
+     "name": "08.회원가입",
+     "node_id": "36:21770",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-08__36-21770.png"
+    },
+    {
+     "name": "08.회원정보입력(일반로그인)",
+     "node_id": "36:21724",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-08__36-21724.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-09",
+   "platform": "APP",
+   "number": 9,
+   "name": "09.로그인 완료",
+   "frames": [
+    {
+     "name": "09.로그인 완료",
+     "node_id": "36:19550",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-09__36-19550.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-11",
+   "platform": "APP",
+   "number": 11,
+   "name": "11.회원정보/배달 불가능한 자역일 때",
+   "frames": [
+    {
+     "name": "11.회원정보/배달 불가능한 자역일 때",
+     "node_id": "36:22437",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-11__36-22437.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-12",
+   "platform": "APP",
+   "number": 12,
+   "name": "12.회원정보/배달 불가능한 자역일 때",
+   "frames": [
+    {
+     "name": "12.회원정보/배달 불가능한 자역일 때",
+     "node_id": "36:22450",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-12__36-22450.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-13",
+   "platform": "APP",
+   "number": 13,
+   "name": "13.회원가입",
+   "frames": [
+    {
+     "name": "13.회원가입",
+     "node_id": "36:21653",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-13__36-21653.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-14",
+   "platform": "APP",
+   "number": 14,
+   "name": "14.회원정보입력(일반로그인)",
+   "frames": [
+    {
+     "name": "14.회원정보입력(일반로그인)",
+     "node_id": "36:21678",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-14__36-21678.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-15",
+   "platform": "APP",
+   "number": 15,
+   "name": "15.회원정보 입력/작성완료",
+   "frames": [
+    {
+     "name": "15.회원정보 입력/작성완료",
+     "node_id": "36:21790",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-15__36-21790.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-16",
+   "platform": "APP",
+   "number": 16,
+   "name": "16.본인인증/문자 본인인증",
+   "frames": [
+    {
+     "name": "16.본인인증/문자 본인인증",
+     "node_id": "36:19449",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-16__36-19449.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-17",
+   "platform": "APP",
+   "number": 17,
+   "name": "17.본인인증/문자 본인인증",
+   "frames": [
+    {
+     "name": "17.본인인증/문자 본인인증",
+     "node_id": "36:19476",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-17__36-19476.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-18",
+   "platform": "APP",
+   "number": 18,
+   "name": "18.회원가입완료",
+   "frames": [
+    {
+     "name": "18.회원가입완료",
+     "node_id": "36:19518",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-18__36-19518.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-19",
+   "platform": "APP",
+   "number": 19,
+   "name": "19.메인",
+   "frames": [
+    {
+     "name": "19.메인",
+     "node_id": "36:22779",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-19__36-22779.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-20",
+   "platform": "APP",
+   "number": 20,
+   "name": "20.메인_배송출발 1개일 때",
+   "frames": [
+    {
+     "name": "20.메인_배송출발 1개일 때",
+     "node_id": "36:22585",
+     "width": 375,
+     "height": 1791,
+     "screenshot": "sources.next/figma/APP-20__36-22585.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-21",
+   "platform": "APP",
+   "number": 21,
+   "name": "21.메인_배송출발 2개일 때",
+   "frames": [
+    {
+     "name": "21.메인_배송출발 2개일 때",
+     "node_id": "36:22994",
+     "width": 375,
+     "height": 1791,
+     "screenshot": "sources.next/figma/APP-21__36-22994.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-22",
+   "platform": "APP",
+   "number": 22,
+   "name": "22.메인/해당상품상세",
+   "frames": [
+    {
+     "name": "22.메인/해당상품상세",
+     "node_id": "36:20520",
+     "width": 375,
+     "height": 1602,
+     "screenshot": "sources.next/figma/APP-22__36-20520.png"
+    },
+    {
+     "name": "22.메인/해당상품상세",
+     "node_id": "36:20614",
+     "width": 375,
+     "height": 1291,
+     "screenshot": "sources.next/figma/APP-22__36-20614.png"
+    },
+    {
+     "name": "22.메인/해당상품상세",
+     "node_id": "36:20640",
+     "width": 375,
+     "height": 1706,
+     "screenshot": "sources.next/figma/APP-22__36-20640.png"
+    },
+    {
+     "name": "22.메인/해당상품상세",
+     "node_id": "36:23491",
+     "width": 375,
+     "height": 1474,
+     "screenshot": "sources.next/figma/APP-22__36-23491.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-24",
+   "platform": "APP",
+   "number": 24,
+   "name": "24.메인_영업 중X",
+   "frames": [
+    {
+     "name": "24.메인_영업 중X",
+     "node_id": "36:23189",
+     "width": 375,
+     "height": 1706,
+     "screenshot": "sources.next/figma/APP-24__36-23189.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-25",
+   "platform": "APP",
+   "number": 25,
+   "name": "25.메인/카테고리/해당상품리스트",
+   "frames": [
+    {
+     "name": "25.메인/카테고리/해당상품리스트",
+     "node_id": "36:19556",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-25__36-19556.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-26",
+   "platform": "APP",
+   "number": 26,
+   "name": "26.검색 후 /해당상품리스트/검색 전",
+   "frames": [
+    {
+     "name": "26.검색 후 /해당상품리스트/검색 전",
+     "node_id": "36:19704",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-26__36-19704.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-27",
+   "platform": "APP",
+   "number": 27,
+   "name": "27.검색 후 /해당상품리스트/상품없음",
+   "frames": [
+    {
+     "name": "27.검색 후 /해당상품리스트/상품없음",
+     "node_id": "36:19718",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-27__36-19718.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-28",
+   "platform": "APP",
+   "number": 28,
+   "name": "28.검색 후 /해당상품리스트/상품있음",
+   "frames": [
+    {
+     "name": "28.검색 후 /해당상품리스트/상품있음",
+     "node_id": "36:19732",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-28__36-19732.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-29",
+   "platform": "APP",
+   "number": 29,
+   "name": "29.메인/카테고리/해당상품리스트",
+   "frames": [
+    {
+     "name": "29.메인/카테고리/해당상품리스트",
+     "node_id": "36:19630",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-29__36-19630.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-30",
+   "platform": "APP",
+   "number": 30,
+   "name": "30.검색 후 /해당상품리스트/검색 전",
+   "frames": [
+    {
+     "name": "30.검색 후 /해당상품리스트/검색 전",
+     "node_id": "36:19711",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-30__36-19711.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-31",
+   "platform": "APP",
+   "number": 31,
+   "name": "31.검색 후 /해당상품리스트/상품없음",
+   "frames": [
+    {
+     "name": "31.검색 후 /해당상품리스트/상품없음",
+     "node_id": "36:19725",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-31__36-19725.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-32",
+   "platform": "APP",
+   "number": 32,
+   "name": "32.검색 후 /해당상품리스트/상품있음",
+   "frames": [
+    {
+     "name": "32.검색 후 /해당상품리스트/상품있음",
+     "node_id": "36:19808",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-32__36-19808.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-33",
+   "platform": "APP",
+   "number": 33,
+   "name": "33.장바구니/담지 X",
+   "frames": [
+    {
+     "name": "33.장바구니/담지 X",
+     "node_id": "36:19970",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-33__36-19970.png"
+    },
+    {
+     "name": "33.장바구니/결제금액도달X",
+     "node_id": "36:19883",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-33__36-19883.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-34",
+   "platform": "APP",
+   "number": 34,
+   "name": "34.장바구니/결제금액도달O",
+   "frames": [
+    {
+     "name": "34.장바구니/결제금액도달O",
+     "node_id": "36:19981",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-34__36-19981.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-35",
+   "platform": "APP",
+   "number": 35,
+   "name": "35.주문/결제/pg결제 토스 O",
+   "frames": [
+    {
+     "name": "35.주문/결제/pg결제 토스 O",
+     "node_id": "36:20068",
+     "width": 375,
+     "height": 1222,
+     "screenshot": "sources.next/figma/APP-35__36-20068.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-36",
+   "platform": "APP",
+   "number": 36,
+   "name": "36.주문/결제/pg결제 토스 O",
+   "frames": [
+    {
+     "name": "36.주문/결제/pg결제 토스 O",
+     "node_id": "36:20152",
+     "width": 375,
+     "height": 1222,
+     "screenshot": "sources.next/figma/APP-36__36-20152.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-37",
+   "platform": "APP",
+   "number": 37,
+   "name": "37.주문/결제/pg결제 토스 O",
+   "frames": [
+    {
+     "name": "37.주문/결제/pg결제 토스 O",
+     "node_id": "36:20328",
+     "width": 375,
+     "height": 1222,
+     "screenshot": "sources.next/figma/APP-37__36-20328.png"
+    },
+    {
+     "name": "37.주문/결제/pg결제 토스 O",
+     "node_id": "36:20424",
+     "width": 375,
+     "height": 1334,
+     "screenshot": "sources.next/figma/APP-37__36-20424.png"
+    },
+    {
+     "name": "37.주문/결제/pg결제 토스 O",
+     "node_id": "36:20233",
+     "width": 375,
+     "height": 1222,
+     "screenshot": "sources.next/figma/APP-37__36-20233.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-38",
+   "platform": "APP",
+   "number": 38,
+   "name": "38.토스 PG결제 예시",
+   "frames": [
+    {
+     "name": "38.토스 PG결제 예시",
+     "node_id": "36:19526",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-38__36-19526.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-39",
+   "platform": "APP",
+   "number": 39,
+   "name": "39.결제완료",
+   "frames": [
+    {
+     "name": "39.결제완료",
+     "node_id": "36:19529",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-39__36-19529.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-40",
+   "platform": "APP",
+   "number": 40,
+   "name": "40.마이/주문내역X",
+   "frames": [
+    {
+     "name": "40.마이/주문내역X",
+     "node_id": "36:20846",
+     "width": 375,
+     "height": 1187,
+     "screenshot": "sources.next/figma/APP-40__36-20846.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-41",
+   "platform": "APP",
+   "number": 41,
+   "name": "41.마이/주문내역O",
+   "frames": [
+    {
+     "name": "41.마이/주문내역O",
+     "node_id": "36:20735",
+     "width": 375,
+     "height": 1187,
+     "screenshot": "sources.next/figma/APP-41__36-20735.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-42",
+   "platform": "APP",
+   "number": 42,
+   "name": "42.마이/주소관리(주소변경)",
+   "frames": [
+    {
+     "name": "42.마이/주소관리(주소변경)",
+     "node_id": "36:21027",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-42__36-21027.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-43",
+   "platform": "APP",
+   "number": 43,
+   "name": "43.마이/주문,배송 현황(검색X)",
+   "frames": [
+    {
+     "name": "43.마이/주문,배송 현황(검색X)",
+     "node_id": "36:21046",
+     "width": 375,
+     "height": 1393,
+     "screenshot": "sources.next/figma/APP-43__36-21046.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-44",
+   "platform": "APP",
+   "number": 44,
+   "name": "44.마이/주문,배송 현황(검색O)",
+   "frames": [
+    {
+     "name": "44.마이/주문,배송 현황(검색O)",
+     "node_id": "36:21422",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-44__36-21422.png"
+    },
+    {
+     "name": "44.마이/주문,배송 현황(검색O)",
+     "node_id": "36:21216",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-44__36-21216.png"
+    },
+    {
+     "name": "44.마이/주문,배송 현황(검색O)",
+     "node_id": "36:21281",
+     "width": 375,
+     "height": 1241,
+     "screenshot": "sources.next/figma/APP-44__36-21281.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-46",
+   "platform": "APP",
+   "number": 46,
+   "name": "46.마이/주문,배송 현황(검색O)",
+   "frames": [
+    {
+     "name": "46.마이/주문,배송 현황(검색O)",
+     "node_id": "36:21495",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-46__36-21495.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-47",
+   "platform": "APP",
+   "number": 47,
+   "name": "47.마이/주문내역/상세",
+   "frames": [
+    {
+     "name": "47.마이/주문내역/상세",
+     "node_id": "36:22132",
+     "width": 375,
+     "height": 1088,
+     "screenshot": "sources.next/figma/APP-47__36-22132.png"
+    },
+    {
+     "name": "47.마이/주문내역/상세",
+     "node_id": "36:22231",
+     "width": 375,
+     "height": 1088,
+     "screenshot": "sources.next/figma/APP-47__36-22231.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-48",
+   "platform": "APP",
+   "number": 48,
+   "name": "48.마이/주문내역/상세",
+   "frames": [
+    {
+     "name": "48.마이/주문내역/상세",
+     "node_id": "36:22332",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-48__36-22332.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-49",
+   "platform": "APP",
+   "number": 49,
+   "name": "49.마이/주문내역/상세",
+   "frames": [
+    {
+     "name": "49.마이/주문내역/상세",
+     "node_id": "36:21839",
+     "width": 375,
+     "height": 1046,
+     "screenshot": "sources.next/figma/APP-49__36-21839.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-50",
+   "platform": "APP",
+   "number": 50,
+   "name": "50.마이/주문내역/상세",
+   "frames": [
+    {
+     "name": "50.마이/주문내역/상세",
+     "node_id": "36:22034",
+     "width": 375,
+     "height": 1046,
+     "screenshot": "sources.next/figma/APP-50__36-22034.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-51",
+   "platform": "APP",
+   "number": 51,
+   "name": "51.마이/주문내역/상세",
+   "frames": [
+    {
+     "name": "51.마이/주문내역/상세",
+     "node_id": "36:21936",
+     "width": 375,
+     "height": 1046,
+     "screenshot": "sources.next/figma/APP-51__36-21936.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-52",
+   "platform": "APP",
+   "number": 52,
+   "name": "52.마이/로그아웃",
+   "frames": [
+    {
+     "name": "52.마이/로그아웃",
+     "node_id": "36:23389",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-52__36-23389.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-53",
+   "platform": "APP",
+   "number": 53,
+   "name": "53.마이/탈퇴",
+   "frames": [
+    {
+     "name": "53.마이/탈퇴",
+     "node_id": "36:20925",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-53__36-20925.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "APP-54",
+   "platform": "APP",
+   "number": 54,
+   "name": "54.마이/고객센터",
+   "frames": [
+    {
+     "name": "54.마이/고객센터",
+     "node_id": "36:21507",
+     "width": 375,
+     "height": 812,
+     "screenshot": "sources.next/figma/APP-54__36-21507.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-01",
+   "platform": "WEB",
+   "number": 1,
+   "name": "01.로그인",
+   "frames": [
+    {
+     "name": "01.로그인",
+     "node_id": "36:23592",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-01__36-23592.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": true
+  },
+  {
+   "id": "WEB-02",
+   "platform": "WEB",
+   "number": 2,
+   "name": "02.로그인 실패",
+   "frames": [
+    {
+     "name": "02.로그인 실패",
+     "node_id": "36:23611",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-02__36-23611.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-03",
+   "platform": "WEB",
+   "number": 3,
+   "name": "03.메인/주문관리",
+   "frames": [
+    {
+     "name": "03.메인/주문관리",
+     "node_id": "36:23632",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-03__36-23632.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-04",
+   "platform": "WEB",
+   "number": 4,
+   "name": "04_메인/주문관리/생성 전",
+   "frames": [
+    {
+     "name": "04_메인/주문관리/생성 전",
+     "node_id": "36:23673",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-04__36-23673.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-05",
+   "platform": "WEB",
+   "number": 5,
+   "name": "05_메인/주문관리",
+   "frames": [
+    {
+     "name": "05_메인/주문관리",
+     "node_id": "36:23659",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-05__36-23659.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-06",
+   "platform": "WEB",
+   "number": 6,
+   "name": "06_메인/주문관리",
+   "frames": [
+    {
+     "name": "06_메인/주문관리",
+     "node_id": "36:23666",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-06__36-23666.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-07",
+   "platform": "WEB",
+   "number": 7,
+   "name": "07_메인/주문관리/처리상태 변경모달",
+   "frames": [
+    {
+     "name": "07_메인/주문관리/처리상태 변경모달",
+     "node_id": "36:23718",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-07__36-23718.png"
+    },
+    {
+     "name": "07_메인/주문관리/처리상태 변경모달",
+     "node_id": "36:23727",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-07__36-23727.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-08",
+   "platform": "WEB",
+   "number": 8,
+   "name": "08_메인/주문관리/상세보기 모달",
+   "frames": [
+    {
+     "name": "08_메인/주문관리/상세보기 모달",
+     "node_id": "36:23736",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-08__36-23736.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-09",
+   "platform": "WEB",
+   "number": 9,
+   "name": "09_메인/상품 카테고리/추가 전",
+   "frames": [
+    {
+     "name": "09_메인/상품 카테고리/추가 전",
+     "node_id": "36:23861",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-09__36-23861.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-10",
+   "platform": "WEB",
+   "number": 10,
+   "name": "10_메인/상품 카테고리",
+   "frames": [
+    {
+     "name": "10_메인/상품 카테고리",
+     "node_id": "36:23836",
+     "width": 1920,
+     "height": 1180,
+     "screenshot": "sources.next/figma/WEB-10__36-23836.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-11",
+   "platform": "WEB",
+   "number": 11,
+   "name": "11_메인/상품 카테고리",
+   "frames": [
+    {
+     "name": "11_메인/상품 카테고리",
+     "node_id": "36:23904",
+     "width": 1920,
+     "height": 1180,
+     "screenshot": "sources.next/figma/WEB-11__36-23904.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-12",
+   "platform": "WEB",
+   "number": 12,
+   "name": "12_메인/상품 카테고리/추가하기",
+   "frames": [
+    {
+     "name": "12_메인/상품 카테고리/추가하기",
+     "node_id": "36:23886",
+     "width": 1920,
+     "height": 1180,
+     "screenshot": "sources.next/figma/WEB-12__36-23886.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-13",
+   "platform": "WEB",
+   "number": 13,
+   "name": "13_메인/상품 카테고리/수정하기",
+   "frames": [
+    {
+     "name": "13_메인/상품 카테고리/수정하기",
+     "node_id": "36:23895",
+     "width": 1920,
+     "height": 1180,
+     "screenshot": "sources.next/figma/WEB-13__36-23895.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-14",
+   "platform": "WEB",
+   "number": 14,
+   "name": "14_메인/상품 카테고리/삭제하기",
+   "frames": [
+    {
+     "name": "14_메인/상품 카테고리/삭제하기",
+     "node_id": "36:23843",
+     "width": 1920,
+     "height": 1180,
+     "screenshot": "sources.next/figma/WEB-14__36-23843.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-15",
+   "platform": "WEB",
+   "number": 15,
+   "name": "15_메인/상품 카테고리/삭제하기",
+   "frames": [
+    {
+     "name": "15_메인/상품 카테고리/삭제하기",
+     "node_id": "36:23852",
+     "width": 1920,
+     "height": 1180,
+     "screenshot": "sources.next/figma/WEB-15__36-23852.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-16",
+   "platform": "WEB",
+   "number": 16,
+   "name": "16_메인/상품관리",
+   "frames": [
+    {
+     "name": "16_메인/상품관리",
+     "node_id": "36:24310",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-16__36-24310.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-17",
+   "platform": "WEB",
+   "number": 17,
+   "name": "17_메인/상품관리",
+   "frames": [
+    {
+     "name": "17_메인/상품관리",
+     "node_id": "36:23933",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-17__36-23933.png"
+    },
+    {
+     "name": "17_메인/상품관리",
+     "node_id": "36:24140",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-17__36-24140.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-18",
+   "platform": "WEB",
+   "number": 18,
+   "name": "18_메인/상품관리",
+   "frames": [
+    {
+     "name": "18_메인/상품관리",
+     "node_id": "36:23972",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-18__36-23972.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-19",
+   "platform": "WEB",
+   "number": 19,
+   "name": "19_메인/상품관리",
+   "frames": [
+    {
+     "name": "19_메인/상품관리",
+     "node_id": "36:24099",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-19__36-24099.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-20",
+   "platform": "WEB",
+   "number": 20,
+   "name": "20_메인/상품관리",
+   "frames": [
+    {
+     "name": "20_메인/상품관리",
+     "node_id": "36:24017",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-20__36-24017.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-21",
+   "platform": "WEB",
+   "number": 21,
+   "name": "21_메인/상품관리",
+   "frames": [
+    {
+     "name": "21_메인/상품관리",
+     "node_id": "36:24058",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-21__36-24058.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-22",
+   "platform": "WEB",
+   "number": 22,
+   "name": "22_메인/상품관리",
+   "frames": [
+    {
+     "name": "22_메인/상품관리",
+     "node_id": "36:24181",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-22__36-24181.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-23",
+   "platform": "WEB",
+   "number": 23,
+   "name": "23_메인/상품관리",
+   "frames": [
+    {
+     "name": "23_메인/상품관리",
+     "node_id": "36:24221",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-23__36-24221.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-24",
+   "platform": "WEB",
+   "number": 24,
+   "name": "24_메인/상품관리",
+   "frames": [
+    {
+     "name": "24_메인/상품관리",
+     "node_id": "36:24269",
+     "width": 1920,
+     "height": 1680,
+     "screenshot": "sources.next/figma/WEB-24__36-24269.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-25",
+   "platform": "WEB",
+   "number": 25,
+   "name": "25_메인/지점관리",
+   "frames": [
+    {
+     "name": "25_메인/지점관리",
+     "node_id": "36:24680",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-25__36-24680.png"
+    }
+   ],
+   "overrides": [
+    {
+     "section": "수정 반영",
+     "section_node_id": "36:29184",
+     "case": "case 6 수정 버전(07.21)",
+     "node_id": "36:29189",
+     "frame_name": "25_메인/지점관리",
+     "note": "AS-IS 지점 대표사진 1장 → TO-BE 여러 장 등록, 우측상단 삭제, 우측 스크롤, 비율 안내, 앱 상단 이미지 5초 자동 슬라이드 (텍스트 노드 36:29205)",
+     "screenshot": "sources.next/figma/OVR-case6__36-29189.png"
+    },
+    {
+     "section": "수정 반영",
+     "section_node_id": "36:29184",
+     "case": "case 7 수정 버전(07.21)",
+     "node_id": "36:29196",
+     "frame_name": "25_메인/지점관리",
+     "note": "AS-IS 배송 시간 삭제 시 즉시 삭제 → TO-BE '배송 시간 삭제' 확인 모달 (텍스트 노드 36:29206)",
+     "screenshot": "sources.next/figma/OVR-case7__36-29196.png"
+    }
+   ],
+   "override_rule": "사용자 결정: #25·#26은 「수정 반영」 섹션에 종속되며 충돌 시 case 6·7이 최신 기준",
+   "start_frame": false
+  },
+  {
+   "id": "WEB-26",
+   "platform": "WEB",
+   "number": 26,
+   "name": "26_메인/지점관리",
+   "frames": [
+    {
+     "name": "26_메인/지점관리",
+     "node_id": "36:24689",
+     "width": 1920,
+     "height": 1383,
+     "screenshot": "sources.next/figma/WEB-26__36-24689.png"
+    }
+   ],
+   "overrides": [
+    {
+     "section": "수정 반영",
+     "section_node_id": "36:29184",
+     "case": "case 6 수정 버전(07.21)",
+     "node_id": "36:29189",
+     "frame_name": "25_메인/지점관리",
+     "note": "AS-IS 지점 대표사진 1장 → TO-BE 여러 장 등록, 우측상단 삭제, 우측 스크롤, 비율 안내, 앱 상단 이미지 5초 자동 슬라이드 (텍스트 노드 36:29205)",
+     "screenshot": "sources.next/figma/OVR-case6__36-29189.png"
+    },
+    {
+     "section": "수정 반영",
+     "section_node_id": "36:29184",
+     "case": "case 7 수정 버전(07.21)",
+     "node_id": "36:29196",
+     "frame_name": "25_메인/지점관리",
+     "note": "AS-IS 배송 시간 삭제 시 즉시 삭제 → TO-BE '배송 시간 삭제' 확인 모달 (텍스트 노드 36:29206)",
+     "screenshot": "sources.next/figma/OVR-case7__36-29196.png"
+    }
+   ],
+   "override_rule": "사용자 결정: #25·#26은 「수정 반영」 섹션에 종속되며 충돌 시 case 6·7이 최신 기준",
+   "start_frame": false
+  },
+  {
+   "id": "WEB-27",
+   "platform": "WEB",
+   "number": 27,
+   "name": "27_메인/지점관리",
+   "frames": [
+    {
+     "name": "27_메인/지점관리",
+     "node_id": "36:24687",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-27__36-24687.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-28",
+   "platform": "WEB",
+   "number": 28,
+   "name": "28_메인/회원관리",
+   "frames": [
+    {
+     "name": "28_메인/회원관리",
+     "node_id": "36:24443",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-28__36-24443.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-29",
+   "platform": "WEB",
+   "number": 29,
+   "name": "29_메인/회원관리",
+   "frames": [
+    {
+     "name": "29_메인/회원관리",
+     "node_id": "36:24479",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-29__36-24479.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-30",
+   "platform": "WEB",
+   "number": 30,
+   "name": "30_메인/매출요약",
+   "frames": [
+    {
+     "name": "30_메인/매출요약",
+     "node_id": "36:24486",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-30__36-24486.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-31",
+   "platform": "WEB",
+   "number": 31,
+   "name": "31_메인/매출요약",
+   "frames": [
+    {
+     "name": "31_메인/매출요약",
+     "node_id": "36:24563",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-31__36-24563.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-32",
+   "platform": "WEB",
+   "number": 32,
+   "name": "32_메인/매출요약",
+   "frames": [
+    {
+     "name": "32_메인/매출요약",
+     "node_id": "36:24602",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-32__36-24602.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  },
+  {
+   "id": "WEB-33",
+   "platform": "WEB",
+   "number": 33,
+   "name": "33_메인/오픈 요청 지역",
+   "frames": [
+    {
+     "name": "33_메인/오픈 요청 지역",
+     "node_id": "36:24641",
+     "width": 1920,
+     "height": 1080,
+     "screenshot": "sources.next/figma/WEB-33__36-24641.png"
+    }
+   ],
+   "overrides": [],
+   "start_frame": false
+  }
+ ],
+ "screen_summary": {
+  "APP": 50,
+  "WEB": 33,
+  "APP_frames": 60,
+  "WEB_frames": 35
+ },
+ "excluded_frames": [
+  {
+   "name": "TAG",
+   "count": 111,
+   "reason": "화면 판별 규칙 제외 이름(TAG) — 라벨 프레임"
+  },
+  {
+   "name": "logo/color/image",
+   "node_id": "36:19002",
+   "reason": "제외 이름(logo/color/image)"
+  },
+  {
+   "name": "컴포넌트",
+   "node_id": "36:24696",
+   "reason": "제외 이름(컴포넌트) — section"
+  },
+  {
+   "name": "modal",
+   "node_id": "36:29213",
+   "reason": "제외 이름(modal) — 단독 instance"
+  },
+  {
+   "name": "수정 반영",
+   "node_id": "36:29184",
+   "reason": "override 섹션 — 화면 목록에 넣지 않고 WEB-25·WEB-26 overrides로 연결"
+  }
+ ],
+ "platform_gaps": [],
+ "excluded_requests": [
+  {
+   "request": "배달기사앱도 같이 검증해줘",
+   "reason": "배달기사앱은 story-service §A 플랫폼 허용 목록 밖(자료 없음 → 검증 대상에 넣으면 FAIL). 화면·요구사항을 추가하지 않음"
+  }
+ ],
+ "excluded_sources": [
+  {
+   "source": "EX-01 work/Today To-do 관리자웹 수정사항 정리 (401cd783…)",
+   "reason": "사용자 명령에서 'MARU 관리자웹 수정사항 정리 문서' 참고를 요청했으나 다른 고객사(MARU) 프로젝트 자료라 EXCLUDED 유지. 열지 않고 인용하지 않음"
+  },
+  {
+   "source": "EX-02 work/Today To-do 관리자웹 수정 (402cd783…)",
+   "reason": "다른 프로젝트(MARU 추정) 자료, EXCLUDED 유지, 열지 않음"
+  },
+  {
+   "source": "EX-03 Figma 복제본 screens 페이지 (23:29)",
+   "reason": "사용자 지시: concept 페이지만 근거로 사용"
+  }
+ ],
+ "changes": [],
+ "recheck_targets": [],
+ "notion_read": "ok",
+ "notion_inputs": [],
+ "notion_note": "검토 사항 DB(collection://65c346a4-…) 조회 결과 행 0개 (첫 실행)",
+ "feedback": [],
+ "unverified": [
+  "SRC-04(앱 기능정의서 .xlsx)·SRC-05(QA-TC 앱): SEARCH_ONLY, 본문 미열람",
+  "SRC-07 Figma 원본: BLOCKED — 복제본(SRC-10) 복제일 미확인, 원본과 차이 여부 확인 불가",
+  "SRC-08 관리자웹 기능정의서: NOT_FOUND",
+  "SRC-02 외부 블록 2개 미확인 (이번 실행에서 재확인하지 않음)",
+  "REQ-AW-BR-05~07은 SRC-09에서 [추론] 상태"
+ ]
+}

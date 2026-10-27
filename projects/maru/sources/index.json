@@ -2,11 +2,74 @@
   "slug": "maru",
   "updated_at": "2026-10-27",
   "sources": [
-    { "id": "SRC-00", "title": "관리자웹 회의 픽스 (사용자 제공 원문, 수정 완료 표시)", "platform": ["WEB"], "status": "FETCHED", "role": "관리자웹 변경 요구사항 1차 기준", "url": "https://app.notion.com/p/401cd783cd41805c9aabec957797e49a", "path": "sources/meeting-fix-admin-web.md", "checked_at": "2026-10-27", "hash": null },
-    { "id": "SRC-01", "title": "MARU(커뮤니티) 프로젝트 페이지 (Notion)", "platform": ["APP", "WEB"], "status": "FETCHED", "role": "서비스 맥락·회의 내용 (참고 의견·확정 혼재)", "url": "https://app.notion.com/p/3cacd783cd4180e796abd060fc650992", "path": null, "checked_at": "2026-10-27", "hash": null, "note": "외부 블록 2개·PDF 1개 미확인" },
-    { "id": "SRC-02", "title": "사용자앱 기능정의서/와이어 PDF (회의 픽스의 '56p', '85p' 참조 대상)", "platform": ["APP"], "status": "NOT_FOUND", "role": "신고 사유·Review feedback·Specialty 항목의 기준", "url": null, "path": null, "checked_at": "2026-10-27", "hash": null, "note": "프로젝트 페이지에 PDF 블록이 있으나 읽지 못함" },
-    { "id": "SRC-03", "title": "MARU Figma 파일", "platform": ["APP", "WEB"], "status": "NOT_FOUND", "role": "검증 대상 화면", "url": null, "path": null, "checked_at": "2026-10-27", "hash": null, "note": "사용자에게 링크 요청 중" },
-    { "id": "EX-01", "title": "이너베러 프로젝트 자료 일체", "platform": [], "status": "EXCLUDED", "role": "다른 고객사", "url": null, "path": null, "checked_at": "2026-10-27", "hash": null }
+    {
+      "id": "SRC-00",
+      "title": "관리자웹 회의 픽스 (사용자 제공 원문, 수정 완료 표시)",
+      "platform": [
+        "WEB"
+      ],
+      "status": "FETCHED",
+      "role": "관리자웹 변경 요구사항 1차 기준",
+      "url": "https://app.notion.com/p/401cd783cd41805c9aabec957797e49a",
+      "path": "sources/meeting-fix-admin-web.md",
+      "checked_at": "2026-10-27",
+      "hash": null
+    },
+    {
+      "id": "SRC-01",
+      "title": "MARU(커뮤니티) 프로젝트 페이지 (Notion)",
+      "platform": [
+        "APP",
+        "WEB"
+      ],
+      "status": "FETCHED",
+      "role": "서비스 맥락·회의 내용 (참고 의견·확정 혼재)",
+      "url": "https://app.notion.com/p/3cacd783cd4180e796abd060fc650992",
+      "path": null,
+      "checked_at": "2026-10-27",
+      "hash": null,
+      "note": "외부 블록 2개·PDF 1개 미확인"
+    },
+    {
+      "id": "SRC-02",
+      "title": "사용자앱 기능정의서/와이어 PDF (회의 픽스의 '56p', '85p' 참조 대상)",
+      "platform": [
+        "APP"
+      ],
+      "status": "NOT_FOUND",
+      "role": "신고 사유·Review feedback·Specialty 항목의 기준",
+      "url": null,
+      "path": null,
+      "checked_at": "2026-10-27",
+      "hash": null,
+      "note": "프로젝트 페이지에 PDF 블록이 있으나 읽지 못함"
+    },
+    {
+      "id": "SRC-03",
+      "title": "MARU Figma 파일",
+      "platform": [
+        "APP",
+        "WEB"
+      ],
+      "status": "BLOCKED",
+      "role": "검증 대상 화면",
+      "url": "https://www.figma.com/design/nNK8EOxzqkDrX7GvAZH5NR?node-id=47-177",
+      "path": null,
+      "checked_at": "2026-10-27",
+      "hash": null,
+      "note": "마루 (개발) 원본. 이 계정에 편집 권한이 없어 읽기 불가 (2026-10-27 확인)"
+    },
+    {
+      "id": "EX-01",
+      "title": "이너베러 프로젝트 자료 일체",
+      "platform": [],
+      "status": "EXCLUDED",
+      "role": "다른 고객사",
+      "url": null,
+      "path": null,
+      "checked_at": "2026-10-27",
+      "hash": null
+    }
   ],
   "conflicts": []
 }

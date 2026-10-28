@@ -1,6 +1,6 @@
 {
   "slug": "maru",
-  "updated_at": "2026-10-27",
+  "updated_at": "2026-10-28",
   "sources": [
     {
       "id": "SRC-00",
@@ -51,13 +51,13 @@
         "APP",
         "WEB"
       ],
-      "status": "BLOCKED",
+      "status": "FETCHED",
       "role": "검증 대상 화면",
       "url": "https://www.figma.com/design/nNK8EOxzqkDrX7GvAZH5NR?node-id=47-177",
       "path": null,
-      "checked_at": "2026-10-27",
-      "hash": null,
-      "note": "마루 (개발) 원본. 이 계정에 편집 권한이 없어 읽기 불가 (2026-10-27 확인)"
+      "checked_at": "2026-10-28",
+      "hash": "b5e14f6a638abe0b",
+      "note": "마루 (개발) 원본, 기획/디자인 페이지(47:177)만 사용. Figma 커넥터 계정으로 메타데이터 조회 성공 (2026-10-28)"
     },
     {
       "id": "EX-01",
@@ -68,6 +68,17 @@
       "url": null,
       "path": null,
       "checked_at": "2026-10-27",
+      "hash": null
+    },
+    {
+      "id": "EX-02",
+      "title": "마루 (개발) 견적서&래퍼런스(0:1)·backup(92:911) 페이지",
+      "platform": [],
+      "status": "EXCLUDED",
+      "role": "지정 페이지(기획/디자인) 밖",
+      "url": null,
+      "path": null,
+      "checked_at": "2026-10-28",
       "hash": null
     }
   ],

@@ -604,6 +604,8 @@ class Display:
                 self.node[f["node_id"]] = f["name"]
                 self.plat[f["name"]] = s.get("platform")
         self.src = {x["id"]: x.get("title", x["id"]) for x in source_index(slug, run).get("sources", [])}
+        cfg = load(proj(slug) / "project.json", {}) or {}
+        self.plat_label = {p["code"]: p["label"] for p in cfg.get("platforms", [])}
         tops, tags, self.owner = _figma_layout(slug)
         self.tops = tops
         self.category, self.frame_tag = self._tags(tops, tags)
@@ -644,11 +646,20 @@ class Display:
                 seen.append(n)
         return seen
 
+    def display_name(self, name):
+        """이름이 숫자뿐인 프레임은 플랫폼과 프레임 TAG를 붙여 알아볼 수 있게 한다 (artifacts §10)."""
+        if name and re.fullmatch(r"\d+", str(name)):
+            plat = self.plat_label.get(self.plat.get(name), "")
+            tag = self.frame_tag.get(name)
+            return f"{plat} {name}" + (f" · {tag}" if tag else "")
+        return name
+
     def frame_label(self, names, cap=4):
         names = list(dict.fromkeys(names))
         if not names:
             return "(특정 프레임 없음 · 전체 화면)"
-        return ", ".join(names[:cap]) + (f" 외 {len(names) - cap}개" if len(names) > cap else "")
+        shown = [self.display_name(n) for n in names[:cap]]
+        return ", ".join(shown) + (f" 외 {len(names) - cap}개" if len(names) > cap else "")
 
     def text(self, s):
         if not s:
@@ -660,10 +671,10 @@ class Display:
             name = self.node.get(nid) or self.node.get(self.owner.get(nid, ""))
             if not name and nid in self.tops and self.tops[nid]["name"] not in ("TAG",):
                 name = self.tops[nid]["name"]
-            return f"「{name}」" if name else nid
+            return f"「{self.display_name(name)}」" if name else nid
         s = re.sub(r"(?<![\d:])\d+:\d+(?![\d:])", node_sub, s)
         s = re.sub(r"(?<![A-Za-z])(APP|WEB)-(\d+)(?!\d)",
-                   lambda m: f"「{self.screen[m.group(0)][0]}」" if m.group(0) in self.screen else m.group(0), s)
+                   lambda m: f"「{self.display_name(self.screen[m.group(0)][0])}」" if m.group(0) in self.screen else m.group(0), s)
         s = re.sub(r"「([^」]+)」\s*\(\s*\1\s*\)", r"「\1」", s)   # 「이름」 (이름) 중복 제거
         return s
 

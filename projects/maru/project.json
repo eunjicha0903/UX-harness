@@ -2,18 +2,22 @@
   "slug": "maru",
   "name": "MARU(커뮤니티)",
   "figma": {
-    "file_key": "",
-    "page_id": "",
-    "page_name": "",
+    "file_key": "nNK8EOxzqkDrX7GvAZH5NR",
+    "page_id": "47:177",
+    "page_name": "기획/디자인",
     "is_copy": false,
     "original_file_key": null,
     "copied_at": null,
-    "metadata_file": ""
+    "metadata_file": "sources/figma/design-metadata.xml"
   },
   "notion": {
-    "review_db_url": "",
-    "review_data_source": "",
-    "rule_options": {}
+    "review_db_url": "https://app.notion.com/p/fb2367422bcd4472a6dc9324ee6a23a2",
+    "review_data_source": "collection://c4f66c72-be3f-4e3d-adb4-7851ea01574b",
+    "rule_options": {
+      "1": "규칙1 원문글 삭제",
+      "2": "규칙2 Professional 심사"
+    },
+    "parent_page_id": "407cd783cd4181b0bfa0e61818de223a"
   },
   "platforms": [
     {
@@ -28,15 +32,27 @@
     }
   ],
   "screen_rule": {
-    "name_pattern": "^(\\d+)[._]",
+    "name_pattern": "^(\\d+)$",
     "exclude_names": [
       "TAG",
-      "컴포넌트",
-      "modal"
+      "주석",
+      "icon/guide",
+      "사용자앱",
+      "관리자웹",
+      "image 1"
     ],
-    "override_sections": [
-      "수정 반영"
+    "exclude_prefixes": [
+      "MARU_",
+      "Rectangle"
     ],
-    "start_frames": {}
+    "exclude_sections": [
+      "관리자웹/컴포넌트",
+      "사용자앱/컴포넌트"
+    ],
+    "override_sections": [],
+    "start_frames": {
+      "APP": "1",
+      "WEB": "01"
+    }
   }
 }

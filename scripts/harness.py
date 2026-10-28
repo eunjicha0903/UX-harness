@@ -31,7 +31,7 @@ UNRESOLVED = {"FAIL", "NEEDS_REVIEW", "INSUFFICIENT_INFO"}
 SRC_STATUSES = ["FETCHED", "SEARCH_ONLY", "BLOCKED", "NOT_FOUND", "EXCLUDED"]
 DECISIONS = ["수정 필요", "수정 불필요", "추가 확인 필요"]
 STAGE_LABEL = {"S2": "S2 요구사항·흐름", "S3": "S3 컴포넌트", "S4": "S4 영향 분석"}
-USER_FIELDS = {"수정 완료", "컨펌 완료", "결정 메모"}
+USER_FIELDS = {"수정 완료", "결정 메모", "컨펌 완료", "승인 완료"}   # 사용자 칸(뒤 둘은 이전 이름, 쓰기 금지 유지)
 UNIT_FIELDS = ["change_target", "related_screens", "relation_evidence",
                "expected_problem", "needs_fix", "verdict", "follow_up"]
 RECORD_FIELDS = ["id", "title", "stage", "platform", "screen_ids", "verdict",
@@ -539,8 +539,8 @@ def compute_status(slug, run):
         if v not in UNRESOLVED or r.get("superseded_by"):
             continue
         n = inputs.get(r.get("id"), {})
-        if (v == "NEEDS_REVIEW" and not r.get("rule_ref") and n.get("컨펌 완료")
-                and (n.get("결정 메모") or "").strip()):
+        # 보드는 to do 구조: 수정 완료 = 할 일 완료. 사람 판단 필요 항목은 수정 완료로 해소된다 (harness-goal §4)
+        if v == "NEEDS_REVIEW" and not r.get("rule_ref") and n.get("수정 완료"):
             pr = prev_recs.get(r.get("id"))
             same_evidence = pr is None or pr.get("evidence") == r.get("evidence")
             if same_evidence:
@@ -678,8 +678,16 @@ class Display:
         no, pr = self.sort_key(nids)
         return no * 10 + min(pr, 9)
 
-    def frame_label(self, nids, cap=4):
-        nids = sorted(dict.fromkeys(nids), key=lambda n: self.sort_key([n]))
+    def frame_numbers(self, nids, first=None):
+        """Figma 프레임 이름 번호만 (제목과 같은 순서). Notion '프레임 번호' 칸."""
+        nids = sorted(dict.fromkeys(nids), key=lambda n: (first is not None and self.fplat.get(n) != first,
+                                                          self.sort_key([n])))
+        return ", ".join(dict.fromkeys(str(self.fname[n]) for n in nids if n in self.fname))
+
+    def frame_label(self, nids, cap=4, first=None):
+        """프레임 이름 목록 (번호순). first가 있으면 그 플랫폼 프레임을 앞에 둔다."""
+        nids = sorted(dict.fromkeys(nids), key=lambda n: (first is not None and self.fplat.get(n) != first,
+                                                          self.sort_key([n])))
         if not nids:
             return "(특정 프레임 없음 · 전체 화면)"
         shown = list(dict.fromkeys(self.display_name(n) for n in nids))
@@ -715,11 +723,23 @@ class Display:
         codes = {self.fplat.get(n) for n in nids if self.fplat.get(n)} or set((r or {}).get("platform") or [])
         return sorted(codes, key=lambda c: self.plat_rank.get(c, 9))
 
+    def primary_platform(self, nids, r=None):
+        """항목의 대표 플랫폼 = 첫 프레임(기점 화면)의 플랫폼. 항목은 플랫폼 하나에만 속한다 (artifacts §10)."""
+        for n in nids:
+            if self.fplat.get(n):
+                return self.fplat[n]
+        plats = (r or {}).get("platform") or []
+        return plats[0] if len(plats) == 1 else None   # 프레임 없는 전체 공통 항목은 플랫폼 없음
+
+    def primary_frames(self, nids, r=None):
+        """대표 플랫폼 프레임만 (카테고리·정렬 기준)."""
+        p = self.primary_platform(nids, r)
+        return [n for n in nids if self.fplat.get(n) == p] or list(nids)
+
     def platform_group(self, nids, r=None):
-        """검토 사항 플랫폼 분류: 사용자앱 / 관리자웹 / 사용자앱 · 관리자웹 (artifacts §10)."""
-        codes = self.platforms(nids, r)
-        label = " · ".join(self.plat_label.get(c, c) for c in codes) or "플랫폼 미지정"
-        return (len(codes), tuple(self.plat_rank.get(c, 9) for c in codes)), label
+        """검토 사항 플랫폼 분류: 사용자앱 / 관리자웹 (대표 플랫폼 하나)."""
+        p = self.primary_platform(nids, r)
+        return (self.plat_rank.get(p, 99),), self.plat_label.get(p, p or "전체 공통")
 
     def categories(self, nids):
         out = list(dict.fromkeys(self.category[n] for n in nids if n in self.category))
@@ -806,7 +826,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
              f"(문제 확인 {n_type['FAIL']} · 사람 판단 필요 {n_type['NEEDS_REVIEW']} · 자료 부족 {n_type['INSUFFICIENT_INFO']})")
     L.append(f"- 컨펌으로 해소: {len(judgement['resolved_by_confirm'])}건")
     if s1.get("notion_read") == "failed":
-        L.append("- ⚠ Notion 검토 사항을 읽지 못해 이번 실행에서는 수정 완료·컨펌 완료를 해소로 인정하지 않았다.")
+        L.append("- ⚠ Notion 검토 사항을 읽지 못해 이번 실행에서는 수정 완료를 해소로 인정하지 않았다.")
     L.append("")
     focus = focus_config(slug)
     primary, merged, _ = merged_view(slug, run, recs, judgement["unresolved"])
@@ -874,7 +894,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
             r = by_id[u["id"]]
             names = D.frames(r)
             pk, pl = D.platform_group(names, r)
-            groups.setdefault((pk, pl, D.categories(names)[0]), []).append((u, r, names))
+            groups.setdefault((pk, pl, D.categories(D.primary_frames(names, r))[0]), []).append((u, r, names))
         for key in sorted(groups, key=lambda k: (k[0], min(D.sort_key(x[2]) for x in groups[k]))):
             L.append(f"### {key[1]} / {key[2]} ({len(groups[key])}건)")
             L.append("| 검토 사항(프레임) | 판정 유형 | 검토 내용 | 왜 | 근거 | 영향 화면 | 후속 조치 |")
@@ -903,7 +923,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
     for r in recs:
         names = D.frames(r)
         pk, pl = D.platform_group(names, r)
-        groups.setdefault((pk, pl, D.categories(names)[0]), []).append((r, names))
+        groups.setdefault((pk, pl, D.categories(D.primary_frames(names, r))[0]), []).append((r, names))
     for key in sorted(groups, key=lambda k: (k[0], min(D.sort_key(x[1]) for x in groups[k]))):
         L.append(f"### {key[1]} / {key[2]}")
         L.append("| 검토 사항(프레임) | 판정 | 판정 유형 | 규칙 | 검토 내용 | 근거 |")
@@ -953,13 +973,15 @@ def _row_props(slug, run, D, cfg, r, verdict, what, why, follow_up, impact_ids, 
     rule_opts = cfg.get("notion", {}).get("rule_options", {})
     rule = rule_opts.get((r.get("rule_ref") or "").split("-")[0], "해당 없음") if r.get("rule_ref") else "해당 없음"
     names = D.frames(r)
+    main = D.primary_frames(names, r)   # 대표 플랫폼 프레임: 카테고리·플랫폼·정렬 기준
     impact = [nm for sid in impact_ids for nm in D.screen.get(sid, [sid])]
     props = {
-        "검토 사항": D.frame_label(names), "검토 내용": D.text(what), "항목 ID": r["id"],
-        "판정": VERDICT_KO[verdict], "판정 유형": VTYPE_KO[verdict],
-        "카테고리": D.categories(names), "프레임 태그": D.tags(names), "정렬 순서": D.order_value(names),
+        "검토 사항": D.frame_label(names, first=D.primary_platform(names, r)),
+        "프레임 번호": D.frame_numbers(names, first=D.primary_platform(names, r)), "검토 내용": D.text(what), "항목 ID": r["id"],
+        "판정": VERDICT_KO[verdict],
+        "카테고리": D.categories(main), "프레임 태그": D.tags(main), "정렬 순서": D.order_value(main),
         "단계": STAGE_LABEL.get(r.get("stage"), "S4 영향 분석"),
-        "플랫폼": [labels[x] for x in D.platforms(names, r) if x in labels],
+        "플랫폼": [labels[x] for x in [D.primary_platform(names, r)] if x in labels],
         "영향 화면": D.frame_label(impact, cap=8) if impact else "",
         "필수 규칙": rule, "사유": D.text(why),
         "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []) + extra_evidence,

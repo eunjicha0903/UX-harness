@@ -29,7 +29,7 @@
 공통 금지:
 
 - 자기 폴더 밖 쓰기 금지 (G5② 해시 검사와 Orchestrator 확인으로 강제)
-- Notion 쓰기는 Orchestrator만. 사용자 칸(수정 완료·컨펌 완료·결정 메모)은 Orchestrator도 쓰지 않는다
+- Notion 쓰기는 Orchestrator만. 사용자 칸(수정 완료·결정 메모)은 Orchestrator도 쓰지 않는다
 - Figma 쓰기 도구(`use_figma`, `generate_*`, `upload_assets` 등) 사용 금지 — 검증 대상을 수정하지 않는다
 - EXCLUDED 자료 읽기·인용 금지 (`sources/index.json` 확인)
 

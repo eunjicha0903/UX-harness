@@ -35,6 +35,7 @@ revision-impact-checker 스킬을 쓸 수 있다. 단, 결과는 위 7개 항목
 
 ## 표시 규칙 (docs/artifacts.md §10)
 `title`·`reason`·`follow_up`·영향 설명에서 화면을 가리킬 때는 **Figma 프레임 이름**(예: `33.장바구니/결제금액도달X`)으로 쓴다. 화면 ID·노드 ID는 `screen_ids`·`figma_node_ids`·`evidence.locator` 필드에만 둔다.
+`projects/<slug>/project.json`에 `report.focus`(핵심 검증 관점)가 있으면 모든 레코드(와 S4 분석 단위)에 `focus` 필드로 해당 관점 ID(예: `Q1`)를 단다. 레코드의 `title`은 결론을 먼저 쓴 한 줄로 쓴다(두괄식).
 
 ## 금지
 자기 폴더 밖 쓰기, `impact-map.json` 직접 수정, Figma 쓰기, EXCLUDED 자료 인용, 근거 없는 영향 확정, 실행 중 사용자에게 질문.

@@ -702,6 +702,20 @@ class Display:
         return ", ".join(out)
 
 
+def focus_config(slug):
+    """project.json report.focus: 프로젝트가 가장 중요하게 보는 검증 관점 (없으면 빈 목록)."""
+    cfg = load(proj(slug) / "project.json", {}) or {}
+    return (cfg.get("report") or {}).get("focus") or []
+
+
+def record_focus(r, focus):
+    ids = {q["id"] for q in focus}
+    if r.get("focus") in ids:
+        return r["focus"]
+    default = [q["id"] for q in focus if q.get("default")]
+    return default[0] if default else None
+
+
 def build_report(slug, run, final, judgement, missing_cov, diff):
     rd = run_dir(slug, run)
     D = Display(slug, run)
@@ -719,6 +733,29 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
     if s1.get("notion_read") == "failed":
         L.append("- ⚠ Notion 검토 사항을 읽지 못해 이번 실행에서는 수정 완료·컨펌 완료를 해소로 인정하지 않았다.")
     L.append("")
+    focus = focus_config(slug)
+    if focus:
+        unresolved_ids = {u["id"] for u in judgement["unresolved"]}
+        L.append("## 한눈에 보기")
+        for q in focus:
+            mine = [r for r in recs if record_focus(r, focus) == q["id"]]
+            open_ = [r for r in mine if r["id"] in unresolved_ids]
+            if not mine:
+                head = "판정 항목 없음"
+            elif not open_:
+                head = f"✅ 문제 없음 ({len(mine)}건 확인)"
+            else:
+                t = {k: sum(1 for r in open_ if r.get("verdict") == k) for k in ("FAIL", "NEEDS_REVIEW", "INSUFFICIENT_INFO")}
+                head = (f"⚠ 검토 필요 {len(open_)}건 / {len(mine)}건 — 문제 확인 {t['FAIL']} · "
+                        f"사람 판단 필요 {t['NEEDS_REVIEW']} · 자료 부족 {t['INSUFFICIENT_INFO']}")
+            L.append(f"### {q['label']} — {head}")
+            L.append(f"*{q['question']}*")
+            order = {"FAIL": 0, "NEEDS_REVIEW": 1, "INSUFFICIENT_INFO": 2}
+            for r in sorted(open_, key=lambda x: order.get(x.get("verdict"), 9))[:8]:
+                L.append(f"- **{D.frame_label(D.frames(r), cap=2)}** — {D.text(r.get('title'))} ({VTYPE_KO[r['verdict']]})")
+            if len(open_) > 8:
+                L.append(f"- 외 {len(open_) - 8}건 (아래 상세 · 검토 사항 DB)")
+            L.append("")
     if judgement["gr_fail"]:
         L.append("## ⛔ 필수 규칙 위반 (컨펌으로 해소 불가)")
         for rid in judgement["gr_fail"]:
@@ -859,6 +896,10 @@ def cmd_notion_sync(a):
             "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []),
             "후속 조치": D.text(u["follow_up"]), "재검증 결과": recheck, "최근 실행": a.run,
         }
+        focus = focus_config(a.slug)
+        if focus:
+            fid = record_focus(r, focus)
+            props["검증 관점"] = next((q["label"] for q in focus if q["id"] == fid), "")
         ops.append({"op": "update" if n else "create", "page_url": n.get("page_url") if n else None,
                     "item_id": u["id"], "properties": props})
     unresolved_ids = {u["id"] for u in j["unresolved"]}

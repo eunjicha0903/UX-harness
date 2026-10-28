@@ -710,6 +710,17 @@ class Display:
             return f"Figma {self.text(m.group(0))}"
         return f"{self.src.get(sid, sid)} {self.text(loc)}".strip()
 
+    def platforms(self, nids, r=None):
+        """프레임 기준 플랫폼 코드 (project.json platforms 순서)."""
+        codes = {self.fplat.get(n) for n in nids if self.fplat.get(n)} or set((r or {}).get("platform") or [])
+        return sorted(codes, key=lambda c: self.plat_rank.get(c, 9))
+
+    def platform_group(self, nids, r=None):
+        """검토 사항 플랫폼 분류: 사용자앱 / 관리자웹 / 사용자앱 · 관리자웹 (artifacts §10)."""
+        codes = self.platforms(nids, r)
+        label = " · ".join(self.plat_label.get(c, c) for c in codes) or "플랫폼 미지정"
+        return (len(codes), tuple(self.plat_rank.get(c, 9) for c in codes)), label
+
     def categories(self, nids):
         out = list(dict.fromkeys(self.category[n] for n in nids if n in self.category))
         return out or ["분류 없음"]
@@ -754,9 +765,22 @@ def merged_view(slug, run, final_records, unresolved):
 
 
 def focus_config(slug):
-    """project.json report.focus: 프로젝트가 가장 중요하게 보는 검증 관점 (없으면 빈 목록)."""
+    """핵심 검증 관점. project.json report.focus가 있으면 그것, 없으면 공통 기본 관점 (artifacts §10)."""
     cfg = load(proj(slug) / "project.json", {}) or {}
-    return (cfg.get("report") or {}).get("focus") or []
+    own = (cfg.get("report") or {}).get("focus")
+    if own:
+        return own
+    try:
+        codes = set(allowed_codes(slug))
+    except (OSError, KeyError, SystemExit):
+        codes = {p["code"] for p in cfg.get("platforms", [])}
+    focus = [{"id": "Q1", "label": "수정사항 반영",
+              "question": ("관리자웹 수정사항을 제대로 반영했는가" if "WEB" in codes else "수정사항을 제대로 반영했는가")}]
+    if {"APP", "WEB"} <= codes:   # 모바일·관리자웹 두 가지가 있을 때만
+        focus.append({"id": "Q2", "label": "앱 크로스 체크",
+                      "question": "사용자앱(모바일)과 크로스 체크했을 때 연결이 잘 되는가"})
+    focus.append({"id": "Q3", "label": "고려 못한 사항", "question": "고려하지 못한 사항이 있는가", "default": True})
+    return focus
 
 
 def record_focus(r, focus):
@@ -844,17 +868,18 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
                      f"{VERDICT_KO.get(c['before'], '없음')} → {VERDICT_KO.get(c['after'], '없음')}")
         L.append("")
     if judgement["status"] == "검토 필요":
-        L.append("## 미승인 사유 (카테고리별 검토 필요 항목)")
+        L.append("## 미승인 사유 (플랫폼 · 카테고리별 검토 필요 항목)")
         groups = {}
         for u in judgement["unresolved"]:
             r = by_id[u["id"]]
             names = D.frames(r)
-            groups.setdefault(D.categories(names)[0], []).append((u, r, names))
-        for cat in sorted(groups):
-            L.append(f"### {cat} ({len(groups[cat])}건)")
+            pk, pl = D.platform_group(names, r)
+            groups.setdefault((pk, pl, D.categories(names)[0]), []).append((u, r, names))
+        for key in sorted(groups, key=lambda k: (k[0], min(D.sort_key(x[2]) for x in groups[k]))):
+            L.append(f"### {key[1]} / {key[2]} ({len(groups[key])}건)")
             L.append("| 검토 사항(프레임) | 판정 유형 | 검토 내용 | 왜 | 근거 | 영향 화면 | 후속 조치 |")
             L.append("|---|---|---|---|---|---|---|")
-            for u, r, names in sorted(groups[cat], key=lambda x: D.sort_key(x[2])):
+            for u, r, names in sorted(groups[key], key=lambda x: D.sort_key(x[2])):
                 ev = "; ".join(D.evidence(e) for e in r.get("evidence") or [])
                 imp = D.frame_label([n for s in u["impact_screens"] for n in D.screen.get(s, [s])], cap=6)
                 L.append(f"| {D.frame_label(names)} | {VTYPE_KO[u['verdict']]} | {D.text(u['what'])} | {D.text(u['why'])} | {ev} | {imp} | {D.text(u['follow_up'])} |")
@@ -873,16 +898,17 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
     for k, (ok, d) in judgement["done"].items():
         L.append(f"- {k}: {'OK' if ok else '미충족 ' + str(d[:5])}")
     L.append("")
-    L.append("## 전체 항목 (카테고리별)")
+    L.append("## 전체 항목 (플랫폼 · 카테고리별)")
     groups = {}
     for r in recs:
         names = D.frames(r)
-        groups.setdefault(D.categories(names)[0], []).append((r, names))
-    for cat in sorted(groups):
-        L.append(f"### {cat}")
+        pk, pl = D.platform_group(names, r)
+        groups.setdefault((pk, pl, D.categories(names)[0]), []).append((r, names))
+    for key in sorted(groups, key=lambda k: (k[0], min(D.sort_key(x[1]) for x in groups[k]))):
+        L.append(f"### {key[1]} / {key[2]}")
         L.append("| 검토 사항(프레임) | 판정 | 판정 유형 | 규칙 | 검토 내용 | 근거 |")
         L.append("|---|---|---|---|---|---|")
-        for r, names in sorted(groups[cat], key=lambda x: D.sort_key(x[1])):
+        for r, names in sorted(groups[key], key=lambda x: D.sort_key(x[1])):
             ev = "; ".join(D.evidence(e) for e in r.get("evidence") or [])
             L.append(f"| {D.frame_label(names)} | {VERDICT_KO.get(r.get('verdict'))} | {VTYPE_KO.get(r.get('verdict'), '')} | {r.get('rule_ref') or ''} | {D.text(r.get('title'))} | {ev} |")
         L.append("")
@@ -933,7 +959,7 @@ def _row_props(slug, run, D, cfg, r, verdict, what, why, follow_up, impact_ids, 
         "판정": VERDICT_KO[verdict], "판정 유형": VTYPE_KO[verdict],
         "카테고리": D.categories(names), "프레임 태그": D.tags(names), "정렬 순서": D.order_value(names),
         "단계": STAGE_LABEL.get(r.get("stage"), "S4 영향 분석"),
-        "플랫폼": [labels[x] for x in r.get("platform") or [] if x in labels],
+        "플랫폼": [labels[x] for x in D.platforms(names, r) if x in labels],
         "영향 화면": D.frame_label(impact, cap=8) if impact else "",
         "필수 규칙": rule, "사유": D.text(why),
         "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []) + extra_evidence,

@@ -1,63 +1,73 @@
 {
   "slug": "maru",
   "updated_at": "2026-10-28",
+  "run_id": "20261028-0133",
+  "snapshot_note": "S1 Context Agent 갱신 후보. 셸 도구가 없는 실행이라 파일 해시(sha)를 새로 계산하지 못함 — 변경 판별은 확인일·Notion 최종 수정 시각·Figma 메타데이터 해시(기존 값 유지)로 함. Figma 메타데이터(design-metadata.xml)는 2026-10-28 조회본이 이미 sources/figma/에 있고 이번 실행에서 같은 파일을 그대로 근거로 사용함(변경 없음 → 재스냅샷 생략). 스크린샷 PNG는 도구 결과 경로에 저장되어 있으며 s1-context.json screenshots 항목에 원본 경로와 목표 경로를 기록함(복사는 Orchestrator 반영 단계에서 수행 필요).",
   "sources": [
     {
       "id": "SRC-00",
       "title": "관리자웹 회의 픽스 (사용자 제공 원문, 수정 완료 표시)",
-      "platform": [
-        "WEB"
-      ],
+      "platform": ["WEB"],
       "status": "FETCHED",
       "role": "관리자웹 변경 요구사항 1차 기준",
       "url": "https://app.notion.com/p/401cd783cd41805c9aabec957797e49a",
       "path": "sources/meeting-fix-admin-web.md",
-      "checked_at": "2026-10-27",
-      "hash": null
+      "checked_at": "2026-10-28",
+      "hash": null,
+      "changed": false,
+      "note": "로컬 원문 파일을 이번 실행에서 다시 열어 확인. 모든 항목 ✅(사용자가 Figma 반영 완료로 표시). 이번 실행 사용자 명령과 함께 수정 피드백(FB) 원문으로도 등록."
+    },
+    {
+      "id": "FB",
+      "title": "사용자 수정 피드백 원문 (run 20261028-0133 명령: '마루(개발) 피그마 읽고 하네스 돌려줘 … 화면 수정완료한 상황')",
+      "platform": ["WEB"],
+      "status": "FETCHED",
+      "role": "피드백 항목 FB-20261028-0133-01~08의 원문 (내용은 SRC-00과 동일)",
+      "url": null,
+      "path": "sources/meeting-fix-admin-web.md",
+      "checked_at": "2026-10-28",
+      "hash": null,
+      "changed": false
     },
     {
       "id": "SRC-01",
       "title": "MARU(커뮤니티) 프로젝트 페이지 (Notion)",
-      "platform": [
-        "APP",
-        "WEB"
-      ],
+      "platform": ["APP", "WEB"],
       "status": "FETCHED",
       "role": "서비스 맥락·회의 내용 (참고 의견·확정 혼재)",
       "url": "https://app.notion.com/p/3cacd783cd4180e796abd060fc650992",
       "path": null,
-      "checked_at": "2026-10-27",
+      "checked_at": "2026-10-28",
       "hash": null,
-      "note": "외부 블록 2개·PDF 1개 미확인"
+      "version_marker": "page_last_edited_at 2026-09-21T09:46:32Z",
+      "changed": false,
+      "note": "2026-10-28 Notion에서 다시 열어 본문 확인(회의 내용 토글 포함). 외부 블록 2개(3cacd783-cd41-807e…, 3cacd783-cd41-800d…)와 PDF 1개, 첨부 maru-prototype-v2.html, 하위 페이지 1개(3d8cd783cd41805b985acb455d169b7a)는 열지 않음/읽지 못함."
     },
     {
       "id": "SRC-02",
       "title": "사용자앱 기능정의서/와이어 PDF (회의 픽스의 '56p', '85p' 참조 대상)",
-      "platform": [
-        "APP"
-      ],
+      "platform": ["APP"],
       "status": "NOT_FOUND",
       "role": "신고 사유·Review feedback·Specialty 항목의 기준",
       "url": null,
       "path": null,
-      "checked_at": "2026-10-27",
+      "checked_at": "2026-10-28",
       "hash": null,
-      "note": "프로젝트 페이지에 PDF 블록이 있으나 읽지 못함"
+      "changed": false,
+      "note": "SRC-01 페이지의 PDF 블록이 내용 없이 반환됨(<pdf />). 56p·85p 원문 확인 불가."
     },
     {
       "id": "SRC-03",
       "title": "MARU Figma 파일",
-      "platform": [
-        "APP",
-        "WEB"
-      ],
+      "platform": ["APP", "WEB"],
       "status": "FETCHED",
       "role": "검증 대상 화면",
       "url": "https://www.figma.com/design/nNK8EOxzqkDrX7GvAZH5NR?node-id=47-177",
-      "path": null,
+      "path": "sources/figma/design-metadata.xml",
       "checked_at": "2026-10-28",
       "hash": "b5e14f6a638abe0b",
-      "note": "마루 (개발) 원본, 기획/디자인 페이지(47:177)만 사용. Figma 커넥터 계정으로 메타데이터 조회 성공 (2026-10-28)"
+      "changed": false,
+      "note": "마루 (개발) 원본, 기획/디자인 페이지(47:177)만 사용. 메타데이터는 2026-10-28 조회본(sources/figma/design-metadata.xml, 7,099줄) 사용. 스크린샷: 관리자웹 프레임 42/42개, 사용자앱 프레임 41/93개(관리자 변경 영향 관련 프레임만) get_screenshot으로 확인. 나머지 사용자앱 52개는 레이어 메타데이터만 확인."
     },
     {
       "id": "EX-01",
@@ -68,7 +78,8 @@
       "url": null,
       "path": null,
       "checked_at": "2026-10-27",
-      "hash": null
+      "hash": null,
+      "changed": false
     },
     {
       "id": "EX-02",
@@ -79,8 +90,39 @@
       "url": null,
       "path": null,
       "checked_at": "2026-10-28",
-      "hash": null
+      "hash": null,
+      "changed": false,
+      "note": "열지 않음."
     }
   ],
-  "conflicts": []
+  "conflicts": [
+    {
+      "id": "CF-01",
+      "topic": "회원(사용자) 유형 명칭",
+      "detail": "SRC-01 프로젝트 정보는 사용자 유형을 '뉴비, 한국 기본 경험자, 전문가'로 적음. SRC-00은 '회원 유형 3가지'라고만 적고 이름이 없음. SRC-03 Figma(관리자웹 회원 관리·이용 정지 관리 드롭다운, 사용자앱 Member type 화면)는 'Newcomer / Insider / Professional'을 씀. 같은 3분류의 영문 표기인지 확정 근거 없음.",
+      "sources": ["SRC-00 [회원 관리] '회원 유형 3가지 드롭다운'", "SRC-01 프로젝트 정보 '사용자 유형'", "SRC-03 WEB 19(245:33348), APP 70(499:16609)"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-02",
+      "topic": "회원 관리 날짜 항목 명칭",
+      "detail": "SRC-01 관리자웹 회의 내용은 회원관리 항목을 '계정 생성일자'로 적음. SRC-00은 '계정 생성 일자→가입 일시 명칭 통일'로 바꿈. SRC-00이 index상 1차 기준이지만 하네스가 임의로 확정하지 않음.",
+      "sources": ["SRC-00 [회원 관리] '계정 생성 일자→ 가입 일시 명칭 통일'", "SRC-01 회의 내용/관리자웹 '회원관리) 이메일, 간편 로그인 가입 유형, 계정 생성일자, 닉네임'"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-03",
+      "topic": "Professional 신청 유형 값",
+      "detail": "SRC-00은 신청 유형을 '개인 사업자 / 국내 사업자 / 해외 사업자'로 정함. SRC-03 사용자앱 신청 유형 선택 화면(APP 71·75·79)의 선택지는 'Individual professional / Business registered on Korea / Professional membership'이고, 세 번째 선택 후 화면(APP 80~82)은 제목이 'Business registered outside Korea'임. 관리자웹 심사 상세(WEB 23·24)는 '개인 사업자', '국내 & 해외 사업자' 2가지 case. 세 번째 값이 '해외 사업자'인지 'Professional membership'인지 자료 간 불일치.",
+      "sources": ["SRC-00 [Professional 심사] 항목 '신청 유형(개인 사업자/국내 사업자/해외 사업자)'", "SRC-03 APP 71(500:17414)·79(505:14223)·80(505:14288), WEB 23(689:25415)·24(692:26946)"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-04",
+      "topic": "신고 사유·Review feedback 기준 원문 부재",
+      "detail": "SRC-00은 신고 사유를 '사용자앱 기준, 모달에 뜨는 항목(56p)', 미승인 사유를 '85p Review feedback 컨텐츠'로 정의하지만 기준 자료 SRC-02가 NOT_FOUND. SRC-03 사용자앱 신고 모달(APP 56)은 6개 사유(Spam or repetitive post, Scam or fraud, Harassment or hate speech, Explicit sexual content or graphic violence, Sharing personal infomation without consent, Other)를 다중 선택으로 받고, 관리자웹 신고 관리(WEB 28)는 행마다 사유 1개를 표시함. 기준 원문 없이 어느 쪽이 맞는지 판단 불가.",
+      "sources": ["SRC-00 <신고 관리> 항목, <Professional 신청 심사 상세> 사유 모달", "SRC-02 (NOT_FOUND)", "SRC-03 APP 56(271:28469), APP 85(500:18860), WEB 28(245:33331)"],
+      "status": "INSUFFICIENT_INFO"
+    }
+  ]
 }

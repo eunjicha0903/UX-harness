@@ -31,7 +31,7 @@
 
 1. `state.json` 확인: 미완료 run이 있으면 묻지 않고 artifacts §6 기준으로 결정한다 (자료 해시가 같으면 재개, 다르면 새 run). 사용자 수정 피드백이 함께 들어오면 새 run으로 시작한다.
 2. run-id 생성, `state.json` 기록 → G0.
-3. `ux-context` → G1 → `sources.next/` 반영.
+3. `ux-context` → (에이전트에 셸이 없으므로) Orchestrator가 `s1-context.json`의 `screenshot_src`를 `s1/sources.next/figma/`로 복사하고 metadata 파일을 넣는다 → G1 → `sources.next/` 반영. 게이트는 항상 Orchestrator가 실행한다.
 4. `ux-flow`, `ux-component` (병렬 가능) → G2, G3.
 5. `ux-impact` → G4 → `impact-map.next.json` 반영.
 6. s1~s4 해시 기록 → `ux-judge` → 반환 JSON을 `s5/judge.json`에 저장 → 해시 재검사 (G5②).

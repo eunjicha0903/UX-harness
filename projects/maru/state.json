@@ -2,12 +2,13 @@
   "slug": "maru",
   "run_id": "20261028-0133",
   "started_at": "2026-10-28T01:33:49",
-  "current_stage": "S5",
+  "current_stage": "DONE",
   "completed_stages": [
     "S1",
     "S3",
     "S2",
-    "S4"
+    "S4",
+    "S5"
   ],
   "stage_outputs": {},
   "source_hashes": {
@@ -19,6 +20,6 @@
     "EX-02": null
   },
   "gate_failures": {},
-  "last_status": null,
+  "last_status": "검토 필요",
   "last_error": null
 }

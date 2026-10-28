@@ -1,0 +1,1225 @@
+{
+  "run_id": "20261028-0133",
+  "slug": "maru",
+  "stage": "S4",
+  "created_at": "2026-10-28",
+  "basis": {
+    "sources": ["SRC-00 (FETCHED)", "FB (FETCHED)", "SRC-01 (FETCHED)", "SRC-03 (FETCHED, 관리자웹 42/42·사용자앱 41/93 스크린샷, 나머지 사용자앱은 design-metadata.xml만)", "SRC-02 (NOT_FOUND — 앱 기준 원문 부재 근거로만 인용, PASS 근거로 쓰지 않음)"],
+    "excluded_not_cited": ["EX-01", "EX-02"],
+    "impact_map_before": "projects/maru/impact-map.json 비어 있음(첫 실행) → 이번 실행에서 연결을 새로 구성해 s4/impact-map.next.json에 기록",
+    "origins": "변경점 0건(첫 실행), 재검증 대상 0건, S2·S3 FAIL 28건, 피드백 FB-20261028-0133-01~08 8건 = 기점 36개, 기점마다 분석 단위 1개",
+    "skill": "revision-impact-checker 관점(공유 컴포넌트·데이터·상태·권한·정책·플랫폼 간)을 적용하고 결과는 7개 항목 형식으로 옮김. Figma 쓰기 없음",
+    "story_service_review": "정책 값(story-service B절 상태 정의·용어)을 바꿀 수 있는 피드백 단위에 story_service_review 필드로 NEEDS_REVIEW를 남김: IMP-S4-001(뉴스 푸시 상태), IMP-S4-003(회원 유형 명칭), IMP-S4-004(심사 상태 표기), IMP-S4-006(신고 처리 명칭), IMP-S4-009(뉴스 푸시 상태)"
+  },
+  "units": [
+    {
+      "id": "IMP-S4-001",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-01"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-03", "WEB-04", "WEB-05", "WEB-07", "WEB-08", "WEB-10", "WEB-12"],
+      "change_target": "뉴스 관리 픽스는 대부분 반영됐지만 푸시 상태 문구와 완료 모달 문구가 픽스와 어긋남",
+      "consider_areas": [
+        "화면: 관리자웹 03(뉴스 관리)·04(뉴스 등록 상세)·07(뉴스 수정 상세)·05·08(등록 모달)·10(선택 삭제 모달)·12(뉴스 관리/ 빈화면)",
+        "컴포넌트: sidebar, card/뉴스 관리, card/뉴스 등록(B·Link 툴바), 상태 태그, modal",
+        "데이터: 푸시 상태 2값, 본문 Bold·링크, 뉴스 이미지(여러 장)",
+        "상태: 푸시 전송/미전송별 완료 모달, 검색 결과 없음",
+        "정책: 전체 푸시 전송 여부를 관리자가 체크, 수정 시 재푸시 여부",
+        "플랫폼별: 사용자앱 45(News 메인)·46(News 상세)·41(뉴스피드 상세) 본문 출력, 26(알림 상세) 푸시 수신"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "수정 필요", "reason": "푸시 상태 배지가 '푸시 알림 전송 완료/미전송'이라 '전체' 표기가 빠졌다."},
+        {"screen_id": "WEB-04", "platform": "WEB", "decision": "추가 확인 필요", "reason": "전체 화면·B·링크 툴바는 반영됐지만 이미지 1칸뿐이라 여러 장 등록 방식이 정해지지 않았다(CHK-S2-047)."},
+        {"screen_id": "WEB-05", "platform": "WEB", "decision": "수정 필요", "reason": "'푸시 알림 전송' 체크 상태인데 완료 모달이 '발송되지 않았습니다'로 안내한다."},
+        {"screen_id": "WEB-06", "platform": "WEB", "decision": "수정 불필요", "reason": "등록 취소 모달에 취소·확인이 있어 픽스와 같다."},
+        {"screen_id": "WEB-07", "platform": "WEB", "decision": "추가 확인 필요", "reason": "이미 푸시한 뉴스를 수정할 때 다시 푸시되는지 정해지지 않았다(CHK-S2-052)."},
+        {"screen_id": "WEB-08", "platform": "WEB", "decision": "수정 필요", "reason": "수정 완료 모달도 체크 상태와 맞지 않는 미발송 문구다."},
+        {"screen_id": "WEB-09", "platform": "WEB", "decision": "수정 불필요", "reason": "수정 취소 모달에 취소·확인이 있어 픽스와 같다."},
+        {"screen_id": "WEB-10", "platform": "WEB", "decision": "수정 필요", "reason": "모달 제목이 옛 이름 '뉴스 피드 삭제'이고 배경 목록 배지도 03과 같은 문구다."},
+        {"screen_id": "WEB-11", "platform": "WEB", "decision": "수정 필요", "reason": "배경 목록이 03과 같은 card/뉴스 관리라 푸시 배지 문구가 함께 바뀌어야 한다."},
+        {"screen_id": "WEB-12", "platform": "WEB", "decision": "수정 필요", "reason": "검색바가 생겼는데 검색 결과 0건 상태가 없어 '등록된 뉴스가 없습니다'로 잘못 안내된다."},
+        {"screen_id": "APP-45", "platform": "APP", "decision": "수정 불필요", "reason": "앱 뉴스 목록은 제목·날짜·썸네일만 보여 관리자 목록 열 변경·번호 라벨 제거와 무관하다."},
+        {"screen_id": "APP-46", "platform": "APP", "decision": "추가 확인 필요", "reason": "관리자 본문 Bold가 앱 상세에서 어떻게 보이는지 예시가 없고 이미지 여러 장 등록 기준이 없다."},
+        {"screen_id": "APP-41", "platform": "APP", "decision": "추가 확인 필요", "reason": "46과 같은 뉴스 상세 구조라 Bold 출력·다중 이미지 기준이 같이 필요하다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "'New announcement from MARU' 항목이 전체 푸시 뉴스인지, 미전송 뉴스도 쌓이는지 정해지지 않았다(CHK-S2-046)."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-01 [뉴스관리]"},
+        {"source_id": "SRC-00", "locator": "[뉴스관리] 푸시→ 전체 푸시 전송 완료/ 전체 푸시 미전송(상태 2개)"},
+        {"source_id": "SRC-01", "locator": "회의 내용 > 사용자앱 > 메인 '-알림: … 관리자웹에서 푸시 알림 체크여부'; 뉴스피드 '-상세구조는 html 구조로 고정'"},
+        {"source_id": "SRC-03", "locator": "128:9957"},
+        {"source_id": "SRC-03", "locator": "676:27974"},
+        {"source_id": "SRC-03", "locator": "487:17032"},
+        {"source_id": "SRC-03", "locator": "271:29551"}
+      ],
+      "expected_problem": "관리자가 푸시 전송 결과를 반대로 읽을 수 있다. 앱 알림·뉴스 상세에서 푸시와 본문 서식이 어떻게 나가는지 기준이 없다.",
+      "needs_fix": "필요 — 관리자웹 03·05·08·10·11·12, 앱 쪽은 정책 확인 후 결정",
+      "verdict": "FAIL",
+      "story_service_review": "NEEDS_REVIEW — 현재 표기('푸시 알림 전송 완료/미전송')를 유지하기로 하면 story-service B절 뉴스 푸시 상태 정의를 갱신(H0 재승인)해야 한다.",
+      "follow_up": "관리자웹 03 배지와 05·08 완료 모달을 전송 여부별로 고치고, 앱 알림 노출·재푸시·다중 이미지 기준을 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-002",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-02"},
+      "focus": "Q2",
+      "origin_screens": ["WEB-13", "WEB-14", "WEB-15", "WEB-16", "WEB-17", "WEB-18"],
+      "change_target": "관리자 원문글 삭제(답글 동반)가 앱 게시글·내 활동·알림에 닿는데 앱에 '삭제된 글' 상태가 없음",
+      "consider_areas": [
+        "화면: 관리자웹 13~18(포럼 관리), 28(신고 관리)·29(신고 관리/ 원문 글 확인)",
+        "컴포넌트: card/원문 글 상세(15·16·29~31 공유), dropdown, tag(카테고리), modal",
+        "데이터: 원문글·답글, 답글 수, 다중 카테고리",
+        "상태: 삭제된 글 진입, 검색 결과 없음, 필터 '전체'",
+        "권한: 관리자 삭제 vs 작성자 본인 삭제",
+        "정책: 필수 규칙 1(원문 삭제 시 답글 동반 삭제·확인 모달)",
+        "플랫폼별: 사용자앱 52(Topics 상세)·55(삭제 모달)·90·91(My community activity 상세)·26(알림 상세)·49(Topics 메인), 앱 용어 Comment/Reply"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-13", "platform": "WEB", "decision": "수정 필요", "reason": "카테고리 드롭다운에 '전체' 항목이 없고 진입 버튼명이 픽스('상세보기')와 다른 '원문 확인'이다."},
+        {"screen_id": "WEB-14", "platform": "WEB", "decision": "수정 필요", "reason": "닫힌 드롭다운 라벨이 '전체'로 13·18의 '카테고리 전체'와 다르다."},
+        {"screen_id": "WEB-15", "platform": "WEB", "decision": "수정 불필요", "reason": "원문 글 삭제·답글 삭제 버튼과 '답글' 용어가 픽스대로 있다(CHK-S2-011)."},
+        {"screen_id": "WEB-16", "platform": "WEB", "decision": "수정 불필요", "reason": "답글 동반 삭제 안내와 취소·확인이 있어 규칙 1-b·1-c를 충족한다."},
+        {"screen_id": "WEB-17", "platform": "WEB", "decision": "수정 필요", "reason": "떼어낸 복사본이라 버튼이 '댓글 삭제'로 남았고 TAG도 내용과 다르다."},
+        {"screen_id": "WEB-18", "platform": "WEB", "decision": "수정 필요", "reason": "제목 검색 결과 0건 상태가 없다."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "추가 확인 필요", "reason": "포럼에서 삭제된 원문·답글에 걸린 신고 건의 처리 상태가 정해지지 않았다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "추가 확인 필요", "reason": "같은 card/원문 글 상세를 써서 15 수정이 전파되고, 삭제된 원문으로 진입할 때 상태가 없다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "수정 필요", "reason": "관리자가 지운 글·답글을 열었을 때 보여줄 '삭제된 게시글' 상태가 없다(CHK-S2-044)."},
+        {"screen_id": "APP-55", "platform": "APP", "decision": "추가 확인 필요", "reason": "작성자 원문 삭제 모달에는 답글 동반 삭제 안내가 없어 같은 정책인지 정해야 한다(CHK-S2-045)."},
+        {"screen_id": "APP-90", "platform": "APP", "decision": "수정 필요", "reason": "내가 쓴 글 목록에서 관리자 삭제 글을 어떻게 처리할지 상태가 없다."},
+        {"screen_id": "APP-91", "platform": "APP", "decision": "수정 필요", "reason": "내 답글의 'Move to content' 대상 원문이 삭제됐을 때 상태가 없다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "수정 필요", "reason": "삭제된 글의 좋아요·답글 알림을 눌렀을 때 상태가 없다."},
+        {"screen_id": "APP-49", "platform": "APP", "decision": "수정 불필요", "reason": "카테고리 표시 값 6종이 관리자 드롭다운과 같아 탭→드롭다운 변경의 영향이 없다(CHK-S3-021)."},
+        {"screen_id": "APP-56", "platform": "APP", "decision": "추가 확인 필요", "reason": "'Report comment'가 관리자 '답글'과 같은 대상인지 앱 용어가 정해지지 않았다(CHK-S2-036)."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-02 [포럼 관리]"},
+        {"source_id": "SRC-00", "locator": "[포럼 관리] 원문 글 삭제 모달 문구 / 댓글→답글 명칭 수정 / 카테고리 tab→ 드롭다운"},
+        {"source_id": "SRC-01", "locator": "회의 내용 > 관리자웹 '관리자 답글,원문 삭제 권한'; 사용자앱 > 마이페이지 '-내 활동관리'"},
+        {"source_id": "SRC-03", "locator": "682:36814"},
+        {"source_id": "SRC-03", "locator": "682:37013"},
+        {"source_id": "SRC-03", "locator": "606:19829"},
+        {"source_id": "SRC-03", "locator": "276:43474"}
+      ],
+      "expected_problem": "관리자가 원문을 지우면 답글까지 사라지는데 앱 작성자·답글 작성자는 내 활동·알림에서 빈 화면이나 오류를 만난다. 관리자웹 17의 '댓글 삭제'는 용어 픽스 일부 누락이다.",
+      "needs_fix": "필요 — 관리자웹 13·14·17·18, 사용자앱 52·90·91·26",
+      "verdict": "FAIL",
+      "follow_up": "관리자웹 17을 원본 인스턴스로 교체하고, 사용자앱에 '삭제된 게시글' 상태(상세·내 활동·알림)를 추가하며 앱 작성자 삭제 정책과 앱 용어를 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-003",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-03"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-19", "WEB-20", "WEB-21"],
+      "change_target": "회원 관리 운영 상태는 추가됐으나 정지 용어가 섞이고 '회원 유형'이 '회원 등급'으로 표기돼 픽스가 일부만 반영됨",
+      "consider_areas": [
+        "화면: 관리자웹 19~21(회원 관리), 33·34(이용 정지 관리), 28·31(신고 관리), 22(Professional 심사)",
+        "컴포넌트: card/회원 관리, 상태 태그, dropdown, search bar, 사유 입력 모달",
+        "데이터: 운영 상태, 회원 유형, 가입 일시, 정지 사유",
+        "상태: 정상↔이용 정지 전환, 검색 결과 없음",
+        "권한: 정지된 회원의 앱 이용 제한",
+        "정책: 회원 유형 명칭(CF-01), 가입 일시 명칭(CF-02)",
+        "플랫폼별: 사용자앱 6(로그인 실패)·59·63(프로필 배지)·67(프로필 수정 Member type)"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 필요", "reason": "열·버튼이 '회원 정지'와 '이용 정지'로 섞이고 드롭다운·열 명칭이 '회원 등급'이다."},
+        {"screen_id": "WEB-20", "platform": "WEB", "decision": "수정 필요", "reason": "정지 모달에 대상 이름이 없고 머리글이 19와 다르다."},
+        {"screen_id": "WEB-21", "platform": "WEB", "decision": "수정 필요", "reason": "닉네임/이메일 검색 결과 0건 상태가 없다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "수정 필요", "reason": "같은 정지 동작을 '회원 이용 정지'로 불러 용어를 맞춰야 한다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "추가 확인 필요", "reason": "운영 상태 '이용 정지' 회원과 이 목록이 같은 집합인지 화면상 근거가 없고 '회원 등급' 명칭 결정을 기다린다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "추가 확인 필요", "reason": "'현재 회원 등급' 명칭을 회원 관리와 함께 정해야 한다(CF-01)."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "수정 필요", "reason": "정지된 회원이 로그인하면 일반 로그인 실패 문구만 보여 정지 안내가 없다(CHK-S2-043)."},
+        {"screen_id": "APP-59", "platform": "APP", "decision": "수정 불필요", "reason": "프로필 배지 값 Newcomer/Insider/Professional이 관리자 회원 유형 값과 같다(CHK-S3-020)."},
+        {"screen_id": "APP-63", "platform": "APP", "decision": "수정 불필요", "reason": "타인 프로필 배지 값도 관리자 값 3종과 같다."},
+        {"screen_id": "APP-67", "platform": "APP", "decision": "추가 확인 필요", "reason": "프로필 수정에서 Professional을 바로 고를 수 있어 관리자 회원 유형·심사와 어긋날 수 있다(CHK-S2-042)."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-03 [회원 관리]"},
+        {"source_id": "SRC-00", "locator": "[회원 관리] 운영 상태 항목 추가 ( 정상, 이용 정지 상태 2개) / 회원 유형 3가지 드롭다운"},
+        {"source_id": "SRC-01", "locator": "회의 내용 > 사용자앱 > 커뮤니티 '-사용자 프로필 옆에 사용자 유형+ 프로필 국가 표기'"},
+        {"source_id": "SRC-03", "locator": "245:33348"},
+        {"source_id": "SRC-03", "locator": "245:33353"},
+        {"source_id": "SRC-03", "locator": "271:30732"},
+        {"source_id": "SRC-03", "locator": "271:28118"}
+      ],
+      "expected_problem": "같은 정지 동작이 화면마다 이름이 달라 운영자와 개발이 다른 기능으로 오해할 수 있다. 정지 결과가 앱에서 안내되지 않아 정지 회원의 흐름이 끊긴다.",
+      "needs_fix": "필요 — 관리자웹 19·20·21·31, 사용자앱 6",
+      "verdict": "FAIL",
+      "story_service_review": "NEEDS_REVIEW — '회원 유형' 대신 '회원 등급'으로 확정하면 회의 픽스·story-service 용어를 갱신해야 한다(CF-01).",
+      "follow_up": "정지 라벨을 '이용 정지'로 통일하고 회원 유형 명칭을 결정한 뒤 19·22·33을 함께 고치며, 앱 정지 안내를 추가한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-004",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-04"},
+      "focus": "Q2",
+      "origin_screens": ["WEB-22", "WEB-27"],
+      "change_target": "Professional 심사 목록 항목은 반영됐으나 신청 유형·전문 분야 값이 앱 신청 화면과 1:1로 확정되지 않음",
+      "consider_areas": [
+        "화면: 관리자웹 22(Professional 심사)·27(빈 화면), 23·24(심사 상세), 19(회원 관리)",
+        "컴포넌트: card/Professional 심사, 상태 태그, dropdown, search bar",
+        "데이터: 신청 유형 3종(CF-03), 전문 분야=앱 Specialty, 현재 회원 유형, 심사 상태 3값",
+        "상태: 처리된 건 진입('심사하기'), 검색 결과 없음",
+        "정책: 심사 상태 표기(띄어쓰기) — story-service B절·규칙 2-d",
+        "플랫폼별: 사용자앱 70·71·79(신청 유형 선택), 72(Specialty 입력), 83~85(신청 상태)"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 필요", "reason": "승인 완료·심사 거절 행에도 '심사하기'가 같고 전문 분야 머리글이 드롭다운에 가려 있다."},
+        {"screen_id": "WEB-27", "platform": "WEB", "decision": "수정 필요", "reason": "검색·필터 결과 0건 상태가 없다."},
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "목록의 심사 상태가 상세에 표시되지 않는다(규칙 2-d)."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같이 상세에 심사 상태가 없다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "추가 확인 필요", "reason": "승인 시 회원 관리의 회원 유형이 Professional로 바뀌는지 화면 근거가 없다."},
+        {"screen_id": "APP-70", "platform": "APP", "decision": "수정 불필요", "reason": "Member type 값 3종이 '현재 회원 등급' 값과 같다."},
+        {"screen_id": "APP-71", "platform": "APP", "decision": "추가 확인 필요", "reason": "세 번째 선택지 'Professional membership'이 관리자 '해외 사업자'와 다르다(CF-03)."},
+        {"screen_id": "APP-79", "platform": "APP", "decision": "추가 확인 필요", "reason": "71과 같은 선택지라 같은 결정이 필요하다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "추가 확인 필요", "reason": "Specialty가 '전문 분야' 열로 오지만 기준 원문(SRC-02)이 없고 22의 머리글이 가려 대응을 확인할 수 없다."},
+        {"screen_id": "APP-83", "platform": "APP", "decision": "수정 불필요", "reason": "'Under review'가 '심사 중'과 대응한다(CHK-S2-037)."},
+        {"screen_id": "APP-84", "platform": "APP", "decision": "추가 확인 필요", "reason": "상태 배지 'Approve'가 동사형이라 '승인 완료'와 맞출지 정해야 한다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "수정 불필요", "reason": "'Not approved'가 '심사 거절'과 대응한다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-04 [Professional 심사]"},
+        {"source_id": "SRC-00", "locator": "[Professional 심사] 신청 유형(개인 사업자/국내 사업자/해외 사업자), 전문 분야 (모바일 Specialty 항목 해당)"},
+        {"source_id": "SRC-02", "locator": "Specialty 기준 원문 NOT_FOUND (CF-04)"},
+        {"source_id": "SRC-03", "locator": "689:23558"},
+        {"source_id": "SRC-03", "locator": "500:17414"},
+        {"source_id": "SRC-03", "locator": "505:14223"},
+        {"source_id": "SRC-03", "locator": "500:18780"}
+      ],
+      "expected_problem": "앱에서 고른 신청 유형이 관리자 목록에서 다른 이름으로 보여 심사자가 유형을 잘못 판단할 수 있다. 처리된 건에 다시 들어가 결과를 바꿀 위험이 있다.",
+      "needs_fix": "필요 — 관리자웹 22·23·24·27, 앱 신청 유형 라벨은 결정 후",
+      "verdict": "FAIL",
+      "story_service_review": "NEEDS_REVIEW — 화면 표기('승인 완료','심사 거절')를 기준으로 하면 story-service B절과 규칙 2-d 상태 값 표기를 갱신해야 한다.",
+      "follow_up": "신청 유형 세 번째 값(CF-03)과 상태 표기를 확정하고, 처리된 건 진입 방식과 상세 상태 배지를 추가한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-005",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-05"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-23", "WEB-24", "WEB-25", "WEB-26"],
+      "change_target": "심사 상세의 이력 누적(픽스 항목)이 화면에 없고, 미승인 사유가 앱 Review feedback으로 가는 기준이 비어 있음",
+      "consider_areas": [
+        "화면: 관리자웹 23~26(심사 상세·승인·거절), 22(Professional 심사), 19(회원 관리)",
+        "컴포넌트: card/Professional 신청 심사, modal, web/field",
+        "데이터: 신청 데이터(개인/사업자), 내부 검토 메모(비공개), 미승인 사유(=Review feedback), 심사 이력",
+        "상태: 이력 누적, 처리된 건 재처리 방지, 사유 미입력",
+        "권한: 내부 메모는 신청자에게 비공개",
+        "정책: 필수 규칙 2(2-a~2-d)",
+        "플랫폼별: 사용자앱 72·73·80·81(신청 입력), 84(승인), 85(미승인·재제출), 63(Professional 배지), 26(결과 알림)"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "심사 상태·이력 영역이 없고 메모 안내가 '제목을 입력해주세요'다."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같은 문제가 있다."},
+        {"screen_id": "WEB-25", "platform": "WEB", "decision": "수정 필요", "reason": "승인 뒤 결과 안내와 이동 화면이 없다(CHK-S2-065)."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "수정 필요", "reason": "'니승인' 오타, 미입력 시 확인을 막는 상태 없음, 작성 언어 미정이다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 필요", "reason": "처리된 건도 '심사하기'로 같은 상세에 들어가 이력 대신 결과를 덮어쓸 위험이 있다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "추가 확인 필요", "reason": "승인 결과가 회원 관리 회원 유형에 반영되는 연결 근거가 없다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "수정 불필요", "reason": "개인 신청 입력 항목이 관리자웹 23에 모두 있다(CHK-S2-040)."},
+        {"screen_id": "APP-73", "platform": "APP", "decision": "수정 불필요", "reason": "72와 같은 입력 항목이 23에 있다."},
+        {"screen_id": "APP-80", "platform": "APP", "decision": "수정 불필요", "reason": "사업자 신청 입력 항목이 관리자웹 24에 있다."},
+        {"screen_id": "APP-81", "platform": "APP", "decision": "수정 불필요", "reason": "80과 같은 입력 항목이 24에 있다."},
+        {"screen_id": "APP-84", "platform": "APP", "decision": "추가 확인 필요", "reason": "승인 상태 배지 'Approve' 표기를 정해야 한다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "Review feedback 기준 원문(85p, SRC-02)이 없고 재제출 후 이전 사유 표시 여부가 정해지지 않았다."},
+        {"screen_id": "APP-63", "platform": "APP", "decision": "수정 불필요", "reason": "승인 결과로 보일 Professional 배지·Business 영역이 이미 있다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "심사 결과 알림 유형이 없다(CHK-S2-049)."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-05 <Professional 신청 심사 상세>"},
+        {"source_id": "SRC-00", "locator": "<Professional 신청 심사 상세> 이력이 계속 누적됨 / 신청자에게 전달할 사유 → 85p Review feedback"},
+        {"source_id": "SRC-02", "locator": "85p NOT_FOUND (CF-04)"},
+        {"source_id": "SRC-03", "locator": "689:25415"},
+        {"source_id": "SRC-03", "locator": "693:28331"},
+        {"source_id": "SRC-03", "locator": "500:18860"}
+      ],
+      "expected_problem": "재신청 시 이전 결과·사유를 볼 수 없어 규칙 2(이력 누적)를 화면으로 지킬 수 없다. 비어 있거나 오타 섞인 사유가 앱 Review feedback에 그대로 나갈 수 있다.",
+      "needs_fix": "필요 — 관리자웹 22·23·24·25·26",
+      "verdict": "FAIL",
+      "follow_up": "심사 상세에 상태 배지와 '심사 이력'(회차·일시·결과·사유)을 추가하고, 사유 모달 오타·미입력 상태·작성 언어를 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-006",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-06"},
+      "focus": "Q2",
+      "origin_screens": ["WEB-28", "WEB-29", "WEB-30", "WEB-31", "WEB-32"],
+      "change_target": "신고 관리 항목은 반영됐으나 신고 사유가 앱 신고 모달(다중 선택·오타)과 어긋나고 정지 결과가 앱에 닿지 않음",
+      "consider_areas": [
+        "화면: 관리자웹 28~32(신고 관리), 33(이용 정지 관리), 19(회원 관리), 15·16(포럼 관리 상세)",
+        "컴포넌트: sidebar, card/신고 관리, card/원문 글 상세, modal, web/field, search bar",
+        "데이터: 신고 사유(앱 56 모달 값), 대상 종류, 신고자·대상자, 처리 상태 3값",
+        "상태: 처리된 신고 재처리 방지, 검색 결과 없음, 처리 상태 필터",
+        "권한: 관리자 정지 / 제재 없음 처리",
+        "정책: 버튼 명칭('확인 완료' vs '제재 없음')과 처리 상태 대응",
+        "플랫폼별: 사용자앱 56(신고 모달), 52(신고 대상 글), 6(정지 회원 로그인), 26(처리 결과 알림)"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "검색 안내가 '닉네임으로 검색'뿐이고 사유 오타가 있으며 처리된 행도 같은 버튼이다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 필요", "reason": "신고 대상·사유·신고자 요약이 없고 처리된 건 상태가 없다."},
+        {"screen_id": "WEB-30", "platform": "WEB", "decision": "추가 확인 필요", "reason": "'제재 없음'이 픽스 '확인 완료(이상 없음)'와 이름이 달라 결정이 필요하다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "수정 필요", "reason": "정지 대상 'Chris Taylor'가 화면 속 작성자와 연결되지 않는다."},
+        {"screen_id": "WEB-32", "platform": "WEB", "decision": "수정 필요", "reason": "검색 안내와 검색 결과 0건 상태를 28과 함께 고쳐야 한다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "추가 확인 필요", "reason": "신고로 정지된 회원이 이 목록에 정지 사유와 함께 들어가는지 근거가 없다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "추가 확인 필요", "reason": "신고 정지 시 운영 상태가 '이용 정지'로 바뀌는 연결 근거가 없다."},
+        {"screen_id": "APP-56", "platform": "APP", "decision": "수정 필요", "reason": "'infomation' 오타를 관리자와 같이 고쳐야 하고 다중 선택 사유 표시 방식을 정해야 한다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱에서 신고한 원문/답글이 관리자웹 29에서 어느 것인지 식별할 정보가 정해지지 않았다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "수정 필요", "reason": "신고로 정지된 회원에게 정지 안내가 없다(CHK-S2-043)."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "신고자에게 처리 결과를 알릴지 정해지지 않았다(CHK-S4-003)."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-06 <신고 관리>"},
+        {"source_id": "SRC-00", "locator": "<신고 관리> 신고 사유 (사용자앱 기준, 모달에 뜨는 항목으로 상태값 설정: 56p) / 회원 정지 , 확인 완료 버튼(이상 없음)"},
+        {"source_id": "SRC-02", "locator": "56p NOT_FOUND (CF-04)"},
+        {"source_id": "SRC-03", "locator": "245:33331"},
+        {"source_id": "SRC-03", "locator": "689:22801"},
+        {"source_id": "SRC-03", "locator": "271:28469"}
+      ],
+      "expected_problem": "앱 신고 값과 관리자 사유 값이 어긋나면 상태값 매핑이 깨진다. 관리자가 어떤 글이 왜 신고됐는지 모른 채 정지·제재 없음을 처리하게 된다.",
+      "needs_fix": "필요 — 관리자웹 28·29·31·32, 사용자앱 56·6",
+      "verdict": "FAIL",
+      "story_service_review": "NEEDS_REVIEW — '제재 없음'으로 확정하면 회의 픽스 버튼 명칭과 story-service B절 신고 처리 상태('처리 완료') 대응을 갱신해야 한다.",
+      "follow_up": "신고 상세에 신고 요약과 처리 결과 상태를 추가하고, 앱·관리자 사유 값(오타·다중 선택)을 함께 확정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-007",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-07"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-33", "WEB-34", "WEB-35"],
+      "change_target": "이용 정지 관리 항목은 반영됐으나 정지 해제가 회원 관리·신고 관리 상태에 어떻게 반영되는지 정해지지 않음",
+      "consider_areas": [
+        "화면: 관리자웹 33~35(이용 정지 관리), 19·20(회원 관리), 28·31(신고 관리)",
+        "컴포넌트: card/이용 정지 관리, dropdown, search bar, modal",
+        "데이터: 이메일, 회원 유형, 정지 사유, 정지 일시",
+        "상태: 해제 후 운영 상태 '정상' 복귀, 신고 처리 상태 '정지 완료' 유지 여부",
+        "권한: 해제된 회원의 앱 재로그인",
+        "정책: 정지 기간(기한 여부) — 자료 없음",
+        "플랫폼별: 사용자앱 6(로그인 실패)"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 필요", "reason": "'정지 해지' 오기, 드롭다운 '전체' 없음, 체크박스에 연결된 동작이 없다."},
+        {"screen_id": "WEB-34", "platform": "WEB", "decision": "수정 불필요", "reason": "정지 해제 모달 문구·취소·확인이 있다(목록 공통 수정은 33에서 반영)."},
+        {"screen_id": "WEB-35", "platform": "WEB", "decision": "수정 필요", "reason": "검색 결과 0건 상태가 없다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "추가 확인 필요", "reason": "해제 시 운영 상태가 '정상'으로 돌아가는 연결 근거가 없다."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "추가 확인 필요", "reason": "해제 후 해당 신고 건 처리 상태('정지 완료')를 유지할지 정해지지 않았다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "추가 확인 필요", "reason": "해제된 회원의 재로그인 안내나 정지 기간 정보가 앱에 없다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-07 <이용 정지 관리>"},
+        {"source_id": "SRC-00", "locator": "<이용 정지 관리> 이메일, 회원 유형, 정지 일시, 검색바, 초기화 버튼"},
+        {"source_id": "SRC-01", "locator": "회의 내용 > 관리자웹 '회원관리 , 정지된 회원 관리 메뉴 탭 구분'"},
+        {"source_id": "SRC-03", "locator": "245:33343"},
+        {"source_id": "SRC-03", "locator": "689:17022"}
+      ],
+      "expected_problem": "해제 뒤에도 회원 관리·신고 관리에 정지 상태가 남으면 운영자가 같은 회원을 다르게 판단한다. 해제 오기('해지')로 같은 기능이 두 이름으로 전달된다.",
+      "needs_fix": "필요 — 관리자웹 33·35, 상태 연동은 확인 후",
+      "verdict": "FAIL",
+      "follow_up": "'정지 해제'로 통일하고, 해제 시 회원 관리 운영 상태·신고 처리 상태·앱 로그인에 반영되는 규칙을 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-008",
+      "origin": {"type": "feedback", "ref": "FB-20261028-0133-08"},
+      "focus": "Q2",
+      "origin_screens": ["WEB-36", "WEB-37", "WEB-39"],
+      "change_target": "배너 등록 일시는 반영됐으나 여러 배너·순서가 앱 단일 배너 자리에 어떻게 나가는지 정해지지 않음",
+      "consider_areas": [
+        "화면: 관리자웹 36~42(배너 관리)",
+        "컴포넌트: card/배너 등록 관리, modal",
+        "데이터: 배너 이미지(3:1), 연결 링크, 순서, 등록 일시",
+        "상태: 순서 변경·저장 토스트, 등록 입력 오류, 삭제 결과",
+        "정책: 배너 노출 위치(홈 최하단·뉴스피드 상세 하단), 여러 장 노출 방식",
+        "플랫폼별: 사용자앱 40(홈 메인)·41(뉴스피드 상세)·45(News 메인)·46(News 상세)"
+      ],
+      "related_screens": [
+        {"screen_id": "WEB-36", "platform": "WEB", "decision": "추가 확인 필요", "reason": "등록 일시는 반영됐지만 등록한 배너를 수정할 경로가 없다(CHK-S2-064)."},
+        {"screen_id": "WEB-37", "platform": "WEB", "decision": "추가 확인 필요", "reason": "정한 순서가 앱 노출 순서인지 정해지지 않았다."},
+        {"screen_id": "WEB-38", "platform": "WEB", "decision": "수정 불필요", "reason": "순서 저장 토스트가 있어 등록 일시 추가와 무관하다."},
+        {"screen_id": "WEB-39", "platform": "WEB", "decision": "추가 확인 필요", "reason": "이미지 미선택·링크 형식 오류 상태가 없다."},
+        {"screen_id": "WEB-40", "platform": "WEB", "decision": "수정 불필요", "reason": "같은 card/배너 등록 관리 인스턴스라 등록 일시 열이 함께 반영된다."},
+        {"screen_id": "WEB-41", "platform": "WEB", "decision": "수정 필요", "reason": "삭제 뒤 결과 안내가 없다(CHK-S2-065)."},
+        {"screen_id": "WEB-42", "platform": "WEB", "decision": "수정 불필요", "reason": "배너 관리에는 검색이 없어 빈 화면 1종으로 충분하다."},
+        {"screen_id": "APP-40", "platform": "APP", "decision": "추가 확인 필요", "reason": "홈에는 배너 1장 자리만 있어 여러 배너의 순환·첫 장 노출 여부가 정해지지 않았다."},
+        {"screen_id": "APP-41", "platform": "APP", "decision": "추가 확인 필요", "reason": "뉴스피드 상세 하단도 1장 자리뿐이다."},
+        {"screen_id": "APP-45", "platform": "APP", "decision": "추가 확인 필요", "reason": "News 메인에도 배너가 있는데 회의의 노출 위치 목록에 없다."},
+        {"screen_id": "APP-46", "platform": "APP", "decision": "추가 확인 필요", "reason": "News 상세 하단 배너가 41과 같은 배너 묶음인지 정해지지 않았다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "FB", "locator": "FB-20261028-0133-08 <배너 관리>"},
+        {"source_id": "SRC-00", "locator": "<배너 관리> 피그마 기준 항목 유지+배너 등록 일시"},
+        {"source_id": "SRC-01", "locator": "회의 내용 > 사용자앱 '배너 위치: 홈 최하단 & 뉴스피드 상세 글 하단 위치 고정'"},
+        {"source_id": "SRC-03", "locator": "245:36153"},
+        {"source_id": "SRC-03", "locator": "271:30494"},
+        {"source_id": "SRC-03", "locator": "271:29404"}
+      ],
+      "expected_problem": "관리자가 순서를 바꿔도 앱에 어떤 배너가 보일지 예측할 수 없다. 앱 노출 위치가 회의 내용과 화면이 달라 개발 기준이 갈린다.",
+      "needs_fix": "확인 필요 — 앱 노출 방식 결정 후, 관리자웹 41은 공통 결과 안내로 수정",
+      "verdict": "NEEDS_REVIEW",
+      "follow_up": "앱 배너 노출 방식(자동 넘김·인디케이터)과 노출 위치(홈·뉴스 메인·뉴스 상세)를 확정하고 배너 수정 경로를 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-009",
+      "origin": {"type": "fail", "ref": "CHK-S2-007"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-03"],
+      "change_target": "관리자웹 03(뉴스 관리) 푸시 배지를 '전체 푸시 전송 완료/미전송'으로 고치면 같은 카드를 쓰는 10·11도 함께 바뀜",
+      "related_screens": [
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "수정 필요", "reason": "배지 문구에 '전체'가 빠졌다."},
+        {"screen_id": "WEB-10", "platform": "WEB", "decision": "수정 필요", "reason": "배경 목록이 같은 card/뉴스 관리다."},
+        {"screen_id": "WEB-11", "platform": "WEB", "decision": "수정 필요", "reason": "배경 목록이 같은 card/뉴스 관리다."},
+        {"screen_id": "WEB-04", "platform": "WEB", "decision": "추가 확인 필요", "reason": "체크박스 '푸시 알림 전송'도 '전체 푸시'로 맞출지 정해야 한다."},
+        {"screen_id": "WEB-07", "platform": "WEB", "decision": "추가 확인 필요", "reason": "04와 같은 체크박스 문구다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱 알림 'New announcement' 문구와 '전체 푸시'의 대응이 정해지지 않았다."},
+        {"screen_id": "APP-45", "platform": "APP", "decision": "수정 불필요", "reason": "앱 뉴스 목록에는 푸시 상태가 표시되지 않는다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[뉴스관리] 푸시→ 전체 푸시 전송 완료/ 전체 푸시 미전송(상태 2개)"},
+        {"source_id": "SRC-03", "locator": "128:9957"},
+        {"source_id": "SRC-03", "locator": "136:13020"},
+        {"source_id": "SRC-03", "locator": "271:29551"}
+      ],
+      "expected_problem": "'전체' 대상 여부가 빠져 개별 푸시 기능이 있는 것처럼 읽힌다.",
+      "needs_fix": "필요 — 관리자웹 03(card/뉴스 관리)",
+      "verdict": "FAIL",
+      "story_service_review": "NEEDS_REVIEW — 현재 표기를 유지하면 story-service B절 뉴스 푸시 상태 정의를 갱신해야 한다.",
+      "follow_up": "card/뉴스 관리 상태 태그 문구를 고치고 04·07 체크박스 문구 통일 여부를 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-010",
+      "origin": {"type": "fail", "ref": "CHK-S2-009"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-17"],
+      "change_target": "관리자웹 17(상세 / 답글 삭제 모달) 버튼 '댓글 삭제'만 고치면 되고 15·16은 영향 없음",
+      "related_screens": [
+        {"screen_id": "WEB-17", "platform": "WEB", "decision": "수정 필요", "reason": "모달 제목은 '답글 삭제'인데 버튼 2개가 '댓글 삭제'다."},
+        {"screen_id": "WEB-15", "platform": "WEB", "decision": "수정 불필요", "reason": "원본 인스턴스라 '답글 삭제'로 반영돼 있다."},
+        {"screen_id": "WEB-16", "platform": "WEB", "decision": "수정 불필요", "reason": "원본 인스턴스라 '답글' 용어가 맞다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱은 'Comment'·'reply'를 섞어 써 관리자 '답글'과 대응 용어를 정해야 한다(CHK-S2-036)."},
+        {"screen_id": "APP-91", "platform": "APP", "decision": "추가 확인 필요", "reason": "'Comments' 탭도 같은 용어 결정이 필요하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[포럼 관리] 댓글→답글 명칭 수정"},
+        {"source_id": "SRC-03", "locator": "682:37013"},
+        {"source_id": "SRC-03", "locator": "144:6583"},
+        {"source_id": "SRC-03", "locator": "497:21709"}
+      ],
+      "expected_problem": "한 화면에서 '답글'과 '댓글'이 함께 보여 다른 대상으로 오해된다. 원인은 CHK-S3-006(떼어낸 복사본)과 같다.",
+      "needs_fix": "필요 — 관리자웹 17",
+      "verdict": "FAIL",
+      "follow_up": "관리자웹 17을 원본 인스턴스로 교체해 라벨을 맞춘다(IMP-S4-027과 같은 조치).",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-011",
+      "origin": {"type": "fail", "ref": "CHK-S2-021"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-23", "WEB-24"],
+      "change_target": "심사 상세(관리자웹 23·24)에 목록과 같은 심사 상태 배지를 추가해야 규칙 2-d가 성립함",
+      "related_screens": [
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "현재 심사 상태가 상세 어디에도 없다."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 불필요", "reason": "목록 배지와 필터가 같은 3값이다(CHK-S3-014)."},
+        {"screen_id": "WEB-25", "platform": "WEB", "decision": "추가 확인 필요", "reason": "승인 후 상세 상태가 바뀐 화면이 없다."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "추가 확인 필요", "reason": "미승인 후 상세 상태가 바뀐 화면이 없다."},
+        {"screen_id": "APP-83", "platform": "APP", "decision": "수정 불필요", "reason": "'Under review'가 '심사 중'과 대응한다."},
+        {"screen_id": "APP-84", "platform": "APP", "decision": "추가 확인 필요", "reason": "'Approve' 표기를 상태형으로 맞출지 정해야 한다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "수정 불필요", "reason": "'Not approved'가 '심사 거절'과 대응한다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 상태 표시와 무관하다."},
+        {"screen_id": "APP-73", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 상태 표시와 무관하다."},
+        {"screen_id": "APP-80", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 상태 표시와 무관하다."},
+        {"screen_id": "APP-81", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 상태 표시와 무관하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[Professional 심사] 심사 상태( 심사 중/심사거절/승인완료)"},
+        {"source_id": "SRC-03", "locator": "689:23558"},
+        {"source_id": "SRC-03", "locator": "689:25415"},
+        {"source_id": "SRC-03", "locator": "692:26946"},
+        {"source_id": "SRC-03", "locator": "500:18409"}
+      ],
+      "expected_problem": "심사자가 상세에서 이미 처리된 건인지 알 수 없어 중복 처리가 생긴다.",
+      "needs_fix": "필요 — 관리자웹 23·24",
+      "verdict": "FAIL",
+      "follow_up": "관리자웹 23·24 신청 정보 제목 옆에 목록과 같은 상태 배지를 넣고 승인·거절 후 상태 프레임을 추가한다.",
+      "rule_ref": "2-d",
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-012",
+      "origin": {"type": "fail", "ref": "CHK-S2-026"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-23", "WEB-24"],
+      "change_target": "재신청 심사 이력 영역이 없어 규칙 2-c를 화면으로 보여줄 수 없음 — 심사 상세에 이력 목록 추가 필요",
+      "related_screens": [
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "이전 회차 결과·사유·일시를 보여주는 영역이 없다."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "추가 확인 필요", "reason": "재신청 건을 새 행으로 쌓을지 한 행에 묶을지 정해지지 않았다."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "추가 확인 필요", "reason": "입력한 미승인 사유가 이력에 남는다는 화면 근거가 없다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "재제출 후 앱 상태와 이전 Review feedback 표시 여부를 보여주는 화면이 없다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "수정 불필요", "reason": "최초 신청 입력 화면이라 이력 영역 추가와 무관하다."},
+        {"screen_id": "APP-73", "platform": "APP", "decision": "수정 불필요", "reason": "최초 신청 입력 화면이다."},
+        {"screen_id": "APP-80", "platform": "APP", "decision": "수정 불필요", "reason": "최초 신청 입력 화면이다."},
+        {"screen_id": "APP-81", "platform": "APP", "decision": "수정 불필요", "reason": "최초 신청 입력 화면이다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<Professional 신청 심사 상세> 사용자가 재승인을 요청해도 관리자 웹에서 이력이 계속 누적됨"},
+        {"source_id": "SRC-03", "locator": "689:25415"},
+        {"source_id": "SRC-03", "locator": "692:26946"},
+        {"source_id": "SRC-03", "locator": "500:18860"}
+      ],
+      "expected_problem": "재신청자의 이전 거절 사유를 모른 채 심사해 판단이 흔들린다. 결과가 덮어써진 것처럼 보인다.",
+      "needs_fix": "필요 — 관리자웹 23·24",
+      "verdict": "FAIL",
+      "follow_up": "심사 상세에 '심사 이력'(회차·접수 일시·결과·전달 사유·처리자)을 추가하고 목록의 재신청 표시 방식을 정한다.",
+      "rule_ref": "2-c",
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-013",
+      "origin": {"type": "fail", "ref": "CHK-S2-030"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-28", "WEB-32"],
+      "change_target": "신고 관리(관리자웹 28·32) 검색 안내만 '닉네임 또는 이메일로 검색'으로 고치면 됨 — 다른 목록은 이미 맞음",
+      "related_screens": [
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "검색 안내가 '닉네임으로 검색'뿐이고 신고자·대상자 중 검색 대상이 불분명하다."},
+        {"screen_id": "WEB-32", "platform": "WEB", "decision": "수정 필요", "reason": "빈 화면도 같은 검색 안내다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 불필요", "reason": "이미 '닉네임 또는 이메일로 검색'이다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 불필요", "reason": "이미 '닉네임 또는 이메일로 검색'이다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 불필요", "reason": "이미 '닉네임 또는 이메일로 검색'이다."},
+        {"screen_id": "APP-56", "platform": "APP", "decision": "수정 불필요", "reason": "검색 안내는 관리자 전용이라 앱 신고 모달과 무관하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<신고 관리> 검색바(닉네임, 이메일 검색) +초기화 버튼 추가?"},
+        {"source_id": "SRC-03", "locator": "245:33331"},
+        {"source_id": "SRC-03", "locator": "694:28598"},
+        {"source_id": "SRC-03", "locator": "245:33348"}
+      ],
+      "expected_problem": "이메일로 신고 건을 찾을 수 없다고 읽혀 픽스 항목이 빠진 것으로 보인다.",
+      "needs_fix": "필요 — 관리자웹 28·32",
+      "verdict": "FAIL",
+      "follow_up": "검색 안내를 바꾸고 검색 대상(신고자/신고 대상자)을 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-014",
+      "origin": {"type": "fail", "ref": "CHK-S2-043"},
+      "focus": "Q2",
+      "origin_screens": ["WEB-20", "WEB-31", "WEB-34", "APP-06"],
+      "change_target": "관리자 이용 정지가 앱에 닿는 화면이 없어 사용자앱 6(로그인 실패) 외 정지 안내를 추가해야 함",
+      "related_screens": [
+        {"screen_id": "APP-06", "platform": "APP", "decision": "수정 필요", "reason": "정지 계정에도 일반 로그인 실패 문구만 보여 정지 사유·문의 경로가 없다."},
+        {"screen_id": "APP-07", "platform": "APP", "decision": "추가 확인 필요", "reason": "로그인된 상태에서 정지될 때 처리가 화면에 없다(메타데이터만 확인)."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "정지·해제 알림을 보낼지 정해지지 않았다."},
+        {"screen_id": "WEB-20", "platform": "WEB", "decision": "추가 확인 필요", "reason": "입력한 정지 사유를 앱 안내에 노출할지 정해야 한다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "추가 확인 필요", "reason": "신고 정지 사유도 같은 노출 여부 결정이 필요하다."},
+        {"screen_id": "WEB-34", "platform": "WEB", "decision": "추가 확인 필요", "reason": "해제 시 앱 안내 여부가 정해지지 않았다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 불필요", "reason": "정지 사유·일시가 이미 목록에 있어 앱 안내의 데이터 원천으로 쓸 수 있다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[회원 관리] 운영 상태 항목 추가 ( 정상, 이용 정지 상태 2개)"},
+        {"source_id": "SRC-03", "locator": "271:30732"},
+        {"source_id": "SRC-03", "locator": "689:23298"},
+        {"source_id": "SRC-03", "locator": "sources/figma/design-metadata.xml 사용자앱 프레임 텍스트 검색('suspend' 등) 결과 없음"}
+      ],
+      "expected_problem": "정지된 사용자는 비밀번호 오류로 오해해 재설정·문의를 반복한다.",
+      "needs_fix": "필요 — 사용자앱 6(또는 정지 안내 화면 신규)",
+      "verdict": "FAIL",
+      "follow_up": "사용자앱에 '이용 정지 안내'(사유·기간·문의 경로) 모달을 추가하고 관리자 정지 사유 노출 여부를 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-015",
+      "origin": {"type": "fail", "ref": "CHK-S2-044"},
+      "focus": "Q2",
+      "origin_screens": ["WEB-16", "WEB-17"],
+      "change_target": "관리자 원문·답글 삭제 결과를 보여줄 '삭제된 글' 상태가 앱 상세·내 활동·알림에 없음",
+      "related_screens": [
+        {"screen_id": "APP-52", "platform": "APP", "decision": "수정 필요", "reason": "삭제된 글 진입 시 안내 상태가 없다."},
+        {"screen_id": "APP-90", "platform": "APP", "decision": "수정 필요", "reason": "내가 쓴 글 목록에서 삭제 글 처리가 없다."},
+        {"screen_id": "APP-91", "platform": "APP", "decision": "수정 필요", "reason": "'Move to content' 대상 삭제 시 상태가 없다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "수정 필요", "reason": "삭제 글 알림을 눌렀을 때 상태가 없다."},
+        {"screen_id": "APP-55", "platform": "APP", "decision": "추가 확인 필요", "reason": "작성자 삭제에도 답글이 함께 지워지는지 정책이 정해지지 않았다."},
+        {"screen_id": "APP-59", "platform": "APP", "decision": "추가 확인 필요", "reason": "프로필 Topics activity 글 수가 삭제 후 갱신되는지 근거가 없다."},
+        {"screen_id": "APP-63", "platform": "APP", "decision": "추가 확인 필요", "reason": "타인 프로필 글 목록도 같은 갱신 기준이 필요하다."},
+        {"screen_id": "WEB-16", "platform": "WEB", "decision": "수정 불필요", "reason": "관리자 쪽 확인 모달은 규칙 1을 충족한다."},
+        {"screen_id": "WEB-17", "platform": "WEB", "decision": "수정 불필요", "reason": "답글 삭제 확인 모달은 있다(라벨 문제는 IMP-S4-010)."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "추가 확인 필요", "reason": "삭제된 글에 걸린 신고 건의 처리 상태가 정해지지 않았다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-01", "locator": "회의 내용 > 사용자앱 > 마이페이지(프로필) '-내 활동관리) 답글, 좋아요 반응/내가 작성한 글/내가 작성한 답글'"},
+        {"source_id": "SRC-00", "locator": "[포럼 관리] 원문 글 삭제 모달 문구"},
+        {"source_id": "SRC-03", "locator": "606:19829"},
+        {"source_id": "SRC-03", "locator": "271:29551"},
+        {"source_id": "SRC-03", "locator": "sources/figma/design-metadata.xml 사용자앱 텍스트 검색('deleted','removed') 결과 없음"}
+      ],
+      "expected_problem": "앱 사용자가 사라진 글로 이동하면 빈 화면이나 오류를 보고, 답글 작성자는 이유 없이 답글을 잃는다.",
+      "needs_fix": "필요 — 사용자앱 52·90·91·26",
+      "verdict": "FAIL",
+      "follow_up": "사용자앱에 '삭제된 게시글입니다' 상태와 내 활동·알림 목록 처리 규칙을 추가한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-016",
+      "origin": {"type": "fail", "ref": "CHK-S2-051"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-05", "WEB-08"],
+      "change_target": "뉴스 등록·수정 완료 모달을 푸시 전송함/안 함 2가지로 나눠야 함",
+      "related_screens": [
+        {"screen_id": "WEB-05", "platform": "WEB", "decision": "수정 필요", "reason": "체크 상태와 반대인 '발송되지 않았습니다'를 안내한다."},
+        {"screen_id": "WEB-08", "platform": "WEB", "decision": "수정 필요", "reason": "수정 완료 모달도 같다."},
+        {"screen_id": "WEB-04", "platform": "WEB", "decision": "추가 확인 필요", "reason": "체크 해제 상태 프레임이 없어 어느 모달로 이어지는지 알 수 없다."},
+        {"screen_id": "WEB-07", "platform": "WEB", "decision": "추가 확인 필요", "reason": "04와 같다."},
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "추가 확인 필요", "reason": "모달 결과와 목록 푸시 배지 값이 일치하는지 확인해야 한다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "전송함 선택 시 앱 알림이 어떤 문구로 생기는지 정해지지 않았다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[뉴스관리] 뉴스 등록 상세-취소/등록 완료 모달; 푸시→ 전체 푸시 전송 완료/ 전체 푸시 미전송"},
+        {"source_id": "SRC-03", "locator": "676:27974"},
+        {"source_id": "SRC-03", "locator": "676:28609"},
+        {"source_id": "SRC-03", "locator": "271:40018"}
+      ],
+      "expected_problem": "관리자가 푸시가 안 나간 줄 알고 재등록해 중복 푸시가 갈 수 있다.",
+      "needs_fix": "필요 — 관리자웹 05·08",
+      "verdict": "FAIL",
+      "follow_up": "완료 모달 문구 variant 2종을 만들고 05·08 체크 상태와 맞춘다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-017",
+      "origin": {"type": "fail", "ref": "CHK-S2-054"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-12", "WEB-18", "WEB-21", "WEB-27", "WEB-32", "WEB-35"],
+      "change_target": "검색바가 생긴 6개 목록에 공통 '검색 결과 없음 + 초기화' 상태가 필요함",
+      "related_screens": [
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "수정 필요", "reason": "제목 검색 0건 상태가 없다."},
+        {"screen_id": "WEB-13", "platform": "WEB", "decision": "수정 필요", "reason": "제목 검색·카테고리 필터 0건 상태가 없다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 필요", "reason": "닉네임/이메일 검색 0건 상태가 없다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 필요", "reason": "검색·심사 상태 필터 0건 상태가 없다."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "검색 0건 상태가 없다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 필요", "reason": "검색·회원 유형 필터 0건 상태가 없다."},
+        {"screen_id": "WEB-12", "platform": "WEB", "decision": "수정 불필요", "reason": "데이터 0건 빈 화면으로는 맞아 그대로 두고 별도 상태를 추가한다."},
+        {"screen_id": "WEB-18", "platform": "WEB", "decision": "수정 불필요", "reason": "데이터 0건 빈 화면으로는 맞다."},
+        {"screen_id": "WEB-21", "platform": "WEB", "decision": "수정 불필요", "reason": "데이터 0건 빈 화면으로는 맞다."},
+        {"screen_id": "WEB-27", "platform": "WEB", "decision": "수정 불필요", "reason": "데이터 0건 빈 화면으로는 맞다."},
+        {"screen_id": "WEB-32", "platform": "WEB", "decision": "수정 불필요", "reason": "데이터 0건 빈 화면으로는 맞다."},
+        {"screen_id": "WEB-35", "platform": "WEB", "decision": "수정 불필요", "reason": "데이터 0건 빈 화면으로는 맞다."},
+        {"screen_id": "WEB-42", "platform": "WEB", "decision": "수정 불필요", "reason": "배너 관리에는 검색이 없다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "각 메뉴 '검색바 + 초기화 버튼 추가'"},
+        {"source_id": "SRC-03", "locator": "671:30550"},
+        {"source_id": "SRC-03", "locator": "694:31617"},
+        {"source_id": "SRC-03", "locator": "694:28598"}
+      ],
+      "expected_problem": "검색 결과가 없을 때 '등록된 데이터 없음'으로 안내돼 운영자가 데이터가 사라졌다고 오해한다.",
+      "needs_fix": "필요 — 공통 상태 프레임 1종(search bar 공유 6개 목록)",
+      "verdict": "FAIL",
+      "follow_up": "목록 공통 '검색 결과가 없습니다 + 초기화' 상태를 하나 만들고 6개 목록에 적용한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-018",
+      "origin": {"type": "fail", "ref": "CHK-S2-056"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-29", "WEB-31"],
+      "change_target": "신고 원문 상세(관리자웹 29) 상단에 신고 요약을 넣어야 함 — 같은 카드를 쓰는 포럼 상세와 분리 필요",
+      "related_screens": [
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 필요", "reason": "신고 대상·사유·신고자가 표시되지 않는다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "수정 필요", "reason": "정지 대상 이름이 원문 작성자와 연결되지 않는다."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "추가 확인 필요", "reason": "목록 행의 신고 정보를 상세로 넘기는 기준이 정해지지 않았다."},
+        {"screen_id": "WEB-30", "platform": "WEB", "decision": "수정 불필요", "reason": "확인 모달 자체는 대상 표시와 무관하고 29 상단 요약으로 해결된다."},
+        {"screen_id": "WEB-15", "platform": "WEB", "decision": "추가 확인 필요", "reason": "같은 card/원문 글 상세를 써서 신고 요약을 컴포넌트에 넣으면 포럼 상세에도 번진다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱에서 신고된 답글을 식별할 정보(답글 위치·ID)가 관리자 강조 표시에 필요하다."},
+        {"screen_id": "APP-56", "platform": "APP", "decision": "추가 확인 필요", "reason": "다중 선택 사유를 상세 요약에 모두 보일지 정해야 한다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "수정 불필요", "reason": "정지 대상 연결은 관리자 화면 내부 문제다(앱 정지 안내는 IMP-S4-014)."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<신고 관리> 원문 확인 버튼 클릭, 상세 이동→ 게시글 원문 Full 화면"},
+        {"source_id": "SRC-03", "locator": "689:22801"},
+        {"source_id": "SRC-03", "locator": "689:23298"},
+        {"source_id": "SRC-03", "locator": "682:37321"}
+      ],
+      "expected_problem": "관리자가 엉뚱한 회원을 정지하거나 신고된 답글을 찾지 못한다.",
+      "needs_fix": "필요 — 관리자웹 29·31",
+      "verdict": "FAIL",
+      "follow_up": "29 상단에 신고 요약을 두고 신고된 답글을 강조하되, card/원문 글 상세에 '신고' variant를 따로 둔다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-019",
+      "origin": {"type": "fail", "ref": "CHK-S2-058"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-28", "WEB-29"],
+      "change_target": "처리 완료·정지 완료 신고에는 처리 결과를 보여주고 처리 버튼을 막는 상세 상태가 필요함",
+      "related_screens": [
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "처리 상태와 관계없이 모든 행이 같은 '원문 확인'이다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 필요", "reason": "처리된 건의 버튼 비활성·결과 표시 상태가 없다."},
+        {"screen_id": "WEB-30", "platform": "WEB", "decision": "추가 확인 필요", "reason": "이미 처리된 건에서 다시 열리지 않도록 진입 조건을 정해야 한다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "추가 확인 필요", "reason": "이미 정지된 회원을 다시 정지하는 경우 처리가 없다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "추가 확인 필요", "reason": "중복 정지 시 정지 일시를 갱신할지 정해지지 않았다."},
+        {"screen_id": "APP-56", "platform": "APP", "decision": "추가 확인 필요", "reason": "같은 글을 여러 명이 신고하면 신고 건을 묶는지 정해지지 않았다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "추가 확인 필요", "reason": "'제재 없음' 처리 뒤 글이 앱에 그대로 남는 것이 의도인지 근거가 없다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<신고 관리> 처리 상테 ( 접수, 정지 완료, 처리 완료)"},
+        {"source_id": "SRC-03", "locator": "245:33331"},
+        {"source_id": "SRC-03", "locator": "689:22801"},
+        {"source_id": "SRC-03", "locator": "271:28469"}
+      ],
+      "expected_problem": "같은 신고를 두 번 처리해 처리 상태가 '정지 완료'에서 '처리 완료'로 뒤집힐 수 있다.",
+      "needs_fix": "필요 — 관리자웹 28·29",
+      "verdict": "FAIL",
+      "follow_up": "처리된 신고용 상세 프레임(처리 결과·일시·처리자, 버튼 비활성)을 추가하고 다중 신고 묶음 기준을 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-020",
+      "origin": {"type": "fail", "ref": "CHK-S2-059"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-22", "WEB-23", "WEB-24"],
+      "change_target": "처리된 심사 건은 '상세 보기'와 버튼 비활성 상세로 분리해야 결과 덮어쓰기(규칙 2 위험)를 막음",
+      "related_screens": [
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 필요", "reason": "승인 완료·심사 거절 행에도 '심사하기'가 같다."},
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "처리된 건의 버튼 비활성·결과 보기 상태가 없다."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같다."},
+        {"screen_id": "WEB-25", "platform": "WEB", "decision": "추가 확인 필요", "reason": "이미 거절된 건을 승인으로 바꿀 수 있는지 정책이 없다."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "추가 확인 필요", "reason": "이미 승인된 건을 거절할 수 있는지 정책이 없다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "추가 확인 필요", "reason": "재처리 시 회원 유형이 다시 바뀌는 위험이 있다."},
+        {"screen_id": "APP-83", "platform": "APP", "decision": "수정 불필요", "reason": "앱은 상태만 보여 관리자 버튼 상태와 무관하다."},
+        {"screen_id": "APP-84", "platform": "APP", "decision": "추가 확인 필요", "reason": "승인 후 재처리되면 앱 상태가 뒤집히는 경우가 화면에 없다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "84와 같다."},
+        {"screen_id": "APP-70", "platform": "APP", "decision": "수정 불필요", "reason": "신청 진입 화면이라 처리된 건 재진입과 무관하다."},
+        {"screen_id": "APP-71", "platform": "APP", "decision": "수정 불필요", "reason": "신청 유형 선택 화면이라 무관하다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 무관하다."},
+        {"screen_id": "APP-73", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 무관하다."},
+        {"screen_id": "APP-80", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 무관하다."},
+        {"screen_id": "APP-81", "platform": "APP", "decision": "수정 불필요", "reason": "신청 입력 화면이라 무관하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[Professional 심사] 관리( 심사하기 버튼); <Professional 신청 심사 상세> 기존 심사 상태 업데이트X"},
+        {"source_id": "SRC-03", "locator": "689:23558"},
+        {"source_id": "SRC-03", "locator": "689:25415"},
+        {"source_id": "SRC-03", "locator": "500:18780"}
+      ],
+      "expected_problem": "처리된 결과를 다시 승인·미승인해 이력 누적 원칙이 깨지고 앱 사용자의 상태가 뒤집힌다.",
+      "needs_fix": "필요 — 관리자웹 22·23·24",
+      "verdict": "FAIL",
+      "follow_up": "처리된 건은 '상세 보기'로 바꾸고 승인·미승인 버튼을 숨기거나 비활성한 상세 프레임을 추가한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-021",
+      "origin": {"type": "fail", "ref": "CHK-S2-060"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-23", "WEB-24"],
+      "change_target": "내부 검토 메모 안내 문구를 고치고 저장 시점을 표시해야 함 — 신청자 전달 사유와 구분 필요",
+      "related_screens": [
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "메모 안내가 '제목을 입력해주세요'이고 저장 버튼이 없다."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같다."},
+        {"screen_id": "WEB-25", "platform": "WEB", "decision": "추가 확인 필요", "reason": "승인할 때 메모가 함께 저장되는지 알 수 없다."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "추가 확인 필요", "reason": "내부 메모와 신청자 전달 사유가 구분되는지 사람 검토가 필요하다(규칙 2 사람 검토)."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "내부 메모가 Review feedback에 섞이지 않는다는 기준 근거가 없다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "수정 불필요", "reason": "신청자 입력 화면에는 내부 메모 노출 영역이 없다."},
+        {"screen_id": "APP-73", "platform": "APP", "decision": "수정 불필요", "reason": "내부 메모 노출 영역이 없다."},
+        {"screen_id": "APP-80", "platform": "APP", "decision": "수정 불필요", "reason": "내부 메모 노출 영역이 없다."},
+        {"screen_id": "APP-81", "platform": "APP", "decision": "수정 불필요", "reason": "내부 메모 노출 영역이 없다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<Professional 신청 심사 상세> 내부 검토 메모 항목 추가"},
+        {"source_id": "SRC-03", "locator": "689:25415"},
+        {"source_id": "SRC-03", "locator": "693:27116"},
+        {"source_id": "SRC-03", "locator": "500:18860"}
+      ],
+      "expected_problem": "메모가 저장되지 않거나 신청자에게 보이는 사유로 오인돼 내부 판단이 노출될 수 있다.",
+      "needs_fix": "필요 — 관리자웹 23·24",
+      "verdict": "FAIL",
+      "follow_up": "안내를 '내부 검토 메모(신청자에게 보이지 않음)'로 바꾸고 저장 시점을 표시한다(오타는 IMP-S4-036과 함께 수정).",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-022",
+      "origin": {"type": "fail", "ref": "CHK-S2-061"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-26"],
+      "change_target": "미승인 사유 모달의 '니승인' 오타와 미입력 허용을 고쳐야 앱 Review feedback이 비지 않음",
+      "related_screens": [
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "수정 필요", "reason": "안내 오타가 있고 빈 상태에서 '확인'이 활성으로 보인다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "빈 사유가 Review feedback으로 갈 수 있고 85p 기준(SRC-02)이 없어 문구 기준을 대조할 수 없다."},
+        {"screen_id": "WEB-20", "platform": "WEB", "decision": "추가 확인 필요", "reason": "같은 사유 입력 모달 패턴이라 미입력 시 확인 비활성 규칙을 함께 정해야 한다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "추가 확인 필요", "reason": "20과 같다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<Professional 신청 심사 상세> 미승인 시, 신청자에게 전달할 사유 모달 노출"},
+        {"source_id": "SRC-03", "locator": "693:28331"},
+        {"source_id": "SRC-03", "locator": "694:28590"},
+        {"source_id": "SRC-02", "locator": "85p NOT_FOUND (CF-04)"}
+      ],
+      "expected_problem": "사유 없이 미승인이 처리돼 규칙 2(사유 반드시 입력)가 화면에서 보장되지 않는다. 오타는 CHK-S3-029와 같은 문제다.",
+      "needs_fix": "필요 — 관리자웹 26",
+      "verdict": "FAIL",
+      "follow_up": "오타를 '미승인'으로 고치고 미입력 시 확인 비활성·오류 상태를 추가한다(IMP-S4-036과 같은 조치 포함).",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-023",
+      "origin": {"type": "fail", "ref": "CHK-S2-062"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-19", "WEB-20"],
+      "change_target": "정지 동작 라벨을 '이용 정지'로 통일하면 회원 관리·신고 상세 4개 화면이 함께 바뀜",
+      "related_screens": [
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 필요", "reason": "열 머리글·첫 행 '회원 정지', 나머지 행 '이용 정지'로 섞였다."},
+        {"screen_id": "WEB-20", "platform": "WEB", "decision": "수정 필요", "reason": "머리글이 19와 다르고 모달에 대상 이름이 없다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 필요", "reason": "버튼이 '회원 이용 정지'다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "수정 필요", "reason": "모달 제목이 '회원 이용 정지'다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 불필요", "reason": "메뉴명 '이용 정지 관리'가 통일안 기준이다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱 정지 안내를 만들 때 대응 영문 용어(Suspended 등)를 같이 정해야 한다."},
+        {"screen_id": "APP-59", "platform": "APP", "decision": "수정 불필요", "reason": "정지 용어를 쓰지 않는 화면이다."},
+        {"screen_id": "APP-63", "platform": "APP", "decision": "수정 불필요", "reason": "정지 용어를 쓰지 않는 화면이다."},
+        {"screen_id": "APP-67", "platform": "APP", "decision": "수정 불필요", "reason": "정지 용어를 쓰지 않는 화면이다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[회원 관리] 운영 상태 항목 추가 ( 정상, 이용 정지 상태 2개)"},
+        {"source_id": "SRC-03", "locator": "245:33348"},
+        {"source_id": "SRC-03", "locator": "245:33353"},
+        {"source_id": "SRC-03", "locator": "689:23094"}
+      ],
+      "expected_problem": "같은 기능이 세 이름으로 불려 개발이 다른 기능으로 구현할 수 있다. CHK-S3-023과 같은 문제다.",
+      "needs_fix": "필요 — 관리자웹 19·20·29·31",
+      "verdict": "FAIL",
+      "follow_up": "라벨을 '이용 정지'로 통일하고 관리자웹 20 모달에 'OOO님의 이용을 정지하시겠습니까?'를 넣는다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-024",
+      "origin": {"type": "fail", "ref": "CHK-S2-065"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-14", "WEB-16", "WEB-17", "WEB-20", "WEB-25", "WEB-26", "WEB-30", "WEB-31", "WEB-34", "WEB-41"],
+      "change_target": "승인·정지·해제·삭제 뒤 결과 안내와 이동 화면이 없어 공통 성공 토스트·실패 모달이 필요함",
+      "related_screens": [
+        {"screen_id": "WEB-13", "platform": "WEB", "decision": "수정 필요", "reason": "목록에서 원문 삭제 후 목록 갱신·안내가 없다."},
+        {"screen_id": "WEB-15", "platform": "WEB", "decision": "수정 필요", "reason": "상세에서 삭제 후 어디로 가는지 없다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 필요", "reason": "정지 후 운영 상태 갱신·안내가 없다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 필요", "reason": "승인·미승인 후 목록 복귀·상태 갱신이 없다."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "처리 후 처리 상태 갱신·안내가 없다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 필요", "reason": "처리 후 이동 화면이 없다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 필요", "reason": "해제 후 목록 갱신·안내가 없다."},
+        {"screen_id": "WEB-36", "platform": "WEB", "decision": "수정 필요", "reason": "삭제 후 안내가 없다."},
+        {"screen_id": "WEB-38", "platform": "WEB", "decision": "수정 불필요", "reason": "순서 저장 토스트가 이미 있어 공통 성공 토스트 기준으로 쓸 수 있다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "추가 확인 필요", "reason": "관리자 삭제가 앱에 반영되는 시점이 정해지지 않았다."},
+        {"screen_id": "APP-90", "platform": "APP", "decision": "추가 확인 필요", "reason": "삭제 반영 시점이 정해지지 않았다."},
+        {"screen_id": "APP-91", "platform": "APP", "decision": "추가 확인 필요", "reason": "삭제 반영 시점이 정해지지 않았다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "처리 결과를 앱 알림으로 보낼지 정해지지 않았다."},
+        {"screen_id": "APP-55", "platform": "APP", "decision": "수정 불필요", "reason": "작성자 본인 삭제 모달이라 관리자 처리 결과 안내와 무관하다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "추가 확인 필요", "reason": "정지·해제가 앱 로그인에 반영되는 시점이 정해지지 않았다."},
+        {"screen_id": "APP-84", "platform": "APP", "decision": "추가 확인 필요", "reason": "승인이 앱 상태에 반영되는 시점이 정해지지 않았다."},
+        {"screen_id": "APP-63", "platform": "APP", "decision": "추가 확인 필요", "reason": "승인 후 Professional 배지 반영 시점이 정해지지 않았다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "미승인 사유가 앱에 반영되는 시점이 정해지지 않았다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[포럼 관리] 원문 글 삭제 모달 / <Professional 신청 심사 상세> 승인/미승인 / <신고 관리> 회원 정지"},
+        {"source_id": "SRC-03", "locator": "685:45488"},
+        {"source_id": "SRC-03", "locator": "693:27331"},
+        {"source_id": "SRC-03", "locator": "689:23298"}
+      ],
+      "expected_problem": "처리 성공 여부를 몰라 같은 처리를 반복하고, 실패 시 대처 화면이 없다.",
+      "needs_fix": "필요 — 관리자웹 13·15·19·22·28·29·33·36(공통 토스트·오류 모달)",
+      "verdict": "FAIL",
+      "follow_up": "관리자웹 38 토스트를 기준으로 공통 성공 토스트와 실패 모달을 정하고 처리별 이동 화면을 표시하며 앱 반영 시점을 정한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-025",
+      "origin": {"type": "fail", "ref": "CHK-S3-003"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-28", "WEB-32"],
+      "change_target": "CHK-S2-030과 같은 문제 — 신고 관리 search bar 안내만 고치면 됨(IMP-S4-013 참조)",
+      "related_screens": [
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "검색 안내가 '닉네임으로 검색'이다."},
+        {"screen_id": "WEB-32", "platform": "WEB", "decision": "수정 필요", "reason": "같은 검색 안내다."},
+        {"screen_id": "APP-56", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 전용 검색 문구라 앱과 무관하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "<신고 관리> 검색바(닉네임, 이메일 검색)"},
+        {"source_id": "SRC-03", "locator": "689:17718"}
+      ],
+      "expected_problem": "IMP-S4-013과 같다.",
+      "needs_fix": "필요 — 관리자웹 28·32",
+      "verdict": "FAIL",
+      "follow_up": "IMP-S4-013 조치로 함께 해소한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-026",
+      "origin": {"type": "fail", "ref": "CHK-S3-004"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-03", "WEB-10", "WEB-11"],
+      "change_target": "CHK-S2-007과 같은 문제 — 상태 태그 문구 수정(IMP-S4-009 참조)",
+      "related_screens": [
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "수정 필요", "reason": "푸시 상태 태그에 '전체'가 빠졌다."},
+        {"screen_id": "WEB-10", "platform": "WEB", "decision": "수정 필요", "reason": "같은 card/뉴스 관리다."},
+        {"screen_id": "WEB-11", "platform": "WEB", "decision": "수정 필요", "reason": "같은 card/뉴스 관리다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱 알림 문구와 '전체 푸시' 대응이 정해지지 않았다."},
+        {"screen_id": "APP-45", "platform": "APP", "decision": "수정 불필요", "reason": "앱 뉴스 목록에는 푸시 상태가 없다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-00", "locator": "[뉴스관리] 푸시→ 전체 푸시 전송 완료/ 전체 푸시 미전송"},
+        {"source_id": "SRC-03", "locator": "136:13020"}
+      ],
+      "expected_problem": "IMP-S4-009와 같다.",
+      "needs_fix": "필요 — card/뉴스 관리 상태 태그",
+      "verdict": "FAIL",
+      "follow_up": "IMP-S4-009 조치로 함께 해소한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-027",
+      "origin": {"type": "fail", "ref": "CHK-S3-006"},
+      "focus": "Q1",
+      "origin_screens": ["WEB-17"],
+      "change_target": "관리자웹 17의 떼어낸 복사본을 card/원문 글 상세 인스턴스로 되돌리면 '댓글 삭제'가 해소됨",
+      "related_screens": [
+        {"screen_id": "WEB-17", "platform": "WEB", "decision": "수정 필요", "reason": "인스턴스가 아닌 frame이라 '댓글 삭제'가 남았다."},
+        {"screen_id": "WEB-15", "platform": "WEB", "decision": "수정 불필요", "reason": "원본 인스턴스라 이미 '답글 삭제'다."},
+        {"screen_id": "WEB-16", "platform": "WEB", "decision": "수정 불필요", "reason": "원본 인스턴스다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 불필요", "reason": "같은 card/원문 글 상세 인스턴스라 복사본 문제가 없다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱 답글 용어(Comment/Reply) 결정이 남았다."},
+        {"screen_id": "APP-91", "platform": "APP", "decision": "추가 확인 필요", "reason": "'Comments' 탭도 같은 결정이 필요하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "682:37023"},
+        {"source_id": "SRC-03", "locator": "682:37321"},
+        {"source_id": "SRC-00", "locator": "[포럼 관리] 댓글→답글 명칭 수정"}
+      ],
+      "expected_problem": "컴포넌트를 고쳐도 17만 따로 남아 이후 수정이 계속 누락된다. CHK-S2-009와 같은 원인이다.",
+      "needs_fix": "필요 — 관리자웹 17",
+      "verdict": "FAIL",
+      "follow_up": "17 상세 영역을 원문 글 상세(682:37321) 인스턴스로 교체한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-028",
+      "origin": {"type": "fail", "ref": "CHK-S3-011"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-05", "WEB-08"],
+      "change_target": "CHK-S2-051과 같은 문제 — 완료 모달에 발송 여부별 문구 variant 필요(IMP-S4-016 참조)",
+      "related_screens": [
+        {"screen_id": "WEB-05", "platform": "WEB", "decision": "수정 필요", "reason": "체크 상태와 반대 문구다."},
+        {"screen_id": "WEB-08", "platform": "WEB", "decision": "수정 필요", "reason": "같다."},
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "추가 확인 필요", "reason": "모달 결과와 목록 배지 값 일치를 확인해야 한다."},
+        {"screen_id": "APP-26", "platform": "APP", "decision": "추가 확인 필요", "reason": "발송 시 앱 알림 문구가 정해지지 않았다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "693:27904"},
+        {"source_id": "SRC-03", "locator": "271:40018"},
+        {"source_id": "SRC-00", "locator": "[뉴스관리] 푸시→ 전체 푸시 전송 완료/ 전체 푸시 미전송"}
+      ],
+      "expected_problem": "IMP-S4-016과 같다.",
+      "needs_fix": "필요 — 관리자웹 05·08",
+      "verdict": "FAIL",
+      "follow_up": "IMP-S4-016 조치로 함께 해소한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-029",
+      "origin": {"type": "fail", "ref": "CHK-S3-019"},
+      "focus": "Q2",
+      "origin_screens": ["APP-56", "WEB-28"],
+      "change_target": "신고 사유 오타 'infomation'은 앱 신고 모달과 관리자 신고 목록을 동시에 고쳐야 값이 어긋나지 않음",
+      "related_screens": [
+        {"screen_id": "APP-56", "platform": "APP", "decision": "수정 필요", "reason": "Reort modal 사유에 오타가 있다."},
+        {"screen_id": "WEB-28", "platform": "WEB", "decision": "수정 필요", "reason": "card/신고 관리가 같은 오타 값을 쓴다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "추가 확인 필요", "reason": "상세에 사유 요약을 추가하면 같은 값을 써야 한다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "499:12897"},
+        {"source_id": "SRC-03", "locator": "689:17750"},
+        {"source_id": "SRC-00", "locator": "<신고 관리> 신고 사유 (사용자앱 기준, 모달에 뜨는 항목으로 상태값 설정: 56p)"},
+        {"source_id": "SRC-02", "locator": "56p NOT_FOUND (CF-04) — 기준 표기 대조 불가"}
+      ],
+      "expected_problem": "한쪽만 고치면 앱 값과 관리자 상태값 매핑이 깨진다.",
+      "needs_fix": "필요 — 사용자앱 56, 관리자웹 28",
+      "verdict": "FAIL",
+      "follow_up": "Reort modal과 card/신고 관리 문구를 'information'으로 함께 고친다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-030",
+      "origin": {"type": "fail", "ref": "CHK-S3-022"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-13", "APP-49"],
+      "change_target": "카테고리 variant 이름 'Work'와 표시 'Job'을 맞춰야 관리자 필터·앱 칩 값 매핑이 어긋나지 않음",
+      "related_screens": [
+        {"screen_id": "WEB-13", "platform": "WEB", "decision": "수정 필요", "reason": "tag variant 이름이 'Work'인데 라벨·드롭다운은 'Job'이다."},
+        {"screen_id": "WEB-14", "platform": "WEB", "decision": "수정 필요", "reason": "같은 tag 컴포넌트를 쓴다."},
+        {"screen_id": "APP-49", "platform": "APP", "decision": "수정 필요", "reason": "chips variant 이름도 'Work'다."},
+        {"screen_id": "APP-28", "platform": "APP", "decision": "추가 확인 필요", "reason": "같은 chips를 쓰지만 메타데이터만 확인해 표시 라벨을 보지 못했다."},
+        {"screen_id": "APP-30", "platform": "APP", "decision": "추가 확인 필요", "reason": "게시글 등록 화면도 chips를 써 같은 매핑 확인이 필요하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "143:24459"},
+        {"source_id": "SRC-03", "locator": "271:31624"},
+        {"source_id": "SRC-03", "locator": "676:31584"}
+      ],
+      "expected_problem": "앱에서 'Job'으로 쓴 글이 관리자 필터에서 'Work' 값으로 처리돼 검색에서 빠질 수 있다.",
+      "needs_fix": "필요 — tag(관리자웹)·chips(사용자앱) variant 이름",
+      "verdict": "FAIL",
+      "follow_up": "tag·chips variant 이름을 'Job'으로 바꾸거나 라벨을 'Work'로 통일한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-031",
+      "origin": {"type": "fail", "ref": "CHK-S3-023"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-19", "WEB-20", "WEB-29"],
+      "change_target": "CHK-S2-062와 같은 문제 — 정지 라벨 통일(IMP-S4-023 참조)",
+      "related_screens": [
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 필요", "reason": "'회원 정지'·'이용 정지'가 섞였다."},
+        {"screen_id": "WEB-20", "platform": "WEB", "decision": "수정 필요", "reason": "머리글이 19와 다르다."},
+        {"screen_id": "WEB-29", "platform": "WEB", "decision": "수정 필요", "reason": "'회원 이용 정지' 버튼이다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "수정 필요", "reason": "'회원 이용 정지' 모달이다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 불필요", "reason": "'이용 정지'가 기준이다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "추가 확인 필요", "reason": "앱 정지 안내 용어를 함께 정해야 한다."},
+        {"screen_id": "APP-52", "platform": "APP", "decision": "수정 불필요", "reason": "앱 게시글 상세에는 정지 동작이 없다."},
+        {"screen_id": "APP-59", "platform": "APP", "decision": "수정 불필요", "reason": "정지 용어를 쓰지 않는다."},
+        {"screen_id": "APP-63", "platform": "APP", "decision": "수정 불필요", "reason": "정지 용어를 쓰지 않는다."},
+        {"screen_id": "APP-67", "platform": "APP", "decision": "수정 불필요", "reason": "정지 용어를 쓰지 않는다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "245:33348"},
+        {"source_id": "SRC-03", "locator": "689:23094"}
+      ],
+      "expected_problem": "IMP-S4-023과 같다.",
+      "needs_fix": "필요 — 관리자웹 19·20·29·31",
+      "verdict": "FAIL",
+      "follow_up": "IMP-S4-023 조치로 함께 해소한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-032",
+      "origin": {"type": "fail", "ref": "CHK-S3-024"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-33"],
+      "change_target": "card/이용 정지 관리의 '정지 해지'를 '정지 해제'로 고치면 33·35가 함께 맞춰짐",
+      "related_screens": [
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 필요", "reason": "열 머리글·버튼이 '정지 해지'다."},
+        {"screen_id": "WEB-34", "platform": "WEB", "decision": "수정 불필요", "reason": "모달·버튼이 이미 '정지 해제'다."},
+        {"screen_id": "WEB-35", "platform": "WEB", "decision": "추가 확인 필요", "reason": "빈 화면 머리글에 같은 오기가 있는지 이번 실행에서 따로 확인하지 않았다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 불필요", "reason": "회원 관리에는 해제 동작이 없다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "245:33343"},
+        {"source_id": "SRC-03", "locator": "689:17022"},
+        {"source_id": "SRC-03", "locator": "689:16736"}
+      ],
+      "expected_problem": "같은 동작이 '해지'와 '해제'로 갈려 개발 문구가 섞인다.",
+      "needs_fix": "필요 — card/이용 정지 관리",
+      "verdict": "FAIL",
+      "follow_up": "card/이용 정지 관리 문구를 '정지 해제'로 고친다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-033",
+      "origin": {"type": "fail", "ref": "CHK-S3-025"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-10"],
+      "change_target": "관리자웹 10(선택 삭제 모달)과 modal 기본 문구의 '뉴스 피드'를 '뉴스'로 고쳐야 함",
+      "related_screens": [
+        {"screen_id": "WEB-10", "platform": "WEB", "decision": "수정 필요", "reason": "모달 제목이 '뉴스 피드 삭제'다."},
+        {"screen_id": "WEB-03", "platform": "WEB", "decision": "수정 불필요", "reason": "이미 '뉴스' 명칭을 쓴다."},
+        {"screen_id": "WEB-41", "platform": "WEB", "decision": "추가 확인 필요", "reason": "같은 modal 기본 문구('뉴스피드 삭제')를 덮어쓴 인스턴스라 기본 문구 수정 시 영향 여부를 확인해야 한다."},
+        {"screen_id": "APP-45", "platform": "APP", "decision": "수정 불필요", "reason": "앱 탭명 'News'는 관리자 한국어 메뉴명과 별개다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "693:28308"},
+        {"source_id": "SRC-03", "locator": "139:20678"},
+        {"source_id": "SRC-00", "locator": "[뉴스관리] → sidebar 명칭 픽스"}
+      ],
+      "expected_problem": "픽스된 메뉴명과 다른 이름이 남아 삭제 대상이 다른 기능처럼 읽힌다.",
+      "needs_fix": "필요 — 관리자웹 10, modal 기본 문구",
+      "verdict": "FAIL",
+      "follow_up": "'뉴스 삭제 / 선택한 뉴스를 삭제하시겠습니까?'로 고치고 modal 기본 문구를 중립 문구로 바꾼다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-034",
+      "origin": {"type": "fail", "ref": "CHK-S3-026"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-13", "WEB-14", "WEB-33"],
+      "change_target": "dropdown 목록 첫 항목을 '전체'로 고정하면 포럼 관리·이용 정지 관리 필터 해제가 일관됨",
+      "related_screens": [
+        {"screen_id": "WEB-13", "platform": "WEB", "decision": "수정 필요", "reason": "펼친 목록에 '전체'가 없다."},
+        {"screen_id": "WEB-14", "platform": "WEB", "decision": "수정 필요", "reason": "닫힌 라벨이 '전체'로 13과 다르다."},
+        {"screen_id": "WEB-18", "platform": "WEB", "decision": "추가 확인 필요", "reason": "닫힌 라벨 규칙('카테고리 전체')을 기준으로 삼을지 정해야 한다."},
+        {"screen_id": "WEB-33", "platform": "WEB", "decision": "수정 필요", "reason": "회원 유형 목록에 '전체'가 없다."},
+        {"screen_id": "WEB-34", "platform": "WEB", "decision": "추가 확인 필요", "reason": "배경 목록의 드롭다운이 33과 같은 인스턴스인지 확인해야 한다."},
+        {"screen_id": "WEB-35", "platform": "WEB", "decision": "추가 확인 필요", "reason": "34와 같다."},
+        {"screen_id": "WEB-19", "platform": "WEB", "decision": "수정 불필요", "reason": "이미 '전체'가 있다."},
+        {"screen_id": "WEB-22", "platform": "WEB", "decision": "수정 불필요", "reason": "이미 '전체'가 있다."},
+        {"screen_id": "APP-49", "platform": "APP", "decision": "수정 불필요", "reason": "앱 카테고리 칩에 'All'이 있어 '전체' 기준과 맞다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "676:31582"},
+        {"source_id": "SRC-03", "locator": "142:23478"},
+        {"source_id": "SRC-03", "locator": "245:33343"},
+        {"source_id": "SRC-03", "locator": "497:20891"}
+      ],
+      "expected_problem": "필터를 되돌리려면 초기화로 검색어까지 지워야 한다.",
+      "needs_fix": "필요 — dropdown list variant, 관리자웹 13·14·33",
+      "verdict": "FAIL",
+      "follow_up": "dropdown list variant 첫 항목을 '전체'로 고정하고 닫힌 라벨 규칙('○○ 전체')을 모든 목록에 맞춘다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-035",
+      "origin": {"type": "fail", "ref": "CHK-S3-028"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-20", "WEB-26", "WEB-31", "WEB-39"],
+      "change_target": "사유 입력 모달 3종(관리자웹 20·26·31)을 modal 입력형 variant로 묶어야 이후 수정이 한 번에 반영됨",
+      "related_screens": [
+        {"screen_id": "WEB-20", "platform": "WEB", "decision": "수정 필요", "reason": "460×328 frame이고 부제가 없다."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "수정 필요", "reason": "572×444 frame으로 크기가 다르다."},
+        {"screen_id": "WEB-31", "platform": "WEB", "decision": "수정 필요", "reason": "460×370 frame으로 크기가 다르다."},
+        {"screen_id": "WEB-39", "platform": "WEB", "decision": "추가 확인 필요", "reason": "배너 등록 모달은 입력 항목이 달라 같은 variant 대상인지 정해야 한다."},
+        {"screen_id": "WEB-34", "platform": "WEB", "decision": "수정 불필요", "reason": "입력 없는 버튼 2개 확인 모달이라 기존 variant로 충분하다."},
+        {"screen_id": "APP-06", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 모달 규격은 앱 화면과 무관하다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 모달 규격은 앱 Review feedback 표시와 무관하다."},
+        {"screen_id": "APP-40", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 모달 규격은 앱 배너 노출과 무관하다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "139:20690"},
+        {"source_id": "SRC-03", "locator": "682:41124"},
+        {"source_id": "SRC-03", "locator": "694:28585"},
+        {"source_id": "SRC-03", "locator": "689:23541"}
+      ],
+      "expected_problem": "미입력 비활성 같은 공통 규칙(IMP-S4-022)을 넣을 때 화면마다 따로 고쳐야 해 누락이 생긴다.",
+      "needs_fix": "필요 — modal 입력형 variant 신설, 관리자웹 20·26·31",
+      "verdict": "FAIL",
+      "follow_up": "modal에 '입력형(제목·안내·web/field·버튼 2개)' variant를 만들고 20·26·31을 그 인스턴스로 바꾼다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    },
+    {
+      "id": "IMP-S4-036",
+      "origin": {"type": "fail", "ref": "CHK-S3-029"},
+      "focus": "Q3",
+      "origin_screens": ["WEB-23", "WEB-24", "WEB-26"],
+      "change_target": "CHK-S2-060·061과 같은 placeholder 문제 — '미승인'·'내부 검토 메모' 문구로 고치면 됨(IMP-S4-021·022 참조)",
+      "related_screens": [
+        {"screen_id": "WEB-23", "platform": "WEB", "decision": "수정 필요", "reason": "메모 placeholder가 '제목을 입력해주세요'다."},
+        {"screen_id": "WEB-24", "platform": "WEB", "decision": "수정 필요", "reason": "23과 같다."},
+        {"screen_id": "WEB-26", "platform": "WEB", "decision": "수정 필요", "reason": "'니승인' 오타다."},
+        {"screen_id": "APP-85", "platform": "APP", "decision": "추가 확인 필요", "reason": "사유 입력 안내가 앱 Review feedback 문구 기준과 맞는지 85p(SRC-02)가 없어 대조할 수 없다."},
+        {"screen_id": "APP-72", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 전용 placeholder라 앱 입력 화면과 무관하다."},
+        {"screen_id": "APP-73", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 전용 placeholder다."},
+        {"screen_id": "APP-80", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 전용 placeholder다."},
+        {"screen_id": "APP-81", "platform": "APP", "decision": "수정 불필요", "reason": "관리자 전용 placeholder다."}
+      ],
+      "relation_evidence": [
+        {"source_id": "SRC-03", "locator": "694:28590"},
+        {"source_id": "SRC-03", "locator": "693:27116"}
+      ],
+      "expected_problem": "IMP-S4-021·022와 같다.",
+      "needs_fix": "필요 — 관리자웹 23·24·26",
+      "verdict": "FAIL",
+      "follow_up": "IMP-S4-021·022 조치로 함께 해소한다.",
+      "rule_ref": null,
+      "prev_verdict": null
+    }
+  ],
+  "records": [
+    {
+      "id": "CHK-S4-001",
+      "title": "이용 정지 회원이 쓴 기존 원문글·답글을 앱에 계속 보일지 기준 없음",
+      "stage": "S4",
+      "focus": "Q3",
+      "platform": ["WEB", "APP"],
+      "screen_ids": ["WEB-20", "WEB-31", "WEB-33", "APP-52", "APP-63"],
+      "figma_node_ids": ["245:33353", "689:23298", "245:33343", "497:21709", "505:14734"],
+      "rule_ref": null,
+      "verdict": "NEEDS_REVIEW",
+      "evidence": [
+        {"source_id": "SRC-00", "locator": "[회원 관리] 운영 상태 항목 추가 ( 정상, 이용 정지 상태 2개); <신고 관리> 회원 정지"},
+        {"source_id": "SRC-03", "locator": "689:23298"},
+        {"source_id": "SRC-03", "locator": "497:21709"},
+        {"source_id": "SRC-03", "locator": "505:14734"}
+      ],
+      "reason": "관리자웹 20·31에서 회원을 정지해도 사용자앱 52(Topics 상세)·63(타인 프로필 확인)에는 작성자 배지만 있어, 정지 회원의 기존 글·답글을 그대로 둘지 숨길지 표시할지 정한 자료와 화면이 없다.",
+      "impact_screens": ["WEB-20", "WEB-31", "WEB-33", "APP-49", "APP-52", "APP-63"],
+      "follow_up": "정지 회원 콘텐츠 노출 정책(유지·숨김·'정지된 사용자' 표시)을 정하고, 숨긴다면 관리자웹 33에 콘텐츠 상태를, 앱 52·63에 표시 규칙을 추가한다.",
+      "prev_verdict": null
+    },
+    {
+      "id": "CHK-S4-002",
+      "title": "앱에서 탈퇴한 회원을 관리자 목록에 어떻게 보일지 상태 없음",
+      "stage": "S4",
+      "focus": "Q3",
+      "platform": ["WEB", "APP"],
+      "screen_ids": ["APP-95", "WEB-19", "WEB-28", "WEB-33"],
+      "figma_node_ids": ["502:19563", "245:33348", "245:33331", "245:33343"],
+      "rule_ref": null,
+      "verdict": "NEEDS_REVIEW",
+      "evidence": [
+        {"source_id": "SRC-00", "locator": "[회원 관리] 운영 상태 항목 추가 ( 정상, 이용 정지 상태 2개)"},
+        {"source_id": "SRC-03", "locator": "502:19563 (사용자앱 95 프레임 TAG '탈퇴', modal 인스턴스 — 메타데이터만 확인)"},
+        {"source_id": "SRC-03", "locator": "245:33348"}
+      ],
+      "reason": "사용자앱 95(탈퇴)로 회원이 나갈 수 있지만 관리자웹 19(회원 관리) 운영 상태는 정상/이용 정지 2값뿐이라, 탈퇴 회원이 목록에서 사라지는지, 신고 관리 28의 신고자·대상자와 이용 정지 관리 33에는 어떻게 남는지 정해지지 않았다.",
+      "impact_screens": ["APP-95", "WEB-19", "WEB-22", "WEB-28", "WEB-33"],
+      "follow_up": "탈퇴 회원 처리(목록 제외·'탈퇴' 상태 추가·닉네임 마스킹)를 정하고, 운영 상태 값을 늘리면 story-service B절 갱신 여부도 함께 결정한다.",
+      "prev_verdict": null
+    },
+    {
+      "id": "CHK-S4-003",
+      "title": "신고 처리 결과를 앱 신고자에게 알릴지 정해지지 않음",
+      "stage": "S4",
+      "focus": "Q2",
+      "platform": ["WEB", "APP"],
+      "screen_ids": ["WEB-28", "WEB-30", "WEB-31", "APP-26", "APP-56"],
+      "figma_node_ids": ["245:33331", "689:23099", "689:23298", "271:29551", "271:28469"],
+      "rule_ref": null,
+      "verdict": "NEEDS_REVIEW",
+      "evidence": [
+        {"source_id": "SRC-01", "locator": "회의 내용 > 사용자앱 > 메인 '-알림: 계속 쌓이는 구조'"},
+        {"source_id": "SRC-00", "locator": "<신고 관리> 처리 상테 ( 접수, 정지 완료, 처리 완료)"},
+        {"source_id": "SRC-03", "locator": "271:29551"},
+        {"source_id": "SRC-03", "locator": "271:28469"}
+      ],
+      "reason": "관리자웹 30·31에서 신고를 '처리 완료'·'정지 완료'로 바꿔도 사용자앱 26(알림 상세)에는 좋아요·답글·공지 유형만 있고 사용자앱 56(게시글,답글 신고)에도 접수 후 안내가 보이지 않아, 신고자가 결과를 알 방법이 없다.",
+      "impact_screens": ["WEB-28", "WEB-30", "WEB-31", "APP-26", "APP-56"],
+      "follow_up": "신고 접수·처리 결과 알림 여부를 정하고, 보낸다면 사용자앱 26에 신고 결과 알림 예시와 56에 접수 완료 안내를 추가한다.",
+      "prev_verdict": null
+    }
+  ]
+}

@@ -7,7 +7,8 @@
     "page_name": "",
     "is_copy": false,
     "original_file_key": null,
-    "copied_at": null
+    "copied_at": null,
+    "metadata_file": ""
   },
   "notion": {
     "review_db_url": "",

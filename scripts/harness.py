@@ -555,29 +555,164 @@ def compute_status(slug, run):
             "follow_up": r.get("follow_up"),
         })
     gr_fail = [r.get("id") for r in final.get("records", []) if r.get("rule_ref") and r.get("verdict") == "FAIL"]
-    status = "통과" if not unresolved else "검토 필요"
+    status = "승인" if not unresolved else "검토 필요"
     return {"status": status, "unresolved": unresolved, "gr_fail": gr_fail,
             "resolved_by_confirm": resolved_by_confirm}
 
 
+# ---------- 사용자 표시 (artifacts §10) ----------
+
+VERDICT_KO = {"PASS": "승인", "FAIL": "검토 필요", "NEEDS_REVIEW": "검토 필요", "INSUFFICIENT_INFO": "검토 필요"}
+VTYPE_KO = {"PASS": "", "FAIL": "문제 확인", "NEEDS_REVIEW": "사람 판단 필요", "INSUFFICIENT_INFO": "자료 부족"}
+DECISION_ORDER = {"수정 필요": 0, "추가 확인 필요": 1, "수정 불필요": 2}
+
+
+def _figma_layout(slug):
+    """metadata XML에서 최상위 노드 위치·TAG 텍스트·하위 노드→최상위 프레임 이름을 읽는다."""
+    cfg = load(proj(slug) / "project.json", {}) or {}
+    mf = cfg.get("figma", {}).get("metadata_file")
+    path = proj(slug) / mf if mf else None
+    if not path or not path.exists():
+        return {}, [], {}
+    lines = path.read_text(encoding="utf-8").split("\n")
+    tops, tags, owner = {}, [], {}
+    cur = None
+    for line in lines:
+        attrs = dict(re.findall(r'(\w+)="([^"]*)"', line))
+        if re.match(r"^  <\w", line):
+            cur = {"id": attrs.get("id"), "name": attrs.get("name"), "text": None,
+                   "x": float(attrs.get("x", 0)), "y": float(attrs.get("y", 0)),
+                   "w": float(attrs.get("width", 0)), "h": float(attrs.get("height", 0))}
+            tops[cur["id"]] = cur
+            if cur["name"] == "TAG":
+                tags.append(cur)
+        elif cur and attrs.get("id"):
+            owner[attrs["id"]] = cur["id"]
+            if cur["name"] == "TAG" and cur["text"] is None and line.lstrip().startswith("<text"):
+                cur["text"] = attrs.get("name")
+    return tops, tags, owner
+
+
+class Display:
+    def __init__(self, slug, run):
+        s1 = load(run_dir(slug, run) / "s1" / "s1-context.json", {}) or {}
+        self.node, self.screen, self.plat = {}, {}, {}
+        for s in s1.get("screens", []):
+            names = [f["name"] for f in s.get("frames", [])] or [s.get("name")]
+            self.screen[s["id"]] = names
+            for f in s.get("frames", []):
+                self.node[f["node_id"]] = f["name"]
+                self.plat[f["name"]] = s.get("platform")
+        self.src = {x["id"]: x.get("title", x["id"]) for x in source_index(slug, run).get("sources", [])}
+        tops, tags, self.owner = _figma_layout(slug)
+        self.tops = tops
+        self.category, self.frame_tag = self._tags(tops, tags)
+
+    def _tags(self, tops, tags):
+        cat, ftag = {}, {}
+        frames = [(nid, tops[nid]) for nid in self.node if nid in tops]
+        def covering(t):
+            return [g for g in tags if g["h"] < 1000 and g["text"] and g["y"] < t["y"]
+                    and g["x"] < t["x"] + t["w"] and g["x"] + g["w"] > t["x"]]
+        base = {}
+        for nid, t in frames:
+            near = [g for g in covering(t) if t["y"] - g["y"] < 400]
+            if near:
+                base.setdefault(self.plat.get(self.node[nid]), []).append(min(g["h"] for g in near))
+        med = {p: sorted(v)[len(v) // 2] for p, v in base.items()}
+        for nid, t in frames:
+            name = self.node[nid]
+            h0 = med.get(self.plat.get(name), 0) or 0
+            cands = covering(t)
+            secs = [g for g in cands if h0 and g["h"] >= 1.4 * h0]
+            own = [g for g in cands if not (h0 and g["h"] >= 1.4 * h0) and t["y"] - g["y"] < 400]
+            if secs:
+                cat[name] = max(secs, key=lambda g: g["y"])["text"]
+            if own:
+                ftag[name] = max(own, key=lambda g: g["y"])["text"]
+        return cat, ftag
+
+    def frames(self, r):
+        names = [self.node.get(n) or self.node.get(self.owner.get(n, ""), None) for n in r.get("figma_node_ids") or []]
+        names = [n for n in names if n]
+        if not names:
+            for sid in r.get("screen_ids") or []:
+                names += self.screen.get(sid, [])
+        seen = []
+        for n in names:
+            if n not in seen:
+                seen.append(n)
+        return seen
+
+    def frame_label(self, names, cap=4):
+        names = list(dict.fromkeys(names))
+        if not names:
+            return "(특정 프레임 없음 · 전체 화면)"
+        return ", ".join(names[:cap]) + (f" 외 {len(names) - cap}개" if len(names) > cap else "")
+
+    def text(self, s):
+        if not s:
+            return s
+        s = str(s)
+
+        def node_sub(m):
+            nid = m.group(0)
+            name = self.node.get(nid) or self.node.get(self.owner.get(nid, ""))
+            if not name and nid in self.tops and self.tops[nid]["name"] not in ("TAG",):
+                name = self.tops[nid]["name"]
+            return f"「{name}」" if name else nid
+        s = re.sub(r"(?<![\d:])\d+:\d+(?![\d:])", node_sub, s)
+        s = re.sub(r"(?<![A-Za-z])(APP|WEB)-(\d+)(?!\d)",
+                   lambda m: f"「{self.screen[m.group(0)][0]}」" if m.group(0) in self.screen else m.group(0), s)
+        s = re.sub(r"「([^」]+)」\s*\(\s*\1\s*\)", r"「\1」", s)   # 「이름」 (이름) 중복 제거
+        return s
+
+    def evidence(self, e):
+        sid, loc = e.get("source_id"), e.get("locator") or ""
+        m = re.search(r"\b\d+:\d+\b", loc)
+        if m and (m.group(0) in self.node or self.owner.get(m.group(0)) in self.node or m.group(0) in self.tops):
+            return f"Figma {self.text(m.group(0))}"
+        return f"{self.src.get(sid, sid)} {self.text(loc)}".strip()
+
+    def categories(self, names):
+        out = []
+        for n in names:
+            c = self.category.get(n)
+            if c and c not in out:
+                out.append(c)
+        return out or ["분류 없음"]
+
+    def tags(self, names):
+        out = []
+        for n in names:
+            t = self.frame_tag.get(n)
+            if t and t not in out:
+                out.append(t)
+        return ", ".join(out)
+
+
 def build_report(slug, run, final, judgement, missing_cov, diff):
     rd = run_dir(slug, run)
+    D = Display(slug, run)
     s1 = load(rd / "s1" / "s1-context.json", {}) or {}
     s4 = load(rd / "s4" / "s4-impact.json", {}) or {}
     recs = final["records"]
-    count = {v: sum(1 for r in recs if r.get("verdict") == v) for v in VERDICTS}
+    by_id = {r["id"]: r for r in recs}
+    n_pass = sum(1 for r in recs if r.get("verdict") == "PASS")
+    n_type = {k: sum(1 for r in recs if r.get("verdict") == k) for k in ("FAIL", "NEEDS_REVIEW", "INSUFFICIENT_INFO")}
     L = [f"# UX 검증 보고서 — {slug} / {run}", ""]
-    L.append(f"- 상태: **{judgement['status'] or '실행 실패'}**")
-    L.append(f"- 판정: PASS {count['PASS']} · FAIL {count['FAIL']} · NEEDS_REVIEW {count['NEEDS_REVIEW']} · INSUFFICIENT_INFO {count['INSUFFICIENT_INFO']}")
+    L.append(f"- 결과: **{judgement['status'] or '실행 실패'}**")
+    L.append(f"- 판정: 승인 {n_pass} · 검토 필요 {sum(n_type.values())} "
+             f"(문제 확인 {n_type['FAIL']} · 사람 판단 필요 {n_type['NEEDS_REVIEW']} · 자료 부족 {n_type['INSUFFICIENT_INFO']})")
     L.append(f"- 컨펌으로 해소: {len(judgement['resolved_by_confirm'])}건")
     if s1.get("notion_read") == "failed":
         L.append("- ⚠ Notion 검토 사항을 읽지 못해 이번 실행에서는 수정 완료·컨펌 완료를 해소로 인정하지 않았다.")
     L.append("")
     if judgement["gr_fail"]:
         L.append("## ⛔ 필수 규칙 위반 (컨펌으로 해소 불가)")
-        for r in recs:
-            if r.get("id") in judgement["gr_fail"]:
-                L.append(f"- `{r['rule_ref']}` {r.get('id')} — {r.get('title')}: {r.get('reason')}")
+        for rid in judgement["gr_fail"]:
+            r = by_id[rid]
+            L.append(f"- **{D.frame_label(D.frames(r))}** — 규칙 {r['rule_ref']}: {D.text(r.get('reason'))}")
         L.append("")
     fb_units = [u for u in s4.get("units", []) if u.get("origin", {}).get("type") == "feedback"]
     if fb_units:
@@ -585,50 +720,69 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
         fbtext = {f["id"]: f.get("text") for f in s1.get("feedback", [])}
         for u in fb_units:
             ref = u["origin"]["ref"]
-            L.append(f"### {ref} — {fbtext.get(ref, '')}")
-            L.append(f"- 판정: {u.get('verdict')} / 수정 필요 여부: {u.get('needs_fix')}")
+            L.append(f"### {fbtext.get(ref, ref)}")
+            L.append(f"- 판정: {VERDICT_KO.get(u.get('verdict'))} ({VTYPE_KO.get(u.get('verdict'))}) / 수정 필요 여부: {u.get('needs_fix')}")
             if u.get("consider_areas"):
                 L.append(f"- 고려해야 할 영역: {', '.join(u['consider_areas'])}")
-            L.append(f"- 예상 문제: {u.get('expected_problem')}")
+            L.append(f"- 예상 문제: {D.text(u.get('expected_problem'))}")
             L.append("")
-            L.append("| 화면 | 플랫폼 | 판정 | 사유 |")
+            L.append("| 프레임 | 카테고리 | 판정 | 사유 |")
             L.append("|---|---|---|---|")
-            for s in u.get("related_screens", []):
-                L.append(f"| {s.get('screen_id')} | {s.get('platform')} | {s.get('decision')} | {s.get('reason', '')} |")
-            L.append(f"- 후속 작업: {u.get('follow_up')}")
+            for s in sorted(u.get("related_screens", []), key=lambda x: DECISION_ORDER.get(x.get("decision"), 9)):
+                names = D.screen.get(s.get("screen_id"), [s.get("screen_id")])
+                L.append(f"| {D.frame_label(names)} | {', '.join(D.categories(names))} | {s.get('decision')} | {D.text(s.get('reason', ''))} |")
+            L.append(f"- 후속 작업: {D.text(u.get('follow_up'))}")
             L.append("")
     if diff and diff.get("changes"):
         L.append("## 이전 실행 대비 변화")
         for c in diff["changes"]:
-            L.append(f"- {c['id']}: {c['before']} → {c['after']}")
+            r = by_id.get(c["id"], {})
+            L.append(f"- {D.frame_label(D.frames(r))} · {D.text(r.get('title'))}: "
+                     f"{VERDICT_KO.get(c['before'], '없음')} → {VERDICT_KO.get(c['after'], '없음')}")
         L.append("")
     if judgement["status"] == "검토 필요":
-        L.append("## 미승인 사유 (미해소 항목)")
-        L.append("| ID | 판정 | 무엇이 | 왜 | 근거 | 영향 화면 | 후속 조치 |")
-        L.append("|---|---|---|---|---|---|---|")
+        L.append("## 미승인 사유 (카테고리별 검토 필요 항목)")
+        groups = {}
         for u in judgement["unresolved"]:
-            L.append(f"| {u['id']} | {u['verdict']} | {u['what']} | {u['why']} | {'; '.join(u['evidence'])} | {', '.join(map(str, u['impact_screens']))} | {u['follow_up']} |")
-        L.append("")
+            r = by_id[u["id"]]
+            names = D.frames(r)
+            groups.setdefault(D.categories(names)[0], []).append((u, r, names))
+        for cat in sorted(groups):
+            L.append(f"### {cat} ({len(groups[cat])}건)")
+            L.append("| 검토 사항(프레임) | 판정 유형 | 검토 내용 | 왜 | 근거 | 영향 화면 | 후속 조치 |")
+            L.append("|---|---|---|---|---|---|---|")
+            for u, r, names in groups[cat]:
+                ev = "; ".join(D.evidence(e) for e in r.get("evidence") or [])
+                imp = D.frame_label([n for s in u["impact_screens"] for n in D.screen.get(s, [s])], cap=6)
+                L.append(f"| {D.frame_label(names)} | {VTYPE_KO[u['verdict']]} | {D.text(u['what'])} | {D.text(u['why'])} | {ev} | {imp} | {D.text(u['follow_up'])} |")
+            L.append("")
     if s1.get("excluded_requests") or s1.get("excluded_sources"):
         L.append("## 제외된 요청·자료")
         for x in s1.get("excluded_requests", []) + s1.get("excluded_sources", []):
             L.append(f"- {x.get('request') or x.get('source')}: {x.get('reason')}")
         L.append("")
     if missing_cov:
-        L.append("## Judge가 지적한 누락")
+        L.append("## 판정자(Judge)가 지적한 누락")
         for m in missing_cov:
-            L.append(f"- {m}")
+            L.append(f"- {D.text(m)}")
         L.append("")
     L.append("## 실행 완결성 (DONE)")
     for k, (ok, d) in judgement["done"].items():
-        L.append(f"- {k}: {'OK' if ok else 'FAIL ' + str(d[:5])}")
+        L.append(f"- {k}: {'OK' if ok else '미충족 ' + str(d[:5])}")
     L.append("")
-    L.append("## 전체 항목")
-    L.append("| ID | 단계 | 판정 | 규칙 | 제목 | 근거 |")
-    L.append("|---|---|---|---|---|---|")
+    L.append("## 전체 항목 (카테고리별)")
+    groups = {}
     for r in recs:
-        ev = "; ".join(f"{e.get('source_id')} {e.get('locator')}" for e in r.get("evidence") or [])
-        L.append(f"| {r.get('id')} | {r.get('stage')} | {r.get('verdict')} | {r.get('rule_ref') or ''} | {r.get('title')} | {ev} |")
+        names = D.frames(r)
+        groups.setdefault(D.categories(names)[0], []).append((r, names))
+    for cat in sorted(groups):
+        L.append(f"### {cat}")
+        L.append("| 검토 사항(프레임) | 판정 | 판정 유형 | 규칙 | 검토 내용 | 근거 |")
+        L.append("|---|---|---|---|---|---|")
+        for r, names in groups[cat]:
+            ev = "; ".join(D.evidence(e) for e in r.get("evidence") or [])
+            L.append(f"| {D.frame_label(names)} | {VERDICT_KO.get(r.get('verdict'))} | {VTYPE_KO.get(r.get('verdict'), '')} | {r.get('rule_ref') or ''} | {D.text(r.get('title'))} | {ev} |")
+        L.append("")
     return "\n".join(L) + "\n"
 
 
@@ -672,6 +826,7 @@ def cmd_notion_sync(a):
     final = {r["id"]: r for r in load(rd / "s5" / "final.json")["records"]}
     j = load(rd / "s5" / "s5-judgement.json")
     inputs = notion_inputs(a.slug, a.run)
+    D = Display(a.slug, a.run)
     ops = []
     for u in j["unresolved"]:
         r = final[u["id"]]
@@ -680,14 +835,18 @@ def cmd_notion_sync(a):
         recheck = "미실행"
         if n and n.get("수정 완료"):
             recheck = "여전히 FAIL" if u["verdict"] == "FAIL" else "미실행"
+        names = D.frames(r)
+        impact = [nm for s in u["impact_screens"] for nm in D.screen.get(s, [s])]
         props = {
-            "검토 사항": u["what"], "항목 ID": u["id"], "판정": u["verdict"],
+            "검토 사항": D.frame_label(names), "검토 내용": D.text(u["what"]), "항목 ID": u["id"],
+            "판정": VERDICT_KO[u["verdict"]], "판정 유형": VTYPE_KO[u["verdict"]],
+            "카테고리": D.categories(names), "프레임 태그": D.tags(names),
             "단계": STAGE_LABEL.get(r.get("stage"), "S4 영향 분석"),
             "플랫폼": [labels[p] for p in r.get("platform") or [] if p in labels],
-            "화면": ", ".join(map(str, r.get("screen_ids") or [])) + (" / " + ", ".join(r.get("figma_node_ids") or []) if r.get("figma_node_ids") else ""),
-            "영향 화면": ", ".join(map(str, u["impact_screens"])),
-            "필수 규칙": rule, "사유": u["why"], "근거": "; ".join(u["evidence"]),
-            "후속 조치": u["follow_up"], "재검증 결과": recheck, "최근 실행": a.run,
+            "영향 화면": D.frame_label(impact, cap=8) if impact else "",
+            "필수 규칙": rule, "사유": D.text(u["why"]),
+            "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []),
+            "후속 조치": D.text(u["follow_up"]), "재검증 결과": recheck, "최근 실행": a.run,
         }
         ops.append({"op": "update" if n else "create", "page_url": n.get("page_url") if n else None,
                     "item_id": u["id"], "properties": props})
@@ -695,13 +854,15 @@ def cmd_notion_sync(a):
     for item_id, n in inputs.items():
         if item_id not in unresolved_ids:
             ops.append({"op": "update", "page_url": n.get("page_url"), "item_id": item_id,
-                        "properties": {"재검증 결과": "PASS", "최근 실행": a.run}})
+                        "properties": {"판정": "승인", "판정 유형": "", "재검증 결과": "PASS", "최근 실행": a.run}})
+    categories = sorted({c for op in ops for c in op["properties"].get("카테고리", [])})
     for op in ops:
         bad = USER_FIELDS & set(op["properties"])
         if bad:
             print(f"오류: 사용자 칸 {bad} 쓰기 시도")
             return 1
-    save(rd / "s5" / "notion-sync.json", {"run_id": a.run, "data_source": cfg["notion"]["review_data_source"], "ops": ops})
+    save(rd / "s5" / "notion-sync.json", {"run_id": a.run, "data_source": cfg["notion"]["review_data_source"],
+                                          "categories": categories, "ops": ops})
     print(f"Notion 반영 계획: 생성 {sum(o['op'] == 'create' for o in ops)} / 갱신 {sum(o['op'] == 'update' for o in ops)} (사용자 칸 0건)")
     return 0
 

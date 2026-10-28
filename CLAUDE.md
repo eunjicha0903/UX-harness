@@ -8,7 +8,7 @@ PRD·업무 자료와 Figma 화면을 대조해 요구사항 누락, 흐름·예
 
 | 필요할 때 | 읽을 문서 |
 |---|---|
-| 판정값·실행 상태(통과/검토 필요)·해소 조건·DONE (공통 규칙 SSOT) | `docs/harness-goal.md` |
+| 판정값·실행 상태(승인/검토 필요)·해소 조건·DONE (공통 규칙 SSOT) | `docs/harness-goal.md` |
 | 단계 S1~S5, 재실행, 화면 판별, 수정 피드백, 질문 금지 | `docs/pipeline.md` |
 | 게이트 G0~G5·GR, 사람 승인 H0·H1 | `docs/gates.md` |
 | 에이전트·편집 폴더·트리거·Judge 이의 | `docs/agents.md`, `.claude/agents/` |

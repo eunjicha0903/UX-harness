@@ -7,21 +7,43 @@
     "page_name": "concept",
     "is_copy": true,
     "original_file_key": "ZwcWEllvBjbgK6ZYO16PKT",
-    "copied_at": null
+    "copied_at": null,
+    "metadata_file": "sources/figma/concept-metadata.xml"
   },
   "notion": {
     "review_db_url": "https://app.notion.com/p/d65548e7506446288f9a12e46512b708",
     "review_data_source": "collection://65c346a4-b6ab-4f3b-a8d6-9a6e921f7392",
-    "rule_options": { "1": "규칙1 최소주문금액", "2": "규칙2 주문취소" }
+    "rule_options": {
+      "1": "규칙1 최소주문금액",
+      "2": "규칙2 주문취소"
+    }
   },
   "platforms": [
-    { "code": "APP", "label": "사용자앱", "frame_width": 375 },
-    { "code": "WEB", "label": "관리자웹", "frame_width": 1920 }
+    {
+      "code": "APP",
+      "label": "사용자앱",
+      "frame_width": 375
+    },
+    {
+      "code": "WEB",
+      "label": "관리자웹",
+      "frame_width": 1920
+    }
   ],
   "screen_rule": {
     "name_pattern": "^(\\d+)[._]",
-    "exclude_names": ["TAG", "컴포넌트", "modal", "logo/color/image"],
-    "override_sections": ["수정 반영"],
-    "start_frames": { "APP": "01.회인가입/로그인", "WEB": "01.로그인" }
+    "exclude_names": [
+      "TAG",
+      "컴포넌트",
+      "modal",
+      "logo/color/image"
+    ],
+    "override_sections": [
+      "수정 반영"
+    ],
+    "start_frames": {
+      "APP": "01.회인가입/로그인",
+      "WEB": "01.로그인"
+    }
   }
 }

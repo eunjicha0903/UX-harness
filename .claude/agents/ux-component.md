@@ -31,5 +31,8 @@ tools: Read, Write, Glob, Grep, mcp__Figma__create_session, mcp__Figma__get_meta
 - 근거: Figma 노드 ID + FETCHED 자료. 시각적 미감은 판정하지 않는다 (범위 밖).
 - 기계로 판정할 수 없는 사용성 판단은 `NEEDS_REVIEW`.
 
+## 표시 규칙 (docs/artifacts.md §10)
+`title`·`reason`·`follow_up`·영향 설명에서 화면을 가리킬 때는 **Figma 프레임 이름**(예: `33.장바구니/결제금액도달X`)으로 쓴다. 화면 ID·노드 ID는 `screen_ids`·`figma_node_ids`·`evidence.locator` 필드에만 둔다.
+
 ## 금지
 자기 폴더 밖 쓰기, Figma 쓰기, EXCLUDED 자료 인용.

@@ -723,23 +723,49 @@ class Display:
         codes = {self.fplat.get(n) for n in nids if self.fplat.get(n)} or set((r or {}).get("platform") or [])
         return sorted(codes, key=lambda c: self.plat_rank.get(c, 9))
 
-    def primary_platform(self, nids, r=None):
-        """항목의 대표 플랫폼 = 첫 프레임(기점 화면)의 플랫폼. 항목은 플랫폼 하나에만 속한다 (artifacts §10)."""
+    def fix_platforms(self, nids, r=None):
+        """수정 대상 플랫폼 (artifacts §10). 보드의 플랫폼 줄은 '그 플랫폼을 고쳐야 하는 항목'만 보여 준다.
+        ① 레코드 fix_platforms ② 후속 조치가 '조치 없음' → 없음 ③ 후속 조치에 적힌 화면의 플랫폼
+        ④ 항목 프레임이 가장 많은 플랫폼 (같으면 모두)."""
+        r = r or {}
+        rank = lambda c: self.plat_rank.get(c, 9)
+        if r.get("fix_platforms") is not None:
+            return sorted(set(r["fix_platforms"]), key=rank)
+        fu = str(r.get("follow_up") or "").strip()
+        if fu.startswith("조치 없음"):
+            return []
+        named = set(m.group(1) for m in re.finditer(r"(?<![A-Za-z])(APP|WEB)-\d+", fu))
+        named |= {self.fplat.get(self._frame_of(m.group(0))) for m in re.finditer(r"(?<![\d:])\d+:\d+(?![\d:])", fu)}
+        for code, label in self.plat_label.items():
+            if re.search(re.escape(label) + r"\s*\d+", fu):
+                named.add(code)
+        named.discard(None)
+        if named:
+            return sorted(named, key=rank)
+        count = {}
         for n in nids:
             if self.fplat.get(n):
-                return self.fplat[n]
-        plats = (r or {}).get("platform") or []
-        return plats[0] if len(plats) == 1 else None   # 프레임 없는 전체 공통 항목은 플랫폼 없음
+                count[self.fplat[n]] = count.get(self.fplat[n], 0) + 1
+        if not count:
+            plats = r.get("platform") or []
+            return plats if len(plats) == 1 else []   # 프레임 없는 전체 공통 항목
+        top = max(count.values())
+        return sorted([c for c, k in count.items() if k == top], key=rank)
+
+    def primary_platform(self, nids, r=None):
+        fp = self.fix_platforms(nids, r)
+        return fp[0] if fp else None
 
     def primary_frames(self, nids, r=None):
-        """대표 플랫폼 프레임만 (카테고리·정렬 기준)."""
-        p = self.primary_platform(nids, r)
-        return [n for n in nids if self.fplat.get(n) == p] or list(nids)
+        """수정 대상 플랫폼 프레임만 (카테고리·정렬 기준)."""
+        fp = set(self.fix_platforms(nids, r))
+        return [n for n in nids if self.fplat.get(n) in fp] or list(nids)
 
     def platform_group(self, nids, r=None):
-        """검토 사항 플랫폼 분류: 사용자앱 / 관리자웹 (대표 플랫폼 하나)."""
-        p = self.primary_platform(nids, r)
-        return (self.plat_rank.get(p, 99),), self.plat_label.get(p, p or "전체 공통")
+        """검토 사항 플랫폼 분류: 수정 대상 플랫폼 (사용자앱 / 관리자웹 / 둘 다 / 전체 공통)."""
+        fp = self.fix_platforms(nids, r)
+        return (len(fp) or 9, tuple(self.plat_rank.get(c, 9) for c in fp)), \
+            (" · ".join(self.plat_label.get(c, c) for c in fp) or "전체 공통")
 
     def categories(self, nids):
         out = list(dict.fromkeys(self.category[n] for n in nids if n in self.category))
@@ -981,7 +1007,7 @@ def _row_props(slug, run, D, cfg, r, verdict, what, why, follow_up, impact_ids, 
         "판정": VERDICT_KO[verdict],
         "카테고리": D.categories(main), "프레임 태그": D.tags(main), "정렬 순서": D.order_value(main),
         "단계": STAGE_LABEL.get(r.get("stage"), "S4 영향 분석"),
-        "플랫폼": [labels[x] for x in [D.primary_platform(names, r)] if x in labels],
+        "플랫폼": [labels[x] for x in D.fix_platforms(names, r) if x in labels],
         "영향 화면": D.frame_label(impact, cap=8) if impact else "",
         "필수 규칙": rule, "사유": D.text(why),
         "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []) + extra_evidence,

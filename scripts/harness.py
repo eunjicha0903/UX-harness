@@ -18,6 +18,7 @@
 import argparse
 import datetime as dt
 import hashlib
+import html
 import json
 import re
 import shutil
@@ -578,7 +579,7 @@ def _figma_layout(slug):
     tops, tags, owner = {}, [], {}
     cur = None
     for line in lines:
-        attrs = dict(re.findall(r'(\w+)="([^"]*)"', line))
+        attrs = {k: html.unescape(v) for k, v in re.findall(r'(\w+)="([^"]*)"', line)}
         if re.match(r"^  <\w", line):
             cur = {"id": attrs.get("id"), "name": attrs.get("name"), "text": None,
                    "x": float(attrs.get("x", 0)), "y": float(attrs.get("y", 0)),
@@ -594,15 +595,18 @@ def _figma_layout(slug):
 
 
 class Display:
+    """프레임은 노드 ID로 구분한다 (플랫폼마다 같은 이름 '17'이 있을 수 있으므로)."""
+
     def __init__(self, slug, run):
         s1 = load(run_dir(slug, run) / "s1" / "s1-context.json", {}) or {}
-        self.node, self.screen, self.plat = {}, {}, {}
+        self.fname, self.fplat, self.screen = {}, {}, {}
         for s in s1.get("screens", []):
-            names = [f["name"] for f in s.get("frames", [])] or [s.get("name")]
-            self.screen[s["id"]] = names
+            nids = []
             for f in s.get("frames", []):
-                self.node[f["node_id"]] = f["name"]
-                self.plat[f["name"]] = s.get("platform")
+                self.fname[f["node_id"]] = f["name"]
+                self.fplat[f["node_id"]] = s.get("platform")
+                nids.append(f["node_id"])
+            self.screen[s["id"]] = nids
         self.src = {x["id"]: x.get("title", x["id"]) for x in source_index(slug, run).get("sources", [])}
         cfg = load(proj(slug) / "project.json", {}) or {}
         self.plat_label = {p["code"]: p["label"] for p in cfg.get("platforms", [])}
@@ -612,7 +616,8 @@ class Display:
 
     def _tags(self, tops, tags):
         cat, ftag = {}, {}
-        frames = [(nid, tops[nid]) for nid in self.node if nid in tops]
+        frames = [(nid, tops[nid]) for nid in self.fname if nid in tops]
+
         def covering(t):
             return [g for g in tags if g["h"] < 1000 and g["text"] and g["y"] < t["y"]
                     and g["x"] < t["x"] + t["w"] and g["x"] + g["w"] > t["x"]]
@@ -620,46 +625,50 @@ class Display:
         for nid, t in frames:
             near = [g for g in covering(t) if t["y"] - g["y"] < 400]
             if near:
-                base.setdefault(self.plat.get(self.node[nid]), []).append(min(g["h"] for g in near))
+                base.setdefault(self.fplat.get(nid), []).append(min(g["h"] for g in near))
         med = {p: sorted(v)[len(v) // 2] for p, v in base.items()}
         for nid, t in frames:
-            name = self.node[nid]
-            h0 = med.get(self.plat.get(name), 0) or 0
+            h0 = med.get(self.fplat.get(nid), 0) or 0
             cands = covering(t)
             secs = [g for g in cands if h0 and g["h"] >= 1.4 * h0]
             own = [g for g in cands if not (h0 and g["h"] >= 1.4 * h0) and t["y"] - g["y"] < 400]
             if secs:
-                cat[name] = max(secs, key=lambda g: g["y"])["text"]
+                cat[nid] = max(secs, key=lambda g: g["y"])["text"]
             if own:
-                ftag[name] = max(own, key=lambda g: g["y"])["text"]
+                ftag[nid] = max(own, key=lambda g: g["y"])["text"]
         return cat, ftag
 
-    def frames(self, r):
-        names = [self.node.get(n) or self.node.get(self.owner.get(n, ""), None) for n in r.get("figma_node_ids") or []]
-        names = [n for n in names if n]
-        if not names:
-            for sid in r.get("screen_ids") or []:
-                names += self.screen.get(sid, [])
-        seen = []
-        for n in names:
-            if n not in seen:
-                seen.append(n)
-        return seen
+    def _frame_of(self, nid):
+        if nid in self.fname:
+            return nid
+        o = self.owner.get(nid)
+        return o if o in self.fname else None
 
-    def display_name(self, name):
-        """이름이 숫자뿐인 프레임은 플랫폼과 프레임 TAG를 붙여 알아볼 수 있게 한다 (artifacts §10)."""
-        if name and re.fullmatch(r"\d+", str(name)):
-            plat = self.plat_label.get(self.plat.get(name), "")
-            tag = self.frame_tag.get(name)
-            return f"{plat} {name}" + (f" · {tag}" if tag else "")
+    def frames(self, r):
+        """레코드가 가리키는 프레임 노드 ID 목록."""
+        out = [self._frame_of(n) for n in r.get("figma_node_ids") or []]
+        out = [n for n in out if n]
+        if not out:
+            for sid in r.get("screen_ids") or []:
+                out += self.screen.get(sid, [])
+        return list(dict.fromkeys(out))
+
+    def display_name(self, nid):
+        """프레임 이름. 숫자뿐인 이름은 플랫폼과 프레임 TAG를 붙인다 (artifacts §10)."""
+        name = self.fname.get(nid)
+        if name is None:
+            return str(nid)
+        if re.fullmatch(r"\d+", str(name)):
+            tag = self.frame_tag.get(nid)
+            return f"{self.plat_label.get(self.fplat.get(nid), '')} {name}" + (f" · {tag}" if tag else "")
         return name
 
-    def frame_label(self, names, cap=4):
-        names = list(dict.fromkeys(names))
-        if not names:
+    def frame_label(self, nids, cap=4):
+        nids = list(dict.fromkeys(nids))
+        if not nids:
             return "(특정 프레임 없음 · 전체 화면)"
-        shown = [self.display_name(n) for n in names[:cap]]
-        return ", ".join(shown) + (f" 외 {len(names) - cap}개" if len(names) > cap else "")
+        shown = list(dict.fromkeys(self.display_name(n) for n in nids))
+        return ", ".join(shown[:cap]) + (f" 외 {len(shown) - cap}개" if len(shown) > cap else "")
 
     def text(self, s):
         if not s:
@@ -667,39 +676,66 @@ class Display:
         s = str(s)
 
         def node_sub(m):
-            nid = m.group(0)
-            name = self.node.get(nid) or self.node.get(self.owner.get(nid, ""))
-            if not name and nid in self.tops and self.tops[nid]["name"] not in ("TAG",):
-                name = self.tops[nid]["name"]
-            return f"「{self.display_name(name)}」" if name else nid
+            nid = self._frame_of(m.group(0))
+            if nid:
+                return f"「{self.display_name(nid)}」"
+            t = self.tops.get(m.group(0))
+            return f"「{t['name']}」" if t and t["name"] != "TAG" else m.group(0)
         s = re.sub(r"(?<![\d:])\d+:\d+(?![\d:])", node_sub, s)
         s = re.sub(r"(?<![A-Za-z])(APP|WEB)-(\d+)(?!\d)",
-                   lambda m: f"「{self.display_name(self.screen[m.group(0)][0])}」" if m.group(0) in self.screen else m.group(0), s)
+                   lambda m: f"「{self.display_name(self.screen[m.group(0)][0])}」"
+                   if self.screen.get(m.group(0)) else m.group(0), s)
         s = re.sub(r"「([^」]+)」\s*\(\s*\1\s*\)", r"「\1」", s)   # 「이름」 (이름) 중복 제거
         return s
 
     def evidence(self, e):
         sid, loc = e.get("source_id"), e.get("locator") or ""
-        m = re.search(r"\b\d+:\d+\b", loc)
-        if m and (m.group(0) in self.node or self.owner.get(m.group(0)) in self.node or m.group(0) in self.tops):
+        m = re.search(r"(?<![\d:])\d+:\d+(?![\d:])", loc)
+        if m and (self._frame_of(m.group(0)) or m.group(0) in self.tops):
             return f"Figma {self.text(m.group(0))}"
         return f"{self.src.get(sid, sid)} {self.text(loc)}".strip()
 
-    def categories(self, names):
-        out = []
-        for n in names:
-            c = self.category.get(n)
-            if c and c not in out:
-                out.append(c)
+    def categories(self, nids):
+        out = list(dict.fromkeys(self.category[n] for n in nids if n in self.category))
         return out or ["분류 없음"]
 
-    def tags(self, names):
-        out = []
-        for n in names:
-            t = self.frame_tag.get(n)
-            if t and t not in out:
-                out.append(t)
-        return ", ".join(out)
+    def tags(self, nids):
+        return ", ".join(dict.fromkeys(self.frame_tag[n] for n in nids if n in self.frame_tag))
+
+
+def merged_view(slug, run, final_records, unresolved):
+    """표시용 병합 (판정은 바꾸지 않는다, artifacts §10).
+    - S4에서 FAIL 레코드를 기점으로 한 분석 단위는 기점 항목에 합친다 (영향 화면 보강).
+    - Judge가 '같은 문제'라고 지적한 중복 항목은 지목된 대표 항목에 합친다.
+    반환: (대표 미해소 항목 목록, {대표 id: [합쳐진 id...]}, {대표 id: [추가 영향 화면...]})"""
+    by_id = {r["id"]: r for r in final_records}
+    ids = [u["id"] for u in unresolved]
+    open_ids = set(ids)
+    target = {}
+    for u in impact_units(slug, run):
+        o = u.get("origin", {})
+        if o.get("type") == "fail" and o.get("ref") in open_ids and u.get("id") in open_ids:
+            target[u["id"]] = o["ref"]
+    for r in final_records:
+        j = r.get("judge") or {}
+        reason = j.get("objection_reason") or ""
+        if not j.get("agree", True) and ("두 번 집계" in reason or "중복" in reason):
+            m = re.search(r"((?:CHK-S\d|IMP-S4)-\d+)[과와]\s*같은", reason)
+            if m and m.group(1) in open_ids and r["id"] in open_ids and m.group(1) != r["id"]:
+                target[r["id"]] = m.group(1)
+
+    def root(i, seen=()):
+        t = target.get(i)
+        return root(t, seen + (i,)) if t and t not in seen else i
+    merged, extra = {}, {}
+    for i in ids:
+        rt = root(i)
+        if rt != i:
+            merged.setdefault(rt, []).append(i)
+            unit = by_id.get(i, {})
+            extra.setdefault(rt, []).extend(unit.get("impact_screens") or [])
+    primary = [u for u in unresolved if root(u["id"]) == u["id"]]
+    return primary, merged, extra
 
 
 def focus_config(slug):
@@ -734,11 +770,15 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
         L.append("- ⚠ Notion 검토 사항을 읽지 못해 이번 실행에서는 수정 완료·컨펌 완료를 해소로 인정하지 않았다.")
     L.append("")
     focus = focus_config(slug)
+    primary, merged, _ = merged_view(slug, run, recs, judgement["unresolved"])
     if focus:
-        unresolved_ids = {u["id"] for u in judgement["unresolved"]}
+        unresolved_ids = {u["id"] for u in primary}
+        hidden = {i for v in merged.values() for i in v}
         L.append("## 한눈에 보기")
+        L.append(f"*같은 문제를 합친 고유 항목 기준 · 미해소 {len(primary)}건 (원 집계 {len(judgement['unresolved'])}건)*")
+        L.append("")
         for q in focus:
-            mine = [r for r in recs if record_focus(r, focus) == q["id"]]
+            mine = [r for r in recs if record_focus(r, focus) == q["id"] and r["id"] not in hidden]
             open_ = [r for r in mine if r["id"] in unresolved_ids]
             if not mine:
                 head = "판정 항목 없음"
@@ -875,9 +915,11 @@ def cmd_notion_sync(a):
     j = load(rd / "s5" / "s5-judgement.json")
     inputs = notion_inputs(a.slug, a.run)
     D = Display(a.slug, a.run)
+    primary, merged, extra = merged_view(a.slug, a.run, list(final.values()), j["unresolved"])
     ops = []
-    for u in j["unresolved"]:
+    for u in primary:
         r = final[u["id"]]
+        u = dict(u, impact_screens=list(dict.fromkeys((u["impact_screens"] or []) + extra.get(u["id"], []))))
         rule = rule_opts.get((r.get("rule_ref") or "").split("-")[0], "해당 없음") if r.get("rule_ref") else "해당 없음"
         n = inputs.get(u["id"])
         recheck = "미실행"
@@ -893,7 +935,8 @@ def cmd_notion_sync(a):
             "플랫폼": [labels[p] for p in r.get("platform") or [] if p in labels],
             "영향 화면": D.frame_label(impact, cap=8) if impact else "",
             "필수 규칙": rule, "사유": D.text(u["why"]),
-            "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []),
+            "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or [])
+                    + (f" · 같은 문제: {', '.join(merged[u['id']])}" if merged.get(u["id"]) else ""),
             "후속 조치": D.text(u["follow_up"]), "재검증 결과": recheck, "최근 실행": a.run,
         }
         focus = focus_config(a.slug)

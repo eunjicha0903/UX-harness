@@ -610,6 +610,7 @@ class Display:
         self.src = {x["id"]: x.get("title", x["id"]) for x in source_index(slug, run).get("sources", [])}
         cfg = load(proj(slug) / "project.json", {}) or {}
         self.plat_label = {p["code"]: p["label"] for p in cfg.get("platforms", [])}
+        self.plat_rank = {p["code"]: i for i, p in enumerate(cfg.get("platforms", []))}
         tops, tags, self.owner = _figma_layout(slug)
         self.tops = tops
         self.category, self.frame_tag = self._tags(tops, tags)
@@ -663,8 +664,22 @@ class Display:
             return f"{self.plat_label.get(self.fplat.get(nid), '')} {name}" + (f" · {tag}" if tag else "")
         return name
 
+    def frame_no(self, nid):
+        """프레임 이름 앞 숫자 (없으면 맨 뒤로)."""
+        m = re.match(r"\s*(\d+)", str(self.fname.get(nid, "")))
+        return int(m.group(1)) if m else 99999
+
+    def sort_key(self, nids):
+        """검토 사항 정렬: 프레임 번호 오름차순 → 플랫폼 순서 (artifacts §10)."""
+        keys = [(self.frame_no(n), self.plat_rank.get(self.fplat.get(n), 9)) for n in nids]
+        return min(keys) if keys else (99999, 9)
+
+    def order_value(self, nids):
+        no, pr = self.sort_key(nids)
+        return no * 10 + min(pr, 9)
+
     def frame_label(self, nids, cap=4):
-        nids = list(dict.fromkeys(nids))
+        nids = sorted(dict.fromkeys(nids), key=lambda n: self.sort_key([n]))
         if not nids:
             return "(특정 프레임 없음 · 전체 화면)"
         shown = list(dict.fromkeys(self.display_name(n) for n in nids))
@@ -839,7 +854,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
             L.append(f"### {cat} ({len(groups[cat])}건)")
             L.append("| 검토 사항(프레임) | 판정 유형 | 검토 내용 | 왜 | 근거 | 영향 화면 | 후속 조치 |")
             L.append("|---|---|---|---|---|---|---|")
-            for u, r, names in groups[cat]:
+            for u, r, names in sorted(groups[cat], key=lambda x: D.sort_key(x[2])):
                 ev = "; ".join(D.evidence(e) for e in r.get("evidence") or [])
                 imp = D.frame_label([n for s in u["impact_screens"] for n in D.screen.get(s, [s])], cap=6)
                 L.append(f"| {D.frame_label(names)} | {VTYPE_KO[u['verdict']]} | {D.text(u['what'])} | {D.text(u['why'])} | {ev} | {imp} | {D.text(u['follow_up'])} |")
@@ -867,7 +882,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
         L.append(f"### {cat}")
         L.append("| 검토 사항(프레임) | 판정 | 판정 유형 | 규칙 | 검토 내용 | 근거 |")
         L.append("|---|---|---|---|---|---|")
-        for r, names in groups[cat]:
+        for r, names in sorted(groups[cat], key=lambda x: D.sort_key(x[1])):
             ev = "; ".join(D.evidence(e) for e in r.get("evidence") or [])
             L.append(f"| {D.frame_label(names)} | {VERDICT_KO.get(r.get('verdict'))} | {VTYPE_KO.get(r.get('verdict'), '')} | {r.get('rule_ref') or ''} | {D.text(r.get('title'))} | {ev} |")
         L.append("")
@@ -906,59 +921,226 @@ def cmd_finalize(a):
 
 # ---------- Notion ----------
 
-def cmd_notion_sync(a):
-    rd = run_dir(a.slug, a.run)
-    cfg = load(proj(a.slug) / "project.json")
+def _row_props(slug, run, D, cfg, r, verdict, what, why, follow_up, impact_ids, stage_mark, extra_evidence=""):
+    """검토 사항 DB 한 행의 하네스 칸 (사용자 칸은 넣지 않는다)."""
     labels = {p["code"]: p["label"] for p in cfg["platforms"]}
     rule_opts = cfg.get("notion", {}).get("rule_options", {})
-    final = {r["id"]: r for r in load(rd / "s5" / "final.json")["records"]}
-    j = load(rd / "s5" / "s5-judgement.json")
-    inputs = notion_inputs(a.slug, a.run)
-    D = Display(a.slug, a.run)
-    primary, merged, extra = merged_view(a.slug, a.run, list(final.values()), j["unresolved"])
+    rule = rule_opts.get((r.get("rule_ref") or "").split("-")[0], "해당 없음") if r.get("rule_ref") else "해당 없음"
+    names = D.frames(r)
+    impact = [nm for sid in impact_ids for nm in D.screen.get(sid, [sid])]
+    props = {
+        "검토 사항": D.frame_label(names), "검토 내용": D.text(what), "항목 ID": r["id"],
+        "판정": VERDICT_KO[verdict], "판정 유형": VTYPE_KO[verdict],
+        "카테고리": D.categories(names), "프레임 태그": D.tags(names), "정렬 순서": D.order_value(names),
+        "단계": STAGE_LABEL.get(r.get("stage"), "S4 영향 분석"),
+        "플랫폼": [labels[x] for x in r.get("platform") or [] if x in labels],
+        "영향 화면": D.frame_label(impact, cap=8) if impact else "",
+        "필수 규칙": rule, "사유": D.text(why),
+        "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []) + extra_evidence,
+        "후속 조치": D.text(follow_up), "확정 여부": stage_mark, "최근 실행": run,
+    }
+    focus = focus_config(slug)
+    if focus:
+        fid = record_focus(r, focus)
+        props["검증 관점"] = next((q["label"] for q in focus if q["id"] == fid), "")
+    return props
+
+
+def _focus_lines(D, recs, open_ids, focus, cap=8):
+    """관점별 두괄식 요약 줄 (결론 한 줄 → 프레임·한 줄 요약)."""
+    L = []
+    order = {"FAIL": 0, "NEEDS_REVIEW": 1, "INSUFFICIENT_INFO": 2}
+    groups = focus or [{"id": None, "label": "전체", "question": ""}]
+    for q in groups:
+        mine = [r for r in recs if (record_focus(r, focus) == q["id"] if focus else True)]
+        open_ = [r for r in mine if r["id"] in open_ids]
+        if not mine:
+            head = "판정 항목 없음"
+        elif not open_:
+            head = f"✅ 문제 없음 ({len(mine)}건 확인)"
+        else:
+            t = {k: sum(1 for r in open_ if r.get("verdict") == k) for k in order}
+            head = (f"⚠ 검토 필요 {len(open_)}건 / {len(mine)}건 — 문제 확인 {t['FAIL']} · "
+                    f"사람 판단 필요 {t['NEEDS_REVIEW']} · 자료 부족 {t['INSUFFICIENT_INFO']}")
+        L.append(f"### {q['label']} — {head}")
+        if q.get("question"):
+            L.append(f"*{q['question']}*")
+        for r in sorted(open_, key=lambda x: (order.get(x.get("verdict"), 9), D.sort_key(D.frames(x))))[:cap]:
+            L.append(f"- **{D.frame_label(D.frames(r), cap=2)}** — {D.text(r.get('title'))} ({VTYPE_KO[r['verdict']]})")
+        if len(open_) > cap:
+            L.append(f"- 외 {len(open_) - cap}건 (검토 사항 DB)")
+        L.append("")
+    return L
+
+
+def _progress_line(stage):
+    order = ["S1", "S2", "S3", "S4", "S5"]
+    names = {"S1": "맥락", "S2": "요구사항·흐름", "S3": "컴포넌트", "S4": "영향 분석", "S5": "최종 판정"}
+    done = order[: order.index(stage) + 1]
+    return " → ".join(f"{'✅' if s in done else '⏳'} {names[s]}" for s in order)
+
+
+def stage_page(slug, run, stage):
+    """단계별 결과 페이지 조각. section은 페이지에 추가하고, header는 맨 위(진행 상황/결론)를 교체한다."""
+    rd = run_dir(slug, run)
+    D = Display(slug, run)
+    focus = focus_config(slug)
+    s1 = load(rd / "s1" / "s1-context.json", {}) or {}
+    header = [f"**진행 상황:** {_progress_line(stage)}", ""]
+    sec = []
+    if stage == "S1":
+        from collections import Counter
+        c = Counter(sc.get("platform") for sc in s1.get("screens", []))
+        sec.append("## 1. 검증 대상 (S1 맥락)")
+        sec.append("- 화면: " + " · ".join(f"{D.plat_label.get(k, k)} {v}개" for k, v in c.items()))
+        sec.append(f"- 요구사항 {len(s1.get('requirements', []))}개 · 구역별 피드백 {len(s1.get('feedback', []))}개")
+        for f in s1.get("feedback", []):
+            first = (f.get("text") or "").split("\n")[0][:60]
+            sec.append(f"  - {first} — Figma 반영(1차 관찰): {f.get('figma_reflected', '확인 불가')}")
+        for x in s1.get("excluded_requests", []) + s1.get("excluded_sources", []):
+            sec.append(f"- 제외: {x.get('request') or x.get('source')} — {x.get('reason')}")
+        if s1.get("unverified"):
+            sec.append(f"- 미확인: {s1['unverified'] if isinstance(s1['unverified'], str) else len(s1['unverified'])}")
+    elif stage in ("S2", "S3"):
+        rel = {"S2": "s2/s2-requirements.json", "S3": "s3/s3-components.json"}[stage]
+        recs = (load(rd / rel, {}) or {}).get("records", [])
+        open_ids = {r["id"] for r in recs if r.get("verdict") in UNRESOLVED}
+        title = {"S2": "2. 요구사항·흐름 (S2, 잠정)", "S3": "3. 컴포넌트 (S3, 잠정)"}[stage]
+        sec.append(f"## {title}")
+        sec += _focus_lines(D, recs, open_ids, focus)
+    elif stage == "S4":
+        s4 = load(rd / "s4" / "s4-impact.json", {}) or {}
+        fbtext = {f["id"]: f.get("text") for f in s1.get("feedback", [])}
+        sec.append("## 4. 구역별 영향 영역 (S4, 잠정)")
+        for u in s4.get("units", []):
+            if u.get("origin", {}).get("type") != "feedback":
+                continue
+            name = (fbtext.get(u["origin"]["ref"]) or u["origin"]["ref"]).split("\n")[0][:40]
+            sec.append(f"<details><summary>{name} — {VERDICT_KO.get(u.get('verdict'))}</summary>")
+            sec.append("")
+            sec.append(f"- 고려해야 할 영역: {', '.join(u.get('consider_areas') or [])}")
+            sec.append(f"- 예상 문제: {D.text(u.get('expected_problem'))}")
+            for x in sorted(u.get("related_screens", []), key=lambda x: DECISION_ORDER.get(x.get("decision"), 9)):
+                sec.append(f"  - {D.frame_label(D.screen.get(x.get('screen_id'), [x.get('screen_id')]))}: "
+                           f"{x.get('decision')} — {D.text(x.get('reason', ''))}")
+            sec.append(f"- 후속 작업: {D.text(u.get('follow_up'))}")
+            sec.append("</details>")
+        edges = (load(rd / "s4" / "impact-map.next.json", {}) or {}).get("edges", [])
+        sec.append(f"- 영향 맵 연결 {len(edges)}개")
+    elif stage == "S5":
+        final = (load(rd / "s5" / "final.json", {}) or {}).get("records", [])
+        j = load(rd / "s5" / "s5-judgement.json", {}) or {}
+        primary, merged, _ = merged_view(slug, run, final, j.get("unresolved", []))
+        hidden = {i for v in merged.values() for i in v}
+        by_id = {r["id"]: r for r in final}
+        header = [f"**진행 상황:** {_progress_line('S5')}", ""]
+        gr = j.get("gr_fail", [])
+        header.append(f"> **결과: {j.get('status') or '실행 실패'}** — 미해소 {len(primary)}건(같은 문제 병합)"
+                      + (f" · 필수 규칙 위반 {len(gr)}건" if gr else ""))
+        header.append("")
+        header.append("## 한눈에 보기")
+        header += _focus_lines(D, [r for r in final if r["id"] not in hidden], {u["id"] for u in primary}, focus)
+        if gr:
+            header.append("## ⛔ 필수 규칙 위반 (컨펌으로 해소 불가)")
+            seen = set()
+            for rid in gr:
+                r = by_id[rid]
+                key = (r.get("rule_ref"), D.frame_label(D.frames(r), cap=2))
+                if key in seen:
+                    continue
+                seen.add(key)
+                header.append(f"- **{key[1]}** — 규칙 {r['rule_ref']}: {D.text(r.get('title'))}")
+            header.append("")
+        lowered = [r for r in final if r.get("original_verdict")]
+        sec.append("## 5. 판정자(Judge) 확인으로 바뀐 판정")
+        sec.append(f"- 판정이 낮아진 항목 {len(lowered)}건, 같은 문제로 병합된 항목 {len(hidden)}건")
+        for r in lowered[:10]:
+            sec.append(f"  - {D.frame_label(D.frames(r), cap=2)} — {D.text(r.get('title'))}: "
+                       f"{VERDICT_KO[r['original_verdict']]}({VTYPE_KO[r['original_verdict']] or '승인'}) → 검토 필요(사람 판단 필요)")
+    return "\n".join(header) + "\n", "\n".join(sec) + "\n"
+
+
+def stage_ops(slug, run, stage):
+    """단계별 검토 사항 DB upsert 목록 (항목 ID 기준). 실행 주체는 같은 항목 ID 행이 있으면 갱신, 없으면 생성한다."""
+    rd = run_dir(slug, run)
+    cfg = load(proj(slug) / "project.json")
+    D = Display(slug, run)
     ops = []
-    for u in primary:
-        r = final[u["id"]]
-        u = dict(u, impact_screens=list(dict.fromkeys((u["impact_screens"] or []) + extra.get(u["id"], []))))
-        rule = rule_opts.get((r.get("rule_ref") or "").split("-")[0], "해당 없음") if r.get("rule_ref") else "해당 없음"
-        n = inputs.get(u["id"])
-        recheck = "미실행"
-        if n and n.get("수정 완료"):
-            recheck = "여전히 FAIL" if u["verdict"] == "FAIL" else "미실행"
-        names = D.frames(r)
-        impact = [nm for s in u["impact_screens"] for nm in D.screen.get(s, [s])]
-        props = {
-            "검토 사항": D.frame_label(names), "검토 내용": D.text(u["what"]), "항목 ID": u["id"],
-            "판정": VERDICT_KO[u["verdict"]], "판정 유형": VTYPE_KO[u["verdict"]],
-            "카테고리": D.categories(names), "프레임 태그": D.tags(names),
-            "단계": STAGE_LABEL.get(r.get("stage"), "S4 영향 분석"),
-            "플랫폼": [labels[p] for p in r.get("platform") or [] if p in labels],
-            "영향 화면": D.frame_label(impact, cap=8) if impact else "",
-            "필수 규칙": rule, "사유": D.text(u["why"]),
-            "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or [])
-                    + (f" · 같은 문제: {', '.join(merged[u['id']])}" if merged.get(u["id"]) else ""),
-            "후속 조치": D.text(u["follow_up"]), "재검증 결과": recheck, "최근 실행": a.run,
-        }
-        focus = focus_config(a.slug)
-        if focus:
-            fid = record_focus(r, focus)
-            props["검증 관점"] = next((q["label"] for q in focus if q["id"] == fid), "")
-        ops.append({"op": "update" if n else "create", "page_url": n.get("page_url") if n else None,
-                    "item_id": u["id"], "properties": props})
-    unresolved_ids = {u["id"] for u in j["unresolved"]}
-    for item_id, n in inputs.items():
-        if item_id not in unresolved_ids:
-            ops.append({"op": "update", "page_url": n.get("page_url"), "item_id": item_id,
-                        "properties": {"판정": "승인", "판정 유형": "", "재검증 결과": "PASS", "최근 실행": a.run}})
-    categories = sorted({c for op in ops for c in op["properties"].get("카테고리", [])})
+    if stage in ("S2", "S3"):
+        rel = {"S2": "s2/s2-requirements.json", "S3": "s3/s3-components.json"}[stage]
+        for r in (load(rd / rel, {}) or {}).get("records", []):
+            if r.get("verdict") in UNRESOLVED:
+                ops.append({"op": "upsert", "item_id": r["id"], "properties": _row_props(
+                    slug, run, D, cfg, r, r["verdict"], r.get("title"), r.get("reason"), r.get("follow_up"),
+                    r.get("impact_screens") or r.get("screen_ids") or [], f"잠정 {stage}")})
+    elif stage == "S4":
+        s4 = load(rd / "s4" / "s4-impact.json", {}) or {}
+        for u in s4.get("units", []):
+            o = u.get("origin", {})
+            ur = unit_as_record(u)
+            if o.get("type") == "fail":   # 기점 행의 영향 화면만 보강
+                imp = [x.get("screen_id") for x in u.get("related_screens", []) if x.get("decision") != "수정 불필요"]
+                ops.append({"op": "update_only", "item_id": o.get("ref"), "properties": {
+                    "영향 화면": D.frame_label([n for sid in imp for n in D.screen.get(sid, [sid])], cap=8),
+                    "후속 조치": D.text(u.get("follow_up")), "최근 실행": run}})
+            elif ur.get("verdict") in UNRESOLVED:
+                ur["focus"] = u.get("focus")
+                ops.append({"op": "upsert", "item_id": ur["id"], "properties": _row_props(
+                    slug, run, D, cfg, ur, ur["verdict"], ur.get("title"), ur.get("reason"), ur.get("follow_up"),
+                    ur.get("impact_screens") or [], "잠정 S4")})
+        for r in s4.get("records", []):
+            if r.get("verdict") in UNRESOLVED:
+                ops.append({"op": "upsert", "item_id": r["id"], "properties": _row_props(
+                    slug, run, D, cfg, r, r["verdict"], r.get("title"), r.get("reason"), r.get("follow_up"),
+                    r.get("impact_screens") or r.get("screen_ids") or [], "잠정 S4")})
+    elif stage == "S5":
+        final = {r["id"]: r for r in load(rd / "s5" / "final.json")["records"]}
+        j = load(rd / "s5" / "s5-judgement.json")
+        inputs = notion_inputs(slug, run)
+        primary, merged, extra = merged_view(slug, run, list(final.values()), j["unresolved"])
+        for u in primary:
+            r = final[u["id"]]
+            imp = list(dict.fromkeys((u["impact_screens"] or []) + extra.get(u["id"], [])))
+            props = _row_props(slug, run, D, cfg, r, u["verdict"], u["what"], u["why"], u["follow_up"], imp, "확정",
+                               f" · 같은 문제: {', '.join(merged[u['id']])}" if merged.get(u["id"]) else "")
+            n = inputs.get(u["id"])
+            props["재검증 결과"] = ("여전히 FAIL" if u["verdict"] == "FAIL" else "미실행") if n and n.get("수정 완료") else "미실행"
+            ops.append({"op": "upsert", "item_id": u["id"], "properties": props})
+        for rep, ids in merged.items():
+            for i in ids:   # 앞 단계에서 만든 중복 행은 병합 표시
+                ops.append({"op": "update_only", "item_id": i, "properties": {
+                    "확정 여부": "병합됨", "근거": f"같은 문제로 {rep} 행에 병합됨", "최근 실행": run}})
+        unresolved_ids = {u["id"] for u in j["unresolved"]}
+        for item_id in inputs:
+            if item_id not in unresolved_ids:
+                ops.append({"op": "update_only", "item_id": item_id, "properties": {
+                    "판정": "승인", "재검증 결과": "PASS", "확정 여부": "확정", "최근 실행": run}})
+    ops.sort(key=lambda o: (o["op"] != "upsert", o["properties"].get("정렬 순서", 999999)))
     for op in ops:
-        bad = USER_FIELDS & set(op["properties"])
-        if bad:
-            print(f"오류: 사용자 칸 {bad} 쓰기 시도")
-            return 1
-    save(rd / "s5" / "notion-sync.json", {"run_id": a.run, "data_source": cfg["notion"]["review_data_source"],
-                                          "categories": categories, "ops": ops})
-    print(f"Notion 반영 계획: 생성 {sum(o['op'] == 'create' for o in ops)} / 갱신 {sum(o['op'] == 'update' for o in ops)} (사용자 칸 0건)")
+        op["properties"] = {k: v for k, v in op["properties"].items() if v not in ("", [], None)}
+        if USER_FIELDS & set(op["properties"]):
+            raise SystemExit(f"오류: 사용자 칸 {USER_FIELDS & set(op['properties'])} 쓰기 시도")
+    return ops
+
+
+def cmd_notion_sync(a):
+    """단계별 Notion 반영 계획을 results/<run>/notion/에 만든다 (artifacts §11)."""
+    rd = run_dir(a.slug, a.run)
+    cfg = load(proj(a.slug) / "project.json")
+    stage = a.stage or "S5"
+    ops = stage_ops(a.slug, a.run, stage)
+    header, section = stage_page(a.slug, a.run, stage)
+    nd = rd / "notion"
+    categories = sorted({c for op in ops for c in op["properties"].get("카테고리", [])})
+    plan = {"run_id": a.run, "stage": stage, "data_source": cfg["notion"]["review_data_source"],
+            "parent_page_id": cfg["notion"].get("parent_page_id"), "categories": categories, "ops": ops}
+    save(nd / f"sync-{stage}.json", plan)
+    (nd / f"page-{stage}-header.md").write_text(header, encoding="utf-8")
+    (nd / f"page-{stage}-section.md").write_text(section, encoding="utf-8")
+    if stage == "S5":
+        save(rd / "s5" / "notion-sync.json", plan)
+    n_up = sum(o["op"] == "upsert" for o in ops)
+    print(f"Notion {stage} 반영 계획: upsert {n_up} / 기존 행 갱신 {len(ops) - n_up} · 페이지 맨 위 교체 + 섹션 추가 (사용자 칸 0건)")
     return 0
 
 
@@ -997,8 +1179,10 @@ def main():
     s.add_argument("--status"); s.add_argument("--reason"); s.set_defaults(fn=cmd_state)
     s = sub.add_parser("promote"); s.add_argument("--slug", required=True); s.add_argument("--run", required=True)
     s.add_argument("--what", choices=["sources", "impact-map"], required=True); s.set_defaults(fn=cmd_promote)
-    for name, fn in (("hash", cmd_hash), ("finalize", cmd_finalize), ("notion-sync", cmd_notion_sync)):
+    for name, fn in (("hash", cmd_hash), ("finalize", cmd_finalize)):
         s = sub.add_parser(name); s.add_argument("--slug", required=True); s.add_argument("--run", required=True); s.set_defaults(fn=fn)
+    s = sub.add_parser("notion-sync"); s.add_argument("--slug", required=True); s.add_argument("--run", required=True)
+    s.add_argument("--stage", choices=["S1", "S2", "S3", "S4", "S5"], default="S5"); s.set_defaults(fn=cmd_notion_sync)
     s = sub.add_parser("gate"); s.add_argument("name", choices=["G0", "G1", "G2", "G3", "G4", "G5", "GR"])
     s.add_argument("--slug", required=True); s.add_argument("--run", default=""); s.set_defaults(fn=cmd_gate)
     s = sub.add_parser("notion-result"); s.add_argument("--slug", required=True); s.add_argument("--run", required=True)

@@ -24,6 +24,7 @@
 4. R1-A 절차로 `story-service.md` 초안을 쓴다: 사용자 스토리(5문장 이내), 필수 규칙 1~2개(PRD 근거), 플랫폼 허용 목록, 검증 범위, 필수 규칙 판정 조건(ID), 화면 판별 재지정(필요 시).
 5. **H0**: 사용자 승인 → `approved_at` 기록. 승인 전에는 검증을 시작하지 않는다 (G0).
 6. `project.json`을 쓰고, Notion `업무 도우미 / UX검토 / <프로젝트>` 아래 검토 사항 DB를 만든다 (스키마: `templates/project/notion-review-db.sql`), 보기는 템플릿 SQL 주석대로 `검토 중`(to do 보드: 카테고리 × 플랫폼, 정렬 순서)과 `완료`(보드)을 만든다 (artifacts §10, 공통).
+   - **모든 프로젝트 공통 (사용자 지시 2026-10-29)**: 검토 사항 DB는 프로젝트마다 다르게 만들지 않는다. 칸·보기·제목 형식·검토 case·플랫폼 줄·정렬·to do(수정 완료)·완료 보드·중복 미포함은 `templates/project/notion-review-db.sql`과 artifacts §10·§11을 그대로 따른다. 하네스 표시 규칙이 바뀌면 템플릿과 문서를 같이 고치고, 기존 프로젝트 DB는 다음 실행 때 같은 구성으로 맞춘다.
 7. 실제 업무 흐름이 story-work와 다르면 `story-work-exceptions.md`에만 기록한다 (`docs/story-work.md`는 수정 금지).
 8. 공통 파일과 섞지 않고 `[<slug>] init` 커밋.
 

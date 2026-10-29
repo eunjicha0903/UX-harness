@@ -767,12 +767,67 @@ class Display:
         return (len(fp) or 9, tuple(self.plat_rank.get(c, 9) for c in fp)), \
             (" · ".join(self.plat_label.get(c, c) for c in fp) or "전체 공통")
 
+    def page_label(self, nids, r=None):
+        """페이지 case: '관리자웹 뉴스 관리/상세' (수정 대상 플랫폼 · 카테고리 / 프레임 태그)."""
+        fp = self.fix_platforms(nids, r)
+        plat = "·".join(self.plat_label.get(c, c) for c in fp) or "전체 공통"
+        main = self.primary_frames(nids, r)
+        main = sorted(main, key=lambda n: self.sort_key([n]))
+        if not main:
+            return plat
+        n0 = main[0]
+        cat, tag = self.category.get(n0), self.frame_tag.get(n0)
+        page = cat or tag or self.display_name(n0)
+        if tag and cat and tag.replace(" ", "").startswith(cat.replace(" ", "")):
+            tag = re.sub(r"^\s*" + r"\s*".join(map(re.escape, cat.replace(" ", ""))) + r"\s*/?\s*", "", tag)
+        if tag and tag != cat:
+            page += f"/{tag}"
+        return f"{plat} {page}"
+
     def categories(self, nids):
         out = list(dict.fromkeys(self.category[n] for n in nids if n in self.category))
         return out or ["분류 없음"]
 
     def tags(self, nids):
         return ", ".join(dict.fromkeys(self.frame_tag[n] for n in nids if n in self.frame_tag))
+
+
+REVIEW_CASES = ["오타", "명칭·문구", "UI", "로직", "추가 고려사항", "반영 확인", "자료 확인"]
+
+
+def display_overrides(slug, run):
+    """Orchestrator 표시 보정 s5/display-overrides.json + Judge duplicates (artifacts §12). 판정은 바꾸지 않는다."""
+    rd = run_dir(slug, run)
+    o = load(rd / "s5" / "display-overrides.json", {}) or {}
+    dup = dict(o.get("duplicates") or {})
+    for d in (load(rd / "s5" / "judge.json", {}) or {}).get("duplicates", []) or []:
+        if d.get("id") and d.get("same_as"):
+            dup.setdefault(d["id"], d["same_as"])
+    return {"review_case": o.get("review_case") or {}, "duplicates": dup,
+            "user_removed": set(o.get("user_removed") or [])}
+
+
+def review_case(r, ov=None):
+    """검토 case: 레코드 review_case → 보정 파일 → 제목 키워드 추정."""
+    if r.get("review_case") in REVIEW_CASES:
+        return r["review_case"]
+    c = ((ov or {}).get("review_case") or {}).get(r.get("id"))
+    if c:
+        return c
+    t = f"{r.get('title') or ''} {r.get('reason') or ''}"
+    if r.get("verdict") == "INSUFFICIENT_INFO" or "판단 불가" in t:
+        return "자료 확인"
+    if "오타" in t:
+        return "오타"
+    if re.search(r"반영됨|충돌하지 않음|대응됨", r.get("title") or ""):
+        return "반영 확인"
+    if re.search(r"명칭|문구|표기|라벨|용어|이름", t):
+        return "명칭·문구"
+    if re.search(r"정해지지 않|화면 없|기준 없|알림이 없", t):
+        return "추가 고려사항"
+    if re.search(r"상태|컴포넌트|variant|버튼|모달|배지|표시|가려", t):
+        return "UI"
+    return "로직"
 
 
 def merged_view(slug, run, final_records, unresolved):
@@ -795,6 +850,10 @@ def merged_view(slug, run, final_records, unresolved):
             m = re.search(r"((?:CHK-S\d|IMP-S4)-\d+)[과와]\s*같은", reason)
             if m and m.group(1) in open_ids and r["id"] in open_ids and m.group(1) != r["id"]:
                 target[r["id"]] = m.group(1)
+
+    for i, keep in display_overrides(slug, run)["duplicates"].items():
+        if i in open_ids and keep in open_ids and i != keep:
+            target[i] = keep
 
     def root(i, seen=()):
         t = target.get(i)
@@ -1001,8 +1060,10 @@ def _row_props(slug, run, D, cfg, r, verdict, what, why, follow_up, impact_ids, 
     names = D.frames(r)
     main = D.primary_frames(names, r)   # 대표 플랫폼 프레임: 카테고리·플랫폼·정렬 기준
     impact = [nm for sid in impact_ids for nm in D.screen.get(sid, [sid])]
+    case = review_case(r, display_overrides(slug, run))
     props = {
-        "검토 사항": D.frame_label(names, first=D.primary_platform(names, r)),
+        "검토 사항": f"{case} · {D.page_label(names, r)}", "검토 case": case,
+        "화면 프레임": D.frame_label(names, first=D.primary_platform(names, r)),
         "프레임 번호": D.frame_numbers(names, first=D.primary_platform(names, r)), "검토 내용": D.text(what), "항목 ID": r["id"],
         "판정": VERDICT_KO[verdict],
         "카테고리": D.categories(main), "프레임 태그": D.tags(main), "정렬 순서": D.order_value(main),
@@ -1011,12 +1072,8 @@ def _row_props(slug, run, D, cfg, r, verdict, what, why, follow_up, impact_ids, 
         "영향 화면": D.frame_label(impact, cap=8) if impact else "",
         "필수 규칙": rule, "사유": D.text(why),
         "근거": "; ".join(D.evidence(e) for e in r.get("evidence") or []) + extra_evidence,
-        "후속 조치": D.text(follow_up), "확정 여부": stage_mark, "최근 실행": run,
+        "후속 조치": D.text(follow_up), "최근 실행": run,
     }
-    focus = focus_config(slug)
-    if focus:
-        fid = record_focus(r, focus)
-        props["검증 관점"] = next((q["label"] for q in focus if q["id"] == fid), "")
     return props
 
 
@@ -1182,13 +1239,18 @@ def stage_ops(slug, run, stage):
             ops.append({"op": "upsert", "item_id": u["id"], "properties": props})
         for rep, ids in merged.items():
             for i in ids:   # 앞 단계에서 만든 중복 행은 병합 표시
-                ops.append({"op": "update_only", "item_id": i, "properties": {
-                    "확정 여부": "병합됨", "근거": f"같은 문제로 {rep} 행에 병합됨", "최근 실행": run}})
+                ops.append({"op": "archive", "item_id": i, "properties": {},
+                            "note": f"중복 — {rep} 행에 합침 (있는 행만 휴지통으로)"})
         unresolved_ids = {u["id"] for u in j["unresolved"]}
         for item_id in inputs:
             if item_id not in unresolved_ids:
                 ops.append({"op": "update_only", "item_id": item_id, "properties": {
-                    "판정": "승인", "재검증 결과": "PASS", "확정 여부": "확정", "최근 실행": run}})
+                    "판정": "승인", "재검증 결과": "PASS", "최근 실행": run}})
+    removed = display_overrides(slug, run)["user_removed"]
+    ops = [o for o in ops if o["item_id"] not in removed]   # 사용자가 지운 행은 다시 만들지 않는다
+    if stage != "S5":   # 중복으로 합쳐질 항목은 앞 단계에서도 만들지 않는다
+        dups = display_overrides(slug, run)["duplicates"]
+        ops = [o for o in ops if o["item_id"] not in dups]
     ops.sort(key=lambda o: (o["op"] != "upsert", o["properties"].get("정렬 순서", 999999)))
     for op in ops:
         op["properties"] = {k: v for k, v in op["properties"].items() if v not in ("", [], None)}
@@ -1213,8 +1275,9 @@ def cmd_notion_sync(a):
     (nd / f"page-{stage}-section.md").write_text(section, encoding="utf-8")
     if stage == "S5":
         save(rd / "s5" / "notion-sync.json", plan)
-    n_up = sum(o["op"] == "upsert" for o in ops)
-    print(f"Notion {stage} 반영 계획: upsert {n_up} / 기존 행 갱신 {len(ops) - n_up} · 페이지 맨 위 교체 + 섹션 추가 (사용자 칸 0건)")
+    n = {k: sum(o["op"] == k for o in ops) for k in ("upsert", "update_only", "archive")}
+    print(f"Notion {stage} 반영 계획: upsert {n['upsert']} / 기존 행 갱신 {n['update_only']} / 중복 정리 {n['archive']}"
+          " · 페이지 맨 위 교체 + 섹션 추가 (사용자 칸 0건)")
     return 0
 
 

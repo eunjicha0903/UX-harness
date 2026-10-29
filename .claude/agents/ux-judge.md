@@ -30,7 +30,8 @@ s2~s4의 모든 레코드에 대해 확인한다:
     {"id": "CHK-S2-014", "agree": true, "objection_reason": null, "evidence_check": "ok"},
     {"id": "CHK-S3-003", "agree": false, "objection_reason": "...", "evidence_check": "missing|not_fetched|excluded|mismatch"}
   ],
-  "missing_coverage": ["누락된 REQ·규칙 조건·연결 화면 설명"]
+  "missing_coverage": ["누락된 REQ·규칙 조건·연결 화면 설명"],
+  "duplicates": [{"id": "CHK-S3-029", "same_as": "CHK-S2-061", "reason": "같은 오타를 다른 단계에서 다시 기록"}]
 }
 ```
 
@@ -38,3 +39,5 @@ s2~s4의 모든 레코드에 대해 확인한다:
 - 이의는 판정을 낮추는 방향으로만 작동한다. PASS로 올리자고 제안하지 않는다.
 - 판정을 직접 고치거나 대체 판정을 쓰지 않는다. 사유만 쓴다.
 - 실행 중 사용자에게 질문하지 않는다.
+
+같은 문제를 가리키는 레코드가 둘 이상이면 `duplicates[]`에 `{id, same_as, reason}`으로 적는다 (보드에는 대표 항목만 남는다, artifacts §10). 판정은 바꾸지 않는다.

@@ -23,7 +23,7 @@
 3. 자료 수집: 사용자가 준 PRD·Notion·Figma를 확인하고 `sources/index.json`에 상태를 기록한다 (context-inventory §3 원칙). 다른 고객사 자료는 EXCLUDED로 기록한다.
 4. R1-A 절차로 `story-service.md` 초안을 쓴다: 사용자 스토리(5문장 이내), 필수 규칙 1~2개(PRD 근거), 플랫폼 허용 목록, 검증 범위, 필수 규칙 판정 조건(ID), 화면 판별 재지정(필요 시).
 5. **H0**: 사용자 승인 → `approved_at` 기록. 승인 전에는 검증을 시작하지 않는다 (G0).
-6. `project.json`을 쓰고, Notion `업무 도우미 / UX검토 / <프로젝트>` 아래 검토 사항 DB를 만든다 (스키마: `templates/project/notion-review-db.sql`), 보기는 템플릿 SQL 주석대로 `검토 중`(to do 보드: 카테고리 × 플랫폼, 정렬 순서)과 `완료 기록`(표)을 만든다 (artifacts §10, 공통).
+6. `project.json`을 쓰고, Notion `업무 도우미 / UX검토 / <프로젝트>` 아래 검토 사항 DB를 만든다 (스키마: `templates/project/notion-review-db.sql`), 보기는 템플릿 SQL 주석대로 `검토 중`(to do 보드: 카테고리 × 플랫폼, 정렬 순서)과 `완료`(보드)을 만든다 (artifacts §10, 공통).
 7. 실제 업무 흐름이 story-work와 다르면 `story-work-exceptions.md`에만 기록한다 (`docs/story-work.md`는 수정 금지).
 8. 공통 파일과 섞지 않고 `[<slug>] init` 커밋.
 

@@ -182,7 +182,8 @@ def unit_as_record(u):
         "impact_screens": [s for s, d in zip(screens, u.get("related_screens", []))
                            if d.get("decision") != "수정 불필요"],
         "follow_up": u.get("follow_up"), "prev_verdict": u.get("prev_verdict"),
-        "unit": True,
+        "related_ids": screens, "fix_platforms": u.get("fix_platforms"),
+        "review_case": u.get("review_case"), "focus": u.get("focus"), "unit": True,
     }
 
 
@@ -358,7 +359,10 @@ def gate_g2(a, g):
         return
     recs = s2.get("records", [])
     covered = {ref for r in recs for ref in (r.get("req_refs") or [])}
+    out = set(s1.get("out_of_scope_requirements") or [])   # 사용자 범위 지시로 이번 실행에서 판정하지 않는 REQ (pipeline §7)
     for req in s1.get("requirements", []):
+        if req["id"] in out:
+            continue
         g.check(req["id"] in covered, f"{req['id']}: 판정 레코드 없음")
     _record_checks(a, g, recs)
     rule_refs = {r.get("rule_ref") for r in recs}
@@ -557,7 +561,7 @@ def compute_status(slug, run):
             "what": r.get("title"), "why": r.get("reason"),
             "evidence": [f"{e.get('source_id')} {e.get('locator')}" for e in r.get("evidence") or []],
             # CHK-S3-GUIDE(디자인 가이드 부재)는 하네스가 요구하는 프로젝트 전체 항목이므로 영향 범위가 전체 화면이다.
-            "impact_screens": r.get("impact_screens") or r.get("screen_ids")
+            "impact_screens": r.get("impact_screens") or r.get("screen_ids") or r.get("related_ids")
                               or (["전체 화면"] if r.get("id") == "CHK-S3-GUIDE" else []),
             "follow_up": r.get("follow_up"),
         })
@@ -664,7 +668,10 @@ class Display:
         out = [self._frame_of(n) for n in r.get("figma_node_ids") or []]
         out = [n for n in out if n]
         if not out:
-            for sid in r.get("screen_ids") or []:
+            sids = list(r.get("screen_ids") or [])
+            if r.get("unit"):   # S4 단위: 수정 대상 화면(영향 화면)을 앞에, 기점 화면을 뒤에
+                sids = list(r.get("impact_screens") or []) + sids
+            for sid in sids:
                 out += self.screen.get(sid, [])
         return list(dict.fromkeys(out))
 
@@ -958,7 +965,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
             L.append(f"*{q['question']}*")
             order = {"FAIL": 0, "NEEDS_REVIEW": 1, "INSUFFICIENT_INFO": 2}
             for r in sorted(open_, key=lambda x: order.get(x.get("verdict"), 9))[:8]:
-                L.append(f"- **{D.frame_label(D.frames(r), cap=2)}** — {D.text(r.get('title'))} ({VTYPE_KO[r['verdict']]})")
+                L.append(f"- **{D.frame_label(D.frames(r), cap=2, first=D.primary_platform(D.frames(r), r))}** — {D.text(r.get('title'))} ({VTYPE_KO[r['verdict']]})")
             if len(open_) > 8:
                 L.append(f"- 외 {len(open_) - 8}건 (아래 상세 · 검토 사항 DB)")
             L.append("")
@@ -1119,7 +1126,7 @@ def _focus_lines(D, recs, open_ids, focus, cap=8):
         if q.get("question"):
             L.append(f"*{q['question']}*")
         for r in sorted(open_, key=lambda x: (order.get(x.get("verdict"), 9), D.sort_key(D.frames(x))))[:cap]:
-            L.append(f"- **{D.frame_label(D.frames(r), cap=2)}** — {D.text(r.get('title'))} ({VTYPE_KO[r['verdict']]})")
+            L.append(f"- **{D.frame_label(D.frames(r), cap=2, first=D.primary_platform(D.frames(r), r))}** — {D.text(r.get('title'))} ({VTYPE_KO[r['verdict']]})")
         if len(open_) > cap:
             L.append(f"- 외 {len(open_) - cap}건 (검토 사항 DB)")
         L.append("")

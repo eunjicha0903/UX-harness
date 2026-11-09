@@ -2,10 +2,11 @@
   "slug": "maru",
   "run_id": "20261109-0131",
   "started_at": "2026-11-09T01:31:48",
-  "current_stage": "S2",
+  "current_stage": "S4",
   "completed_stages": [
     "S1",
-    "S3"
+    "S3",
+    "S2"
   ],
   "stage_outputs": {},
   "source_hashes": {

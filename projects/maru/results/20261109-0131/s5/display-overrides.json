@@ -1,0 +1,16 @@
+{
+ "_note": "Orchestrator 표시 보정 (artifacts §10). 판정값은 바꾸지 않는다. board_exclude = 이번 실행 범위(관리자웹만) 밖이라 판정하지 않은 레코드 — 보드에 올리지 않음.",
+ "review_case": {},
+ "duplicates": {},
+ "user_removed": [
+  "CHK-S3-039",
+  "CHK-S2-048"
+ ],
+ "board_exclude": [
+  "CHK-S2-113",
+  "CHK-S2-114",
+  "CHK-S2-115",
+  "CHK-S2-116",
+  "CHK-S2-117"
+ ]
+}

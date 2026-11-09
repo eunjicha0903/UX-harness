@@ -577,12 +577,20 @@ def _figma_layout(slug):
         return {}, [], {}
     lines = path.read_text(encoding="utf-8").split("\n")
     tops, tags, owner = {}, [], {}
-    cur = None
+    cur = group = None   # group: 최상위 'Group …' 프레임 — 직계 자식을 최상위로 펼친다 (좌표는 그룹 기준이라 더함)
     for line in lines:
         attrs = {k: html.unescape(v) for k, v in re.findall(r'(\w+)="([^"]*)"', line)}
-        if re.match(r"^  <\w", line):
+        top = re.match(r"^  <\w", line)
+        if top and re.match(r"^Group \d+$", attrs.get("name") or ""):
+            group = (float(attrs.get("x", 0)), float(attrs.get("y", 0)))
+            cur = None
+            continue
+        if top:
+            group = None
+        if top or (group and re.match(r"^    <\w", line)):
+            gx, gy = group if (group and not top) else (0.0, 0.0)
             cur = {"id": attrs.get("id"), "name": attrs.get("name"), "text": None,
-                   "x": float(attrs.get("x", 0)), "y": float(attrs.get("y", 0)),
+                   "x": gx + float(attrs.get("x", 0)), "y": gy + float(attrs.get("y", 0)),
                    "w": float(attrs.get("width", 0)), "h": float(attrs.get("height", 0))}
             tops[cur["id"]] = cur
             if cur["name"] == "TAG":
@@ -830,6 +838,14 @@ def review_case(r, ov=None):
     return "로직"
 
 
+def fb_label(f, all_fb):
+    """피드백 항목 표시 이름. 한 지시를 여러 항목으로 나눠 원문이 같으면 항목별 변경 내용(change)을 쓴다."""
+    text = (f.get("text") or "").split("\n")[0]
+    if sum(1 for x in all_fb if (x.get("text") or "").split("\n")[0] == text) > 1 and f.get("change"):
+        return str(f["change"]).split("\n")[0][:80]
+    return text
+
+
 def merged_view(slug, run, final_records, unresolved):
     """표시용 병합 (판정은 바꾸지 않는다, artifacts §10).
     - S4에서 FAIL 레코드를 기점으로 한 분석 단위는 기점 항목에 합친다 (영향 화면 보강).
@@ -949,7 +965,7 @@ def build_report(slug, run, final, judgement, missing_cov, diff):
     fb_units = [u for u in s4.get("units", []) if u.get("origin", {}).get("type") == "feedback"]
     if fb_units:
         L.append("## 피드백 영향 영역")
-        fbtext = {f["id"]: f.get("text") for f in s1.get("feedback", [])}
+        fbtext = {f["id"]: fb_label(f, s1.get("feedback", [])) for f in s1.get("feedback", [])}
         for u in fb_units:
             ref = u["origin"]["ref"]
             L.append(f"### {fbtext.get(ref, ref)}")
@@ -1126,7 +1142,7 @@ def stage_page(slug, run, stage):
         sec.append("- 화면: " + " · ".join(f"{D.plat_label.get(k, k)} {v}개" for k, v in c.items()))
         sec.append(f"- 요구사항 {len(s1.get('requirements', []))}개 · 구역별 피드백 {len(s1.get('feedback', []))}개")
         for f in s1.get("feedback", []):
-            first = (f.get("text") or "").split("\n")[0][:60]
+            first = fb_label(f, s1.get("feedback", []))[:60]
             sec.append(f"  - {first} — Figma 반영(1차 관찰): {f.get('figma_reflected', '확인 불가')}")
         for x in s1.get("excluded_requests", []) + s1.get("excluded_sources", []):
             sec.append(f"- 제외: {x.get('request') or x.get('source')} — {x.get('reason')}")
@@ -1141,7 +1157,7 @@ def stage_page(slug, run, stage):
         sec += _focus_lines(D, recs, open_ids, focus)
     elif stage == "S4":
         s4 = load(rd / "s4" / "s4-impact.json", {}) or {}
-        fbtext = {f["id"]: f.get("text") for f in s1.get("feedback", [])}
+        fbtext = {f["id"]: fb_label(f, s1.get("feedback", [])) for f in s1.get("feedback", [])}
         sec.append("## 4. 구역별 영향 영역 (S4, 잠정)")
         for u in s4.get("units", []):
             if u.get("origin", {}).get("type") != "feedback":

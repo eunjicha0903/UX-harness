@@ -1,0 +1,1341 @@
+{
+ "run_id": "20261109-0131",
+ "records": [
+  {
+   "id": "CHK-S2-007",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 클라이언트 html이 자료(FETCHED)에 없어 NEEDS_REVIEW가 맞음"
+  },
+  {
+   "id": "CHK-S2-008",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-009",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-011",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 규칙 1-a 조건대로 판정"
+  },
+  {
+   "id": "CHK-S2-012",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 규칙 1-b 문구 조건 충족"
+  },
+  {
+   "id": "CHK-S2-013",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 규칙 1-c"
+  },
+  {
+   "id": "CHK-S2-015",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-016",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-27은 드롭다운 닫힘 변형인데 '가려 보이지 않음'이라고 적은 것은 서술 오류(판정 영향 없음)"
+  },
+  {
+   "id": "CHK-S2-021",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-30 스크린샷에서 목록 태그 '미승인', 드롭다운 '심사 거절' 확인. 규칙 2-d FAIL 맞음"
+  },
+  {
+   "id": "CHK-S2-025",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-b는 모달이 뜨는지만 봄. 빈 입력 문제는 CHK-S2-061"
+  },
+  {
+   "id": "CHK-S2-026",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 승인된 2-c 기준 FAIL. CF-05 결정 메모로는 해소할 수 없음(5-2 필수 규칙 FAIL)"
+  },
+  {
+   "id": "CHK-S2-027",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-a"
+  },
+  {
+   "id": "CHK-S2-029",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-030",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-031",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-032",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-035",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 기준 원문 56p는 NOT_FOUND(CF-04). Figma 앱 60으로 대조함"
+  },
+  {
+   "id": "CHK-S2-037",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-30 3·7·8·10행 Professional+심사 중 확인"
+  },
+  {
+   "id": "CHK-S2-038",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-040",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-041",
+   "agree": false,
+   "objection_reason": "PASS 근거가 범위 전체를 뒷받침하지 않음. 제목은 '모두 회원 유형으로 통일', 본문은 \"'회원 등급' 표기는 남아 있지 않다\"인데 같은 메뉴의 WEB-29에 '회원 등급 전체'(CHK-S4-103, 이번 실행 스크린샷), WEB-39에 'professional 등급'(CHK-S3-107)이 남아 있음. WEB-28의 기본 라벨 '전체'(CHK-S3-026)도 impact_screens에 넣고서 확인하지 않음. 확인하지 않은 화면을 통일됐다고 판정함",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S2-046",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 사용자앱 쪽 절반을 범위 밖으로 둔 처리가 맞음"
+  },
+  {
+   "id": "CHK-S2-047",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-050",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — APP 60(271:28469)은 신고 모달 화면인데 '게시글 상세'로 인용함(경미한 위치 오기)"
+  },
+  {
+   "id": "CHK-S2-051",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-052",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-053",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-054",
+   "agree": false,
+   "objection_reason": "직접 확인한 화면은 WEB-18(뉴스)뿐. 나머지 목록(19·26·30·40·47)은 결정 메모의 '주석으로 통일'에 기대고 있는데, follow_up 스스로 '메타데이터에서 주석 텍스트는 찾지 못함'이라고 적음. 그런데도 req_refs의 REQ-FORUM-03·MEMBER-03·PRO-03·REPORT-03·BAN-01까지 포함해 PASS를 줌. 확인하지 않은 근거로 준 PASS임",
+   "evidence_check": "missing"
+  },
+  {
+   "id": "CHK-S2-055",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-056",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 핵심 근거 REQ-REPORT-06은 SRC-04(체크 여부 미확인)임. CHK-S3-109(NEEDS_REVIEW)와 판정 유형이 다름 → duplicates 참고"
+  },
+  {
+   "id": "CHK-S2-057",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — SRC-04 722:26278은 체크 여부 미확인. 실행 수단 공백은 CHK-S4-101"
+  },
+  {
+   "id": "CHK-S2-058",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-059",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 열 머리글 문제는 CHK-S3-113(FAIL)에서 따로 판정"
+  },
+  {
+   "id": "CHK-S2-060",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-061",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 규칙 2 '반드시 입력'과 연결됨"
+  },
+  {
+   "id": "CHK-S2-062",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-063",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-064",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-065",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-066",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-067",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-068",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 판정 범위(19·26·30·40·47) 안에서는 맞음"
+  },
+  {
+   "id": "CHK-S2-071",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-101",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — CF-03"
+  },
+  {
+   "id": "CHK-S2-102",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-103",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 정책 변경 결정을 사람 판단으로 둔 처리가 맞음"
+  },
+  {
+   "id": "CHK-S2-104",
+   "agree": false,
+   "objection_reason": "사람이 결정할 사항을 FAIL(문제 확인)로 단정함. SRC-00 <Professional 신청 심사 상세>가 요구하는 것은 '전달 사유 모달'과 '내부 검토 메모'뿐이고, 처리 후 상세에 전달 사유를 표시하라는 요구는 없음. 인용한 '내부 메모와 전달 사유 구분'은 story-service D절에서 '사람 검토' 항목으로 정한 것임. 같은 문제를 다룬 CHK-S3-105는 같은 근거로 NEEDS_REVIEW임",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S2-105",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-106",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-107",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-108",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-109",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-110",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-001",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-002",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S2-113",
+   "agree": false,
+   "objection_reason": "범위 위반. 사용자앱 전용 요구(REQ-CTX-07)를 platform·fix_platforms ['WEB'] 레코드로 만듦. 화면·노드도 없어서 관리자웹 검토 사항 보드에 '검토 필요' 할 일로 올라감. s1 scope.note는 사용자앱만 고치면 되는 항목을 excluded_requests에 적으라고 정함. 플랫폼 표시가 실제 대상(APP)과 맞지 않음",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S2-114",
+   "agree": false,
+   "objection_reason": "CHK-S2-113과 같은 범위 위반. 사용자앱 신고 기능 요구(REQ-CTX-08)를 관리자웹 레코드로 만듦. 화면·노드 없음",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S2-115",
+   "agree": false,
+   "objection_reason": "CHK-S2-113과 같은 범위 위반. 사용자앱 프로필 표기 요구(REQ-CTX-09)를 관리자웹 레코드로 만듦",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S2-116",
+   "agree": false,
+   "objection_reason": "CHK-S2-113과 같은 범위 위반. 사용자앱 뉴스피드 상세 구조 요구(REQ-CTX-11)를 관리자웹 레코드로 만듦",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S2-117",
+   "agree": false,
+   "objection_reason": "CHK-S2-113과 같은 범위 위반. 사용자앱 배너 슬라이드 요구(REQ-BANNER-03, 근거 SRC-04 체크 여부 미확인)를 관리자웹 레코드로 만듦",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S3-101",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-d FAIL. CHK-S2-021과 같은 문제"
+  },
+  {
+   "id": "CHK-S3-102",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-103",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-104",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-105",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — CHK-S2-104(FAIL)와 판정 유형 충돌"
+  },
+  {
+   "id": "CHK-S3-106",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-107",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-108",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-109",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-110",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-111",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-112",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-113",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — SRC-00은 열 이름 '관리(심사하기 버튼)'"
+  },
+  {
+   "id": "CHK-S3-114",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-115",
+   "agree": false,
+   "objection_reason": "PASS 기준이 부족함. 관리자웹 2단 구분이 사용자앱 80(신청서 검토 화면)과 같다는 것만 확인함. 그런데 같은 실행의 CHG-13에서 사용자앱 공개 프로필(65·66·69~72)이 Supporting link·Additional context를 공개로 보여 주어, 앱 안에서 공개/비공개 경계가 엇갈림. 이 경계는 CHK-S2-108·IMP-S4-110에서 사람 결정 대기(NEEDS_REVIEW)임. 정해지지 않은 공개 범위를 기준으로 '구분이 맞다'고 PASS를 줄 수 없음",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S3-116",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-a. CHK-S2-027과 같은 조건"
+  },
+  {
+   "id": "CHK-S3-117",
+   "agree": false,
+   "objection_reason": "case 분류(접수=버튼 3개 / 결과=목록으로만)는 맞음. 하지만 처리 상태 태그 '처리 완료→제재 없음'까지 '반영 확인' PASS로 묶음. 이 값은 story-service B절·SRC-00('접수 / 정지 완료 / 처리 완료')과 다르고, CF-06과 CHK-S2-029·IMP-S4-187이 NEEDS_REVIEW로 남아 있음. 근거인 SRC-04 732:20140도 체크 여부를 확인하지 못함. 미해소 충돌을 반영 완료로 판정함",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S3-003",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-46은 스크린샷 미확인이라고 스스로 적음"
+  },
+  {
+   "id": "CHK-S3-004",
+   "agree": false,
+   "objection_reason": "단계 간 판정 충돌, 확인할 수 없는 근거로 준 PASS. 근거는 '클라이언트 html 명칭으로 픽스' 결정 메모뿐인데 그 html은 하네스 자료(FETCHED)에 없음. 같은 메모를 본 CHK-S2-007은 같은 이유로 NEEDS_REVIEW이고, IMP-S4-159도 이 차이를 지적함. story-service B절 '전체 푸시 전송 완료 / 전체 푸시 미전송'은 바뀌지 않았음(갱신·H0 없음). 메모만으로 판정 기준을 SRC-00에서 SRC-05로 바꿀 수 없음",
+   "evidence_check": "not_fetched"
+  },
+  {
+   "id": "CHK-S3-006",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-007",
+   "agree": false,
+   "objection_reason": "CHK-S3-004와 같은 유형. 근거는 '클라이언트 html 기준 픽스' 메모(html은 FETCHED 아님)와 SRC-04 732:20140(체크 여부 미확인)임. story-service B절·SRC-00('정지 완료 / 처리 완료', '확인 완료(이상 없음)')과 다르고, CF-06과 같은 결정 항목 CHK-S2-029·IMP-S4-187은 NEEDS_REVIEW임. 미해소 정의 충돌 위에 준 PASS임",
+   "evidence_check": "not_fetched"
+  },
+  {
+   "id": "CHK-S3-008",
+   "agree": false,
+   "objection_reason": "WEB-28을 screen_ids에 넣고 '열 머리글·드롭다운 기본 라벨이 모두 회원 유형으로 바뀜'이라고 판정함. 그런데 같은 단계 CHK-S3-026(FAIL)은 WEB-28 기본 라벨이 '전체'라고 판정함(자기 모순). 같은 메뉴 WEB-29 '회원 등급 전체'(CHK-S4-103)도 확인하지 않음. 또 드롭다운 값(Newcomer/Insider/Professional)이 앱과 같다는 것은 맞지만, 값 자체의 확정 근거는 CF-01에서 NEEDS_REVIEW로 남아 있음",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "CHK-S3-011",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-15를 스스로 미확인이라 적었으나 S2(CHK-S2-051)가 get_screenshot으로 확인함"
+  },
+  {
+   "id": "CHK-S3-016",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-018",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 56p 원문은 NOT_FOUND. 앱 60(FETCHED)으로 대조"
+  },
+  {
+   "id": "CHK-S3-019",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-022",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-023",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-024",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 49 모달 문구는 S4의 689:17022 스크린샷으로 이번 실행에서도 확인됨"
+  },
+  {
+   "id": "CHK-S3-025",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-026",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-027",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-028",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-029",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-030",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-031",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-032",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-033",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-034",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-035",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S3-GUIDE",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S4-001",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 핵심 근거는 SRC-05 체크된 메모 'DB 삭제'. SRC-04 722:26278은 체크 여부 미확인"
+  },
+  {
+   "id": "CHK-S4-002",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 신고·정지 목록 행 영향은 missing_coverage 참고"
+  },
+  {
+   "id": "CHK-S4-101",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S4-102",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "CHK-S4-103",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-101",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-102",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-103",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-c"
+  },
+  {
+   "id": "IMP-S4-104",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-d"
+  },
+  {
+   "id": "IMP-S4-105",
+   "agree": false,
+   "objection_reason": "근거 없이 '수정 필요'를 단정함. 미입력 차단(규칙 2 '반드시 입력', CHK-S2-061)만 '수정 필요'의 근거가 됨. WEB-36 '전달 사유 표시'는 SRC-00이 요구하지 않는 사람 검토 사항임(CHK-S3-105 NEEDS_REVIEW). WEB-38 '작성 언어·노출 안내'는 CHK-S2-038(NEEDS_REVIEW, 디자이너 메모 '내가 고려할 부분이 아님')에 기댐. 두 항목을 수정 필요로 묶어 확정함",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "IMP-S4-106",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-107",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-108",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-40 오타·WEB-45 제목은 확정 결함. 41~44 '수정 필요'는 SRC-04(체크 여부 미확인)에 기댐"
+  },
+  {
+   "id": "IMP-S4-109",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-110",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-111",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-112",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-113",
+   "agree": false,
+   "objection_reason": "자료가 부족한데 PASS를 줌. CHG-01은 사용자앱 주석이 '삭제 또는 숨김'(어느 쪽인지 미확인)이라고 적음. 사라진 주석 중 '배너는 정확한 배너 비율 고정'은 관리자웹 배너 등록·수정(WEB-54·55)의 업로드 조건 근거이고, expected_problem도 '근거 위치만 사라짐'이라고 인정함. 근거가 사라진 상태에서 54·55를 '수정 불필요'로 확정할 수 없음",
+   "evidence_check": "missing"
+  },
+  {
+   "id": "IMP-S4-114",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-115",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-116",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-117",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 판정 범위를 목록 화면으로 한정했고 잔존 표기는 IMP-S4-107"
+  },
+  {
+   "id": "IMP-S4-118",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-119",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-120",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-121",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — '제출 시점=접수 일시'는 추론(근거 약함)이지만 관리자웹 수정 요인 없음"
+  },
+  {
+   "id": "IMP-S4-122",
+   "agree": false,
+   "objection_reason": "WEB-36을 '수정 필요(전달 사유 표시 없음)'로 확정함. 이는 SRC-00 요구가 아닌 사람 검토 사항임(CHK-S3-105 NEEDS_REVIEW, CHK-S2-104 이의 참고). WEB-30·31(2-d)과 WEB-38(빈 입력 차단)의 수정 필요는 근거가 있음",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "IMP-S4-123",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-124",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-125",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-126",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-127",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-128",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-129",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-130",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-131",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-132",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-133",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-134",
+   "agree": false,
+   "objection_reason": "자료가 부족한데 PASS를 줌. 사용자앱 49 높이 변경(964→976)의 시각 변화를 'expected_problem: 스크린샷 미확인'이라고 스스로 적음. 사용자앱 49에는 News 메인 배너가 있음(IMP-S4-008에서 '회의 위치 목록에 없음'으로 지적). 그런데도 WEB-51을 '배너 자리 변경 근거 없음'으로 수정 불필요 확정함. 확인하지 않은 변경을 영향 없음으로 판정함",
+   "evidence_check": "missing"
+  },
+  {
+   "id": "IMP-S4-135",
+   "agree": false,
+   "objection_reason": "WEB-36 '수정 필요(전달 사유 표시 없음)'를 사람 검토 사항(CHK-S3-105)인데도 확정함. 나머지 31·34·35·44·45 판단은 기점 레코드 근거가 있음",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "IMP-S4-136",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-137",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-138",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-d"
+  },
+  {
+   "id": "IMP-S4-139",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 2-c"
+  },
+  {
+   "id": "IMP-S4-140",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-141",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — CHK-S3-109와 판정 유형 차이 있음"
+  },
+  {
+   "id": "IMP-S4-142",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-143",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-144",
+   "agree": false,
+   "objection_reason": "기점 CHK-S2-104가 SRC-00이 요구하지 않는 사람 검토 사항('내부 메모와 전달 사유 구분', story-service D절)을 FAIL로 단정한 것임. 이 단위도 WEB-36을 근거 없이 '수정 필요'로 확정함. CHK-S3-105는 같은 문제를 NEEDS_REVIEW로 판정함",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "IMP-S4-145",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-146",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-147",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-148",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-149",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-150",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-151",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-152",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-153",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-154",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-155",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-156",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-157",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-158",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-159",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-160",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-161",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-162",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-163",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-164",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-165",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-166",
+   "agree": false,
+   "objection_reason": "연결 화면을 확인하지 않고 판정함. CHK-S3-031이 '나머지 빈 화면은 스크린샷을 찍지 않아 반영 여부를 확인하지 못함'이라고 적었는데, 이 단위는 WEB-17·25·46·50·58을 '수정 불필요'로 확정함. 같은 방식(떼어낸 복사본)의 29·39에서 실제 결함이 나왔으므로 확인하지 않은 빈 화면을 수정 불필요로 둘 근거가 없음(단위 판정 FAIL은 유지)",
+   "evidence_check": "missing"
+  },
+  {
+   "id": "IMP-S4-167",
+   "agree": false,
+   "objection_reason": "PASS인데 근거를 확인하지 못함. WEB-19·40·47을 '결정 메모로 같은 상태 적용 → 수정 불필요'로 판정했지만, 그 주석은 메타데이터에서 찾지 못함(CHK-S2-054 follow_up). 화면·주석 어느 쪽으로도 확인되지 않은 적용을 PASS로 둠",
+   "evidence_check": "missing"
+  },
+  {
+   "id": "IMP-S4-168",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-169",
+   "agree": false,
+   "objection_reason": "연결 화면을 빠뜨림. '필터 기본값 ○○ 전체 명칭이 결정 메모대로 정리됨'을 PASS로 두면서, 같은 결정이 적용되는 회원 관리·Professional 심사·이용 정지 관리 화면(26~31·47·48)을 related_screens에서 뺐음. 그중 WEB-28 '전체'(CHK-S3-026 FAIL), WEB-29 '회원 등급 전체'(CHK-S4-103 FAIL)는 결정과 어긋남",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "IMP-S4-170",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-171",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-172",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-173",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-174",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-175",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-176",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-177",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-178",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — 신고·정지 목록 행 영향은 missing_coverage 참고"
+  },
+  {
+   "id": "IMP-S4-179",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-180",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-181",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-182",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-183",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-184",
+   "agree": false,
+   "objection_reason": "근거 없이 '수정 필요'를 단정함. 기점 CHK-S2-038은 NEEDS_REVIEW(운영 언어 결정 대기, 디자이너 메모 '내가 고려할 부분이 아님')이고, 작성 언어 안내를 요구하는 자료(SRC-00 등)가 없음. 새 근거 없이 S4에서 FAIL·'수정 필요'로 높이면서 빈 입력 차단(CHK-S2-061)의 근거를 끌어 붙임",
+   "evidence_check": "mismatch"
+  },
+  {
+   "id": "IMP-S4-185",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-186",
+   "agree": false,
+   "objection_reason": "WEB-46을 '수정 불필요'로 확정했지만 CHK-S3-003은 'WEB-46은 떼어낸 복사본이라 스크린샷 미확인'이라고 적음. 같은 방식의 WEB-29는 이전 명칭이 남아 있었음. 확인하지 않은 연결 화면을 수정 불필요로 판정함",
+   "evidence_check": "missing"
+  },
+  {
+   "id": "IMP-S4-187",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-007",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — WEB-50 '해지 오기 없음'은 이번 실행에서 스크린샷으로 확인하지 않음"
+  },
+  {
+   "id": "IMP-S4-188",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-189",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-190",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-008",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-191",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-192",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok"
+  },
+  {
+   "id": "IMP-S4-193",
+   "agree": true,
+   "objection_reason": null,
+   "evidence_check": "ok — relation_evidence의 SRC-03 locator 'design.md 없음'은 Figma 위치가 아님(인용 형식만 어긋남)"
+  }
+ ],
+ "missing_coverage": [
+  "빈 화면 WEB-17·25·46·50·58: 스크린샷을 찍지 않아 목록 변경(검색 안내, '○○ 전체' 기본 라벨, '회원 유형' 명칭)이 반영됐는지 어느 단계에서도 판정하지 않음. 같은 복사본 방식인 29·39에서 결함이 확인됐으므로 확인 대상임",
+  "CF-01(회원 유형 값: SRC-01 한글 명칭 vs 영문 Newcomer/Insider/Professional): 관리자웹 드롭다운·열 값의 확정 근거를 판정한 레코드가 없음. CHK-S3-008은 앱과 같다는 것만 확인함",
+  "CHK-S4-002 '탈퇴 회원은 회원에서 삭제' 결정이 신고 관리(WEB-40)의 신고자·신고 대상자 행과 이용 정지 관리(WEB-47) 행에 주는 영향이 분석되지 않음(CHK-S4-002 impact_screens 비어 있음, IMP-S4-178은 근거 없이 '수정 불필요')",
+  "규칙 1 사람 검토 항목 '원문 글 삭제 모달 문구의 명확성': 이번 실행에서 대응 레코드가 없음(CHK-S2-012 follow_up에 '변동 없음'만 있음)",
+  "REQ-NEWS-01(뉴스 목록 항목·뉴스번호 라벨 제거), REQ-PRO-03·REQ-MEMBER-03(검색바+초기화): 재번호·신규 프레임 이후 CHK-S2-054(검색 결과 없음) req_refs로만 연결돼 있고, 목록 항목·검색바가 있는지 자체는 이번 실행에서 판정하지 않음",
+  "CHG-01로 사라진 사용자앱 주석('배너는 정확한 배너 비율 고정', '알림 종류: …'): 관리자웹 배너 등록·수정(54·55) 업로드 조건과 푸시 알림(14~16)의 근거가 없어졌는데 자료 확인 항목으로 남기지 않음"
+ ],
+ "duplicates": [
+  {
+   "id": "CHK-S3-101",
+   "same_as": "CHK-S2-021",
+   "reason": "Professional 심사 목록 태그 '미승인' vs '심사 거절' — 같은 2-d 결함"
+  },
+  {
+   "id": "CHK-S3-102",
+   "same_as": "CHK-S2-101",
+   "reason": "신청 유형 '개인 사업자' vs 앱 'Individual professional' 명칭(CF-03)"
+  },
+  {
+   "id": "CHK-S3-103",
+   "same_as": "CHK-S2-040",
+   "reason": "WEB-34 'Services area' 오타"
+  },
+  {
+   "id": "CHK-S3-104",
+   "same_as": "CHK-S2-102",
+   "reason": "심사 상세 카드 예시 값(Based in·Experience·Service area·해외 Registration country) 어긋남"
+  },
+  {
+   "id": "CHK-S3-105",
+   "same_as": "CHK-S2-104",
+   "reason": "WEB-36에 신청자 전달 사유 표시 없음. 판정 유형 충돌(S2 FAIL / S3 NEEDS_REVIEW) — CHK-S2-104 이의 참고"
+  },
+  {
+   "id": "CHK-S3-106",
+   "same_as": "CHK-S2-105",
+   "reason": "정지 사유 모달(28·43) 노출·언어 안내·빈 입력 차단 없음"
+  },
+  {
+   "id": "CHK-S3-108",
+   "same_as": "CHK-S2-106",
+   "reason": "WEB-45 제목 '결과: 제재 없음' 오기"
+  },
+  {
+   "id": "CHK-S3-109",
+   "same_as": "CHK-S2-056",
+   "reason": "신고 원문 확인(41) 사유·대상 없음, 결과 화면 사유 1개. 판정 유형 충돌(S2 FAIL / S3 NEEDS_REVIEW)"
+  },
+  {
+   "id": "CHK-S3-114",
+   "same_as": "CHK-S2-107",
+   "reason": "원문 글 상세 카드 카테고리 1개 예시 — 다중 카테고리 미표현"
+  },
+  {
+   "id": "CHK-S3-033",
+   "same_as": "CHK-S2-055",
+   "reason": "신고 관리 처리 상태 필터 없음"
+  },
+  {
+   "id": "CHK-S3-111",
+   "same_as": "CHK-S2-037",
+   "reason": "'현재 회원 유형' 열 예시(심사 중 행 Professional)가 앱 '승인 전 유형 유지'와 반대"
+  },
+  {
+   "id": "CHK-S3-110",
+   "same_as": "CHK-S2-063",
+   "reason": "이용 정지 관리 일부 행 '정지 해제' 비활성 이유 불명(CHK-S2-063 후반부와 같은 문제)"
+  },
+  {
+   "id": "CHK-S3-004",
+   "same_as": "CHK-S2-007",
+   "reason": "같은 결정 메모(클라이언트 html 명칭)를 두고 S3 PASS / S2 NEEDS_REVIEW로 판정이 충돌함 — CHK-S3-004 이의 참고"
+  },
+  {
+   "id": "CHK-S3-007",
+   "same_as": "CHK-S2-029",
+   "reason": "같은 결정 메모('제재 없음' 명칭, CF-06)를 두고 S3 PASS / S2 NEEDS_REVIEW로 판정이 충돌함"
+  },
+  {
+   "id": "CHK-S3-008",
+   "same_as": "CHK-S2-041",
+   "reason": "관리자웹 '회원 유형' 명칭 통일 확인 — 둘 다 WEB-28·29를 놓침"
+  },
+  {
+   "id": "CHK-S3-116",
+   "same_as": "CHK-S2-027",
+   "reason": "규칙 2-a 심사 상세 버튼 구성·처리 후 버튼 제거"
+  },
+  {
+   "id": "CHK-S3-117",
+   "same_as": "CHK-S2-058",
+   "reason": "신고 원문 확인 case 분류(접수=버튼 3개, 결과=목록으로만)"
+  },
+  {
+   "id": "CHK-S3-003",
+   "same_as": "CHK-S2-030",
+   "reason": "신고 관리 검색 안내 '닉네임 또는 이메일로 검색'"
+  },
+  {
+   "id": "CHK-S3-006",
+   "same_as": "CHK-S2-009",
+   "reason": "답글 삭제 버튼·모달 명칭"
+  },
+  {
+   "id": "CHK-S3-011",
+   "same_as": "CHK-S2-051",
+   "reason": "뉴스 등록 완료 모달/푸시 토스트 분리"
+  },
+  {
+   "id": "CHK-S3-016",
+   "same_as": "CHK-S2-110",
+   "reason": "관리자웹 '답글' = 앱 'Comment' 대응"
+  },
+  {
+   "id": "CHK-S3-018",
+   "same_as": "CHK-S2-035",
+   "reason": "신고 목록 '첫 사유 + 외 N개'"
+  },
+  {
+   "id": "CHK-S3-023",
+   "same_as": "CHK-S2-062",
+   "reason": "회원 관리 '이용 정지' 명칭 통일"
+  },
+  {
+   "id": "CHK-S3-029",
+   "same_as": "CHK-S2-060",
+   "reason": "내부 검토 메모 placeholder 수정(미승인 placeholder 오타 수정은 CHK-S2-061 앞부분)"
+  }
+ ]
+}

@@ -1,0 +1,2353 @@
+{
+  "run_id": "20261109-0131",
+  "status": "검토 필요",
+  "gr_fail": [
+    "CHK-S2-021",
+    "CHK-S2-026",
+    "CHK-S3-101",
+    "IMP-S4-103",
+    "IMP-S4-104",
+    "IMP-S4-105",
+    "IMP-S4-122",
+    "IMP-S4-123",
+    "IMP-S4-138",
+    "IMP-S4-139",
+    "IMP-S4-146"
+  ],
+  "unresolved": [
+    {
+      "id": "CHK-S2-007",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "뉴스 푸시 상태 문구는 디자이너가 '클라이언트 html 명칭'으로 픽스했으나 그 html이 자료에 없어 일치 여부를 확인할 수 없음",
+      "why": "관리자웹 03 · 뉴스 관리 푸시 상태 태그는 여전히 '푸시 알림 전송 완료 / 푸시 알림 미전송'으로 회의 픽스 문구('전체 푸시 전송 완료 / 전체 푸시 미전송')와 다르다. 디자이너 결정 메모는 클라이언트 html 명칭으로 픽스했다고 하지만 클라이언트 html은 하네스 자료(FETCHED)에 없어 디자인이 그 명칭과 같은지 확인할 수 없다. 기준 문구가 바뀐 것이므로 FAIL을 유지하지 않고 사람 확인으로 둔다.",
+      "evidence": [
+        "SRC-03 128:9957",
+        "SRC-00 [뉴스관리] 푸시 상태 2개",
+        "SRC-05 Notion CHK-S2-007 결정 메모 '상태 텍스트 길어서 클라이언트 html 명칭으로 픽스함'"
+      ],
+      "impact_screens": [
+        "WEB-03",
+        "WEB-10",
+        "WEB-17",
+        "WEB-18"
+      ],
+      "follow_up": "클라이언트 html의 푸시 상태 명칭이 '푸시 알림 전송 완료/미전송'인지 디자이너가 확인. 맞으면 html 캡처를 sources에 추가해 다음 실행에서 PASS로 닫는다."
+    },
+    {
+      "id": "CHK-S2-008",
+      "verdict": "INSUFFICIENT_INFO",
+      "rule_ref": null,
+      "what": "포럼 관리 '기존 항목 유지'는 수정 전 원본 시안이 여전히 없어 판단할 수 없음",
+      "why": "관리자웹 19 · 포럼 관리 열은 작성 일자/제목/작성자/카테고리/좋아요 수/답글 수/원문 확인이고 2026-10-28 스냅샷과 같다. 그러나 '현재 항목 유지'의 기준인 회의 픽스 이전 Figma 시안은 이번에도 자료에 없어 '유지'됐는지 비교할 수 없다. 수정 완료가 체크됐지만 결정 메모가 없어 기준이 보완되지 않았다.",
+      "evidence": [
+        "SRC-00 [포럼 관리] 피그마 기준, 현재 항목 유지",
+        "SRC-03 142:23478"
+      ],
+      "impact_screens": [
+        "WEB-19",
+        "WEB-20",
+        "WEB-25"
+      ],
+      "follow_up": "회의 픽스 이전 포럼 관리 시안(또는 '현재 열 구성이 기준'이라는 결정 메모)을 Notion 결정 메모나 sources에 추가."
+    },
+    {
+      "id": "CHK-S2-021",
+      "verdict": "FAIL",
+      "rule_ref": "2-d",
+      "what": "Professional 심사 목록 태그는 '미승인'인데 드롭다운·상세는 '심사 거절'이라 3값이 일치하지 않음 (규칙 2-d)",
+      "why": "이전 FAIL 사유(상세에 상태 표시 없음)는 해소됐다 — 관리자웹 32·33·34 상세에 '심사 중', 35에 '승인 완료', 36에 '심사 거절' 태그가 생겼다. 그러나 관리자웹 30·31 · Professional 심사 목록의 처리 거절 행 태그가 '미승인'이고, 같은 화면 드롭다운과 상세 태그·태그 컴포넌트는 '심사 거절'이다. 목록·상세·필터가 같은 3값을 써야 한다는 판정 조건 2-d를 만족하지 않는다. 사용자앱은 같은 상태를 'Not approved'로 보여 주므로 관리자웹 안에서 하나로 정해야 앱 상태와 1:1 대응도 성립한다. 필수 규칙 FAIL이라 컨펌으로 해소할 수 없다.",
+      "evidence": [
+        "SRC-03 689:23558",
+        "SRC-03 722:27288",
+        "SRC-03 725:18762",
+        "SRC-03 725:18738 (컴포넌트 '심사 상태 tag': 승인 완료/심사 중/심사 거절)",
+        "SRC-00 [Professional 심사] 항목 '심사 상태(심사 중/심사거절/승인완료)'",
+        "SRC-05 Notion CHK-S2-021 결정 메모 '대시보드 상단 tag 상태값 표기'",
+        "SRC-03 APP 92(500:18860)·93(739:20998) 'Not approved', APP 90(500:18409) 'Under review', APP 91(500:18780) 'Approved'"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-35",
+        "WEB-36",
+        "WEB-39"
+      ],
+      "follow_up": "관리자웹 30·31 목록의 '미승인' 태그를 컴포넌트 '심사 상태 tag'의 '심사 거절' variant로 교체(또는 3곳 모두 한 명칭으로 통일하고 story-service B절과 맞춤). 수정 후 재검증 PASS 필요."
+    },
+    {
+      "id": "CHK-S2-026",
+      "verdict": "FAIL",
+      "rule_ref": "2-c",
+      "what": "사용자앱은 신청 횟수(1 time·2 times)를 보여 주는데 관리자웹 심사 목록·상세에는 재신청 이력이 전혀 없음 (규칙 2-c)",
+      "why": "판정 조건 2-c(같은 신청자의 재신청 이력이 덮어쓰지 않고 누적되어 보인다)를 승인된 story-service 그대로 적용하면, 관리자웹 30~36 어디에도 이전 신청·이전 심사 결과·신청 횟수가 보이지 않아 조건을 만족하지 않는다. 사용자앱 92·93은 이번 수정으로 'Number of applications: 2 times'와 재제출(Updated documents·Additional context)을 보여 주므로, 같은 신청자가 다시 들어온 건을 관리자가 구분할 정보가 앱보다 적다. 디자이너 결정 메모와 SRC-04는 '관리자웹 누적X'로 규칙과 반대 방향이다(CF-05). 이 결정이 규칙 변경을 뜻하는지는 CHK-S2-103에서 사람 결정으로 남기고, 이 레코드는 현재 승인된 기준으로 판정한다. 필수 규칙 FAIL이라 컨펌으로 해소할 수 없다.",
+      "evidence": [
+        "SRC-00 <Professional 신청 심사 상세> 이력 누적(기존 심사 상태 업데이트 X)",
+        "SRC-03 689:23558 (목록 열: 닉네임/이메일/현재 회원 유형/신청 유형/전문 분야/접수 일시/심사 상태/심사하기)",
+        "SRC-03 725:18762, 724:18198 (처리 완료 상세에 이력 영역 없음)",
+        "SRC-03 APP 92(500:18860) 'Number of applications: 1 time', APP 93(739:20998) '2 times' + Updated documents 재제출",
+        "SRC-05 Notion CHK-S2-026 결정 메모 '관리자웹 재신청 누적X → 사용자앱 검토 필요'",
+        "SRC-04 715:16721·715:16724 '심사이력 누적X(관리자웹 누적X)', 726:18915 '재신청 case → 텍스트로 횟수 표기'"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36",
+        "WEB-38"
+      ],
+      "follow_up": "둘 중 하나: ① 규칙 유지 시 관리자웹 32~36 심사 상세에 '신청 이력'(회차·접수 일시·결과·전달 사유) 영역을, 30·31 목록에 신청 횟수를 추가 ② 규칙을 바꿀 경우 story-service 2-c를 고쳐 H0 재승인 후 재검증(CHK-S2-103)."
+    },
+    {
+      "id": "CHK-S2-029",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 처리 결과 명칭 '제재 없음'은 화면끼리 일치하지만 story-service 정의('처리 완료')와 달라 정의 갱신 여부 확인 필요",
+      "why": "관리자웹 40 · 신고 관리 태그, 41 · 원문 글 확인(접수 상태) 버튼, 44 · 원문 글 확인 결과 제목이 모두 '제재 없음'·'이용 정지'로 서로 맞는다. 디자이너 결정과 체크리스트도 '제재 없음'을 지지한다. 다만 story-service B절과 회의 픽스는 '접수 / 정지 완료 / 처리 완료'로 정의돼 있어(CF-06) 문서와 디자인이 엇갈린다. 하네스가 어느 쪽으로 정하지 않는다.",
+      "evidence": [
+        "SRC-03 245:33331 (처리 상태 태그 접수/이용 정지/제재 없음)",
+        "SRC-03 689:22801 (버튼 제재 없음·회원 이용 정지)",
+        "SRC-05 Notion CHK-S2-029 결정 메모 '명칭은 클라이언트 html 기준으로 픽스'",
+        "SRC-04 732:20140 '처리 완료→제재없음'",
+        "SRC-00 <신고 관리> 처리 상태(접수/정지 완료/처리 완료), 확인 완료(이상 없음) 버튼"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45",
+        "WEB-46"
+      ],
+      "follow_up": "'접수 / 이용 정지 / 제재 없음'을 확정값으로 볼지 결정하고, 확정이면 story-service B절 갱신(H0)을 Orchestrator에 요청."
+    },
+    {
+      "id": "CHK-S2-037",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "관리자 심사 상태 3값은 앱 Under review·Approved·Not approved와 대응하지만, 심사 중인 'Professional' 회원 행과 승인 후 회원 유형 변경이 앱 안내와 맞는지 확인 필요",
+      "why": "앱 상태 3값(Under review / Approved / Not approved)과 관리자 상태(심사 중 / 승인 완료 / 심사 거절)는 개수·의미가 대응한다(목록 '미승인' 태그 불일치는 CHK-S2-021). 사용자앱 76·90은 '승인 전까지 현재 회원 유형 유지'를 새로 안내하는데, 관리자웹 30·31 목록에는 현재 회원 유형이 이미 'Professional'인 사람이 '심사 중'인 행이 4개 있다. 이것이 Professional 회원의 신청 유형 변경(예: 개인→사업자) 재신청을 뜻하는지 단순 예시 오류인지 화면만으로 알 수 없다. 또 승인 시 관리자웹 26 · 회원 관리 '회원 유형'이 Professional로 바뀌는 흐름도 화면으로 표현돼 있지 않다.",
+      "evidence": [
+        "SRC-03 689:23558 (3·7·8·10행: 현재 회원 유형 Professional + 심사 중)",
+        "SRC-03 APP 90(500:18409) 'Your current member type will remain unchanged until your application is approved.' / 'Under review'",
+        "SRC-03 APP 76(733:20651) 'You'll remain a Newcomer until it's approved.'",
+        "SRC-03 APP 91(500:18780) 'Approved', APP 92(500:18860) 'Not approved'",
+        "SRC-03 245:33348 (회원 관리 회원 유형 열)"
+      ],
+      "impact_screens": [
+        "WEB-26",
+        "WEB-30",
+        "WEB-31",
+        "WEB-35",
+        "WEB-37"
+      ],
+      "follow_up": "① Professional 회원이 다시 신청하는 case가 있는지 결정 — 없으면 30·31 목록 예시의 '현재 회원 유형'을 Newcomer/Insider로 수정 ② 승인 완료 시 회원 관리 회원 유형이 Professional로 바뀐다는 점을 심사 승인 모달(37) 문구나 주석으로 명시할지 결정."
+    },
+    {
+      "id": "CHK-S2-038",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "미승인 사유가 영어 앱 'Review feedback'에 그대로 나가는데 관리자 모달에 작성 언어·노출 안내가 여전히 없음",
+      "why": "사용자앱 92·93은 관리자가 쓴 사유를 영어 'Review feedback'으로 그대로 보여 주고, 이번 수정으로 재신청 화면(93)에도 같은 사유가 반복 노출된다. 관리자웹 38 · 심사 거절 모달은 '신청자에게 전달할' 사유라는 점은 알리지만 작성 언어(영어) 안내는 없다. 디자이너는 '내가 고려할 부분이 아님'으로 표시했으므로 디자인 수정보다 기획·클라이언트 운영 결정 사항이다. 근거 화면(앱 93)이 새로 생겨 다시 판정했다.",
+      "evidence": [
+        "SRC-03 693:28331 ('Professional 신청자에게 전달할 심사 미승인 사유를 입력해주세요.')",
+        "SRC-03 APP 92(500:18860)·93(739:20998) 'Review feedback: The submitted materials do not yet provide enough information…'",
+        "SRC-05 Notion CHK-S2-038 결정 메모 '내가 고려할 부분이 아님.'"
+      ],
+      "impact_screens": [
+        "WEB-38",
+        "WEB-36"
+      ],
+      "follow_up": "운영 언어(영어 작성 여부)를 기획/클라이언트에 확인. 영어로 정하면 관리자웹 38 placeholder를 '영어로 입력해 주세요(앱에 그대로 표시됩니다)'처럼 바꾼다. 디자인 범위 밖으로 확정하면 수정 완료 체크로 닫는다."
+    },
+    {
+      "id": "CHK-S2-040",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "해외 사업자 심사 상세 라벨 'Services area'가 앱 'Service area'와 다름 (나머지 라벨은 앱 신청서 변경과 일치)",
+      "why": "사용자앱 신청서 라벨이 'Service area→Service location', 'Services→Service area'로 바뀌었고, 관리자웹 32·35·36(개인)과 33(국내)의 '공개 프로필 정보' 라벨은 이 변경과 일치한다. 관리자웹 34 · 심사 상세(해외 사업자)의 'Service location in Korea'도 앱 89 검토 화면과 맞는다. 그러나 34의 마지막 라벨이 'Services area'로 남아 앱의 'Service area'와 다르다. 문서 제출 쪽 'Document'는 앱 검토 화면(80) 표기와 같아 문제없다. 33은 앱 입력 순서(Business name·Your role·Specialty·About me…)와 순서만 다르다.",
+      "evidence": [
+        "SRC-03 739:21112 ('Service location in Korea', 'Services area')",
+        "SRC-03 689:25415 (Specialty/About me/Based in/Service location/Experience/Languages/Service area)",
+        "SRC-03 692:26946 (Business name/Your role/Business location/Service location/Languages/Service area)",
+        "SRC-03 APP 78(500:17629)·80(500:18061) 'Service location'·'Service area', APP 83(505:13405), APP 87(505:14288) 'Service area', APP 84(505:13758)·88(505:14356) 'Registration country/Upload document'"
+      ],
+      "impact_screens": [
+        "WEB-34"
+      ],
+      "follow_up": "관리자웹 34(및 컴포넌트 'Professional 신청 심사' state=해외 771:20685)의 'Services area'를 'Service area'로 수정. 33 항목 순서를 앱 입력 순서와 맞출지는 선택."
+    },
+    {
+      "id": "CHK-S2-041",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "관리자웹 회원 관리·이용 정지 관리·Professional 심사의 명칭이 모두 '회원 유형'으로 통일됨",
+      "why": "사용자앱 12~15가 'Membership type'으로 바뀌었고 결정 메모는 관리자웹을 '회원 유형'으로 픽스했다. 관리자웹 26·27 · 회원 관리, 47·48 · 이용 정지 관리의 열·드롭다운, 30·31 · Professional 심사의 '현재 회원 유형' 열이 모두 '회원 유형'이다. '회원 등급' 표기는 남아 있지 않다. 이전 실행의 CHK-S2-018(같은 문제)도 이 근거로 해소된다. 관리자웹 28 배경 드롭다운 기본 라벨 '전체'는 필터 라벨 일관성(CHK-S3-026, S3) 문제라 여기서 다루지 않는다. / Judge 이의: PASS 근거가 범위 전체를 뒷받침하지 않음. 제목은 '모두 회원 유형으로 통일', 본문은 \"'회원 등급' 표기는 남아 있지 않다\"인데 같은 메뉴의 WEB-29에 '회원 등급 전체'(CHK-S4-103, 이번 실행 스크린샷), WEB-39에 'professional 등급'(CHK-S3-107)이 남아 있음. WEB-28의 기본 라벨 '전체'(CHK-S3-026)도 impact_screens에 넣고서 확인하지 않음. 확인하지 않은 화면을 통일됐다고 판정함",
+      "evidence": [
+        "SRC-03 245:33348, 722:27665 (열 '회원 유형', 드롭다운 '회원 유형 전체')",
+        "SRC-03 689:23558, 722:27288 (열 '현재 회원 유형')",
+        "SRC-03 245:33343, 722:28045 (열 '회원 유형', 드롭다운 '회원 유형 전체')",
+        "SRC-05 Notion CHK-S2-041 결정 메모 '관리자웹→ 회원 유형, 사용자앱→ Membership type 명칭 픽스'",
+        "SRC-03 APP 12(271:31185) 'Membership type'"
+      ],
+      "impact_screens": [
+        "WEB-26",
+        "WEB-27",
+        "WEB-28",
+        "WEB-29",
+        "WEB-30",
+        "WEB-31",
+        "WEB-47",
+        "WEB-48"
+      ],
+      "follow_up": "조치 없음. 사용자앱 쪽 'Member type' 잔존은 범위 밖(s1 excluded_requests)."
+    },
+    {
+      "id": "CHK-S2-050",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "관리자 원문 확인 상세가 앱 게시글 상세 구조를 따르는지는 사람 판단 사항이며 디자이너 '그대로 유지' 결정이 있음",
+      "why": "관리자웹 22 · 원문 확인 상세는 카테고리 태그·제목·작성 일시·작성자(회원 유형)·본문(볼드·이미지·링크)·좋아요/답글 수 순서로 사용자앱 게시글 상세와 같은 정보 구조를 쓴다. 통일성 정도는 기계로 판정할 수 없고, 디자이너가 '그대로 유지'로 결정했다. 사용자앱 게시글 작성 변경으로 생긴 카테고리 다중 표시 문제는 CHK-S2-107에서 따로 본다.",
+      "evidence": [
+        "SRC-03 144:6583",
+        "SRC-03 APP 60(271:28469) 게시글 상세 (카테고리·제목·작성자·본문·이미지·링크)",
+        "SRC-05 Notion CHK-S2-050 결정 메모 'UI 에셋 활용해서 일부 요소만 수정함→ 그대로 유지'",
+        "SRC-01 회의 내용 > 관리자웹 '모바일 구조 UI와 통일성 유지'"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-41",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "추가 조치 없음(디자이너 유지 결정). 수정 완료 체크 상태 유지로 닫는다."
+    },
+    {
+      "id": "CHK-S2-052",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "푸시 재전송 화면은 체크박스 비활성으로 '2차 전송 불가'를 보여 주지만 TAG 설명과 반대로 읽히고 비활성 이유 안내가 없음",
+      "why": "결정 메모의 규칙(게시물당 1회)은 정해졌고, 관리자웹 16에서 체크박스가 비활성(1차 전송 완료 → 2차 불가), 관리자웹 07 · 뉴스 수정 상세에서 활성(1차 미전송 → 2차 가능)으로 두 case가 그려져 있다. 그러나 16의 TAG는 '푸시 알림 재전송 (1차 때, 푸시 알림 미체크 했을 때만)'이라 화면(비활성)과 반대 case를 설명하는 것처럼 읽히고, 비활성 체크박스 옆에 '이미 전송된 뉴스입니다' 같은 이유 안내가 없다. 디자이너도 수정 완료를 체크하지 않았다.",
+      "evidence": [
+        "SRC-03 739:22326 (푸시 알림 전송 체크박스 비활성)",
+        "SRC-03 676:28259 (수정 상세 체크박스 활성·미체크)",
+        "SRC-05 Notion CHK-S2-052 결정 메모 '1차: 전송O, 2차: 전송 불가능 / 1차: 전송X, 2차: 전송 가능' (수정 완료 미체크)",
+        "SRC-04 717:17659"
+      ],
+      "impact_screens": [
+        "WEB-03",
+        "WEB-07",
+        "WEB-16"
+      ],
+      "follow_up": "16 TAG를 '1차 전송 완료 시 재전송 불가(비활성)'로 고치고, 비활성 체크박스에 이유 안내 문구를 넣을지 결정."
+    },
+    {
+      "id": "CHK-S2-054",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "'검색 결과 없음' 상태가 공용 컴포넌트로 만들어져 뉴스 관리에 적용됨",
+      "why": "관리자웹 18 · 검색 결과 없음이 검색바·초기화 버튼을 유지한 채 '검색한 결과가 없습니다.'를 보여 주고, 같은 화면이 관리자웹 컴포넌트 card에 '검색 결과 없음'으로 등록돼 다른 목록에서도 재사용할 수 있다. 결정 메모는 나머지 목록은 주석으로 통일한다고 한다. / Judge 이의: 직접 확인한 화면은 WEB-18(뉴스)뿐. 나머지 목록(19·26·30·40·47)은 결정 메모의 '주석으로 통일'에 기대고 있는데, follow_up 스스로 '메타데이터에서 주석 텍스트는 찾지 못함'이라고 적음. 그런데도 req_refs의 REQ-FORUM-03·MEMBER-03·PRO-03·REPORT-03·BAN-01까지 포함해 PASS를 줌. 확인하지 않은 근거로 준 PASS임",
+      "evidence": [
+        "SRC-03 719:23179 ('검색한 결과가 없습니다.')",
+        "SRC-03 719:23154 (관리자웹/컴포넌트 card '검색 결과 없음')",
+        "SRC-05 Notion CHK-S2-054 결정 메모 '검색결과 없음 대시보드 베리언트, 주석으로 다른 사이드바도 검색 없음 상태 통일'"
+      ],
+      "impact_screens": [
+        "WEB-18",
+        "WEB-19",
+        "WEB-26",
+        "WEB-30",
+        "WEB-40",
+        "WEB-47"
+      ],
+      "follow_up": "조치 없음. 다른 목록용 주석이 캔버스에 실제로 있는지만 개발 전달 전 확인(메타데이터에서 주석 텍스트는 찾지 못함)."
+    },
+    {
+      "id": "CHK-S2-055",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 관리에만 처리 상태 필터가 여전히 없어 '접수' 건만 골라볼 수 없음",
+      "why": "관리자웹 40 · 신고 관리는 검색바와 초기화만 있고 처리 상태(접수/이용 정지/제재 없음) 필터가 없다. Professional 심사·회원 관리·이용 정지 관리·포럼 관리는 모두 필터 드롭다운이 있다. 체크리스트의 '드롭다운 불필요'는 목록에서 상태를 바꾸는 드롭다운에 대한 것이라 조회 필터 필요 여부와는 별개다. 수정 완료 미체크.",
+      "evidence": [
+        "SRC-03 245:33331 (검색바·초기화만, 필터 드롭다운 없음)",
+        "SRC-03 689:23558 (Professional 심사는 '심사 상태 전체' 드롭다운 있음)",
+        "SRC-04 733:20159·733:20162 '대시보드 리스트에서 변경 가능 여부 → 드롭다운 필요 여부'"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-46"
+      ],
+      "follow_up": "신고 관리 검색바 옆에 '처리 상태 전체' 필터를 둘지 결정. 두지 않으면 사유를 결정 메모에 남기고 수정 완료 체크."
+    },
+    {
+      "id": "CHK-S2-056",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "신고 원문 확인(접수 상태)에는 신고 사유·대상이 없고, 결과 화면도 사유 1개만 보여 어떤 글·답글이 왜 신고됐는지 알 수 없음",
+      "why": "결과 화면(관리자웹 44·45)에는 신고 대상 닉네임과 신고 사유 한 줄이 생겨 일부 반영됐다. 그러나 ① 처리 판단을 실제로 하는 관리자웹 41 · 신고 관리/원문 글 확인(접수 상태)에는 신고 사유·신고 대상이 전혀 없다 ② 사용자앱 60은 사유를 여러 개 고를 수 있고 목록도 '외 N개'로 보여 주는데 44·45는 사유 1개만 보인다 ③ 신고 대상은 'Chris Taylor'인데 화면의 원문 작성자는 Aisha Tan, 답글 작성자는 Alex Morgan이라 신고된 원문·답글이 어느 것인지 표시가 없다.",
+      "evidence": [
+        "SRC-03 689:22801 (제목 '신고 대상 원문 확인', 신고 사유·닉네임 없음)",
+        "SRC-03 739:21556, 739:21763 ('신고 대상 (Chris Taylor) 원문 확인 결과', '신고 사유: Sharing personal information without consent' 1개)",
+        "SRC-03 245:33331 (목록 '+외 2개', '+외 3개' 다중 사유)",
+        "SRC-03 APP 60(271:28469) 'Select all reasons that apply.'",
+        "SRC-04 733:20178·733:20181 '원문 확인 신고 사유·닉네임', 739:21967·739:21970 원문 확인 case 분류"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "관리자웹 41 상단에 44·45와 같은 '신고 대상(닉네임) + 신고 사유 전체' 영역을 추가하고, 다중 사유는 모두 나열. 신고된 원문 또는 답글 카드에 강조(테두리·'신고됨' 태그)를 넣고 예시 데이터의 신고 대상과 작성자를 맞춘다."
+    },
+    {
+      "id": "CHK-S2-061",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "미승인 사유 모달의 '니승인' 오타는 고쳐졌지만 빈 입력에도 '확인'이 활성이라 앱 Review feedback이 빈 채로 나갈 수 있음",
+      "why": "오타는 '미승인'으로 고쳐졌다. 그러나 관리자웹 38 · 심사 거절 모달은 입력란이 비어 있는데 '확인'이 활성 색으로 그려져 있고, 빈 입력 시 막는 상태(비활성 버튼·오류 문구)가 없다. 필수 규칙 2는 미승인 시 사유를 '반드시' 입력한다고 정하고, 사용자앱 92·93은 이 사유를 'Review feedback'으로 바로 보여 주므로 빈 값이 나가면 앱 화면이 빈 칸이 된다.",
+      "evidence": [
+        "SRC-03 693:28331 (placeholder '심사 미승인 사유를 입력해 주세요.', 빈 입력 + 확인 버튼 활성)",
+        "SRC-03 717:17513 (web/field error variant 존재, 38에는 미적용)",
+        "SRC-03 APP 92(500:18860)·93(739:20998) Review feedback 영역"
+      ],
+      "impact_screens": [
+        "WEB-38"
+      ],
+      "follow_up": "관리자웹 38 모달에 '사유 미입력 시 확인 비활성' 상태(또는 web/field error variant로 '사유를 입력해주세요' 오류)를 추가."
+    },
+    {
+      "id": "CHK-S2-063",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "이용 정지 관리 드롭다운에 '전체'는 추가됐지만 '일괄 버튼 불필요' 결정 뒤에도 체크박스 열이 남아 있고 일부 '정지 해제' 버튼 비활성 이유가 없음",
+      "why": "결정 메모의 '드롭다운 전체 추가'는 관리자웹 47에 반영됐다. 그러나 '일괄 버튼 필요없음'으로 정했는데도 관리자웹 47·48 · 이용 정지 관리에 체크박스 열이 그대로 있어, 선택해도 할 수 있는 동작이 없다. 또 정지 중인 회원 목록인데 일부 행의 '정지 해제' 버튼이 비활성으로 그려져 있어 어떤 조건에서 해제할 수 없는지 알 수 없다(사용자앱 22에 정지 안내가 생겨 해제 시점이 회원에게 바로 영향을 줌).",
+      "evidence": [
+        "SRC-03 245:33343 (드롭다운 '전체/Newcomer/Insider/Professional', 체크박스 열)",
+        "SRC-03 722:28045 (2·4·6·8·9행 '정지 해제' 비활성)",
+        "SRC-05 Notion CHK-S2-063 결정 메모 '일괄 버튼 필요없음, 드롭다운 전체 추가'"
+      ],
+      "impact_screens": [
+        "WEB-47",
+        "WEB-48",
+        "WEB-49"
+      ],
+      "follow_up": "체크박스 열을 지울지, 비활성 '정지 해제'의 조건(예: 기간 정지 만료 대기·이미 해제)을 정의할지 결정."
+    },
+    {
+      "id": "CHK-S2-064",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "배너 수정 모달은 생겼지만 배너 이미지를 바꾸는 수단(파일 선택)이 보이지 않음",
+      "why": "결정 메모대로 관리자웹 55 · 수정 모달이 추가돼 등록한 배너를 수정하는 경로가 생겼다. 다만 모달의 배너 이미지는 미리보기만 있고 교체 버튼·호버 안내가 없어 연결 링크만 수정 가능한 것처럼 보인다. 등록 모달 입력 오류 상태(이미지·링크 미입력)도 이번에 확인한 화면에는 없다.",
+      "evidence": [
+        "SRC-03 730:19058 ('배너 수정' 모달: 배너 이미지 미리보기, 연결 링크, 수정 완료)",
+        "SRC-05 Notion CHK-S2-064 결정 메모 '배너 수정 case 추가(리스트 클릭 시, 수정 모달 노출) 및 배너 image 영역 수정'"
+      ],
+      "impact_screens": [
+        "WEB-51",
+        "WEB-54",
+        "WEB-55"
+      ],
+      "follow_up": "수정 모달에서 이미지 교체를 허용하면 '파일 선택'(또는 이미지 위 변경 버튼)을 추가하고, 허용하지 않으면 그 사실을 주석으로 남긴다."
+    },
+    {
+      "id": "CHK-S2-065",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "'처리 후 메인(목록)으로 이동' 결정은 있으나 승인·이용 정지·삭제 실패 시 안내는 여전히 없음",
+      "why": "결정 메모로 성공 시 흐름(처리 후 목록 복귀, 목록 상태 태그로 결과 확인)은 정해졌고, 뉴스(14·15)·배너 순서(53)는 토스트로 결과를 알린다. 그러나 Professional 승인(37)·이용 정지(28·43)·원문 삭제(23)·정지 해제(49)는 성공 토스트가 없어 메뉴마다 안내 방식이 다르고, 실패(네트워크 오류·이미 처리된 건) 안내는 어느 메뉴에도 없다. 사용자앱 22(정지 안내)처럼 처리 결과가 회원에게 바로 닿는 동작이 늘어 실패 처리 기준이 필요하다.",
+      "evidence": [
+        "SRC-05 Notion CHK-S2-065 결정 메모 '처리 후 다시 메인 화면으로 이동'",
+        "SRC-03 716:16803, 716:17188, 685:45488 (뉴스·배너는 토스트 있음)"
+      ],
+      "impact_screens": [
+        "WEB-23",
+        "WEB-28",
+        "WEB-37",
+        "WEB-38",
+        "WEB-43",
+        "WEB-49"
+      ],
+      "follow_up": "처리 동작 공통 성공 토스트를 둘지, 실패(이미 처리됨 등) 안내 1종을 공통으로 둘지 결정."
+    },
+    {
+      "id": "CHK-S2-066",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "관리자 계정이 1개라 권한 구분은 필요 없어졌지만 세션 만료 처리는 여전히 정해지지 않음",
+      "why": "결정 메모로 관리자 계정이 1개뿐이라 권한별 화면 구분은 필요 없다. 세션 만료 시 로그인(관리자웹 01) 복귀나 안내 화면은 자료·화면 모두 없다. 사용자앱 변경과는 무관한 남은 항목이다.",
+      "evidence": [
+        "SRC-05 Notion CHK-S2-066 결정 메모 '1개 밖에 없음'",
+        "SRC-03 128:9888, 134:2318 (로그인 화면)"
+      ],
+      "impact_screens": [
+        "WEB-01",
+        "WEB-02"
+      ],
+      "follow_up": "세션 만료 처리(자동 로그아웃 후 01로 이동 등)를 개발 기본 동작으로 둘지 결정하고 수정 완료 체크."
+    },
+    {
+      "id": "CHK-S2-067",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "프레임 TAG 3곳 중 2곳은 고쳐졌고 배너 순서 변경(53)만 TAG '모달'과 화면 '토스트'가 다름",
+      "why": "관리자웹 24와 42의 TAG는 화면 내용에 맞게 바뀌었다. 관리자웹 53은 TAG가 '배너 관리/순서변경 모달'인데 화면은 상단 토스트('배너 순서 변경을 저장하였습니다.')라 여전히 다르다.",
+      "evidence": [
+        "SRC-03 682:37013 (TAG '원문 확인 상세 / 답글 삭제 모달')",
+        "SRC-03 689:23099 (TAG '신고 내역 확인/제재없음 모달')",
+        "SRC-03 685:45488 (TAG '배너 관리/순서변경 모달', 화면은 '배너 순서 변경을 저장하였습니다.' 토스트)"
+      ],
+      "impact_screens": [
+        "WEB-53"
+      ],
+      "follow_up": "53 TAG를 '배너 관리/순서 저장 토스트'로 바꿀지 결정."
+    },
+    {
+      "id": "CHK-S2-101",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 신청 유형 'Individual professional'(본인 명의, 사업자 아님)을 관리자웹은 '개인 사업자'로 불러 의미가 어긋남",
+      "why": "사용자앱 77은 이번 수정으로 첫 선택지를 '본인 명의로 신청'(사업자가 아님)과 '사업자로 신청'을 가르는 기준으로 바꿨고, 앱 프레임 TAG도 '개인 전문가'다. 관리자웹 30·31 신청 유형 열과 32·35·36 상세 제목은 '개인 사업자'라 관리자는 사업자 등록이 있는 신청으로 오해할 수 있다. 국내·해외 사업자 2개는 앱 'in Korea/outside Korea'와 1:1로 맞고, 3 case 분리(32·33·34)도 반영됐다. 회의 픽스(SRC-00)가 '개인 사업자'로 적고 있어 자료 충돌(CF-03)이므로 하네스가 명칭을 정하지 않는다.",
+      "evidence": [
+        "SRC-03 APP 77(500:17414) 'Choose whether you are applying in your own name or on behalf of a business.' / 'Individual professional: Apply in your own name…'",
+        "SRC-03 APP 82(505:13530)·86(505:14223) 'Business registered in Korea / Business registered outside Korea'",
+        "SRC-03 792:20688 (사용자앱 TAG 'Professional/개인 전문가')",
+        "SRC-03 689:23558 (신청 유형 '개인 사업자/국내 사업자/해외 사업자'), 689:25415 ('개인 사업자 신청 정보')",
+        "SRC-00 [Professional 심사] 신청 유형(개인 사업자/국내 사업자/해외 사업자)",
+        "FB FB-20261109-0131-01"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-35",
+        "WEB-36",
+        "WEB-39"
+      ],
+      "follow_up": "첫 신청 유형의 관리자웹 명칭을 '개인 전문가'(앱 의미 기준)로 바꿀지 '개인 사업자'(회의 픽스 기준)로 둘지 결정. 바꾸면 30·31 목록 값, 32·35·36 상세 제목, 컴포넌트 'Professional 신청 심사' state=개인을 함께 수정."
+    },
+    {
+      "id": "CHK-S2-102",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "심사 상세 예시 값이 앱 신청서와 어긋남 — 개인 'Based in'·'Experience'에 다른 항목 문장, 해외 사업자 'Registration country'가 South Korea",
+      "why": "관리자웹 32 · 심사 상세(개인 사업자)와 같은 카드를 쓰는 35·36에서 'Based in' 값이 About me 문장, 'Experience' 값이 Service location 문장으로 들어가 있어 앱 80 검토 화면의 같은 항목(Seoul, South Korea / 5 years of experience…)과 다르다. 관리자웹 34 · 심사 상세(해외 사업자)는 Registration country가 'South Korea'라 앱 88 해외 사업자(한국 밖 등록) 의미와 맞지 않는다(국내 84만 South Korea 기본값). 33·34의 Service area 값도 앱 변경 전 장문 그대로다. 예시 값이지만 개발·QA가 항목 매핑 기준으로 읽는 자리라 잘못된 매핑으로 전달될 수 있다.",
+      "evidence": [
+        "SRC-03 689:25415, 724:18198, 725:18762 (Based in = About me 문장, Experience = Service location 문장, Service area 'Relocation consultations , Housing guidance')",
+        "SRC-03 739:21112 (해외 사업자 Registration country 'South Korea')",
+        "SRC-03 692:26946, 739:21112 (Service area 'Relocation consultations, housing guidance, and everyday life support')",
+        "SRC-03 APP 78(500:17629)·80(500:18061) Based in 'Seoul, South Korea', Experience '5 years of experience supporting international residents in Korea', Service Area 'Relocation consultations'",
+        "SRC-03 APP 84(505:13758) 국내 Registration country 'South Korea' 기본값, APP 88(505:14356) 해외 Registration country 빈 입력",
+        "FB FB-20261109-0131-02"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36",
+        "WEB-38"
+      ],
+      "follow_up": "컴포넌트 'Professional 신청 심사'(693:27115 개인, 693:27114 국내, 771:20685 해외)의 예시 값을 앱 80·85·89 검토 화면 값과 맞춤: Based in·Experience 값 교정, 해외 Registration country를 한국 외 국가로, Service area를 앱처럼 칩(여러 값) 또는 'Relocation consultations'로."
+    },
+    {
+      "id": "CHK-S2-103",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "디자이너의 '관리자웹 심사 이력 누적X' 결정이 필수 규칙 2-c 변경을 뜻하는지 정하고, 바꾸면 story-service 갱신(H0 재승인)이 필요함",
+      "why": "story-service 필수 규칙 2와 판정 조건 2-c는 H0 승인(2026-10-28) 당시 '이력 누적'이다. 이후 디자이너 결정 메모와 캔버스 체크리스트는 '관리자웹 누적X'로 반대 방향을 정했고, 사용자앱은 대신 신청 횟수 텍스트만 보여 준다(CF-05). 이는 정책 값을 바꾸는 사안이라 하네스가 정할 수 없다. 규칙을 유지하면 CHK-S2-026의 FAIL대로 관리자웹에 이력을 추가해야 하고, 규칙을 바꾸면 story-service를 고쳐 H0 재승인을 받아야 2-c 판정 기준이 바뀐다. 어느 쪽이든 앱이 '2 times'를 보여 주는 이상 관리자웹 30·31 목록이나 32~36 상세에 최소한 신청 횟수(같은 신청자의 몇 번째 신청인지)는 있어야 관리자가 재신청 건을 알아볼 수 있다.",
+      "evidence": [
+        "SRC-05 Notion CHK-S2-026 결정 메모 '관리자웹 재신청 누적X → 사용자앱 검토 필요'",
+        "SRC-04 715:16721·715:16724 '사용자앱/Professonal 심사이력 누적X — 관리자웹에는 심사이력 누적X', 726:18915 '재신청 case → 텍스트로 횟수 표기'",
+        "SRC-00 <Professional 신청 심사 상세> '재승인을 요청해도 관리자 웹에서 이력이 계속 누적됨(기존 심사 상태 업데이트 X)'",
+        "SRC-03 APP 92(500:18860) 'Number of applications: 1 time', APP 93(739:20998) '2 times'",
+        "FB FB-20261109-0131-03"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "① 규칙 2를 유지할지 바꿀지 사용자(디자이너·클라이언트)가 결정 ② 바꾸면 Orchestrator가 story-service 규칙 2·조건 2-c 개정안을 만들어 H0 재승인 ③ 결정과 별개로 관리자웹 Professional 심사 목록·상세에 '신청 횟수 N회' 표시 추가 여부 결정."
+    },
+    {
+      "id": "CHK-S2-104",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "심사 거절 상세에 '신청자에게 전달한 사유'가 없어, 앱 Review feedback으로 무엇이 나갔는지 관리자가 다시 볼 수 없음",
+      "why": "관리자웹 38에서 입력한 '신청자 전달 사유'는 사용자앱 92·93 'Review feedback'으로 그대로 나간다. 그런데 처리 후 관리자웹 36 · 심사 상세/심사 완료(심사 거절)에는 내부 검토 메모만 있고 전달 사유 영역이 없어, 관리자가 무엇을 보냈는지 확인할 수 없고 재신청(앱 93) 심사 때 이전 거절 사유와 비교할 수도 없다. story-service 사람 검토 항목인 '내부 검토 메모와 신청자 전달 사유 구분'도 36에서는 전달 사유가 없어 확인할 수 없다.",
+      "evidence": [
+        "SRC-03 725:18762 (심사 거절 상세: 공개 프로필 정보·문서 제출·내부 검토 메모 '파일 근거 부족으로 심사 거절'만 표시)",
+        "SRC-03 693:28331 (미승인 시 신청자 전달 사유 입력)",
+        "SRC-03 APP 92(500:18860)·93(739:20998) Review feedback 표시, 재신청 화면에서도 반복 노출",
+        "SRC-00 <Professional 신청 심사 상세> 내부 검토 메모 항목 추가 / 신청자에게 전달할 사유 모달",
+        "FB FB-20261109-0131-05"
+      ],
+      "impact_screens": [
+        "WEB-36",
+        "WEB-38"
+      ],
+      "follow_up": "관리자웹 36(심사 거절 상세)에 '신청자 전달 사유(앱 Review feedback)' 읽기 전용 영역을 내부 검토 메모와 구분해 추가."
+    },
+    {
+      "id": "CHK-S2-105",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱에 이용 정지 안내(정지 사유 노출)가 생겼는데 관리자 정지 모달에 '회원에게 그대로 보임'·작성 언어 안내와 빈 입력 차단이 없음",
+      "why": "사용자앱 22 · 이용 정지된 회원이 새로 생겨 관리자가 입력한 정지 사유가 회원에게 그대로 보인다. 관리자웹 28 · 회원 이용 정지 모달과 43 · 신고 내역 확인/회원 이용 정지 모달은 '정지사유를 입력해 주세요.'만 있어 회원 노출 여부를 알리지 않고, 빈 입력에도 확인이 활성이라 앱에 'Reason for suspension:' 뒤가 빈 채로 나갈 수 있다. 관리자웹 47·48 · 이용 정지 관리 예시 사유는 회원에게 쓰는 한국어 문장인데 앱 22는 영어라 운영 언어가 정해지지 않았다. 언어는 CHK-S2-038(미승인 사유)과 같은 운영 결정이 필요하다.",
+      "evidence": [
+        "SRC-03 APP 22(739:21492) 'This member's account is suspended. / Reason for suspension: Multiple members have reported for similar reasons.'",
+        "SRC-03 245:33353, 689:23298 ('Chris Taylor님의 이용을 정지하시겠습니까?' + placeholder '정지사유를 입력해 주세요.', 빈 입력 + 확인 활성)",
+        "SRC-03 245:33343, 722:28045 (정지 사유 예시: 한국어 '…회원님의 서비스 이용을 정지합니다.')",
+        "SRC-04 730:19050 \"사용자앱 -'이용 정지 안내'(정지 사유)\"",
+        "FB FB-20261109-0131-06"
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-43",
+        "WEB-47",
+        "WEB-48",
+        "WEB-49"
+      ],
+      "follow_up": "관리자웹 28·43 모달 안내를 '입력한 사유는 회원 앱 정지 안내에 그대로 표시됩니다(영어 작성)'처럼 바꿀지, 빈 입력 시 확인 비활성 상태를 추가할지 결정. 언어 기준은 CHK-S2-038과 함께 정한다."
+    },
+    {
+      "id": "CHK-S2-106",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "'원문 글 확인 결과: 이용 정지' 화면 제목이 '결과: 제재 없음'으로 되어 있어 44와 똑같음",
+      "why": "관리자웹 45는 TAG와 체크리스트상 '이용 정지' 처리 결과 화면인데 제목이 '…원문 확인 결과: 제재 없음'이라 관리자웹 44 · 원문 글 확인 결과: 제재 없음과 화면이 완전히 같다. 이용 정지 결과를 보여 주는 화면이 사실상 없다. 신고 처리 결과가 사용자앱 22(정지 안내)로 이어지는 경로라 결과 구분이 중요하다.",
+      "evidence": [
+        "SRC-03 739:21763 (TAG '신고 관리/ 원문 글 확인 결과: 이용 정지', 제목 텍스트 739:21768 '신고 대상 (Chris Taylor) 원문 확인 결과: 제재 없음')",
+        "SRC-03 739:21556 (44 제목 동일)",
+        "SRC-04 739:21967·739:21970 '라벨: 신고 대상 (닉네임) 원문 확인 결과: 제재 없음 OR 이용 정지'"
+      ],
+      "impact_screens": [
+        "WEB-45",
+        "WEB-40"
+      ],
+      "follow_up": "관리자웹 45 제목을 '신고 대상 (Chris Taylor) 원문 확인 결과: 이용 정지'로 고치고, 가능하면 정지 사유·정지 일시도 함께 표시."
+    },
+    {
+      "id": "CHK-S2-107",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 게시글은 카테고리를 최대 3개 고르는데 관리자 원문 확인 상세는 카테고리 1개 예시만 있어 다중 표시가 확인되지 않음",
+      "why": "사용자앱 게시글 작성(31~37)에 제목 입력, 카테고리 최대 3개, 본문 이미지·링크·볼드가 추가됐다. 관리자웹 19 · 포럼 관리 목록은 태그 3개와 제목 검색으로 이를 받는다. 관리자웹 22 · 원문 확인 상세, 41·44 신고 원문 확인은 제목·볼드·이미지·링크는 보여 주지만 카테고리는 모두 1개 예시라, 3개일 때 상세 상단 태그가 어떻게 놓이는지 화면이 없다. 같은 카드 컴포넌트('원문 글 상세' 682:37321)를 쓰므로 한 번 정하면 세 화면에 함께 반영된다.",
+      "evidence": [
+        "SRC-03 APP 31(271:29307)~37(491:18129) 'Title', 'You can choose up to 3 categories.', Image/Iink/Bold 툴바; APP 32(271:29226)",
+        "SRC-03 142:23478 (목록 카테고리 태그 최대 3개: Visa·Housing·Life, '제목으로 검색')",
+        "SRC-03 144:6583, 689:22801, 739:21556 (상세 카테고리 태그 'Visa' 1개, 제목·볼드·이미지·링크 표시)",
+        "FB FB-20261109-0131-09"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-23",
+        "WEB-24",
+        "WEB-41",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "컴포넌트 '원문 글 상세'의 예시를 카테고리 3개로 바꾸거나 다중 태그 variant를 추가할지 결정."
+    },
+    {
+      "id": "CHK-S2-108",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 공개 프로필에는 Supporting link·Additional context가 보이는데 관리자 심사 상세는 이를 비공개 '문서 제출' 쪽에 둠 — 공개 범위 결정 후 관리자 구분을 맞춰야 함",
+      "why": "관리자웹 32~36 심사 상세는 앱 신청서 검토 화면(80)과 같이 Supporting link·Additional context를 '문서 제출'(비공개) 쪽에 둔다. 그러나 이번에 추가된 사용자앱 공개 프로필(65·66·69~72)은 두 항목을 공개로 보여 준다. 앱 안의 불일치 자체는 범위 밖이지만, 관리자는 '공개 프로필 정보'를 기준으로 승인 후 공개될 내용을 심사하므로 공개 범위가 정해지면 관리자 상세의 2단 구분도 그에 맞춰야 한다.",
+      "evidence": [
+        "SRC-03 APP 65(792:20528)·66(792:20307)·69~72 공개 프로필에 Supporting link·Additional context 노출",
+        "SRC-03 APP 84(505:13758)·88(505:14356) 'Documents are private / Only documents submitted for review are hidden from your public profile.', APP 80(500:18061) 'Documents for review'에 Supporting link·Additional context 포함",
+        "SRC-03 689:25415, 692:26946, 739:21112 (공개 프로필 정보 / 문서 제출: Registration country·Document·Supporting link·Additional context)",
+        "FB FB-20261109-0131-10"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "Supporting link·Additional context의 공개 여부를 결정. 공개로 정하면 관리자웹 심사 상세(컴포넌트 'Professional 신청 심사' 3 state)에서 두 항목을 '공개 프로필 정보'로 옮긴다."
+    },
+    {
+      "id": "CHK-S2-109",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱에 좋아요 탭·주간 인기글 Top5가 생겨 관리자 원문 삭제·이용 정지가 이 목록과 회원 '누적 좋아요 수'에 어떻게 반영되는지 기준이 없음",
+      "why": "원문·답글 삭제는 DB 삭제(앱 미노출)로 정해졌지만, 이번에 생긴 사용자앱 44 인기글 Top5와 98 받은 좋아요 목록에서 삭제·정지된 글이 빠지는지, 관리자웹 26 · 회원 관리 '누적 좋아요 수'가 삭제된 글의 좋아요를 빼는지 정의가 없다. 관리자 화면에서 바꿀 UI는 지금 확정할 수 없고 정책 결정이 먼저다. 관리자웹에는 인기글을 관리(제외·고정)하는 화면도 없다.",
+      "evidence": [
+        "SRC-03 APP 44(271:30494) 'Popular Top5 / Top 5 Most famous posts of the Week'",
+        "SRC-03 APP 98(792:21985) Like 탭 '32 Likes', APP 99(792:22029) 'No likes received yet.'",
+        "SRC-03 245:33348 (회원 관리 '누적 좋아요 수' 열)",
+        "SRC-05 Notion CHK-S4-001 'DB 삭제', CHK-S2-044 '표기 없이 그냥 삭제되서 미노출'",
+        "FB FB-20261109-0131-11"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-24",
+        "WEB-26",
+        "WEB-28"
+      ],
+      "follow_up": "① 관리자 삭제·정지 시 인기글·좋아요 집계에서 즉시 제외하는지 ② 회원 관리 '누적 좋아요 수'의 집계 기준 ③ 관리자가 인기글을 제외할 수단이 필요한지 기획에 확인."
+    },
+    {
+      "id": "CHK-S3-101",
+      "verdict": "FAIL",
+      "rule_ref": "2-d",
+      "what": "심사 상태 값이 목록 태그만 '미승인'이고 필터·상세·태그 컴포넌트는 '심사 거절'이라 규칙 2-d가 깨짐",
+      "why": "같은 결과(미승인 처리된 신청)를 관리자웹 30·31(Professional 심사) 목록 태그는 '미승인', 같은 화면의 심사 상태 드롭다운과 관리자웹 36(심사 상세/ 심사 완료) 상세 태그·심사 상태 tag 컴포넌트는 '심사 거절'로 부름. 목록 태그가 컴포넌트에 없는 값을 쓰고 있어 필터로 고른 값과 행 태그가 맞지 않음. 사용자앱 92·93은 'Not approved' 하나로 보여주므로 관리자웹 쪽 값이 하나로 정해져야 앱 상태와 1:1로 대응됨.",
+      "evidence": [
+        "SRC-03 689:23558 (관리자웹 30 스크린샷: 드롭다운 '전체/심사 중/승인 완료/심사 거절', 행 태그 '승인 완료/미승인/심사 중'), 722:27288 (관리자웹 31 같은 태그)",
+        "SRC-03 725:18738 심사 상태 tag variant = 승인 완료·심사 중·심사 거절 ('미승인' variant 없음), 725:18762 (관리자웹 36 상세 태그 '심사 거절')",
+        "SRC-03 693:28331 (관리자웹 38 모달 제목 '심사 미승인'), 719:24501 button type=미승인; APP 92 500:18860 'Not approved'",
+        "SRC-00 [Professional 심사] 심사 상태( 심사 중/심사거절/승인완료), 심사 상태 드롭다운"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-35",
+        "WEB-36",
+        "WEB-38",
+        "WEB-39",
+        "APP-92",
+        "APP-93"
+      ],
+      "follow_up": "관리자웹 30·31 목록 태그를 심사 상태 tag 컴포넌트 인스턴스('심사 거절')로 바꾼다. '미승인'으로 통일하기로 하면 tag variant·드롭다운 항목·관리자웹 36 상세 태그·story-service 2-d를 함께 바꾼다."
+    },
+    {
+      "id": "CHK-S3-102",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신청 유형 '개인 사업자'가 앱 'Individual professional'(개인 명의 신청)과 의미가 달라 명칭 확정이 필요함",
+      "why": "사용자앱은 첫 번째 유형을 '사업자가 아닌 개인 명의 신청'으로 바꿔 설명하는데, 관리자웹 30·31(Professional 심사) 목록 값과 관리자웹 32·35·36 상세 제목은 '개인 사업자'임. 국내·해외 2종은 앱과 대응됨. 회의 픽스(SRC-00)는 '개인 사업자'라 자료 간 충돌(CF-03)이 남아 있어 하네스가 한쪽을 고르지 않음.",
+      "evidence": [
+        "SRC-03 689:23558 (관리자웹 30 신청 유형 열 '개인 사업자/국내 사업자/해외 사업자'), 689:25415·724:18198·725:18762 (관리자웹 32·35·36 제목 '개인 사업자 신청 정보'), 693:27115 card variant state=개인",
+        "SRC-03 500:17414 (사용자앱 77: 'Individual professional — Apply in your own name…', 'Business registered in Korea', 'Business registered out of Korea'; 안내 'Choose whether you are applying in your own name or on behalf of a business.'), 사용자앱 프로필 TAG 'Professional/개인 전문가'",
+        "SRC-00 [Professional 심사] 신청 유형(개인/국내/해외 사업자)"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-35",
+        "WEB-36",
+        "APP-77",
+        "APP-82",
+        "APP-86"
+      ],
+      "follow_up": "첫 번째 신청 유형의 관리자웹 명칭을 '개인 전문가' 등 앱 의미에 맞게 바꿀지 결정해 결정 메모로 남긴다. 바꾸면 card/Professional 심사 신청 유형 값, card/Professional 신청 심사 state=개인 제목, 프레임 TAG '심사 상세( 개인 사업자 )'를 함께 고친다."
+    },
+    {
+      "id": "CHK-S3-103",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "해외 사업자 심사 상세 라벨 'Services area'는 오타 — 앱·다른 case는 'Service area'",
+      "why": "관리자웹 34(심사 상세( 해외 사업자 )) 공개 프로필 정보의 마지막 라벨만 'Services area'로, 같은 컴포넌트의 개인·국내 variant와 사용자앱 신청서(CHG-07 'Services'→'Service area')와 다름.",
+      "evidence": [
+        "SRC-03 739:21112 (관리자웹 34 스크린샷 라벨 'Services area'), 771:20685 card variant state=해외",
+        "SRC-03 689:25415·692:26946 (관리자웹 32·33 'Service area'), 505:14417 (사용자앱 89 'Service Area')"
+      ],
+      "impact_screens": [
+        "WEB-34"
+      ],
+      "follow_up": "card/Professional 신청 심사 state=해외의 라벨을 'Service area'로 고친다."
+    },
+    {
+      "id": "CHK-S3-104",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "심사 상세 카드 예시 값이 앱 신청서와 어긋남 — Based in·Experience에 다른 항목 문장, Service area는 변경 전 값",
+      "why": "관리자웹 32·35·36(개인 사업자 case)은 Based in·Experience 칸에 다른 항목 문장이 들어가 있어 어떤 앱 입력값이 어느 칸에 오는지 개발 전달 시 오해될 수 있음. 33·34의 Service area 값은 사용자앱이 바꾸기 전 문장 그대로이고, 34(해외 사업자)의 Registration country가 'South Korea'라 해외 사업자 예시로 맞지 않음.",
+      "evidence": [
+        "SRC-03 689:25415·724:18198·725:18762 (관리자웹 32·35·36: Based in 값 = About me 문장 'I'm planning a move to Seoul…', Experience 값 = Service location 문장 'Seoul and Gyeonggi-do · Online consultations worldwide', Service area 'Relocation consultations , Housing guidance')",
+        "SRC-03 500:18061 (사용자앱 80 Review: Based in 'Seoul, South Korea', Experience '5 years of experience supporting international residents in Korea', Service Area 'Relocation consultations')",
+        "SRC-03 692:26946·739:21112 (관리자웹 33·34 Service area 값 'Relocation consultations, housing guidance, and everyday life support' — 사용자앱 85·89는 'Relocation consultations'로 변경, CHG-07), 739:21112 해외 사업자 Registration country 'South Korea'"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36",
+        "WEB-37",
+        "WEB-38"
+      ],
+      "follow_up": "card/Professional 신청 심사 3개 variant의 예시 값을 사용자앱 80·85·89(Review your application) 값과 같게 맞춘다(Based in·Experience·Service area, 해외 Registration country는 한국 외 국가)."
+    },
+    {
+      "id": "CHK-S3-105",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "심사 거절 상세에 '신청자에게 전달한 사유'를 보여주는 칸이 없어 앱 Review feedback 내용을 관리자가 다시 확인할 수 없음",
+      "why": "관리자웹 38(심사 거절)에서 입력한 사유는 사용자앱 92·93에 Review feedback으로 그대로 보이는데, 처리 후 관리자웹 36(심사 상세/ 심사 완료) 카드에는 그 사유를 보여주는 variant가 없고 내부 검토 메모만 있음. 픽스는 모달 입력까지만 요구해 필요 여부는 사람이 정함.",
+      "evidence": [
+        "SRC-03 725:18762 (관리자웹 36 스크린샷: 공개 프로필 정보·문서 제출·내부 검토 메모 '파일 근거 부족으로 심사 거절'만 있음), 722:26337 (관리자웹 38 사유 입력 모달)",
+        "SRC-03 500:18860·739:20998 (사용자앱 92·93 'Review feedback' 문단)",
+        "SRC-00 <Professional 신청 심사 상세> 신청자에게 전달할 사유(심사거절 사유) 모달 노출 — 사용자앱 85p Review feedback"
+      ],
+      "impact_screens": [
+        "WEB-36",
+        "WEB-38",
+        "APP-92",
+        "APP-93"
+      ],
+      "follow_up": "심사 거절 상태의 card/Professional 신청 심사에 '신청자에게 전달한 사유(읽기 전용)' 영역을 둘지 결정한다."
+    },
+    {
+      "id": "CHK-S3-106",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "이용 정지 사유 모달에 '회원에게 그대로 보임' 안내·작성 언어·필수 입력 상태가 없음 — 앱 정지 안내 화면에 그대로 노출됨",
+      "why": "사용자앱 22에 관리자가 입력한 정지 사유가 영어 화면에 그대로 나오게 바뀌었는데, 관리자웹 28(회원 이용 정지 모달)·43(신고 내역 확인/회원 이용 정지 모달)은 입력 안내만 있고 회원 노출 여부·작성 언어 안내가 없음. 관리자웹 47·48(이용 정지 관리)의 예시 사유는 한국어 장문이라 앱 문구와 다르고, 빈 사유를 막는 오류·비활성 상태도 없어 앱에 'Reason for suspension:' 뒤가 빈 화면이 나올 수 있음.",
+      "evidence": [
+        "SRC-03 245:33353·689:23298 (관리자웹 28·43 모달 '회원 이용 정지 / Chris Taylor님의 이용을 정지하시겠습니까? / placeholder 정지사유를 입력해 주세요.', 빈 입력에서도 확인 버튼이 활성 모양)",
+        "SRC-03 739:21492 (사용자앱 22 'This member's account is suspended. / Reason for suspension: Multiple members have reported for similar reasons.'), 245:33343 (관리자웹 47 정지 사유 열: 한국어 장문)",
+        "SRC-04 Todoodle 730:19050 \"사용자앱 -'이용 정지 안내'(정지 사유)\""
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-43",
+        "WEB-47",
+        "WEB-48",
+        "APP-22"
+      ],
+      "follow_up": "사유 입력 모달 부제에 '입력한 사유는 회원에게 그대로 표시됩니다(영문 작성)' 같은 안내를 넣을지, 미입력 시 확인 버튼 비활성(web/field error variant 사용)을 둘지 결정한다."
+    },
+    {
+      "id": "CHK-S3-107",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "Professional 심사 빈 화면이 심사 상세 상단(제목·목록으로·미승인·승인)을 복사해 쓰고 문구도 'professional 등급'으로 남음",
+      "why": "관리자웹 39(Professional 심사/빈 화면)는 목록 화면인데 제목과 상단 버튼이 상세 화면(관리자웹 32~38) 것임. 빈 목록에 승인·미승인 버튼이 보여 동작 대상이 없음. 빈 상태 문구는 'professional'(소문자)과 이전 명칭 '등급'을 써 사용자앱 변경과 함께 정한 '회원 유형' 기준과 다름. 빈 화면을 떼어낸 복사본으로 둔 위험(CHK-S3-031)이 실제로 나타난 사례.",
+      "evidence": [
+        "SRC-03 694:33112 (관리자웹 39 스크린샷: 제목 'Professional 신청 심사', 상단 목록으로·미승인·승인 버튼, 빈 상태 문구 'professional 등급 신청한 회원이 없습니다.')",
+        "SRC-03 720:24534 top·720:24536 button area (숨김 아님), 694:33487 떼어낸 목록 프레임, 689:23561 (관리자웹 30 제목 'Professional 심사')",
+        "SRC-05 Notion CHK-S2-041 결정 메모 '관리자웹→ 회원 유형'"
+      ],
+      "impact_screens": [
+        "WEB-39",
+        "WEB-30"
+      ],
+      "follow_up": "관리자웹 39 상단을 관리자웹 30과 같은 '제목 Professional 심사' 텍스트만 남기고 버튼 영역을 지운다. 빈 상태 문구를 'Professional 심사를 신청한 회원이 없습니다.' 등으로 고친다."
+    },
+    {
+      "id": "CHK-S3-108",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "신고 원문 확인 결과(이용 정지) 화면 제목이 '결과: 제재 없음'으로 잘못 들어가 44와 내용이 같음",
+      "why": "관리자웹 45(신고 관리/ 원문 글 확인 결과: 이용 정지)는 TAG와 체크리스트상 이용 정지 결과 화면인데 제목·사유 줄·본문이 관리자웹 44(…결과: 제재 없음)와 같음. 이용 정지 결과 case가 실제로는 그려지지 않은 상태.",
+      "evidence": [
+        "SRC-03 739:21768 (관리자웹 45 제목 '신고 대상 (Chris Taylor) 원문 확인 결과: 제재 없음'), 739:21762 TAG '신고 관리/ 원문 글 확인 결과: 이용 정지', 739:21556 (관리자웹 44 같은 제목)",
+        "SRC-04 Todoodle 739:21970 '라벨명: 신고 대상 (Chris Taylor) 원문 확인 결과: 제재 없음 OR 이용정지'"
+      ],
+      "impact_screens": [
+        "WEB-45",
+        "WEB-40"
+      ],
+      "follow_up": "관리자웹 45 제목을 '…원문 확인 결과: 이용 정지'로 고치고, 필요하면 정지 사유를 함께 보여준다."
+    },
+    {
+      "id": "CHK-S3-109",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 사유 표시 줄이 결과 화면에만 있고 사유 1개만 보여 다중 사유('+외 N개')·신고된 글 위치를 상세에서 확인할 수 없음",
+      "why": "사용자앱 신고는 다중 선택이고 관리자웹 40(신고 관리)은 '첫 사유 + 외 N개'로 반영됐지만, 상세에서 나머지 사유를 볼 곳이 정해지지 않음. 처리 전인 관리자웹 41(신고 관리/ 원문 글 확인 (접수 상태))에는 사유 줄이 없어 처리 판단 화면에서 사유를 모름. 신고 대상자(Chris Taylor)가 본문·답글 작성자(Aisha Tan·Alex Morgan)와 달라 어느 글이 신고됐는지도 표시되지 않음. 흐름 쪽 판단은 S2(CHK-S2-056)와 겹침.",
+      "evidence": [
+        "SRC-03 689:22801 (관리자웹 41 접수 상태: 신고 사유 줄 없음), 739:21743·739:21773 (관리자웹 44·45 '신고 사유: Sharing personal information without consent' 1개), 689:22512 (관리자웹 40 'Scam or fraud +외 2개', 'Harassment or hate speech +외 3개')",
+        "SRC-03 271:28469 (사용자앱 60 'Select all reasons that apply.' 6개 사유 다중 선택)",
+        "SRC-04 Todoodle 733:20178·733:20181 원문 확인에서 신고 사유·닉네임 표기"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45",
+        "APP-60"
+      ],
+      "follow_up": "신고 사유 줄을 접수 상태(41~43)에도 두고 다중 사유는 모두 나열하는 형태로 정할지, 신고된 원문/답글에 표시를 둘지 결정한다."
+    },
+    {
+      "id": "CHK-S3-110",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "이용 정지 관리 목록의 '정지 해제' 버튼이 일부 행만 비활성인데 상태 열이 없어 비활성 이유를 알 수 없음",
+      "why": "관리자웹 47·48(이용 정지 관리)은 정지된 회원만 모은 목록인데 일부 행의 '정지 해제'가 비활성임. 이미 해제된 회원이 목록에 남는 것인지, 다른 조건인지 화면에서 구분되지 않아 비활성 상태의 의미를 사람이 정해야 함.",
+      "evidence": [
+        "SRC-03 245:33343 (관리자웹 47 스크린샷: 10행 중 5행 '정지 해제' 비활성 회색, 상태 열 없음), 719:23418 button state=Inactive",
+        "SRC-05 Notion IMP-S4-007 결정 메모 '정지 해제→ 신고 관리/처리 상태: 이용 정지, 회원 관리/운영 상태: 이용 정지'"
+      ],
+      "impact_screens": [
+        "WEB-47",
+        "WEB-48",
+        "WEB-49",
+        "WEB-26"
+      ],
+      "follow_up": "비활성 '정지 해제'가 뜻하는 상태(해제 완료 등)를 정하고, 필요하면 상태 열이나 태그를 추가한다. 의미가 없으면 모든 행을 활성으로 맞춘다."
+    },
+    {
+      "id": "CHK-S3-111",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "'현재 회원 유형' 열 예시 값이 앱의 '승인 전까지 유형 유지' 규칙과 맞지 않아 열 의미 확인이 필요함",
+      "why": "사용자앱은 승인되어야 Professional이 된다고 안내하는데, 관리자웹 30·31(Professional 심사) 예시에서는 승인 완료 행이 Newcomer, 심사 중 행이 Professional임. 열이 '신청 당시 유형'인지 '지금 유형'인지 정해지지 않아 표시값 기준을 개발에 전달할 수 없음.",
+      "evidence": [
+        "SRC-03 689:23558 (관리자웹 30: 승인 완료 행 '현재 회원 유형' Newcomer, 심사 중 행 Professional)",
+        "SRC-03 500:18409 (사용자앱 90 'Your current member type will remain unchanged until your application is approved.'), 733:20651 (사용자앱 76 'You'll remain a Newcomer until it's approved.')"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-26"
+      ],
+      "follow_up": "'현재 회원 유형' 열이 신청 시점 값인지 현재 값인지 정하고, 그에 맞게 열 이름이나 예시 값을 고친다."
+    },
+    {
+      "id": "CHK-S3-112",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "심사 상세 상단 버튼 일부가 버튼 컴포넌트가 아닌 복사본이라 처리 후 상태 변경이 화면마다 따로 필요함",
+      "why": "버튼 컴포넌트(type=미승인 포함, active/Inactive)는 생겼지만 관리자웹 32~39의 상단 버튼 중 일부는 여전히 프레임 복사본임. 처리된 건에서 버튼을 숨기거나 비활성으로 바꾸는 상태(REQ-PRODETAIL-08)를 컴포넌트로 한 번에 관리할 수 없음.",
+      "evidence": [
+        "SRC-03 689:26068 (관리자웹 32: 목록으로·미승인은 button 인스턴스, 승인 689:26073은 frame), 692:26950·739:21117·720:24516·720:24526·720:24536 (관리자웹 33·34·37·38·39: 목록으로·미승인 frame, 승인만 인스턴스)",
+        "SRC-05 Notion CHK-S3-032 결정 메모 '목록으로 버튼 비활성화/활성화 상태값 제작'"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36",
+        "WEB-37",
+        "WEB-38",
+        "WEB-39"
+      ],
+      "follow_up": "관리자웹 32~39 상단 목록으로·미승인·승인을 button 인스턴스로 바꿀지 결정한다."
+    },
+    {
+      "id": "CHK-S3-113",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "Professional 심사 목록 마지막 열 머리글이 '심사하기'라 처리된 행의 '상세보기' 버튼과 맞지 않음",
+      "why": "결정 메모대로 행 버튼은 상태별로 '심사하기'/'상세보기'로 나뉘었지만, 열 머리글은 '심사하기'로 남아 처리된 행과 맞지 않음. 다른 목록은 '원문 확인'·'정지 해제' 등 버튼 이름과 같은 머리글을 씀. 버튼 표기도 결정 메모 '상세 보기'와 띄어쓰기가 다름.",
+      "evidence": [
+        "SRC-03 689:23558·722:27288 (관리자웹 30·31 열 머리글 '심사하기', 행 버튼 '심사하기'(심사 중)·'상세보기'(승인 완료·미승인))",
+        "SRC-05 Notion CHK-S2-059 결정 메모 '처리된 승인 완료/심사 거절→ 상세 보기 라벨명 버튼, 심사 중→ 심사하기'",
+        "SRC-00 [Professional 심사] 관리(심사하기 버튼)"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31"
+      ],
+      "follow_up": "card/Professional 심사 마지막 열 머리글을 '관리'(픽스 원문) 등 두 버튼을 아우르는 이름으로 바꾸고, '상세보기'/'상세 보기' 표기를 하나로 정한다."
+    },
+    {
+      "id": "CHK-S3-114",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "원문 글 상세 카드가 카테고리 태그 1개 예시만 있어 앱 '최대 3개' 게시글이 상세에서 어떻게 보일지 정해지지 않음",
+      "why": "사용자앱 게시글이 카테고리 3개까지 가지게 됐고 관리자웹 19(포럼 관리) 목록은 3개 태그를 보여주지만, 공용 card/원문 글 상세는 태그 1개 상태만 그려져 있음. 본문 이미지·볼드·링크 렌더링은 반영됨(관리자웹 22·41 스크린샷).",
+      "evidence": [
+        "SRC-03 144:6583·689:22801·739:21556 (관리자웹 22·41·44 상세 태그 'Visa' 1개), 142:23478 (관리자웹 19 목록 행 태그 최대 3개 Visa·Housing·Life)",
+        "SRC-03 271:29307 (사용자앱 31 'You can choose up to 3 categories.')"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-23",
+        "WEB-24",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "card/원문 글 상세 제목 위 태그 영역에 3개 태그 예시를 넣을지 결정한다."
+    },
+    {
+      "id": "CHK-S3-115",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "심사 상세의 '공개 프로필 정보 / 문서 제출' 구분이 앱 신청서 검토 화면 구분과 같음",
+      "why": "관리자웹 심사 상세 2단 구분이 사용자앱 80 검토 화면의 구분과 같은 항목으로 나뉨. 사용자앱 공개 프로필(65·66·69~72)에 Supporting link·Additional context가 보이는 문제는 사용자앱 쪽 표시 범위라 이번 범위 밖(s1 excluded_requests). 개별 라벨·값 문제는 CHK-S3-103·104에서 다룸. / Judge 이의: PASS 기준이 부족함. 관리자웹 2단 구분이 사용자앱 80(신청서 검토 화면)과 같다는 것만 확인함. 그런데 같은 실행의 CHG-13에서 사용자앱 공개 프로필(65·66·69~72)이 Supporting link·Additional context를 공개로 보여 주어, 앱 안에서 공개/비공개 경계가 엇갈림. 이 경계는 CHK-S2-108·IMP-S4-110에서 사람 결정 대기(NEEDS_REVIEW)임. 정해지지 않은 공개 범위를 기준으로 '구분이 맞다'고 PASS를 줄 수 없음",
+      "evidence": [
+        "SRC-03 689:25415·692:26946·739:21112 (관리자웹 32·33·34: 공개 프로필 정보 | 문서 제출(Registration country·Document·Supporting link·Additional context))",
+        "SRC-03 500:18061 (사용자앱 80 'Public profile' | 'Documents for review'(Document·Supporting link·Additional context))"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "조치 없음. 사용자앱 공개 범위가 바뀌면 관리자웹 구분 라벨을 다시 맞춘다."
+    },
+    {
+      "id": "CHK-S3-117",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 원문 확인 case 분류와 처리 상태 태그 '접수/제재 없음/이용 정지'가 반영됨",
+      "why": "접수 상태 상세는 처리 버튼 3개, 처리된 결과 상세는 '목록으로'만 보이도록 같은 버튼 인스턴스의 숨김으로 나뉨. 목록 처리 상태 태그도 '처리 완료' 대신 '제재 없음'을 씀. 관리자웹 45 제목 오기는 CHK-S3-108에서 다룸. / Judge 이의: case 분류(접수=버튼 3개 / 결과=목록으로만)는 맞음. 하지만 처리 상태 태그 '처리 완료→제재 없음'까지 '반영 확인' PASS로 묶음. 이 값은 story-service B절·SRC-00('접수 / 정지 완료 / 처리 완료')과 다르고, CF-06과 CHK-S2-029·IMP-S4-187이 NEEDS_REVIEW로 남아 있음. 근거인 SRC-04 732:20140도 체크 여부를 확인하지 못함. 미해소 충돌을 반영 완료로 판정함",
+      "evidence": [
+        "SRC-03 689:22806 (관리자웹 41 '신고 대상 원문 확인' + 목록으로·제재 없음·회원 이용 정지 인스턴스), 739:21561 (관리자웹 44 목록으로만 표시, 나머지 2개 hidden=true), 245:33331 (관리자웹 40 처리 상태 태그 접수·제재 없음·이용 정지)",
+        "SRC-04 Todoodle 739:21967·739:21970 원문 확인 case 분류, 732:20140 처리 완료→제재 없음"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "CHK-S3-004",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "푸시 상태 태그 '푸시 알림 전송 완료/미전송'은 결정 메모로 현재 표기가 확정됨",
+      "why": "같은 문제인 CHK-S2-007에 디자이너가 현재 표기를 클라이언트 html 명칭으로 확정한다고 남겼고, 상태 값 2개는 유지됨. 판정 기준을 SRC-00 원문에서 SRC-05 결정으로 바꿔 적용함. / Judge 이의: 단계 간 판정 충돌, 확인할 수 없는 근거로 준 PASS. 근거는 '클라이언트 html 명칭으로 픽스' 결정 메모뿐인데 그 html은 하네스 자료(FETCHED)에 없음. 같은 메모를 본 CHK-S2-007은 같은 이유로 NEEDS_REVIEW이고, IMP-S4-159도 이 차이를 지적함. story-service B절 '전체 푸시 전송 완료 / 전체 푸시 미전송'은 바뀌지 않았음(갱신·H0 없음). 메모만으로 판정 기준을 SRC-00에서 SRC-05로 바꿀 수 없음",
+      "evidence": [
+        "SRC-03 128:9957·676:28985 (관리자웹 03·12 스크린샷 '푸시 알림 전송 완료' / '푸시 알림 미전송')",
+        "SRC-05 Notion CHK-S2-007 결정 메모 '상태 텍스트 길어서 클라이언트 html 명칭으로 픽스함' (수정 완료 체크)"
+      ],
+      "impact_screens": [
+        "WEB-03",
+        "WEB-12",
+        "WEB-13"
+      ],
+      "follow_up": "조치 없음. story-service B절 상태 정의 문구 갱신 여부는 Orchestrator가 S4·S5에서 판단한다."
+    },
+    {
+      "id": "CHK-S3-007",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 처리 버튼 '제재 없음'·'회원 이용 정지'는 결정 메모로 현재 명칭이 확정됨",
+      "why": "같은 결정 항목 CHK-S2-029에서 현재 명칭으로 확정했고, 목록 처리 상태도 '제재 없음'으로 맞춰져 버튼과 상태 값이 대응함. / Judge 이의: CHK-S3-004와 같은 유형. 근거는 '클라이언트 html 기준 픽스' 메모(html은 FETCHED 아님)와 SRC-04 732:20140(체크 여부 미확인)임. story-service B절·SRC-00('정지 완료 / 처리 완료', '확인 완료(이상 없음)')과 다르고, CF-06과 같은 결정 항목 CHK-S2-029·IMP-S4-187은 NEEDS_REVIEW임. 미해소 정의 충돌 위에 준 PASS임",
+      "evidence": [
+        "SRC-03 689:22801 (관리자웹 41 스크린샷 버튼 '제재 없음'·'회원 이용 정지'), 245:33331 (관리자웹 40 처리 상태 '제재 없음'·'이용 정지')",
+        "SRC-05 Notion CHK-S2-029 결정 메모 '명칭은 클라이언트 html 기준으로 픽스' (수정 완료 체크)",
+        "SRC-04 Todoodle 732:20140 처리 완료→제재 없음"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "CHK-S3-008",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "회원 관리·이용 정지 관리·Professional 심사의 열·드롭다운이 '회원 유형'으로 통일됨",
+      "why": "'회원 등급'이 남아 있던 열 머리글·드롭다운 기본 라벨이 모두 '회원 유형'으로 바뀌어 사용자앱 'Membership type'과 결정 메모대로 대응함. 드롭다운 값 Newcomer·Insider·Professional도 앱 Member type 값과 같음. 빈 화면에 남은 '등급' 문구는 CHK-S3-107에서 다룸. / Judge 이의: WEB-28을 screen_ids에 넣고 '열 머리글·드롭다운 기본 라벨이 모두 회원 유형으로 바뀜'이라고 판정함. 그런데 같은 단계 CHK-S3-026(FAIL)은 WEB-28 기본 라벨이 '전체'라고 판정함(자기 모순). 같은 메뉴 WEB-29 '회원 등급 전체'(CHK-S4-103)도 확인하지 않음. 또 드롭다운 값(Newcomer/Insider/Professional)이 앱과 같다는 것은 맞지만, 값 자체의 확정 근거는 CF-01에서 NEEDS_REVIEW로 남아 있음",
+      "evidence": [
+        "SRC-03 245:33348 (관리자웹 26 열 '회원 유형', 드롭다운 '회원 유형 전체'), 689:23558·722:27288 (관리자웹 30·31 '현재 회원 유형'), 245:33343 (관리자웹 47 '회원 유형')",
+        "SRC-05 Notion CHK-S2-041 결정 메모 '관리자웹→ 회원 유형, 사용자앱→ Membership type 명칭 픽스'",
+        "SRC-03 271:31185 (사용자앱 12 'Membership type', CHG-05)"
+      ],
+      "impact_screens": [
+        "WEB-26",
+        "WEB-27",
+        "WEB-28",
+        "WEB-30",
+        "WEB-31",
+        "WEB-47",
+        "WEB-48"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "CHK-S3-019",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "앱 신고 사유 오타는 'information'으로 고쳐졌지만 관리자웹 신고 목록 2개 행에 'infomation'이 남음",
+      "why": "사용자앱 신고 모달은 오타를 고쳤는데 관리자웹 40(신고 관리) 목록 일부 행은 그대로라 같은 사유가 두 표기로 보임. 사유는 앱 값을 상태값으로 그대로 쓰므로 값이 어긋남. 이전에는 앱·관리자 모두 수정 대상이었으나 이제 관리자웹만 남음.",
+      "evidence": [
+        "SRC-03 245:33331 (관리자웹 40 스크린샷 5·7번째 행 'Sharing personal infomation without consent', 1번째 행은 'information'), 689:17750 card/신고 관리 사유 텍스트",
+        "SRC-03 271:28469 (사용자앱 60 'Sharing personal information without consent', CHG-19)"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "card/신고 관리의 'infomation' 행 2개를 'information'으로 고친다."
+    },
+    {
+      "id": "CHK-S3-026",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "드롭다운 목록에 '전체'가 모두 생겼으나 회원 이용 정지 모달 화면만 기본 라벨이 '전체'로 26과 다름",
+      "why": "필터 해제 수단('전체' 항목)은 모든 목록에 생겼고, 라벨을 '○○ 전체'로 화면마다 다르게 쓰는 것은 결정 메모로 의도된 것임. 다만 관리자웹 28(회원 이용 정지 모달)은 관리자웹 26(회원 관리)과 같은 화면인데 기본 라벨이 '전체'로 남아 결정 메모 규칙과도 다름.",
+      "evidence": [
+        "SRC-03 142:23478·245:33348·689:23558·245:33343 (관리자웹 19·26·30·47 펼친 목록 첫 항목 '전체', 닫힌 라벨 '카테고리 전체'·'회원 유형 전체'·'심사 상태 전체'), 245:33353 (관리자웹 28 같은 회원 관리 화면의 닫힌 라벨 '전체')",
+        "SRC-05 Notion CHK-S3-026 결정 메모 '필터 디폴값 라벨명→어떤 카테고리 필터인지 노출하기 위해서 화면마다 다르게 작업'"
+      ],
+      "impact_screens": [
+        "WEB-28"
+      ],
+      "follow_up": "관리자웹 28 배경 드롭다운 라벨을 '회원 유형 전체'로 맞춘다."
+    },
+    {
+      "id": "CHK-S3-027",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "검색 결과 없음 컴포넌트는 추가됐으나 search bar·dropdown에 지우기·선택 완료 variant는 컴포넌트 섹션에서 확인되지 않음",
+      "why": "검색 결과 없음 화면은 컴포넌트로 추가됨. 지우기 버튼은 filled variant 안에 있을 수 있으나 인스턴스 내부라 메타데이터로 확인하지 못했고, '드롭다운 선택 완료' variant는 dropdown 컴포넌트에 별도 variant로 보이지 않음. 수정 완료가 체크된 사람 판단 항목이라 해소 처리 대상.",
+      "evidence": [
+        "SRC-03 719:23154 '검색 결과 없음' symbol, 671:30550 search bar variant default/filled 2개, 676:31584 dropdown variant default/list 2개 (design-metadata.xml 2~90행)",
+        "SRC-05 Notion CHK-S3-027 결정 메모 '드롭다운 선택완료 컴포넌트 있음, 검색바 filled 상태 시 검색 지우기 버튼 추가, 검색 결과 없음 화면 추가' (수정 완료 체크)"
+      ],
+      "impact_screens": [
+        "WEB-18",
+        "WEB-19",
+        "WEB-26",
+        "WEB-30",
+        "WEB-40",
+        "WEB-47"
+      ],
+      "follow_up": "드롭다운 선택 완료 상태가 별도 컴포넌트에 있다면 위치를 결정 메모에 남긴다. 그 외 조치 없음."
+    },
+    {
+      "id": "CHK-S3-028",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "사유 입력 모달 3종이 여전히 컴포넌트가 아닌 프레임이고 심사 미승인 모달만 크기가 다름",
+      "why": "회원 이용 정지 모달 2개(관리자웹 28·43)는 크기가 맞춰졌지만 셋 다 instance가 아닌 frame이고, 관리자웹 38(심사 거절) 모달은 444×402로 다름. 세 모달 모두 입력 내용이 사용자앱(22 정지 안내, 92·93 Review feedback)에 그대로 나가는데, 안내 문구·필수 입력 상태를 바꾸려면 화면마다 따로 고쳐야 함(CHK-S3-106 참고).",
+      "evidence": [
+        "SRC-03 702:16219 (관리자웹 28 modal frame 460×370), 689:23541 (관리자웹 43 frame 460×370), 722:26337 (관리자웹 38 frame 444×402), 139:20690 modal variant button=1개/2개뿐"
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-38",
+        "WEB-43",
+        "APP-22",
+        "APP-92",
+        "APP-93"
+      ],
+      "follow_up": "modal에 '입력형(제목·안내·web/field·버튼 2개)' variant를 만들고 관리자웹 28·38·43을 그 인스턴스로 바꾼다."
+    },
+    {
+      "id": "CHK-S3-030",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "심사 상태 tag 원본은 컴포넌트 섹션에 생겼으나 푸시·운영·처리 상태 태그 원본은 여전히 찾지 못함",
+      "why": "이전에는 모든 상태 태그 원본을 찾지 못해 자료 부족이었으나, 이번에 심사 상태 tag가 컴포넌트로 생겨 variant 대조가 가능해짐(그 결과 목록 '미승인' 불일치를 CHK-S3-101로 찾음). 푸시·운영·처리 상태 태그는 여전히 원본을 찾지 못했고, 디자이너가 중요하지 않다고 판단해 수정 완료를 체크함 — 자료 보완 대신 사람 판단 항목으로 바꿔 기록함.",
+      "evidence": [
+        "SRC-03 725:18738 심사 상태 tag (승인 완료/심사 중/심사 거절) — 131:12263 섹션 안. 'tag'(689:17754)·'페이지네이션'(689:17942) 원본은 섹션에 없음",
+        "SRC-05 Notion CHK-S3-030 결정 메모 '중요하지 않음' (수정 완료 체크)"
+      ],
+      "impact_screens": [
+        "WEB-03",
+        "WEB-26",
+        "WEB-40"
+      ],
+      "follow_up": "처리 상태 태그(접수·제재 없음·이용 정지)도 심사 상태 tag처럼 컴포넌트로 둘지 결정한다. 그 외 조치 없음."
+    },
+    {
+      "id": "CHK-S3-031",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "빈 화면은 결정대로 목록 카드 복사본을 유지했으나 Professional 심사 빈 화면에서 복사 오류가 실제로 생김",
+      "why": "빈 화면 7개(관리자웹 17·25·29·39·46·50·58)는 결정 메모대로 떼어낸 복사본을 유지함. 그 위험이 관리자웹 39(Professional 심사/빈 화면)에서 실제로 나타남(상세 상단 복사·'등급' 문구, CHK-S3-107). 나머지 빈 화면은 스크린샷을 찍지 않아 목록 변경(검색 안내·드롭다운 라벨) 반영 여부를 확인하지 못함.",
+      "evidence": [
+        "SRC-03 694:33088 (관리자웹 29 회원 관리 frame), 694:33487 (관리자웹 39 frame + 상세 상단 복사), 694:31597 (관리자웹 58 frame) — 목록 card instance가 아님",
+        "SRC-05 Notion CHK-S3-031 결정 메모 '현재 유지' (수정 완료 체크)"
+      ],
+      "impact_screens": [
+        "WEB-17",
+        "WEB-25",
+        "WEB-29",
+        "WEB-39",
+        "WEB-46",
+        "WEB-50",
+        "WEB-58"
+      ],
+      "follow_up": "현재 유지 결정은 그대로 두고, 관리자웹 39는 CHK-S3-107로 고친다. 목록 문구를 바꿀 때 빈 화면 7개도 함께 확인한다."
+    },
+    {
+      "id": "CHK-S3-033",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 관리에만 처리 상태 필터 드롭다운이 여전히 없음 — 필요 여부 사람 판단",
+      "why": "상태 열이 있는 관리자웹 30(Professional 심사)은 상태 필터가 있지만 관리자웹 40(신고 관리)은 '접수' 건만 골라볼 수단이 없음. 같은 결정 항목 CHK-S2-055는 수정 완료 미체크라 미해소로 남음.",
+      "evidence": [
+        "SRC-03 245:33331 (관리자웹 40 스크린샷: 검색바 + 초기화만, 드롭다운 없음), 689:23558 (관리자웹 30 심사 상태 드롭다운 있음)",
+        "SRC-04 Todoodle 733:20159 '심사 상태, 처리 상태 tag 변경 X' (태그를 목록에서 바꾸지 않는다는 뜻으로, 필터 여부와는 별개)"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-46"
+      ],
+      "follow_up": "처리 상태(접수·제재 없음·이용 정지) 필터 드롭다운을 추가할지 CHK-S2-055와 함께 결정한다."
+    },
+    {
+      "id": "CHK-S3-GUIDE",
+      "verdict": "INSUFFICIENT_INFO",
+      "rule_ref": null,
+      "what": "design.md가 없어 디자인 가이드 검사를 하지 못함",
+      "why": "디자인 가이드 검토(W14)는 design.md가 있을 때만 활성화됨. Notion에서 수정 완료가 체크됐지만 자료 부족 항목은 자료를 보완해야 해소되며 design.md는 여전히 없음.",
+      "evidence": [
+        "SRC-03 131:12263 관리자웹/컴포넌트 (가이드 기준 문서 없음: projects/maru/design.md 부재, 2026-11-09 확인)"
+      ],
+      "impact_screens": [
+        "전체 화면"
+      ],
+      "follow_up": "디자인 가이드를 적용하려면 projects/maru/design.md를 추가한 뒤 재검증한다. 적용하지 않기로 했다면 그 결정을 project.json 또는 story-service에 남긴다."
+    },
+    {
+      "id": "CHK-S4-101",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "정지 회원 원문 삭제를 포럼 관리에서 하기로 했지만 포럼 관리는 제목 검색뿐이라 정지 회원 글을 골라낼 수 없음",
+      "why": "관리자웹 28·43에서 회원을 정지한 뒤 그 회원의 원문을 관리자웹 19(포럼 관리)에서 지우기로 정했지만, 19는 회의 픽스대로 제목 검색과 카테고리 필터만 있어 작성자(정지 회원)로 글을 모아 볼 수 없다. 관리자웹 47(이용 정지 관리)에서 해당 회원 글로 가는 경로도 없다. 정지 회원 글이 앱 Topics·Popular Top5에 남는 시간이 길어진다. 회의 픽스가 제목 검색이라 바로 수정 필요로 확정하지 않고 사람 결정으로 둔다.",
+      "evidence": [
+        "SRC-03 142:23478 (관리자웹 19 검색 placeholder '제목으로 검색', 작성자 열 있음, 카테고리 필터만)",
+        "SRC-04 Todoodle 722:26278 '회원 이용 정지 후 해당 회원 원문 삭제는 포럼 관리에서'",
+        "SRC-05 Notion CHK-S4-001 결정 메모 'DB 삭제'",
+        "SRC-00 [포럼 관리] 검색바 (제목 검색)",
+        "SRC-03 245:33343 (관리자웹 47 이용 정지 관리 — 포럼 관리로 가는 연결 없음)"
+      ],
+      "impact_screens": [
+        "WEB-19",
+        "WEB-20",
+        "WEB-47",
+        "APP-44",
+        "APP-56"
+      ],
+      "follow_up": "포럼 관리 검색에 작성자(닉네임) 검색을 추가하거나, 이용 정지 관리에서 '작성 글 보기'로 포럼 관리 필터 이동을 둘지 결정한다."
+    },
+    {
+      "id": "CHK-S4-102",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "정지 후 포럼 관리에서 원문을 DB 삭제하면 신고 원문 확인 결과 화면(44·45)이 보여줄 원문이 사라지는데 그 상태가 없음",
+      "why": "결정된 흐름은 신고 → 관리자웹 43 이용 정지 → 관리자웹 19·21·23에서 원문 DB 삭제다. 그런데 처리된 신고를 다시 여는 관리자웹 44·45(원문 확인 결과)는 원문 본문을 보여 주는 화면이라, 원문이 DB에서 지워진 뒤 무엇을 보여줄지(삭제된 원문 안내, 신고 당시 사본 보관 등)가 없다. 관리자웹 21·23 삭제 모달도 걸린 신고 건이 있다는 안내가 없다. 이전 영향 맵의 '삭제된 원문에 걸린 신고 건 처리(미정)' 연결이 이번 결정으로 실제 흐름이 됐다.",
+      "evidence": [
+        "SRC-05 Notion CHK-S4-001 'DB 삭제', CHK-S2-044 '표기 없이 그냥 삭제되서 미노출'",
+        "SRC-04 Todoodle 722:26278 (정지 후 원문 삭제는 포럼 관리)",
+        "SRC-03 739:21556·739:21763 (관리자웹 44·45 원문 본문을 그대로 보여 주는 결과 화면)",
+        "SRC-03 682:35180·682:36814 (관리자웹 21·23 원문 글 삭제 모달 — 신고 건 안내 없음)"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-44",
+        "WEB-45",
+        "WEB-21",
+        "WEB-23"
+      ],
+      "follow_up": "원문 삭제 후 신고 결과 화면에 보여줄 내용(삭제 안내 또는 신고 시점 사본)을 정하고, 필요하면 44·45에 '삭제된 원문' 상태를 추가한다."
+    },
+    {
+      "id": "CHK-S4-103",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "회원 관리 빈 화면(29) 드롭다운이 이전 명칭 '회원 등급 전체'로 남아 '회원 유형' 통일이 빠짐",
+      "why": "사용자앱 Membership type 변경과 함께 정한 관리자웹 '회원 유형' 명칭이 관리자웹 26(회원 관리)에는 반영됐지만 같은 메뉴의 관리자웹 29(회원 관리/빈 화면)는 떼어낸 복사본이라 '회원 등급 전체'가 남았다. CHK-S2-041(PASS)은 29 스크린샷을 확인하지 않았다.",
+      "evidence": [
+        "SRC-03 694:32665 (관리자웹 29 — 이번 단계 get_screenshot, 드롭다운 '회원 등급 전체')",
+        "SRC-03 245:33348 (관리자웹 26 '회원 유형 전체')",
+        "SRC-05 Notion CHK-S2-041 결정 메모 '관리자웹→ 회원 유형'"
+      ],
+      "impact_screens": [
+        "WEB-29"
+      ],
+      "follow_up": "관리자웹 29 드롭다운 라벨을 '회원 유형 전체'로 고친다."
+    },
+    {
+      "id": "IMP-S4-101",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 신청 유형이 'Individual professional(본인 명의) / Business registered in Korea / outside Korea'로 바뀌어 관리자웹 '개인 사업자' 명칭만 의미가 어긋남(국내·해외는 대응)",
+      "why": "심사자가 본인 명의 개인 신청을 '사업자' 신청으로 읽어 사업자 서류를 요구하는 등 심사 기준을 잘못 적용할 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-01",
+        "SRC-03 500:17414, 505:13530, 505:14223 (사용자앱 신청 유형 선택지)",
+        "SRC-03 689:23558 (관리자웹 30 신청 유형 열), 689:25415·692:26946·739:21112 (32·33·34 제목)",
+        "SRC-00 [Professional 심사] 신청 유형(개인/국내/해외 사업자)"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "첫 번째 신청 유형의 관리자웹 명칭(예: '개인 전문가')을 정하고 card 목록 값·card state=개인 제목·TAG를 함께 바꾼다."
+    },
+    {
+      "id": "IMP-S4-102",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "앱 신청서 라벨·예시 값 변경(Service location / Service area, 'Housing guidance' 삭제)에 관리자 심사 상세 라벨은 대부분 맞췄지만 예시 값과 해외 case 라벨이 어긋남",
+      "why": "개발자가 관리자 카드 예시를 기준으로 필드를 매핑하면 Based in·Experience 데이터가 뒤바뀌어 표시되고, 해외 사업자 심사에서 잘못된 등록 국가를 기준으로 판단할 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-02",
+        "SRC-03 689:25415·724:18198·725:18762·692:26946·739:21112 (관리자웹 32~36 카드), 693:27116 card/Professional 신청 심사",
+        "SRC-03 500:18061·505:13887·505:14417 (사용자앱 80·85·89 Review)"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-35",
+        "WEB-36",
+        "WEB-33",
+        "WEB-34"
+      ],
+      "follow_up": "card/Professional 신청 심사 3개 variant의 예시 값을 사용자앱 80·85·89와 같게 맞추고, 해외 라벨 'Service area'·Registration country(한국 외 국가)로 고친다. 'Document' 라벨은 앱 버튼 문구('Upload document')와 별개라 그대로 둔다."
+    },
+    {
+      "id": "IMP-S4-103",
+      "verdict": "FAIL",
+      "rule_ref": "2-c",
+      "what": "앱에 재신청 횟수('Number of applications: 1 time / 2 times')가 생겼는데 관리자웹 심사 목록·상세에는 신청 횟수·이전 심사 이력이 없음 (규칙 2-c)",
+      "why": "앱 사용자는 '2 times'를 보는데 관리자는 같은 사람의 재신청인지, 이전에 왜 거절했는지 모른 채 다시 심사하게 됨. 규칙 2-c FAIL.",
+      "evidence": [
+        "FB FB-20261109-0131-03",
+        "SRC-00 <Professional 신청 심사 상세> 이력 누적",
+        "SRC-03 500:18860·739:20998 (사용자앱 92·93 'Number of applications')",
+        "SRC-03 689:23558 (관리자웹 30 열), 725:18762 (36)",
+        "SRC-05 Notion CHK-S2-026 결정 메모 '관리자웹 재신청 누적X'"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "규칙 2-c 유지/변경을 먼저 정한다. 유지 시 30·31에 신청 횟수 열, 32~36에 신청 이력(회차·일시·결과·전달 사유)을 추가한다."
+    },
+    {
+      "id": "IMP-S4-104",
+      "verdict": "FAIL",
+      "rule_ref": "2-d",
+      "what": "앱 상태 표기(Under review / Approved / Not approved)와 '승인 전까지 현재 회원 유형 유지' 안내가 생겼는데 관리자웹 목록 태그만 '미승인'이고 '현재 회원 유형' 예시가 안내와 반대 (규칙 2-d)",
+      "why": "필터로 '심사 거절'을 고르면 '미승인' 태그 행이 나와 운영자가 다른 상태로 오해함. '현재 회원 유형' 기준이 없어 개발이 신청 시점 값/현재 값을 임의로 정함.",
+      "evidence": [
+        "FB FB-20261109-0131-04",
+        "SRC-03 689:23558·722:27288 (목록 태그 '미승인'), 725:18738 (심사 상태 tag variant)",
+        "SRC-03 500:18409·733:20651 (승인 전 유형 유지 안내), 500:18780, 500:18860",
+        "SRC-00 [Professional 심사] 심사 상태(심사 중/심사거절/승인완료)"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-37",
+        "WEB-26"
+      ],
+      "follow_up": "30·31 목록 태그를 심사 상태 tag '심사 거절' 인스턴스로 바꾼다. '현재 회원 유형' 열 의미와 승인 시 회원 관리 회원 유형 전환을 결정 메모로 남긴다."
+    },
+    {
+      "id": "IMP-S4-105",
+      "verdict": "FAIL",
+      "rule_ref": "2-b",
+      "what": "관리자 미승인 사유가 영어 앱 'Review feedback'에 그대로 노출되는데 관리자 모달은 빈 입력 차단·언어 안내가 없고 처리 후 상세에 전달 사유가 남지 않음 (규칙 2-b)",
+      "why": "빈 사유나 한국어 사유가 영문 앱에 그대로 나가고, 재신청 심사 때 관리자가 무엇을 전달했는지 확인할 수 없음.",
+      "evidence": [
+        "FB FB-20261109-0131-05",
+        "SRC-03 693:28331 (modal 722:26337), 725:18762 (36 내부 검토 메모만)",
+        "SRC-03 500:18860·739:20998 (Review feedback)",
+        "SRC-00 <Professional 신청 심사 상세> 신청자에게 전달할 사유 — 85p Review feedback"
+      ],
+      "impact_screens": [
+        "WEB-38",
+        "WEB-36"
+      ],
+      "follow_up": "38에 미입력 시 확인 비활성(web/field error)과 '입력한 사유는 신청자 앱에 그대로 표시됨(영문 작성)' 안내를 넣고, 36에 '신청자에게 전달한 사유(읽기 전용)' 영역을 추가한다."
+    },
+    {
+      "id": "IMP-S4-106",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 이용 정지 안내(22)에 관리자가 입력한 정지 사유가 그대로 노출되는데 관리자 정지 모달 2곳에 노출·언어 안내와 빈 입력 차단이 없고 예시 사유는 한국어",
+      "why": "정지 회원 앱에 빈 사유('Reason for suspension:' 뒤 공란)나 한국어 문장이 그대로 보일 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-06",
+        "SRC-03 739:21492 (사용자앱 22)",
+        "SRC-03 245:33353·689:23298 (관리자웹 28·43 모달), 245:33343 (47 정지 사유 한국어), 689:17022 (49)",
+        "SRC-04 Todoodle 730:19050"
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-43",
+        "WEB-47",
+        "WEB-48",
+        "WEB-49"
+      ],
+      "follow_up": "정지 사유 작성 언어(영문)와 '회원에게 그대로 표시됨' 안내, 미입력 시 확인 비활성 여부를 정해 28·43에 반영하고 47·48 예시를 바꾼다."
+    },
+    {
+      "id": "IMP-S4-107",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "'회원 유형' 통일은 목록 화면에 반영됐지만 회원 관리 빈 화면 드롭다운 '회원 등급 전체', Professional 심사 빈 화면 'professional 등급', 정지 모달 화면 드롭다운 '전체'가 남음",
+      "why": "빈 화면·모달 배경에 이전 명칭이 남아 개발 시 '회원 등급'과 '회원 유형'을 다른 필드로 오해할 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-07",
+        "SRC-03 694:32665 (관리자웹 29 '회원 등급 전체' — 이번 단계 스크린샷), 245:33353 (28 '전체'), 694:33112 (39 문구)",
+        "SRC-03 245:33348·245:33343·689:17022 ('회원 유형 전체')",
+        "SRC-05 Notion CHK-S2-041 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-29",
+        "WEB-39"
+      ],
+      "follow_up": "29 드롭다운을 '회원 유형 전체'로, 28 배경 드롭다운을 '회원 유형 전체'로, 39 문구를 'Professional 심사를 신청한 회원이 없습니다.' 등으로 고친다."
+    },
+    {
+      "id": "IMP-S4-108",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "앱 신고 사유 다중 선택·오타 수정이 관리자 목록('+외 N개')에는 반영됐지만 상세(접수 상태)에는 사유가 없고 결과 화면은 사유 1개만, 목록 일부 오타·45 제목 오류가 남음",
+      "why": "관리자가 왜·어떤 글이 신고됐는지 모른 채 제재를 결정하고, 이용 정지 결과 화면이 제재 없음으로 보여 처리 결과를 오인함.",
+      "evidence": [
+        "FB FB-20261109-0131-08",
+        "SRC-03 271:28469 (사용자앱 60)",
+        "SRC-03 245:33331 (40), 689:22801 (41), 739:21556·739:21763 (44·45), 739:21743 (사유 줄)",
+        "SRC-04 Todoodle 733:20178·733:20181·739:21970"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "접수 상태(41~43)에도 신고 사유 줄과 신고 대상(원문/답글) 표시를 두고 다중 사유는 모두 나열한다. 40 오타·45 제목을 고친다."
+    },
+    {
+      "id": "IMP-S4-109",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 게시글에 제목·카테고리 최대 3개·Image/link/Bold가 추가돼 관리자 포럼 목록은 반영됐지만 원문 확인 상세(공용 카드)는 카테고리 1개 예시뿐",
+      "why": "카테고리 3개 게시글이 상세에서 어떻게 보일지 정해지지 않아 개발 시 첫 카테고리만 노출될 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-09",
+        "SRC-03 271:29226 (사용자앱 32 'You can choose up to 3 categories.')",
+        "SRC-03 142:23478 (19), 144:6583 (22 태그 'Visa' 1개), 682:37321 card/원문 글 상세"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-23",
+        "WEB-24",
+        "WEB-41",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "card/원문 글 상세에 카테고리 2~3개 variant(또는 예시)를 추가할지 정한다."
+    },
+    {
+      "id": "IMP-S4-110",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 공개 프로필에 Supporting link·Additional context가 노출되는데 관리자 심사 상세는 이를 비공개 '문서 제출' 쪽에 둠 — 공개 범위 결정 필요",
+      "why": "심사자는 비공개 자료로 알고 승인했는데 앱에 공개돼 개인정보·사업 정보가 노출될 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-10",
+        "SRC-03 792:20307·792:20918 (공개 프로필 Supporting link·Additional context), 505:13758 ('Documents are private')",
+        "SRC-03 689:25415·692:26946·739:21112 (심사 상세 2단 구성)"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "Supporting link·Additional context의 공개 여부를 정하고, 공개라면 카드의 '공개 프로필 정보' 쪽으로 옮긴다."
+    },
+    {
+      "id": "IMP-S4-111",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 'Like' 탭·주간 'Popular Top5'가 생겨 관리자 원문·답글 삭제(DB 삭제)·이용 정지가 좋아요 목록·인기글·회원 '누적 좋아요 수'에 어떻게 반영되는지 기준이 없음",
+      "why": "관리자가 삭제한 글이 앱 인기글에 남거나 회원 누적 좋아요 수가 앱과 달라 운영자가 회원을 잘못 판단할 수 있음.",
+      "evidence": [
+        "FB FB-20261109-0131-11",
+        "SRC-03 271:30494 (사용자앱 44 Popular Top5), 792:21985 (98 Like)",
+        "SRC-03 142:23478 (19 좋아요 수), 245:33348 (26 누적 좋아요 수)",
+        "SRC-05 Notion CHK-S4-001 'DB 삭제', CHK-S2-044"
+      ],
+      "impact_screens": [
+        "WEB-19",
+        "WEB-21",
+        "WEB-22",
+        "WEB-23",
+        "WEB-24",
+        "WEB-26"
+      ],
+      "follow_up": "삭제·정지 시 좋아요·인기글·누적 좋아요 수 처리 규칙을 정해 결정 메모로 남기고, 필요하면 23 삭제 안내 문구에 반영한다."
+    },
+    {
+      "id": "IMP-S4-113",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "사용자앱 프레임 그룹 이동·사용자앱 주석 삭제는 관리자웹 화면에 영향 없음",
+      "why": "관리자웹 쪽 없음. 앱 주석이 근거로 쓰이던 배너 비율·알림 종류는 근거 위치만 사라짐. / Judge 이의: 자료가 부족한데 PASS를 줌. CHG-01은 사용자앱 주석이 '삭제 또는 숨김'(어느 쪽인지 미확인)이라고 적음. 사라진 주석 중 '배너는 정확한 배너 비율 고정'은 관리자웹 배너 등록·수정(WEB-54·55)의 업로드 조건 근거이고, expected_problem도 '근거 위치만 사라짐'이라고 인정함. 근거가 사라진 상태에서 54·55를 '수정 불필요'로 확정할 수 없음",
+      "evidence": [
+        "SRC-03 807:47633 (그룹), s1 changes CHG-01"
+      ],
+      "impact_screens": [
+        "WEB-54",
+        "WEB-14"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "IMP-S4-116",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 이용 정지 안내(22) 신규 — 관리자 정지 사유 입력·표시 화면에 노출 안내·언어·필수 입력 결정 필요 (IMP-S4-106과 같은 영향)",
+      "why": "IMP-S4-106과 같음.",
+      "evidence": [
+        "SRC-03 739:21492, 245:33353, 689:23298, 245:33343"
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-43",
+        "WEB-47",
+        "WEB-48",
+        "WEB-49"
+      ],
+      "follow_up": "IMP-S4-106 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-118",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 신청 유형 문구 변경 → 관리자 '개인 사업자' 명칭 결정 필요 (IMP-S4-101과 같은 영향)",
+      "why": "IMP-S4-101과 같음.",
+      "evidence": [
+        "SRC-03 500:17414, 689:23558"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32"
+      ],
+      "follow_up": "IMP-S4-101 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-119",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "앱 신청서 라벨·값 변경 → 관리자 심사 상세 예시 값·해외 라벨 수정 필요 (IMP-S4-102와 같은 영향)",
+      "why": "IMP-S4-102와 같음.",
+      "evidence": [
+        "SRC-03 500:18061, 505:13887, 505:14417, 693:27116"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "IMP-S4-102 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-120",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 'Upload document'·'Documents are private' 안내 변경 — 관리자 '문서 제출' 라벨은 그대로 두되 비공개 범위가 앱 공개 프로필과 맞는지 확인 필요(IMP-S4-110)",
+      "why": "IMP-S4-110과 같음.",
+      "evidence": [
+        "SRC-03 505:13758, 505:14356, 689:25415"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34"
+      ],
+      "follow_up": "IMP-S4-110 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-122",
+      "verdict": "FAIL",
+      "rule_ref": "2-d",
+      "what": "앱 등급 상태 문구(Approved·승인 전 유형 유지·신청 횟수) 변경 → 관리자 상태 태그·회원 유형 전환·전달 사유 표시에 영향 (IMP-S4-103·104·105와 같은 영향)",
+      "why": "IMP-S4-104·105와 같음.",
+      "evidence": [
+        "SRC-03 500:18409, 500:18780, 500:18860, 689:23558, 725:18762, 693:28331"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-36",
+        "WEB-37",
+        "WEB-38"
+      ],
+      "follow_up": "IMP-S4-104·105 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-123",
+      "verdict": "FAIL",
+      "rule_ref": "2-c",
+      "what": "앱 재신청 후 미승인(93) 신규 → 관리자 심사 이력 누적 필요 (IMP-S4-103과 같은 영향, 규칙 2-c)",
+      "why": "IMP-S4-103과 같음.",
+      "evidence": [
+        "SRC-03 739:20998, 689:23558",
+        "SRC-00 <Professional 신청 심사 상세> 이력 누적"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-36"
+      ],
+      "follow_up": "IMP-S4-103 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-125",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 타인 Professional 공개 프로필 신규 → 관리자 심사 상세 공개/비공개 구분 확인 필요 (IMP-S4-110과 같은 영향)",
+      "why": "IMP-S4-110과 같음.",
+      "evidence": [
+        "SRC-03 792:20528, 792:20307, 689:25415"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35"
+      ],
+      "follow_up": "IMP-S4-110 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-127",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 프로필 수정에서 Professional 선택 시 신청으로 이동하고 '승인 전까지 Newcomer 유지' — 관리자 '현재 회원 유형' 열 의미·회원 관리 반영 확인 필요",
+      "why": "개발이 '현재 회원 유형'을 신청 시 선택 값으로 저장해 승인 전 Professional로 보일 수 있음.",
+      "evidence": [
+        "SRC-03 733:20606, 733:20651, 689:23558",
+        "SRC-05 Notion CHK-S2-042 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-26"
+      ],
+      "follow_up": "CHK-S3-111 결정으로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-128",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 내 활동 Like 탭 신규 → 관리자 삭제·정지 시 좋아요 처리 기준 필요 (IMP-S4-111과 같은 영향)",
+      "why": "IMP-S4-111과 같음.",
+      "evidence": [
+        "SRC-03 792:21985, 245:33348"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-24",
+        "WEB-26"
+      ],
+      "follow_up": "IMP-S4-111 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-129",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 게시글 Title·카테고리 3개·Image/link/Bold → 관리자 원문 확인 상세 다중 카테고리 확인 필요 (IMP-S4-109와 같은 영향)",
+      "why": "IMP-S4-109와 같음.",
+      "evidence": [
+        "SRC-03 271:29226, 142:23478, 144:6583"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-41"
+      ],
+      "follow_up": "IMP-S4-109 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-131",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "앱 신고 모달 다중 선택·오타 수정 → 관리자 신고 목록 오타·상세 사유 표시 수정 필요 (IMP-S4-108과 같은 영향)",
+      "why": "IMP-S4-108과 같음.",
+      "evidence": [
+        "SRC-03 271:28469, 245:33331, 689:22801, 739:21743"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-41",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "IMP-S4-108 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-132",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 홈 Popular Top5 신규 → 관리자 삭제·정지 시 인기글 반영 기준 필요 (IMP-S4-111과 같은 영향)",
+      "why": "IMP-S4-111과 같음.",
+      "evidence": [
+        "SRC-03 271:30494, 142:23478"
+      ],
+      "impact_screens": [
+        "WEB-19",
+        "WEB-22"
+      ],
+      "follow_up": "IMP-S4-111 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-134",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "앱 News 메인 높이만 바뀜(텍스트 변화 없음) — 관리자 뉴스 데이터 항목 변화 근거 없음",
+      "why": "없음(시각 변경은 스크린샷 미확인). / Judge 이의: 자료가 부족한데 PASS를 줌. 사용자앱 49 높이 변경(964→976)의 시각 변화를 'expected_problem: 스크린샷 미확인'이라고 스스로 적음. 사용자앱 49에는 News 메인 배너가 있음(IMP-S4-008에서 '회의 위치 목록에 없음'으로 지적). 그런데도 WEB-51을 '배너 자리 변경 근거 없음'으로 수정 불필요 확정함. 확인하지 않은 변경을 영향 없음으로 판정함",
+      "evidence": [
+        "SRC-03 271:29404 (높이 964→976, 텍스트 동일), 128:9957"
+      ],
+      "impact_screens": [
+        "APP-49"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "IMP-S4-135",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "관리자웹 신규 16개 프레임은 기존 흐름(목록→상세→결과)에 이어지지만 34·35·36·44·45에 앱 연동 값 오류가 남고 16·55는 결정 대기",
+      "why": "신규 결과·상세 화면 일부가 앱 데이터와 다르게 그려져 개발 기준이 흔들림.",
+      "evidence": [
+        "SRC-03 s1 CHG-23 노드 720:24633 … 730:19058",
+        "SRC-04 Todoodle 715:16664"
+      ],
+      "impact_screens": [
+        "WEB-16",
+        "WEB-31",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36",
+        "WEB-44",
+        "WEB-45",
+        "WEB-55"
+      ],
+      "follow_up": "각 기점 레코드(CHK-S2-021·040·102·104·056·106) 조치로 해소하고 16·55는 결정 메모를 남긴다."
+    },
+    {
+      "id": "IMP-S4-136",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "관리자웹 TAG·문구 정리는 대부분 맞지만 45 화면 제목만 TAG(이용 정지)와 다름",
+      "why": "CHK-S2-106과 같음.",
+      "evidence": [
+        "SRC-03 739:21768, 739:21762"
+      ],
+      "impact_screens": [
+        "WEB-45"
+      ],
+      "follow_up": "CHK-S2-106 조치로 함께 해소한다."
+    },
+    {
+      "id": "IMP-S4-137",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "디자이너 체크리스트(Todoodle) 관리자웹 항목은 대부분 화면에 있으나 '원문 확인 신고 사유·닉네임'과 45 결과 라벨이 미반영, '심사이력 누적X'는 규칙 2-c와 충돌",
+      "why": "체크리스트 체크 여부를 확인할 수 없어 완료로 오인된 항목이 화면에 빠져 있음.",
+      "evidence": [
+        "SRC-04 Todoodle 715:16664 (733:20178, 739:21970, 715:16721)",
+        "SRC-03 689:22801, 739:21763"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-41",
+        "WEB-45"
+      ],
+      "follow_up": "CHK-S2-056·106 조치로 해소하고 2-c는 CHK-S2-103 결정을 따른다."
+    },
+    {
+      "id": "IMP-S4-138",
+      "verdict": "FAIL",
+      "rule_ref": "2-d",
+      "what": "Professional 심사 목록 태그 '미승인'만 드롭다운·상세 '심사 거절'과 달라 앱 Not approved와 1:1 대응이 깨짐 (규칙 2-d, 재검증)",
+      "why": "필터 값과 행 태그가 맞지 않아 운영 혼선, 앱 상태 매핑 불명확.",
+      "evidence": [
+        "SRC-03 689:23558, 722:27288, 725:18738",
+        "SRC-00 [Professional 심사] 심사 상태"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31"
+      ],
+      "follow_up": "30·31 목록 태그를 심사 상태 tag '심사 거절' 인스턴스로 교체."
+    },
+    {
+      "id": "IMP-S4-139",
+      "verdict": "FAIL",
+      "rule_ref": "2-c",
+      "what": "관리자웹 심사 목록·상세에 재신청 이력·신청 횟수가 없어 앱 'Number of applications'와 대응하지 않음 (규칙 2-c, 재검증)",
+      "why": "재신청 건을 이전 결과 없이 심사.",
+      "evidence": [
+        "SRC-00 <Professional 신청 심사 상세> 이력 누적",
+        "SRC-03 689:23558, 725:18762, 739:20998",
+        "SRC-05 Notion CHK-S2-026 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31",
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "CHK-S2-103 결정 후 30~36에 신청 횟수·이력을 추가하거나 story-service 2-c를 갱신."
+    },
+    {
+      "id": "IMP-S4-140",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "해외 사업자 심사 상세 라벨 'Services area'가 앱·다른 case 'Service area'와 다름",
+      "why": "필드명 불일치로 매핑 오해.",
+      "evidence": [
+        "SRC-03 739:21112, 505:14417"
+      ],
+      "impact_screens": [
+        "WEB-34"
+      ],
+      "follow_up": "card state=해외 라벨을 'Service area'로 수정."
+    },
+    {
+      "id": "IMP-S4-141",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "신고 원문 확인(접수 상태)에 신고 사유·대상이 없고 결과 화면은 사유 1개만이라 앱 다중 신고와 연결이 끊김",
+      "why": "근거를 모른 채 제재 결정.",
+      "evidence": [
+        "SRC-03 689:22801, 739:21743, 739:21773, 271:28469",
+        "SRC-04 Todoodle 733:20178"
+      ],
+      "impact_screens": [
+        "WEB-41",
+        "WEB-42",
+        "WEB-43",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "41~45에 전체 신고 사유와 신고된 원문/답글 표시를 넣는다."
+    },
+    {
+      "id": "IMP-S4-142",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "미승인 사유 모달이 빈 입력에도 확인 활성이라 앱 Review feedback이 빈 채 나갈 수 있음 (재검증)",
+      "why": "빈 Review feedback 노출, 규칙 2 '반드시 입력' 위반 가능.",
+      "evidence": [
+        "SRC-03 693:28331 (722:26337), 500:18860, 739:20998",
+        "SRC-00 규칙 2 미승인 시 사유 반드시 입력"
+      ],
+      "impact_screens": [
+        "WEB-38",
+        "WEB-28",
+        "WEB-43"
+      ],
+      "follow_up": "38 확인 버튼을 미입력 시 비활성(button Inactive)·web/field error로."
+    },
+    {
+      "id": "IMP-S4-143",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "심사 상세 예시 값이 앱 신청서와 어긋남(Based in·Experience 문장, Service area 변경 전 값, 해외 Registration country)",
+      "why": "필드 매핑 오해.",
+      "evidence": [
+        "SRC-03 689:25415, 692:26946, 739:21112, 500:18061"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "card 3 variant 값을 앱 80·85·89와 맞춘다."
+    },
+    {
+      "id": "IMP-S4-144",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "심사 거절 상세에 신청자에게 전달한 사유가 없어 앱 Review feedback 내용을 관리자가 다시 볼 수 없음",
+      "why": "재심사 때 이전 전달 사유를 모름.",
+      "evidence": [
+        "SRC-03 725:18762, 500:18860, 739:20998",
+        "SRC-00 규칙 2 사람 검토 '내부 메모와 전달 사유 구분'"
+      ],
+      "impact_screens": [
+        "WEB-36",
+        "WEB-38"
+      ],
+      "follow_up": "36에 '신청자에게 전달한 사유(읽기 전용)' 영역 추가."
+    },
+    {
+      "id": "IMP-S4-145",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "신고 원문 확인 결과(이용 정지) 화면 제목이 '결과: 제재 없음'이라 이용 정지 결과가 그려지지 않음",
+      "why": "정지 처리된 신고를 제재 없음으로 오인.",
+      "evidence": [
+        "SRC-03 739:21768, 739:21762",
+        "SRC-04 Todoodle 739:21970"
+      ],
+      "impact_screens": [
+        "WEB-45"
+      ],
+      "follow_up": "45 제목을 '…원문 확인 결과: 이용 정지'로 고치고 정지 사유 표시를 검토."
+    },
+    {
+      "id": "IMP-S4-146",
+      "verdict": "FAIL",
+      "rule_ref": "2-d",
+      "what": "목록 태그 '미승인'이 심사 상태 tag 컴포넌트에 없는 값 (CHK-S2-021과 같은 문제)",
+      "why": "CHK-S2-021과 같음.",
+      "evidence": [
+        "SRC-03 689:23558, 725:18738"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31"
+      ],
+      "follow_up": "CHK-S2-021 조치로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-147",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "해외 사업자 라벨 'Services area' 오타 (CHK-S2-040과 같은 문제)",
+      "why": "CHK-S2-040과 같음.",
+      "evidence": [
+        "SRC-03 739:21112"
+      ],
+      "impact_screens": [
+        "WEB-34"
+      ],
+      "follow_up": "CHK-S2-040 조치로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-148",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "심사 상세 카드 예시 값 어긋남 (CHK-S2-102와 같은 문제)",
+      "why": "CHK-S2-102와 같음.",
+      "evidence": [
+        "SRC-03 693:27116, 500:18061"
+      ],
+      "impact_screens": [
+        "WEB-32",
+        "WEB-33",
+        "WEB-34",
+        "WEB-35",
+        "WEB-36"
+      ],
+      "follow_up": "CHK-S2-102 조치로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-149",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "Professional 심사 빈 화면이 상세 상단(목록으로·미승인·승인)을 복사해 쓰고 'professional 등급' 문구가 남음",
+      "why": "대상 없는 승인 버튼 노출, 명칭 혼용.",
+      "evidence": [
+        "SRC-03 694:33112, 689:23561"
+      ],
+      "impact_screens": [
+        "WEB-39"
+      ],
+      "follow_up": "39 상단을 30과 같게 바꾸고 문구 수정."
+    },
+    {
+      "id": "IMP-S4-150",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "45 제목 '결과: 제재 없음' (CHK-S2-106과 같은 문제)",
+      "why": "CHK-S2-106과 같음.",
+      "evidence": [
+        "SRC-03 739:21768"
+      ],
+      "impact_screens": [
+        "WEB-45"
+      ],
+      "follow_up": "CHK-S2-106 조치로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-151",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "Professional 심사 목록 마지막 열 머리글 '심사하기'가 처리된 행 '상세보기' 버튼과 맞지 않음",
+      "why": "열 이름과 버튼 동작 불일치.",
+      "evidence": [
+        "SRC-03 689:23558, 689:24826",
+        "SRC-05 Notion CHK-S2-059 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-30",
+        "WEB-31"
+      ],
+      "follow_up": "머리글을 '관리' 등으로, '상세보기/상세 보기' 표기 통일."
+    },
+    {
+      "id": "IMP-S4-152",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "앱은 'information'으로 고쳤는데 관리자 신고 목록 2개 행에 'infomation' 오타가 남음 (재검증)",
+      "why": "같은 사유 값이 두 표기로 저장·표시.",
+      "evidence": [
+        "SRC-03 245:33331, 689:17750, 271:28469"
+      ],
+      "impact_screens": [
+        "WEB-40"
+      ],
+      "follow_up": "card/신고 관리 오타 2행 수정."
+    },
+    {
+      "id": "IMP-S4-153",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "회원 이용 정지 모달 화면 배경 드롭다운 기본 라벨만 '전체'로 회원 관리('회원 유형 전체')와 다름 (재검증)",
+      "why": "같은 화면 상태끼리 라벨 불일치.",
+      "evidence": [
+        "SRC-03 245:33353, 245:33348",
+        "SRC-05 Notion CHK-S3-026 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-28"
+      ],
+      "follow_up": "28 배경 드롭다운을 '회원 유형 전체'로."
+    },
+    {
+      "id": "IMP-S4-154",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "사유 입력 모달 3종이 컴포넌트가 아닌 프레임이라 앱에 노출되는 사유(22·92·93)의 안내·필수 입력을 한 번에 바꿀 수 없음 (재검증)",
+      "why": "안내·필수 입력 수정이 화면마다 따로 필요해 누락 위험.",
+      "evidence": [
+        "SRC-03 702:16219, 722:26337, 689:23541, 139:20690"
+      ],
+      "impact_screens": [
+        "WEB-28",
+        "WEB-38",
+        "WEB-43"
+      ],
+      "follow_up": "modal에 입력형 variant를 만들고 28·38·43을 인스턴스로 교체."
+    },
+    {
+      "id": "IMP-S4-155",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "관리자 계정 1개라 권한 구분은 불필요해졌지만 세션 만료 처리는 미정 — 사용자앱 변경과 무관",
+      "why": "세션 만료 시 작업 중 데이터 유실 안내 없음.",
+      "evidence": [
+        "SRC-05 Notion CHK-S2-066 '1개 밖에 없음'",
+        "SRC-03 128:9888"
+      ],
+      "impact_screens": [
+        "WEB-01"
+      ],
+      "follow_up": "CHK-S2-066 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-157",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "검색 결과 없음 컴포넌트는 추가됐으나 드롭다운 선택 완료 variant 위치 미확인 — 앱 연결 없음",
+      "why": "선택된 필터 표시 기준이 개발에 전달되지 않을 수 있음.",
+      "evidence": [
+        "SRC-03 719:23154, 676:31584",
+        "SRC-05 Notion CHK-S3-027 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-19",
+        "WEB-26"
+      ],
+      "follow_up": "CHK-S3-027 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-158",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "심사 상태 tag 원본은 생겼지만 푸시·운영·처리 상태 태그 원본은 미확인 — 앱 연결 없음",
+      "why": "상태 태그 변경이 화면마다 따로 필요.",
+      "evidence": [
+        "SRC-03 725:18738, 689:17754"
+      ],
+      "impact_screens": [
+        "WEB-03",
+        "WEB-26",
+        "WEB-40"
+      ],
+      "follow_up": "CHK-S3-030 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-159",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "뉴스 푸시 상태 문구가 '클라이언트 html 명칭'으로 픽스됐다는데 html이 자료에 없어 확인 불가 — 사용자앱 변경과 무관",
+      "why": "기준 문구 불명.",
+      "evidence": [
+        "SRC-03 128:9957",
+        "SRC-05 Notion CHK-S2-007 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-03",
+        "WEB-12"
+      ],
+      "follow_up": "CHK-S2-007 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-166",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "빈 화면 복사본 유지 결정의 위험이 실제로 나타남 — 39 상단 복사 오류, 29 이전 명칭 '회원 등급 전체' 잔존",
+      "why": "목록 변경이 빈 화면에 전파되지 않아 이전 명칭·잘못된 버튼이 남음.",
+      "evidence": [
+        "SRC-03 694:33112, 694:32665 (이번 단계 스크린샷)",
+        "SRC-05 Notion CHK-S3-031 '현재 유지'"
+      ],
+      "impact_screens": [
+        "WEB-29",
+        "WEB-39"
+      ],
+      "follow_up": "29·39를 고치고 빈 화면을 목록 수정 때 함께 점검."
+    },
+    {
+      "id": "IMP-S4-167",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "'검색 결과 없음'이 공용 컴포넌트로 만들어져 뉴스 관리에 적용되고 다른 목록은 주석으로 통일 결정",
+      "why": "없음. / Judge 이의: PASS인데 근거를 확인하지 못함. WEB-19·40·47을 '결정 메모로 같은 상태 적용 → 수정 불필요'로 판정했지만, 그 주석은 메타데이터에서 찾지 못함(CHK-S2-054 follow_up). 화면·주석 어느 쪽으로도 확인되지 않은 적용을 PASS로 둠",
+      "evidence": [
+        "SRC-03 719:23154, 719:23179",
+        "SRC-05 Notion CHK-S2-054 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-18"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "IMP-S4-169",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "상세 진입 버튼 '원문 확인'과 필터 기본값 '○○ 전체' 명칭이 결정 메모대로 정리됨",
+      "why": "없음. / Judge 이의: 연결 화면을 빠뜨림. '필터 기본값 ○○ 전체 명칭이 결정 메모대로 정리됨'을 PASS로 두면서, 같은 결정이 적용되는 회원 관리·Professional 심사·이용 정지 관리 화면(26~31·47·48)을 related_screens에서 뺐음. 그중 WEB-28 '전체'(CHK-S3-026 FAIL), WEB-29 '회원 등급 전체'(CHK-S4-103 FAIL)는 결정과 어긋남",
+      "evidence": [
+        "SRC-03 142:23478, 245:33331",
+        "SRC-05 Notion CHK-S2-068 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-21",
+        "WEB-40"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "IMP-S4-171",
+      "verdict": "INSUFFICIENT_INFO",
+      "rule_ref": null,
+      "what": "포럼 관리 '기존 항목 유지'는 수정 전 원본 시안이 없어 판단 불가",
+      "why": "기준 시안 부재.",
+      "evidence": [
+        "SRC-00 [포럼 관리] 피그마 기준, 현재 항목 유지",
+        "SRC-03 142:23478"
+      ],
+      "impact_screens": [
+        "WEB-19",
+        "WEB-21"
+      ],
+      "follow_up": "CHK-S2-008과 함께 원본 시안을 sources에 추가."
+    },
+    {
+      "id": "IMP-S4-172",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "'처리 후 목록 이동' 결정은 있으나 승인·이용 정지·삭제 실패 안내는 없음 — 앱 노출 값(정지 사유·Review feedback) 저장 실패 시도 포함",
+      "why": "실패를 성공으로 오인.",
+      "evidence": [
+        "SRC-05 Notion CHK-S2-065 결정 메모",
+        "SRC-03 693:28331, 689:23298, 689:17022"
+      ],
+      "impact_screens": [
+        "WEB-21",
+        "WEB-38",
+        "WEB-42",
+        "WEB-43",
+        "WEB-49",
+        "WEB-57"
+      ],
+      "follow_up": "CHK-S2-065 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-174",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "관리자 원문 확인 상세의 앱 구조 통일은 '그대로 유지' 결정 — 앱 게시글에 제목·다중 카테고리가 생긴 뒤 다중 카테고리만 남은 확인 사항(IMP-S4-109)",
+      "why": "IMP-S4-109와 같음.",
+      "evidence": [
+        "SRC-05 Notion CHK-S2-050 결정 메모",
+        "SRC-03 144:6583, 497:21709"
+      ],
+      "impact_screens": [
+        "WEB-22",
+        "WEB-41"
+      ],
+      "follow_up": "CHK-S2-050·107 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-175",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 원문에서 바로 삭제하지 않고 이용 정지 후 원문 삭제는 포럼 관리에서 하는 흐름으로 정해짐 — 단 포럼 관리에서 정지 회원 글을 찾을 수단이 없음(CHK-S4-101)",
+      "why": "정지 후 원문 삭제 흐름이 실제로는 목록을 넘겨 찾아야 함.",
+      "evidence": [
+        "SRC-04 Todoodle 722:26278",
+        "SRC-03 142:23478 ('제목으로 검색', 작성자 열)"
+      ],
+      "impact_screens": [
+        "WEB-19"
+      ],
+      "follow_up": "CHK-S4-101 결정으로 해소."
+    },
+    {
+      "id": "IMP-S4-176",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "배너 순서 변경(53)만 TAG '모달'과 화면 '토스트'가 다름 — 앱 연결 없음",
+      "why": "개발 전달 시 모달/토스트 혼동.",
+      "evidence": [
+        "SRC-03 685:45488"
+      ],
+      "impact_screens": [
+        "WEB-53"
+      ],
+      "follow_up": "CHK-S2-067 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-180",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "'회원 유형' 통일은 목록에 반영됐지만 회원 관리 빈 화면(29)에 '회원 등급 전체'가 남음 — 재검증 결과 일부 미해소",
+      "why": "빈 화면에 이전 명칭 잔존.",
+      "evidence": [
+        "SRC-03 694:32665 (이번 단계 스크린샷), 245:33348",
+        "SRC-05 Notion CHK-S2-041 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-29"
+      ],
+      "follow_up": "CHK-S4-103 조치로 해소(29 드롭다운 라벨 '회원 유형 전체')."
+    },
+    {
+      "id": "IMP-S4-181",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "정지 회원 기존 글 처리 기준이 'DB 삭제 / 관리자가 포럼 관리에서 삭제'로 정해짐 — 실행 수단(포럼 검색)은 CHK-S4-101",
+      "why": "기준은 정해짐, 실행 수단 공백(CHK-S4-101).",
+      "evidence": [
+        "SRC-05 Notion CHK-S4-001 결정 메모 'DB 삭제'",
+        "SRC-04 Todoodle 722:26278"
+      ],
+      "impact_screens": [
+        "WEB-19"
+      ],
+      "follow_up": "CHK-S4-101 결정으로 해소."
+    },
+    {
+      "id": "IMP-S4-184",
+      "verdict": "FAIL",
+      "rule_ref": null,
+      "what": "미승인 사유가 영어 앱에 그대로 나가는데 관리자 모달에 작성 언어·노출 안내가 없음 (결정 메모 '내가 고려할 부분이 아님' — 담당 결정 필요)",
+      "why": "한국어 사유가 영문 앱에 노출.",
+      "evidence": [
+        "SRC-03 693:28331, 500:18860",
+        "SRC-05 Notion CHK-S2-038 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-38"
+      ],
+      "follow_up": "IMP-S4-105 조치로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-186",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 관리 검색 안내가 '닉네임 또는 이메일로 검색'으로 고쳐짐",
+      "why": "없음. / Judge 이의: WEB-46을 '수정 불필요'로 확정했지만 CHK-S3-003은 'WEB-46은 떼어낸 복사본이라 스크린샷 미확인'이라고 적음. 같은 방식의 WEB-29는 이전 명칭이 남아 있었음. 확인하지 않은 연결 화면을 수정 불필요로 판정함",
+      "evidence": [
+        "SRC-03 245:33331"
+      ],
+      "impact_screens": [
+        "WEB-40"
+      ],
+      "follow_up": "조치 없음."
+    },
+    {
+      "id": "IMP-S4-187",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "신고 처리 결과 '제재 없음'·'이용 정지'는 화면끼리 일치하나 story-service B절('정지 완료/처리 완료')과 달라 정의 갱신 여부 확인 필요 (CF-06)",
+      "why": "정의 문서와 화면 상태값이 달라 개발 기준이 갈림.",
+      "evidence": [
+        "SRC-04 Todoodle 732:20140",
+        "SRC-05 Notion CHK-S2-029 결정 메모",
+        "SRC-03 245:33331"
+      ],
+      "impact_screens": [
+        "WEB-40",
+        "WEB-44",
+        "WEB-45"
+      ],
+      "follow_up": "CHK-S2-029 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-007",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "정지 해제의 회원 관리·신고 관리 반영 결정 메모가 '해제 후 운영 상태: 이용 정지'로 읽혀 앱 이용 정지 안내(22)가 계속 뜨는 것으로 해석되고, 목록 비활성 '정지 해제' 의미도 불명",
+      "why": "해제한 회원이 계속 정지 상태로 남아 앱 로그인이 막힐 수 있음.",
+      "evidence": [
+        "SRC-05 Notion IMP-S4-007 결정 메모 '정지 해제→ 신고 관리/처리 상태: 이용 정지, 회원 관리/운영 상태: 이용 정지'",
+        "SRC-03 689:17022 (이번 단계 스크린샷), 245:33343, 739:21492"
+      ],
+      "impact_screens": [
+        "WEB-49",
+        "WEB-47",
+        "WEB-48",
+        "WEB-26"
+      ],
+      "follow_up": "메모가 '해제 전 상태'를 말한 것인지 확인하고, 해제 후 운영 상태='정상'·앱 22 미노출을 결정 메모로 남긴다. 비활성 버튼 의미(CHK-S3-110)도 함께 정한다."
+    },
+    {
+      "id": "IMP-S4-188",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "이용 정지 관리 드롭다운 '전체'는 추가됐으나 일괄 버튼 불필요 결정 뒤에도 체크박스 열이 남음",
+      "why": "동작 없는 체크박스.",
+      "evidence": [
+        "SRC-03 245:33343",
+        "SRC-05 Notion CHK-S2-063 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-47",
+        "WEB-48"
+      ],
+      "follow_up": "CHK-S2-063 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-008",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "배너 수정 모달은 생겼지만 관리자 배너 순서가 앱 좌우 자동 슬라이드 순서가 되는지는 결정 메모 '논의 필요' 상태",
+      "why": "관리자가 순서를 바꿔도 앱 노출 순서를 예측하기 어려움.",
+      "evidence": [
+        "SRC-05 Notion IMP-S4-008 결정 메모 '논의 필요'",
+        "SRC-04 Todoodle 715:16759 앱 배너 좌우 자동 슬라이드",
+        "SRC-03 245:36153, 245:36158, 730:19058"
+      ],
+      "impact_screens": [
+        "WEB-52",
+        "WEB-55"
+      ],
+      "follow_up": "순서 = 슬라이드 순서 여부를 결정해 52에 안내를 둘지 정한다."
+    },
+    {
+      "id": "IMP-S4-191",
+      "verdict": "NEEDS_REVIEW",
+      "rule_ref": null,
+      "what": "배너 수정 모달에 배너 이미지를 바꾸는 수단이 보이지 않음",
+      "why": "앱 배너 이미지 교체 불가.",
+      "evidence": [
+        "SRC-03 730:19058, 245:36125",
+        "SRC-05 Notion CHK-S2-064 결정 메모"
+      ],
+      "impact_screens": [
+        "WEB-55"
+      ],
+      "follow_up": "CHK-S2-064 결정으로 함께 해소."
+    },
+    {
+      "id": "IMP-S4-193",
+      "verdict": "INSUFFICIENT_INFO",
+      "rule_ref": null,
+      "what": "design.md가 없어 디자인 가이드 검사를 못함 — 화면 간 영향 판단에 쓸 가이드 기준 없음",
+      "why": "가이드 위반 여부 미판정.",
+      "evidence": [
+        "SRC-03 projects/maru/design.md 없음 (CHK-S3-GUIDE)"
+      ],
+      "impact_screens": [
+        "WEB-03"
+      ],
+      "follow_up": "design.md 추가 후 재검사."
+    }
+  ],
+  "resolved_by_confirm": [],
+  "done": {
+    "DONE-01": [
+      true,
+      []
+    ],
+    "DONE-02": [
+      true,
+      []
+    ],
+    "DONE-03": [
+      true,
+      []
+    ],
+    "DONE-04": [
+      true,
+      []
+    ],
+    "DONE-05": [
+      true,
+      []
+    ],
+    "DONE-06": [
+      true,
+      []
+    ],
+    "DONE-07": [
+      true,
+      []
+    ],
+    "DONE-08": [
+      true,
+      []
+    ],
+    "DONE-09": [
+      true,
+      []
+    ],
+    "DONE-10": [
+      true,
+      []
+    ]
+  }
+}

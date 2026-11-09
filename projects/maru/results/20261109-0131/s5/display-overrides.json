@@ -48,11 +48,5 @@
   "CHK-S3-039",
   "CHK-S2-048"
  ],
- "board_exclude": [
-  "CHK-S2-113",
-  "CHK-S2-114",
-  "CHK-S2-115",
-  "CHK-S2-116",
-  "CHK-S2-117"
- ]
+ "board_exclude": []
 }

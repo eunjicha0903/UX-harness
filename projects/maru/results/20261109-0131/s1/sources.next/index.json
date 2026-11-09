@@ -1,0 +1,176 @@
+{
+  "slug": "maru",
+  "updated_at": "2026-11-09",
+  "run_id": "20261109-0131",
+  "previous_run_id": "20261028-0133",
+  "snapshot_note": "S1 Context Agent 갱신 후보. 이 실행 환경에는 셸·바이너리 복사 도구가 없음. (1) Figma 메타데이터는 2026-11-09 get_metadata로 새로 조회했으나 결과가 781,139자 단일 JSON 줄이라 Write 도구로 XML 전체를 옮겨 쓸 수 없었음 → s1/sources.next/figma/design-metadata.xml 은 만들지 못함(부분 파일을 만들면 스크립트가 잘못된 프레임 목록을 읽을 수 있어 일부러 만들지 않음). 원본은 metadata_raw_src 경로에 있고, Orchestrator가 `jq -r '.[0].text' <metadata_raw_src> > s1/sources.next/figma/design-metadata.xml` 로 추출해야 함. (2) 파일 해시는 계산하지 못함(hash=null). 변경 판별은 같은 노드 ID 기준 프레임 목록·이름·크기·하위 텍스트 비교로 함. (3) 스크린샷 PNG는 도구 결과 경로에 저장되어 있고 s1-context.json screenshots[]에 원본·목표 경로를 기록함(복사는 Orchestrator).",
+  "sources": [
+    {
+      "id": "SRC-00",
+      "title": "관리자웹 회의 픽스 (사용자 제공 원문, 수정 완료 표시)",
+      "platform": ["WEB"],
+      "status": "FETCHED",
+      "role": "관리자웹 변경 요구사항 1차 기준",
+      "url": "https://app.notion.com/p/401cd783cd41805c9aabec957797e49a",
+      "path": "sources/meeting-fix-admin-web.md",
+      "checked_at": "2026-10-28",
+      "hash": null,
+      "changed": false,
+      "note": "이번 실행에서 다시 가져오지 않음(변경 신호 없음). 이전 스냅샷 그대로 사용."
+    },
+    {
+      "id": "FB",
+      "title": "사용자 수정 피드백 원문 (run 20261109-0131): '현재 사용자앱 수정 반영된 피그마 화면 기반으로 관리자웹도 연결된 부분 수정사항 검토해줘. 관리자웹만 검토해줘.'",
+      "platform": ["WEB"],
+      "status": "FETCHED",
+      "role": "피드백 항목 FB-20261109-0131-01~12의 원문 (사용자 제공)",
+      "url": null,
+      "path": "results/20261109-0131/s1/feedback-input.md",
+      "checked_at": "2026-11-09",
+      "hash": null,
+      "changed": true,
+      "note": "이전 실행의 FB(run 20261028-0133, 내용=SRC-00)는 이력으로만 남고, 이번 실행 FB는 위 원문으로 교체."
+    },
+    {
+      "id": "SRC-01",
+      "title": "MARU(커뮤니티) 프로젝트 페이지 (Notion)",
+      "platform": ["APP", "WEB"],
+      "status": "FETCHED",
+      "role": "서비스 맥락·회의 내용 (참고 의견·확정 혼재)",
+      "url": "https://app.notion.com/p/3cacd783cd4180e796abd060fc650992",
+      "path": null,
+      "checked_at": "2026-10-28",
+      "hash": null,
+      "version_marker": "page_last_edited_at 2026-09-21T09:46:32Z",
+      "changed": false,
+      "note": "이번 실행에서 다시 열지 않음(이전 확인본 사용). 외부 블록 2개·PDF·첨부 HTML·하위 페이지는 여전히 미확인."
+    },
+    {
+      "id": "SRC-02",
+      "title": "사용자앱 기능정의서/와이어 PDF (회의 픽스의 '56p', '85p' 참조 대상)",
+      "platform": ["APP"],
+      "status": "NOT_FOUND",
+      "role": "신고 사유·Review feedback·Specialty 항목의 기준",
+      "url": null,
+      "path": null,
+      "checked_at": "2026-10-28",
+      "hash": null,
+      "changed": false,
+      "note": "변동 없음. 56p·85p 원문 확인 불가."
+    },
+    {
+      "id": "SRC-03",
+      "title": "MARU Figma 파일 (마루 (개발) 기획/디자인 페이지 47:177)",
+      "platform": ["APP", "WEB"],
+      "status": "FETCHED",
+      "role": "검증 대상 화면 (사용자앱 = 변경 근거, 관리자웹 = 판정 대상)",
+      "url": "https://www.figma.com/design/nNK8EOxzqkDrX7GvAZH5NR?node-id=47-177",
+      "path": "sources/figma/design-metadata.xml",
+      "metadata_raw_src": "/root/.claude/projects/-home-user-ux-harness/b5e0689e-4a13-57dd-9043-d4c5391e6432/tool-results/mcp-Figma-get_metadata-1794187971655.txt",
+      "metadata_raw_format": "JSON 배열 [{type:'text', text:'<canvas …>…</canvas>'}, {type:'text', text:'IMPORTANT: …'}] — 첫 원소 text가 XML",
+      "metadata_target": "s1/sources.next/figma/design-metadata.xml",
+      "metadata_copy_status": "NOT_COPIED (셸 없음, 781,139자 단일 줄)",
+      "checked_at": "2026-11-09",
+      "hash": null,
+      "previous_hash": "b5e14f6a638abe0b",
+      "changed": true,
+      "note": "2026-11-09 get_metadata 재조회. 이전 스냅샷(2026-10-28) 대비 사용자앱 프레임이 최상위에서 그룹 'Group 1597880799'(807:47633) 안으로 이동, 사용자앱 6개 프레임 삭제·18개 신규, 사용자앱·관리자웹 번호 전면 재부여(관리자웹 01~58, 사용자앱 1~105), 관리자웹 16개 프레임 신규. 스크린샷: 관리자웹 23/58개, 사용자앱 29/105개(변경 프레임 위주) get_screenshot으로 확인. 나머지는 레이어 메타데이터(이름·크기·텍스트)만 확인."
+    },
+    {
+      "id": "SRC-04",
+      "title": "Figma 캔버스 위 Todoodle 위젯 체크리스트 '미고려사항 수정 반영' (715:16664, SRC-03 기획/디자인 페이지 안)",
+      "platform": ["APP", "WEB"],
+      "status": "FETCHED",
+      "role": "디자이너가 이번 수정에서 정리한 수정·결정 항목 목록 (작성자 표기: 차은지, 29 Oct)",
+      "url": "https://www.figma.com/design/nNK8EOxzqkDrX7GvAZH5NR?node-id=715-16664",
+      "path": null,
+      "checked_at": "2026-11-09",
+      "hash": null,
+      "changed": true,
+      "note": "이번 실행에서 처음 발견(이전 스냅샷에 없음). get_metadata 텍스트 레이어로 항목 제목·설명 23건을 읽음. 각 항목의 체크(완료) 여부는 메타데이터에 없어 확인하지 못함 — 항목이 '결정됨'인지 '할 일'인지 구분 불가. 위젯 스크린샷은 찍지 않음."
+    },
+    {
+      "id": "SRC-05",
+      "title": "Notion 검토 사항 DB 사용자 입력 스냅샷 (수정 완료·결정 메모, 2026-11-09 조회)",
+      "platform": ["APP", "WEB"],
+      "status": "FETCHED",
+      "role": "디자이너 결정 메모 (사용자 입력). 재검증 대상과, 결정 메모에서 나온 요구사항의 근거",
+      "url": "https://app.notion.com/p/fb2367422bcd4472a6dc9324ee6a23a2",
+      "path": "results/20261109-0131/s1/s1-context.json#notion_inputs",
+      "checked_at": "2026-11-09",
+      "hash": null,
+      "changed": true,
+      "note": "collection://c4f66c72-be3f-4e3d-adb4-7851ea01574b 를 SQL로 읽기 전용 조회(63행). 쓰기 없음."
+    },
+    {
+      "id": "EX-01",
+      "title": "이너베러 프로젝트 자료 일체",
+      "platform": [],
+      "status": "EXCLUDED",
+      "role": "다른 고객사",
+      "url": null,
+      "path": null,
+      "checked_at": "2026-10-27",
+      "hash": null,
+      "changed": false,
+      "note": "열지 않음. 인용 금지."
+    },
+    {
+      "id": "EX-02",
+      "title": "마루 (개발) 견적서&래퍼런스(0:1)·backup(92:911) 페이지",
+      "platform": [],
+      "status": "EXCLUDED",
+      "role": "지정 페이지(기획/디자인) 밖",
+      "url": null,
+      "path": null,
+      "checked_at": "2026-10-28",
+      "hash": null,
+      "changed": false,
+      "note": "열지 않음."
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "CF-01",
+      "topic": "회원(사용자) 유형 명칭",
+      "detail": "SRC-01은 '뉴비, 한국 기본 경험자, 전문가', SRC-03은 'Newcomer / Insider / Professional'. 2026-11-09 갱신: SRC-05 결정 메모(CHK-S2-041)와 SRC-04(721:26133)가 '관리자웹→회원 유형, 사용자앱→Membership type' 명칭을 픽스함. 관리자웹 회원 관리(26·27)·이용 정지 관리(47·48)·Professional 심사(30·31)는 '회원 유형'으로 바뀜. 사용자앱은 회원가입(12~15)만 'Membership type'이고 회원가입(17~19)·프로필 수정(73~76)·Professional 신청(82 헤더)은 'Member type'이 남아 있음. 유형 값 자체(영문 3종 vs SRC-01 한글 명칭)는 여전히 확정 근거 없음.",
+      "sources": ["SRC-01 프로젝트 정보 '사용자 유형'", "SRC-05 CHK-S2-041 결정 메모", "SRC-04 721:26133", "SRC-03 APP 12(271:31185)·74(271:28068), WEB 26(245:33348)"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-02",
+      "topic": "회원 관리 날짜 항목 명칭",
+      "detail": "SRC-01 '계정 생성일자' vs SRC-00 '가입 일시'. 변동 없음(관리자웹 26은 '가입 일시').",
+      "sources": ["SRC-00 [회원 관리]", "SRC-01 회의 내용/관리자웹"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-03",
+      "topic": "Professional 신청 유형 값",
+      "detail": "2026-11-09 갱신: 사용자앱 신청 유형 선택 화면이 'Individual professional / Business registered in Korea / Business registered outside Korea'(APP 82 505:13530, 86 505:14223)로 바뀌어 세 번째 값이 SRC-00의 '해외 사업자' 쪽으로 정렬됨. 관리자웹도 심사 상세를 개인(32)·국내(33)·해외(34) 3 case로 분리함. 남은 불일치: ① APP 77(500:17414)은 'Business registered out of Korea'(82·86의 'outside'와 다름) ② 사용자앱 TAG는 'Professional/개인 전문가'(792:20688)인데 SRC-00·관리자웹은 '개인 사업자' ③ 'Business registered in Korea' 이전 표기는 'on Korea'. 하네스가 어느 명칭으로 확정하지 않음.",
+      "sources": ["SRC-00 [Professional 심사] '신청 유형(개인 사업자/국내 사업자/해외 사업자)'", "SRC-03 APP 77(500:17414)·82(505:13530)·86(505:14223)·87(505:14288), WEB 30(689:23558)·32(689:25415)·33(692:26946)·34(739:21112)", "SRC-03 TAG 792:20688 'Professional/개인 전문가'"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-04",
+      "topic": "신고 사유·Review feedback 기준 원문 부재",
+      "detail": "SRC-02 여전히 NOT_FOUND. 2026-11-09 갱신: 사용자앱 신고 모달(APP 60 271:28469)은 'Report comment / Select all reasons that apply.' 6개 사유 다중 선택, 'information' 오타 수정됨. SRC-05 결정 메모(CHK-S2-035)는 관리자 목록에 '첫 사유 + 외 N개' 표기로 정함. 관리자 신고 관리(40)에 '+외 2개' 표기 반영. 기준 원문(56p·85p)과의 대조는 여전히 불가.",
+      "sources": ["SRC-00 <신고 관리>·<Professional 신청 심사 상세>", "SRC-02 (NOT_FOUND)", "SRC-05 CHK-S2-035", "SRC-03 APP 60(271:28469), APP 92(500:18860), WEB 40(245:33331)"],
+      "status": "INSUFFICIENT_INFO"
+    },
+    {
+      "id": "CF-05",
+      "topic": "Professional 심사 이력 누적 여부 (필수 규칙 2 관련)",
+      "detail": "story-service 필수 규칙 2와 SRC-00 <Professional 신청 심사 상세>는 '재승인을 요청해도 관리자 웹에서 이력이 계속 누적됨(기존 심사 상태 업데이트 X)'(조건 2-c). 반면 SRC-05 결정 메모 CHK-S2-026은 '관리자웹 재신청 누적X → 사용자앱 검토 필요', SRC-04 항목(715:16721/16724)은 '사용자앱/Professonal 심사이력 누적X — 관리자웹에는 심사이력 누적X', SRC-04 726:18915는 '사용자앱 -Professional 심사 재신청 case → 텍스트로 횟수 표기'. 사용자앱은 APP 92(500:18860) 'Number of applications: 1 time', APP 93(739:20998) '2 times' 표기를 추가함. 관리자웹 심사 목록·상세(30~39)에는 이력·신청 횟수 UI가 없음. 정책 값이 바뀌는 사안이라 story-service 갱신(H0 재승인) 여부가 필요하며 하네스가 정하지 않음.",
+      "sources": ["story-service 필수 규칙 2, 조건 2-c", "SRC-00 <Professional 신청 심사 상세>", "SRC-05 CHK-S2-026 결정 메모", "SRC-04 715:16721·715:16724·726:18915", "SRC-03 APP 92(500:18860)·93(739:20998)"],
+      "status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "CF-06",
+      "topic": "신고 처리 상태 값 명칭",
+      "detail": "story-service B절·SRC-00은 처리 상태를 '접수 / 정지 완료 / 처리 완료'로 정의. SRC-04 732:20140은 '처리 완료→제재없음'으로 바꾸고, SRC-03 관리자웹 신고 관리(40)는 '접수 / 이용 정지 / 제재 없음' 태그를 씀. 정의 문서(story-service)와 디자인이 다름.",
+      "sources": ["story-service B절 신고 처리 상태", "SRC-00 <신고 관리> 처리 상태", "SRC-04 732:20140", "SRC-03 WEB 40(245:33331)"],
+      "status": "NEEDS_REVIEW"
+    }
+  ]
+}

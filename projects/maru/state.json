@@ -1,20 +1,18 @@
 {
   "slug": "maru",
   "run_id": "20261109-0131",
-  "started_at": "2026-11-09T01:31:48",
-  "current_stage": "S4",
-  "completed_stages": [
-    "S1",
-    "S3",
-    "S2"
-  ],
+  "started_at": "2026-11-09T08:20:03",
+  "current_stage": "S1",
+  "completed_stages": [],
   "stage_outputs": {},
   "source_hashes": {
     "SRC-00": null,
     "FB": null,
     "SRC-01": null,
     "SRC-02": null,
-    "SRC-03": "b5e14f6a638abe0b",
+    "SRC-03": null,
+    "SRC-04": null,
+    "SRC-05": null,
     "EX-01": null,
     "EX-02": null
   },

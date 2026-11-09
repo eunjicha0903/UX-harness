@@ -404,7 +404,13 @@ def gate_g4(a, g):
             g.check(s.get("decision") in DECISIONS, f"{u.get('id')}: 화면 {s.get('screen_id')} 판정 '{s.get('decision')}' 허용되지 않음 (DONE-09)")
     _record_checks(a, g, s4.get("records", []))
     plat = {s["id"]: s.get("platform") for s in s1.get("screens", [])}
-    imap = load(proj(a.slug) / "impact-map.json", {"edges": []}) or {"edges": []}
+    # 화면 번호가 다시 매겨진 실행(S1 renumbering)은 이전 맵의 화면 ID가 다른 화면을 가리키므로 이번 실행 갱신안으로 검사한다.
+    s1ctx = load(rd / "s1" / "s1-context.json", {}) or {}
+    nxt_map = load(rd / "s4" / "impact-map.next.json")
+    if s1ctx.get("renumbering") and nxt_map and "edges" in nxt_map:
+        imap = nxt_map
+    else:
+        imap = load(proj(a.slug) / "impact-map.json", {"edges": []}) or {"edges": []}
     for u in units:
         related = {s.get("screen_id") for s in u.get("related_screens", [])}
         for o in u.get("origin_screens", []):

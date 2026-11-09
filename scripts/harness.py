@@ -812,7 +812,7 @@ def display_overrides(slug, run):
         if d.get("id") and d.get("same_as"):
             dup.setdefault(d["id"], d["same_as"])
     return {"review_case": o.get("review_case") or {}, "duplicates": dup,
-            "user_removed": set(o.get("user_removed") or [])}
+            "user_removed": set(o.get("user_removed") or []) | set(o.get("board_exclude") or [])}
 
 
 def review_case(r, ov=None):

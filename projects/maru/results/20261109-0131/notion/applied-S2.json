@@ -1,0 +1,6 @@
+{
+  "created": [],
+  "updated": ["CHK-S2-066", "CHK-S2-007", "CHK-S2-052", "CHK-S2-008", "CHK-S2-050", "CHK-S2-065", "CHK-S2-067", "CHK-S2-021", "CHK-S2-026"],
+  "failed": [],
+  "stopped": "Stopped mid-stage on coordinator instruction (superseded by S5). Not applied: 18 of 27 ops; page header/section for S2 not applied."
+}

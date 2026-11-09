@@ -1,0 +1,21 @@
+{
+  "_note": "s4-impact.json의 표시용 보조 필드(suggested_duplicates, summary) 정정. units·records·판정값은 바뀌지 않음. Orchestrator는 duplicates를 옮길 때 이 파일의 값을 쓴다.",
+  "suggested_duplicates_remove": ["IMP-S4-175", "IMP-S4-177", "IMP-S4-190", "IMP-S4-192", "IMP-S4-007", "IMP-S4-135"],
+  "suggested_duplicates_add": {
+    "IMP-S4-174": "CHK-S2-050",
+    "IMP-S4-175": "CHK-S4-101",
+    "IMP-S4-176": "CHK-S2-067",
+    "IMP-S4-180": "CHK-S4-103",
+    "IMP-S4-181": "CHK-S4-101",
+    "IMP-S4-184": "IMP-S4-105",
+    "IMP-S4-191": "CHK-S2-064",
+    "IMP-S4-193": "CHK-S3-GUIDE"
+  },
+  "reason": "번호가 한 칸씩 밀려 적힘(175·177·190·192는 각각 CHK-S2-057·CHK-S3-034·CHK-S2-031·CHK-S2-032 재검증 단위). IMP-S4-007은 Notion 기존 행이고 CHK-S3-110과 일부만 겹쳐 병합하지 않음. IMP-S4-135는 여러 레코드 모음이라 단일 대표로 병합하지 않음.",
+  "summary": {
+    "units": 95,
+    "unit_verdicts": {"PASS": 33, "FAIL": 33, "NEEDS_REVIEW": 27, "INSUFFICIENT_INFO": 2},
+    "by_origin": {"feedback": 12, "change": 25, "fail": 17, "recheck": 41},
+    "records": {"total": 5, "PASS": 2, "FAIL": 1, "NEEDS_REVIEW": 2}
+  }
+}

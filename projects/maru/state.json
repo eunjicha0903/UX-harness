@@ -3,7 +3,9 @@
   "run_id": "20261109-0131",
   "started_at": "2026-11-09T08:20:03",
   "current_stage": "S1",
-  "completed_stages": [],
+  "completed_stages": [
+    "S5"
+  ],
   "stage_outputs": {},
   "source_hashes": {
     "SRC-00": null,
